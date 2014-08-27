@@ -35,7 +35,7 @@ public class WrittenNote implements MusicNote {
     return length;
   }
 
-  public String toString() {
+  public String record() {
     return frequency + " " + length.toString();
   }
 
