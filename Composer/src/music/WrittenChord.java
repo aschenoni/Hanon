@@ -3,11 +3,18 @@ package music;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WrittenChord {
+/**
+ * A chord is just the representation of several notes intended to be played in
+ * unison.
+ */
+public class WrittenChord implements Recordable {
   private final List<WrittenNote> notes;
 
-  public static WrittenChord fromString(String chordRecord) {
-    String[] lines = chordRecord.split("\n");
+  /**
+   * Generate a chord from its string representation.
+   */
+  public static WrittenChord fromString(String s) {
+    String[] lines = s.split("\n");
     List<WrittenNote> notes = new ArrayList<WrittenNote>();
     for (String line : lines) {
       if (isNoteLine(line)) {
@@ -23,10 +30,6 @@ public class WrittenChord {
 
   public WrittenChord(List<WrittenNote> notes) {
     this.notes = notes;
-  }
-
-  public List<WrittenNote> getNotes() {
-    return notes;
   }
 
   public String record() {

@@ -1,6 +1,9 @@
 package music;
 
 import org.junit.Test;
+import sheet.Sheet;
+import sheet.TestReader;
+import sheet.TestWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +53,21 @@ public class MusicRecordTests {
   public void testInverseReadAndWriteChord() {
     assertEquals(chord, WrittenChord.fromString(chord.record()));
     assertEquals(chordRecord, WrittenChord.fromString(chordRecord).record());
+  }
+
+  @Test
+  public void testWriteToFile() {
+    TestWriter w = new TestWriter();
+    Sheet s = new Sheet(chord);
+    s.writeToFile(w);
+    assertEquals(chordRecord, w.readContent());
+  }
+
+  @Test
+  public void testReadFromFile() {
+    TestReader r = new TestReader(chordRecord);
+    Sheet s = Sheet.fromReader(r);
+    assertEquals(chord, s.getRecord());
   }
 
 }
