@@ -1,7 +1,7 @@
 package sheet;
 
 import music.Recordable;
-import music.WrittenChord;
+import music.RecordableSet;
 import music.WrittenNote;
 
 public class Sheet {
@@ -12,8 +12,8 @@ public class Sheet {
     String[] lines = s.split("\n");
 
     Recordable content;
-    if (lines[0].contains("chord")) content = WrittenChord.fromString(s);
-    else                            content = WrittenNote.fromString(s);
+    if (lines[0].contains("{")) content = RecordableSet.fromString(s);
+    else                        content = WrittenNote.fromString(s);
     return new Sheet(content);
   }
 

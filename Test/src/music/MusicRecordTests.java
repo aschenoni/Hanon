@@ -1,9 +1,7 @@
 package music;
 
 import org.junit.Test;
-import sheet.Sheet;
-import sheet.TestReader;
-import sheet.TestWriter;
+import sheet.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,46 +11,47 @@ import static org.junit.Assert.assertEquals;
 public class MusicRecordTests {
   private static final WrittenNote note1 = new WrittenNote(440.0f, NoteLength.eighth);
   private static final WrittenNote note2 = new WrittenNote(480.0f, NoteLength.eighth);
-  private static final String noteRecord = "440.0 eighth";
+  private static final String NOTE_RECORD = "440.0 eighth";
 
-  private static final List<WrittenNote> notes = new ArrayList<WrittenNote>();
+  private static final List<Recordable> notes = new ArrayList<Recordable>();
   static {
     notes.add(note1);
     notes.add(note2);
   }
-  private static final WrittenChord chord = new WrittenChord(notes);
-  private static final String chordRecord = "chord {\n\t440.0 eighth\n\t480.0 eighth\n}";
+  private static final RecordableSet chord = new RecordableSet(RecordableSetType.chord, notes);
+
+  private static final String CHORD_RECORD = "chord {\n\t440.0 eighth\n\t480.0 eighth\n}";
 
   @Test
   public void testWriteNote() {
-    assertEquals(noteRecord, note1.record());
+    assertEquals(NOTE_RECORD, note1.record());
   }
 
   @Test
   public void testReadNote() {
-    assertEquals(note1, WrittenNote.fromString(noteRecord));
+    assertEquals(note1, WrittenNote.fromString(NOTE_RECORD));
   }
 
   @Test
   public void testInverseReadAndWriteNote() {
     assertEquals(note1, WrittenNote.fromString(note1.record()));
-    assertEquals(noteRecord, WrittenNote.fromString(noteRecord).record());
+    assertEquals(NOTE_RECORD, WrittenNote.fromString(NOTE_RECORD).record());
   }
 
   @Test
   public void testWriteChord() {
-    assertEquals(chordRecord, chord.record());
+    assertEquals(CHORD_RECORD, chord.record());
   }
 
   @Test
   public void testReadChord() {
-    assertEquals(chord, WrittenChord.fromString(chordRecord));
+    assertEquals(chord, RecordableSet.fromString(CHORD_RECORD));
   }
 
   @Test
   public void testInverseReadAndWriteChord() {
-    assertEquals(chord, WrittenChord.fromString(chord.record()));
-    assertEquals(chordRecord, WrittenChord.fromString(chordRecord).record());
+    assertEquals(chord, RecordableSet.fromString(chord.record()));
+    assertEquals(CHORD_RECORD, RecordableSet.fromString(CHORD_RECORD).record());
   }
 
   @Test
@@ -60,14 +59,22 @@ public class MusicRecordTests {
     TestWriter w = new TestWriter();
     Sheet s = new Sheet(chord);
     s.writeToFile(w);
-    assertEquals(chordRecord, w.readContent());
+    assertEquals(CHORD_RECORD, w.readContent());
   }
 
   @Test
   public void testReadFromFile() {
-    TestReader r = new TestReader(chordRecord);
+    TestReader r = new TestReader(CHORD_RECORD);
     Sheet s = Sheet.fromReader(r);
     assertEquals(chord, s.getRecord());
   }
 
+  @Test
+  public void testReadAndWrite() {
+    Writer w = new FileWriter("test.hanon");
+    w.print(CHORD_RECORD);
+    w.close();
+    Reader r = new FileReader("test.hanon");
+    assertEquals(CHORD_RECORD, r.getContent());
+  }
 }
