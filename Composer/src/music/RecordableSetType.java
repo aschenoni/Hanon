@@ -1,5 +1,5 @@
 package music;
 
 public enum RecordableSetType {
-  chord, crescendo,
+  chord, crescendo, decrescendo, forte,
 }

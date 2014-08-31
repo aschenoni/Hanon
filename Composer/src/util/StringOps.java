@@ -37,4 +37,16 @@ public class StringOps {
   public static String firstWord(String s) {
     return s.split("\\s")[0];
   }
+
+  public static String[] trimAll(String[] ss) {
+    String[] trimmed = new String[ss.length];
+    for (int i = 0; i < ss.length; i++) trimmed[i] = ss[i].trim();
+    return trimmed;
+  }
+
+  public static String[] groupIntoSets(String[] ss) {
+    SetGrouper sg = new SetGrouper(ss);
+    sg.group();
+    return sg.getGroups();
+  }
 }

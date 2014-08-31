@@ -68,13 +68,4 @@ public class MusicRecordTests {
     Sheet s = Sheet.fromReader(r);
     assertEquals(chord, s.getRecord());
   }
-
-  @Test
-  public void testReadAndWrite() {
-    Writer w = new FileWriter("test.hanon");
-    w.print(CHORD_RECORD);
-    w.close();
-    Reader r = new FileReader("test.hanon");
-    assertEquals(CHORD_RECORD, r.getContent());
-  }
 }
