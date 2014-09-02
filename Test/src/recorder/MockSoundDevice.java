@@ -1,5 +1,7 @@
 package recorder;
 
+import javax.sound.sampled.AudioFileFormat;
+
 public class MockSoundDevice implements SoundDevice {
   private Recording rec;
 
