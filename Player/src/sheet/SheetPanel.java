@@ -1,11 +1,11 @@
 package sheet;
 
-import notes.HalfNote;
-import notes.QuarterNote;
-import notes.WholeNote;
+import notes.NoteImage;
+import notes.QuarterNoteImage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SheetPanel extends JPanel {
 
@@ -32,14 +32,12 @@ public class SheetPanel extends JPanel {
     g2.setBackground(BACKGROUND_COLOR);
     g2.clearRect(0, 0, 400, 400);
 
-    QuarterNote q = new QuarterNote(25, 25);
-    q.draw(g2);
+    java.util.List<NoteImage> images = new ArrayList<NoteImage>();
+    for (int i = 25; i < 60; i+=5) {
+      images.add(new QuarterNoteImage(360 - 6*i, i));
+    }
 
-    HalfNote h = new HalfNote(45, 35);
-    h.draw(g2);
-
-    WholeNote w = new WholeNote(65, 45);
-    w.draw(g2);
+    for (NoteImage i : images) i.draw(g2);
 
     Staff s = new Staff(25,25,250);
     s.draw(g2);

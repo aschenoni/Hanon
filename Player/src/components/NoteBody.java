@@ -1,4 +1,4 @@
-package notes;
+package components;
 
 import sheet.Staff;
 
@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class NoteBody {
   public static final int BASE_OVAL_HEIGHT = Staff.BASE_LINE_GAP - 1;
-  public static final int BASE_OVAL_WIDTH = 2*BASE_OVAL_HEIGHT;
+  public static final int BASE_OVAL_WIDTH = (int) (1.8*BASE_OVAL_HEIGHT);
 
   private final int x, y;
   private final float scale;
@@ -19,7 +19,7 @@ public class NoteBody {
     return (int) (BASE_OVAL_HEIGHT *scale);
   }
 
-  NoteBody(int x, int y, float scale) {
+  public NoteBody(int x, int y, float scale) {
     this.x = x;
     this.y = y;
     this.scale = scale;
@@ -42,6 +42,8 @@ public class NoteBody {
   }
 
   public void draw(Graphics2D g2) {
-    g2.fillOval(x(), y() + 1, width(), height());
+    RotatedEllipse e = new RotatedEllipse(x(), y()+3, width(), height(), -Math.PI/12);
+    e.draw(g2);
+    //g2.fillOval(x(), y() + 1, width(), height());
   }
 }

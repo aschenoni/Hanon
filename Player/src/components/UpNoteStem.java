@@ -1,22 +1,22 @@
-package notes;
+package components;
 
 public class UpNoteStem extends NoteStem {
-  private final int x, y;
+  private final int baseX, baseY;
   private final float scale;
 
   public UpNoteStem(int x, int y, float scale) {
-    this.x = x;
-    this.y = y;
+    this.baseX = x;
+    this.baseY = y;
     this.scale = scale;
   }
 
   public float scale() { return scale; }
 
   protected int y() {
-    return y - height() + (NoteBody.adjustedHeight(scale) / 2) + 1;
+    return baseY - height() + (NoteBody.adjustedHeight(scale) / 2) + 1;
   }
 
   protected int x() {
-    return x + NoteBody.adjustedWidth(scale) - width();
+    return baseX + NoteBody.adjustedWidth(scale) - width() + 1;
   }
 }

@@ -1,17 +1,20 @@
 package notes;
 
+import components.BodyHole;
+import components.NoteBody;
+
 import java.awt.*;
 
-public class WholeNote {
+public class WholeNoteImage implements NoteImage {
   private final NoteBody body;
   private final BodyHole bodyHole;
 
-  public WholeNote(int x, int y, float scale) {
+  public WholeNoteImage(int x, int y, float scale) {
     body = new NoteBody(x, y, scale);
     bodyHole = new BodyHole(x, y, scale);
   }
 
-  public WholeNote(int x, int y) {
+  public WholeNoteImage(int x, int y) {
     this(x, y, 1);
   }
 

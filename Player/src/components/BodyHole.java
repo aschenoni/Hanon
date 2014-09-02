@@ -1,4 +1,6 @@
-package notes;
+package components;
+
+import sheet.SheetPanel;
 
 import java.awt.*;
 
@@ -44,7 +46,7 @@ public class BodyHole {
 
   public void draw(Graphics2D g2) {
     Color c = g2.getColor();
-    g2.setColor(Color.WHITE);
+    g2.setColor(SheetPanel.BACKGROUND_COLOR);
     g2.fillOval(x(), y()+1, width(), height());
     g2.setColor(c);
   }
