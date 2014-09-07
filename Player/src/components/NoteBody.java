@@ -1,11 +1,11 @@
 package components;
 
-import sheet.Staff;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.awt.*;
 
 public class NoteBody {
-  public static final int BASE_OVAL_HEIGHT = Staff.BASE_LINE_GAP - 1;
+  public static final int BASE_OVAL_HEIGHT = 9;
   public static final int BASE_OVAL_WIDTH = (int) (1.8*BASE_OVAL_HEIGHT);
 
   private final int x, y;
@@ -41,7 +41,7 @@ public class NoteBody {
     return adjustedHeight(scale);
   }
 
-  public void draw(Graphics2D g2) {
+  public void draw(GraphicsContext g2) {
     RotatedEllipse e = new RotatedEllipse(x(), y()+3, width(), height(), -Math.PI/12);
     e.draw(g2);
     //g2.fillOval(x(), y() + 1, width(), height());

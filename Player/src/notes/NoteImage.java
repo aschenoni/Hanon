@@ -1,7 +1,9 @@
 package notes;
 
+import javafx.scene.canvas.GraphicsContext;
+
 import java.awt.*;
 
 public interface NoteImage {
-  void draw(Graphics2D g2);
+  void draw(GraphicsContext g2);
 }

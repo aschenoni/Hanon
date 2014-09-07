@@ -2,8 +2,7 @@ package notes;
 
 import components.NoteBody;
 import components.NoteStem;
-
-import java.awt.*;
+import javafx.scene.canvas.GraphicsContext;
 
 public class QuarterNoteImage implements NoteImage {
   private final NoteBody body;
@@ -18,7 +17,7 @@ public class QuarterNoteImage implements NoteImage {
     this(x, y, 1);
   }
 
-  public void draw(Graphics2D g2) {
+  public void draw(GraphicsContext g2) {
     body.draw(g2);
     stem.draw(g2);
   }

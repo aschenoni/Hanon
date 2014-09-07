@@ -1,8 +1,7 @@
 package components;
 
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
+import javafx.scene.canvas.GraphicsContext;
+
 
 public class RotatedEllipse {
   private final int x, y, width, height;
@@ -16,10 +15,7 @@ public class RotatedEllipse {
     this.angle = angle;
   }
 
-  public void draw(Graphics2D g2) {
-    Shape e = AffineTransform.getRotateInstance(angle)
-            .createTransformedShape(new Ellipse2D.Float(0, 0, width, height));
-    e = AffineTransform.getTranslateInstance(x, y).createTransformedShape(e);
-    g2.fill(e);
+  public void draw(GraphicsContext g2) {
+    g2.fillOval(x, y, width, height);
   }
 }

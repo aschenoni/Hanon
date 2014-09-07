@@ -1,5 +1,8 @@
 package components;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Paint;
 import sheet.SheetPanel;
 
 import java.awt.*;
@@ -44,11 +47,11 @@ public class BodyHole {
     return (int)(BASE_HEIGHT_OFFSET*scale);
   }
 
-  public void draw(Graphics2D g2) {
-    Color c = g2.getColor();
-    g2.setColor(SheetPanel.BACKGROUND_COLOR);
+  public void draw(GraphicsContext g2) {
+    Paint c = g2.getFill();
+    g2.setFill(SheetPanel.BACKGROUND_COLOR);
     g2.fillOval(x(), y()+1, width(), height());
-    g2.setColor(c);
+    g2.setFill(c);
   }
 
 

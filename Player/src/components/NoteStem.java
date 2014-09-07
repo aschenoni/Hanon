@@ -1,6 +1,6 @@
 package components;
 
-import sheet.Staff;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.awt.*;
 
@@ -22,15 +22,12 @@ public abstract class NoteStem {
     return (int)(BASE_STEM_HEIGHT *scale());
   }
 
-  public void draw(Graphics2D g2) {
+  public void draw(GraphicsContext g2) {
     g2.fillRect(x(), y(), width(), height());
   }
 
   public static NoteStem fromPosition(int x, int y, float scale, int staffY) {
-    if (y < staffY + 2  * (scale)*Staff.BASE_LINE_GAP)
-      return new DownNoteStem(x, y, scale);
-    else
-      return new UpNoteStem(x, y, scale);
+    return new DownNoteStem(x, y, scale);
   }
 
 }
