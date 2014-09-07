@@ -3,9 +3,10 @@ package notes;
 import components.BodyHole;
 import components.NoteBody;
 import components.NoteStem;
+import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 
-public class HalfNoteImage implements NoteImage {
+public class HalfNoteImage extends NoteImage {
   private final NoteBody body;
   private final NoteStem stem;
   private final BodyHole bodyHole;
@@ -20,10 +21,10 @@ public class HalfNoteImage implements NoteImage {
     this(x, y, 1);
   }
 
-  public void draw(GraphicsContext g2) {
-    body.draw(g2);
-    stem.draw(g2);
-    bodyHole.draw(g2);
+  public void draw(GraphicsContext g2, Group root) {
+    body.draw(g2, root);
+    stem.draw(g2, root);
+    bodyHole.draw(g2, root);
   }
 }
 

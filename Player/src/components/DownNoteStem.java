@@ -17,6 +17,6 @@ public class DownNoteStem extends NoteStem {
   }
 
   protected int x() {
-    return baseX + 1;
+    return baseX;
   }
 }

@@ -1,9 +1,17 @@
 package notes;
 
+import components.NoteComponent;
+import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 
-import java.awt.*;
+public class NoteImage {
+  private final NoteComponent[] components;
 
-public interface NoteImage {
-  void draw(GraphicsContext g2);
+  public NoteImage(NoteComponent... components) {
+    this.components = components;
+  }
+
+  public void draw(GraphicsContext g2, Group root) {
+    for (NoteComponent c : components) { c.draw(g2, root); }
+  }
 }

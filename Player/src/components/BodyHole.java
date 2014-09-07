@@ -1,13 +1,15 @@
 package components;
 
+import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import sheet.SheetPanel;
 
 import java.awt.*;
 
-public class BodyHole {
+public class BodyHole implements NoteComponent {
   public static final int BASE_HEIGHT_OFFSET = 1;
   public static final int BASE_WIDTH_OFFSET = 4;
   public static final int BASE_HOLE_HEIGHT = NoteBody.BASE_OVAL_HEIGHT - 2*BASE_HEIGHT_OFFSET;
@@ -47,12 +49,9 @@ public class BodyHole {
     return (int)(BASE_HEIGHT_OFFSET*scale);
   }
 
-  public void draw(GraphicsContext g2) {
-    Paint c = g2.getFill();
-    g2.setFill(SheetPanel.BACKGROUND_COLOR);
-    g2.fillOval(x(), y()+1, width(), height());
-    g2.setFill(c);
+  public void draw(GraphicsContext g2, Group root) {
+    RotatedEllipse e = new RotatedEllipse(x(), y(), width(), height(), -20);
+    e.setColor(Color.WHITE);
+    e.draw(g2, root);
   }
-
-
 }

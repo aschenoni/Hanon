@@ -13,10 +13,10 @@ public class UpNoteStem extends NoteStem {
   public float scale() { return scale; }
 
   protected int y() {
-    return baseY - height() + (NoteBody.adjustedHeight(scale) / 2) + 1;
+    return baseY - height() + (NoteBody.adjustedHeight(scale) / 2);
   }
 
   protected int x() {
-    return baseX + NoteBody.adjustedWidth(scale) - width() + 1;
+    return baseX + NoteBody.adjustedWidth(scale) - width();
   }
 }
