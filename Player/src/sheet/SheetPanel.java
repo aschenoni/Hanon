@@ -8,7 +8,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import music.MusicNote;
 import music.NoteLength;
+import music.WrittenNote;
 
 public class SheetPanel extends Application {
 
@@ -27,9 +29,10 @@ public class SheetPanel extends Application {
     stage.setScene(new Scene(root));
     stage.show();
 
+    MusicNote note = WrittenNote.fromString("440.0 quarter");
+
     Staff s = new Staff(25, 25);
-    for (int i = 0; i < 10; i ++)
-      s.addNote(NoteLength.half, 450 - 60 * i, i);
+    s.addNote(note.getLength(), 50, note.getStaffPosition());
     s.draw(g, root);
   }
 }

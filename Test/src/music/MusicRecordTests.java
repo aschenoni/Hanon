@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class MusicRecordTests {
   private static final WrittenNote note1 = new WrittenNote(440.0f, NoteLength.eighth);
-  private static final WrittenNote note2 = new WrittenNote(480.0f, NoteLength.eighth);
+  private static final WrittenNote note2 = new WrittenNote(493.88336f, NoteLength.eighth);
   private static final String NOTE_RECORD = "440.0 eighth";
 
   private static final List<Recordable> notes = new ArrayList<Recordable>();
@@ -20,7 +20,7 @@ public class MusicRecordTests {
   }
   private static final RecordableSet chord = new RecordableSet(RecordableSetType.chord, notes);
 
-  private static final String CHORD_RECORD = "chord {\n\t440.0 eighth\n\t480.0 eighth\n}";
+  private static final String CHORD_RECORD = "chord {\n\t440.0 eighth\n\t493.88336 eighth\n}";
 
   @Test
   public void testWriteNote() {

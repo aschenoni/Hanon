@@ -29,6 +29,11 @@ public class Staff {
     for (int i = 0; i < 5; i++) { root.getChildren().add(new Rectangle(x, y+LINE_GAP*i, 300, 1)); }
   }
 
+  /**
+   * @param line The line is the position on the staff where the note should
+   *             lie. The top space is 0, and the line below it is 1, etc. To
+   *             go above the line, use negative values.
+   */
   public void addNote(NoteLength length, int x, int line) {
     notes.add(factory.buildImage(length, x, y + 5*line + 1));
   }

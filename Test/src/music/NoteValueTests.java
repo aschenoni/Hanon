@@ -18,4 +18,9 @@ public class NoteValueTests {
       }
     }
   }
+
+  @Test
+  public void testStaffPosition() {
+    assertEquals(4, NoteValue.fromFrequency(A4).getStaffPosition());
+  }
 }

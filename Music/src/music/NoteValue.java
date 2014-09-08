@@ -17,16 +17,16 @@ public class NoteValue {
         if (values()[i].equals(name)) return i;
       return -1;
     }
+
   }
   public static final float A4 = 440.0f;
-
   public static final int A_INDEX = NoteName.indexOf(NoteName.A);
+
   public static final int NUM_HALF_STEPS_IN_OCTAVE = 12;
   public static final float FREQ_CONST = (float) pow(2.0, (1.0 / NUM_HALF_STEPS_IN_OCTAVE));
-
   private final NoteName name;
-  private final int octave;
 
+  private final int octave;
   public static NoteValue fromFrequency(float frequency) {
     int numHalfSteps = (int) round( log(frequency/A4) / log(FREQ_CONST) );
 
@@ -56,6 +56,16 @@ public class NoteValue {
     int octavesFromA4 = octave - 4;
     int halfStepsFromA4 = NUM_HALF_STEPS_IN_OCTAVE * octavesFromA4 + halfStepsFromA;
     return (float) (A4 * pow(FREQ_CONST, halfStepsFromA4));
+  }
+
+  /**
+   * The line is the position on the staff where the note should lie. The top
+   * space is 0, and the line below it is 1, etc. To go above the line, use
+   * negative values.
+   */
+  public int getStaffPosition() {
+    // A4 = 4, A0 = 52, C0 = 61
+    return 61 - 12*octave - NoteName.indexOf(name);
   }
 
   @Override

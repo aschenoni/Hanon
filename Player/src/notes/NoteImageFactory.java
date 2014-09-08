@@ -13,18 +13,27 @@ public class NoteImageFactory {
   }
 
   public NoteImage buildImage(NoteLength length, int x, int y) {
-    NoteBody body = new NoteBody(x, y, 1);
-    NoteStem stem = NoteStem.fromPosition(x, y, 1, staffY);
-    BodyHole hole = new BodyHole(x, y, 1);
-    NoteImage i = null;
+    NoteBody noteBody = buildNoteBody(x, y);
+    NoteStem noteStem = buildStem(x, y);
+
     switch (length) {
-      case quarter:
-        i = new NoteImage(body, stem);
-        break;
-      case half:
-        i = new NoteImage(body, hole, stem);
-        break;
+      case quarter: return new NoteImage(noteBody, noteStem);
+      case half:    return new NoteImage(noteBody, buildHole(x, y), noteStem);
+      default:      throw new NoSuchNoteLengthException();
     }
-    return i;
+  }
+
+  private BodyHole buildHole(int x, int y) {
+    return new BodyHole(x, y, 1);
+  }
+
+  private NoteStem buildStem(int x, int y) {
+    return NoteStem.fromPosition(x, y, 1, staffY);
+  }
+
+  private NoteBody buildNoteBody(int x, int y) {
+    return new NoteBody(x, y, 1);
   }
 }
+
+class NoSuchNoteLengthException extends RuntimeException { }

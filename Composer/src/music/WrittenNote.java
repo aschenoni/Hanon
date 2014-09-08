@@ -6,7 +6,7 @@ package music;
  * for file storage.
  */
 public class WrittenNote implements MusicNote, Recordable {
-  private final float frequency;
+  private final NoteValue value;
   private final NoteLength length;
 
   /**
@@ -19,16 +19,26 @@ public class WrittenNote implements MusicNote, Recordable {
     String[] words = s.split(" ");
     float frequency = Float.parseFloat(words[0]);
     NoteLength length = NoteLength.valueOf(words[1]);
-    return new WrittenNote(frequency, length);
+    NoteValue value = NoteValue.fromFrequency(frequency);
+    return new WrittenNote(value, length);
   }
 
-  public WrittenNote(float frequency, NoteLength length) {
-    this.frequency = frequency;
+  public WrittenNote(NoteValue value, NoteLength length) {
+    this.value = value;
     this.length = length;
   }
 
+  public WrittenNote(float frequency, NoteLength length) {
+    this(NoteValue.fromFrequency(frequency), length);
+  }
+
   public float getFrequency() {
-    return frequency;
+    return value.getFrequency();
+  }
+
+  @Override
+  public int getStaffPosition() {
+    return value.getStaffPosition();
   }
 
   public NoteLength getLength() {
@@ -36,7 +46,7 @@ public class WrittenNote implements MusicNote, Recordable {
   }
 
   public String record() {
-    return frequency + " " + length.toString();
+    return getFrequency()+ " " + length.toString();
   }
 
   @Override
@@ -45,14 +55,14 @@ public class WrittenNote implements MusicNote, Recordable {
       return false;
     else {
       WrittenNote n = (WrittenNote) o;
-      return (n.frequency == frequency && n.length == length);
+      return (n.value.equals(value) && n.length == length);
     }
   }
 
   @Override
   public int hashCode() {
     int hash = 1;
-    hash = (hash * 17) + (int)(100*frequency);
+    hash = (hash * 17) + value.hashCode();
     hash = (hash * 17) + length.hashCode();
     return hash;
   }

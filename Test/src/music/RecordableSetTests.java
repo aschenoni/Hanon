@@ -9,12 +9,12 @@ import static org.junit.Assert.assertEquals;
 
 public class RecordableSetTests {
 
-  public static final String NESTED_RECORD = "crescendo {\n\tchord {\n\t\t440.0 whole\n\t\t480.0 whole\n\t}\n}";
+  public static final String NESTED_RECORD = "crescendo {\n\tchord {\n\t\t440.0 whole\n\t\t493.88336 whole\n\t}\n}";
   private static final String TWICE_NESTED_RECORD =
-          "forte {\n\tcrescendo {\n\t\tchord {\n\t\t\t440.0 whole\n\t\t\t480.0 whole\n\t\t}\n\t}\n}";
+          "forte {\n\tcrescendo {\n\t\tchord {\n\t\t\t440.0 whole\n\t\t\t493.88336 whole\n\t\t}\n\t}\n}";
   public static final WrittenNote NOTE1 = new WrittenNote(440.0f, NoteLength.whole);
 
-  public static final WrittenNote NOTE2 = new WrittenNote(480.0f, NoteLength.whole);
+  public static final WrittenNote NOTE2 = new WrittenNote(493.88336f, NoteLength.whole);
   public static final List<Recordable> NOTES = new ArrayList<Recordable>();
   public static final List<Recordable> CHORD_SET = new ArrayList<Recordable>();
   public static final List<Recordable> FORTE_SET = new ArrayList<Recordable>();
