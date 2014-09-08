@@ -3,7 +3,7 @@ package music;
 import static java.lang.Math.*;
 
 public class NoteValue {
-  private enum NoteName {
+  public enum NoteName {
     C, CSharp,
     D, DSharp,
     E,
@@ -17,7 +17,6 @@ public class NoteValue {
         if (values()[i].equals(name)) return i;
       return -1;
     }
-
   }
   public static final float A4 = 440.0f;
 
@@ -30,8 +29,18 @@ public class NoteValue {
 
   public static NoteValue fromFrequency(float frequency) {
     int numHalfSteps = (int) round( log(frequency/A4) / log(FREQ_CONST) );
+
     int octavesFromA4 = numHalfSteps / NUM_HALF_STEPS_IN_OCTAVE;
     int halfStepsFromA = numHalfSteps % NUM_HALF_STEPS_IN_OCTAVE;
+
+    if (halfStepsFromA + A_INDEX < 0) {
+      halfStepsFromA += 12;
+      octavesFromA4 -= 1;
+    }
+    if (halfStepsFromA + A_INDEX >= 12) {
+      halfStepsFromA -= 12;
+      octavesFromA4 += 1;
+    }
 
     return new NoteValue(NoteName.values()[A_INDEX + halfStepsFromA], 4 + octavesFromA4);
   }
@@ -52,5 +61,19 @@ public class NoteValue {
   @Override
   public String toString() {
     return name.toString() + octave;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof NoteValue)) return false;
+    else {
+      NoteValue n = (NoteValue)o;
+      return name.equals(n.name) && octave == n.octave;
+    }
+  }
+
+  @Override
+  public int hashCode() {
+    return 17 * (octave + 31*name.hashCode());
   }
 }
