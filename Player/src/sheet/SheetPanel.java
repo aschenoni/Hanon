@@ -33,9 +33,11 @@ public class SheetPanel extends Application {
     MusicNote note3 = WrittenNote.fromString("490.0 half");
     MusicNote note4 = WrittenNote.fromString("440.0 quarter");
 
-    Staff s = new Staff(new Clef(), new TimeSignatureImage(new TimeSignature(4, 4)), 25, 100);
+    Staff s = new Staff(100, 100);
     NoteImageFactory factory = new NoteImageFactory(s.getY());
 
+    s.addElement(new Clef(s.getCurrentX(), s.getY()-20));
+    s.addElement(new TimeSignatureImage(new TimeSignature(4, 4), s.getCurrentX(), s.getY()));
     s.addElement(factory.buildImage(note1, s.getCurrentX()));
     s.addMeasureLine();
     s.addElement(factory.buildImage(note2, s.getCurrentX()));

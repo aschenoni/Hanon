@@ -17,25 +17,20 @@ public class Staff {
   private int currentX;
 
   private final List<StaffPlaceable> elements = new ArrayList<StaffPlaceable>();
-  private final List<Rectangle> measureEnds = new ArrayList<Rectangle>();
-  private final Clef clef;
-  private final TimeSignatureImage timeSignature;
 
-  public Staff(Clef clef, TimeSignatureImage timeSignature, int x, int y) {
-    this.clef = clef;
-    this.timeSignature = timeSignature;
+  public Staff(int x, int y) {
     this.x = x;
     this.y = y;
-    currentX = x+100;
+    currentX = x;
 
   }
 
   public void draw(Brush brush) {
-    clef.draw(brush, x, y-20);
-    timeSignature.draw(brush, x, y);
-
     for (StaffPlaceable e : elements) { e.paint(brush); }
-    for (Rectangle r : measureEnds) { brush.paint(r); }
+    drawStaffLines(brush); // staff lines need to be drawn last so they appear over other elements
+  }
+
+  private void drawStaffLines(Brush brush) {
     for (int i = 0; i < 5; i++) {
       new StaffLine(x, y + LINE_GAP * i, 800).paint(brush);
     }
@@ -60,7 +55,7 @@ public class Staff {
   }
 
   public void addMeasureLine() {
-    addElement(new MeasureLine(currentX, y, 4*LINE_GAP));
+    addElement(new MeasureLine(currentX, y, 4 * LINE_GAP));
   }
 }
 
