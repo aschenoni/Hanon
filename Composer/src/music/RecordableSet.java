@@ -23,6 +23,9 @@ public class RecordableSet implements Recordable {
   private final RecordableSetType type;
   private final List<Recordable> elements;
 
+  /**
+   * Parses a string to find all of the internal sets.
+   */
   public static RecordableSet fromString(String s) {
     String[] lines = trimAll(lines(s));
     RecordableSetType type = RecordableSetType.valueOf(firstWord(lines[0]));

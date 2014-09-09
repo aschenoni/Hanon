@@ -36,17 +36,18 @@ public class WrittenNote implements MusicNote, Recordable {
     return value.getFrequency();
   }
 
-  @Override
-  public int getStaffPosition() {
-    return value.getStaffPosition();
-  }
-
   public NoteLength getLength() {
     return length;
   }
 
+  @Override
   public String record() {
     return getFrequency()+ " " + length.toString();
+  }
+
+  @Override
+  public int getStaffPosition() {
+    return value.getStaffPosition();
   }
 
   @Override
