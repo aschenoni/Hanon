@@ -1,7 +1,7 @@
 package sheet;
 
 import image.Clef;
-import image.TimeSignature;
+import image.TimeSignatureImage;
 import javafx.scene.shape.Rectangle;
 import music.NoteLength;
 import note.NoteImage;
@@ -18,11 +18,12 @@ public class Staff {
   private int currentX;
 
   private final List<NoteImage> notes = new ArrayList<NoteImage>();
+  private final List<Rectangle> measureEnds = new ArrayList<Rectangle>();
   private final NoteImageFactory factory;
   private final Clef clef;
-  private final TimeSignature timeSignature;
+  private final TimeSignatureImage timeSignature;
 
-  public Staff(Clef clef, TimeSignature timeSignature, int x, int y) {
+  public Staff(Clef clef, TimeSignatureImage timeSignature, int x, int y) {
     this.clef = clef;
     this.timeSignature = timeSignature;
     factory = new NoteImageFactory(y);
@@ -36,7 +37,8 @@ public class Staff {
     timeSignature.draw(brush, x, y);
 
     for (NoteImage n : notes) { n.draw(brush); }
-    for (int i = 0; i < 5; i++) { brush.paint(new Rectangle(x, y + LINE_GAP * i, 300, 1)); }
+    for (int i = 0; i < 5; i++) { brush.paint(new Rectangle(x, y + LINE_GAP * i, 800, 1)); }
+    for (Rectangle r : measureEnds) { brush.paint(r); }
   }
 
   /**
@@ -48,5 +50,15 @@ public class Staff {
     NoteImage im = factory.buildImage(length, currentX, y + 5 * line + 1);
     notes.add(im);
     currentX += length.getSpacing();
+    timeSignature.addNote(length);
+    if (timeSignature.needsNewMeasure()) {
+      addMeasureEnd();
+      currentX += 30;
+    }
   }
+
+  private void addMeasureEnd() {
+    measureEnds.add(new Rectangle(currentX, y, 1, 4*LINE_GAP));
+  }
+
 }

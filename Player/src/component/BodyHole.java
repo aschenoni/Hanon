@@ -27,13 +27,13 @@ public class BodyHole implements NoteComponent {
    * The x and y coordinates of the body hole should be the same as the
    * coordinates of the note that it belongs to.
    */
-  public BodyHole(int x, int y) {
+  public BodyHole(int x, int y, int angle) {
     ellipse = RotatedEllipse.buildEllipse(
             x + WIDTH_OFFSET,
             y + HEIGHT_OFFSET,
             WIDTH,
             HEIGHT,
-            NoteBody.ANGLE);
+            angle);
   }
 
   public void draw(Brush brush) {

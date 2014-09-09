@@ -21,13 +21,16 @@ public class NoteImageFactory {
   }
 
   public NoteImage buildImage(NoteLength length, int x, int y) {
-    NoteBody noteBody = new NoteBody(x, y);
-    NoteStem noteStem = NoteStem.fromPosition(x, y, staffY);
-    BodyHole bodyHole = new BodyHole(x, y);
+    NoteBody normalBody = new NoteBody(x, y, -20);
+    NoteBody wholeBody  = new NoteBody(x, y, 0);
+    NoteStem noteStem   = NoteStem.fromPosition(x, y, staffY);
+    BodyHole normalHole = new BodyHole(x, y, -20);
+    BodyHole wholeHole  = new BodyHole(x, y, 80);
 
     switch (length) {
-      case quarter: return new NoteImage(noteBody, noteStem);
-      case half:    return new NoteImage(noteBody, bodyHole, noteStem);
+      case quarter: return new NoteImage(normalBody, noteStem);
+      case half:    return new NoteImage(normalBody, normalHole, noteStem);
+      case whole:   return new NoteImage(wholeBody, wholeHole);
       default:      throw new NoSuchNoteLengthException();
         /*
         *  TODO There is no reason this exception should be needed. We should
