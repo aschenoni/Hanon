@@ -20,7 +20,7 @@ public abstract class NoteStem implements NoteComponent {
    * note appears on the third line or higher, the stem should point down.
    * Otherwise, it should point up.
    *
-   * The x and y coordinates of the body hole should be the same as the
+   * The x and getY coordinates of the body hole should be the same as the
    * coordinates of the note that it belongs to.
    */
   public static NoteStem fromPosition(int x, int y, int staffY) {
@@ -31,8 +31,8 @@ public abstract class NoteStem implements NoteComponent {
   }
 
   /**
-   * Since the x and y coordinates passed for the construction of a note stem
-   * are the same as the x and y coordinates of the note itself, there needs to
+   * Since the x and getY coordinates passed for the construction of a note stem
+   * are the same as the x and getY coordinates of the note itself, there needs to
    * be some adjustment to correctly place the stem.
    */
   protected abstract int adjustedX();

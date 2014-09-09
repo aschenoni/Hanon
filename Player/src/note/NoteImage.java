@@ -2,6 +2,7 @@ package note;
 
 import music.NoteLength;
 import sheet.Brush;
+import sheet.StaffPlaceable;
 
 /**
  * A Note Image is nothing more than the collection of different note components
@@ -9,14 +10,21 @@ import sheet.Brush;
  *
  * For instance, a whole note is a Note Body and a Body Hole.
  */
-public class NoteImage {
+public class NoteImage implements StaffPlaceable {
+  private NoteLength length;
   private final NoteComponent[] components;
 
-  public NoteImage(NoteComponent... components) {
+  public NoteImage(NoteLength length, NoteComponent... components) {
+    this.length = length;
     this.components = components;
   }
 
-  public void draw(Brush brush) {
+  public void paint(Brush brush) {
     for (NoteComponent c : components) { c.draw(brush); }
+  }
+
+  @Override
+  public int getSpacing() {
+    return length.getSpacing();
   }
 }

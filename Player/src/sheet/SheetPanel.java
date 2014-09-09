@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import music.MusicNote;
 import music.TimeSignature;
 import music.WrittenNote;
+import note.NoteImageFactory;
 
 public class SheetPanel extends Application {
 
@@ -33,10 +34,14 @@ public class SheetPanel extends Application {
     MusicNote note4 = WrittenNote.fromString("440.0 quarter");
 
     Staff s = new Staff(new Clef(), new TimeSignatureImage(new TimeSignature(4, 4)), 25, 100);
-    s.addNote(note1.getLength(), note1.getStaffPosition());
-    s.addNote(note2.getLength(), note2.getStaffPosition());
-    s.addNote(note3.getLength(), note3.getStaffPosition());
-    s.addNote(note4.getLength(), note4.getStaffPosition());
+    NoteImageFactory factory = new NoteImageFactory(s.getY());
+
+    s.addElement(factory.buildImage(note1, s.getCurrentX()));
+    s.addMeasureLine();
+    s.addElement(factory.buildImage(note2, s.getCurrentX()));
+    s.addElement(factory.buildImage(note3, s.getCurrentX()));
+    s.addMeasureLine();
+    s.addElement(factory.buildImage(note4, s.getCurrentX()));
     s.draw(brush);
   }
 }

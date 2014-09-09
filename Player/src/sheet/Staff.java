@@ -3,7 +3,6 @@ package sheet;
 import image.Clef;
 import image.TimeSignatureImage;
 import javafx.scene.shape.Rectangle;
-import music.NoteLength;
 import note.NoteImage;
 import note.NoteImageFactory;
 
@@ -17,28 +16,29 @@ public class Staff {
   private final int y;
   private int currentX;
 
-  private final List<NoteImage> notes = new ArrayList<NoteImage>();
+  private final List<StaffPlaceable> elements = new ArrayList<StaffPlaceable>();
   private final List<Rectangle> measureEnds = new ArrayList<Rectangle>();
-  private final NoteImageFactory factory;
   private final Clef clef;
   private final TimeSignatureImage timeSignature;
 
   public Staff(Clef clef, TimeSignatureImage timeSignature, int x, int y) {
     this.clef = clef;
     this.timeSignature = timeSignature;
-    factory = new NoteImageFactory(y);
     this.x = x;
     this.y = y;
     currentX = x+100;
+
   }
 
   public void draw(Brush brush) {
     clef.draw(brush, x, y-20);
     timeSignature.draw(brush, x, y);
 
-    for (NoteImage n : notes) { n.draw(brush); }
-    for (int i = 0; i < 5; i++) { brush.paint(new Rectangle(x, y + LINE_GAP * i, 800, 1)); }
+    for (StaffPlaceable e : elements) { e.paint(brush); }
     for (Rectangle r : measureEnds) { brush.paint(r); }
+    for (int i = 0; i < 5; i++) {
+      new StaffLine(x, y + LINE_GAP * i, 800).paint(brush);
+    }
   }
 
   /**
@@ -46,19 +46,56 @@ public class Staff {
    *             lie. The top space is 0, and the line below it is 1, etc. To
    *             go above the line, use negative values.
    */
-  public void addNote(NoteLength length, int line) {
-    NoteImage im = factory.buildImage(length, currentX, y + 5 * line + 1);
-    notes.add(im);
-    currentX += length.getSpacing();
-    timeSignature.addNote(length);
-    if (timeSignature.needsNewMeasure()) {
-      addMeasureEnd();
-      currentX += 30;
-    }
+  public void addElement(StaffPlaceable s) {
+    elements.add(s);
+    currentX += s.getSpacing();
   }
 
-  private void addMeasureEnd() {
-    measureEnds.add(new Rectangle(currentX, y, 1, 4*LINE_GAP));
+  public int getY() {
+    return y;
   }
 
+  public int getCurrentX() {
+    return currentX;
+  }
+
+  public void addMeasureLine() {
+    addElement(new MeasureLine(currentX, y, 4*LINE_GAP));
+  }
+}
+
+class StaffLine implements StaffPlaceable {
+  private final Rectangle rectangle;
+
+  public StaffLine(int x, int y, int width) {
+    rectangle = new Rectangle(x, y, width, 1);
+  }
+
+  @Override
+  public void paint(Brush brush) {
+    brush.paint(rectangle);
+  }
+
+  @Override
+  public int getSpacing() {
+    return 0;
+  }
+}
+
+class MeasureLine implements StaffPlaceable {
+  private final Rectangle rectangle;
+
+  public MeasureLine(int x, int y, int height) {
+    rectangle = new Rectangle(x, y, 1, height);
+  }
+
+  @Override
+  public void paint(Brush brush) {
+    brush.paint(rectangle);
+  }
+
+  @Override
+  public int getSpacing() {
+    return 30;
+  }
 }

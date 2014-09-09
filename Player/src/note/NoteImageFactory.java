@@ -3,7 +3,9 @@ package note;
 import component.BodyHole;
 import component.NoteBody;
 import component.NoteStem;
+import music.MusicNote;
 import music.NoteLength;
+import music.WrittenNote;
 
 /**
  * The note image factory is responsible for putting together the correct
@@ -20,17 +22,18 @@ public class NoteImageFactory {
     this.staffY = staffY;
   }
 
-  public NoteImage buildImage(NoteLength length, int x, int y) {
+  public NoteImage buildImage(MusicNote note, int x) {
+    int y = note.getStaffPosition()*5 + staffY + 1;
     NoteBody normalBody = new NoteBody(x, y, -20);
     NoteBody wholeBody  = new NoteBody(x, y, 0);
     NoteStem noteStem   = NoteStem.fromPosition(x, y, staffY);
     BodyHole normalHole = new BodyHole(x, y, -20);
     BodyHole wholeHole  = new BodyHole(x, y, 80);
 
-    switch (length) {
-      case quarter: return new NoteImage(normalBody, noteStem);
-      case half:    return new NoteImage(normalBody, normalHole, noteStem);
-      case whole:   return new NoteImage(wholeBody, wholeHole);
+    switch (note.getLength()) {
+      case quarter: return new NoteImage(NoteLength.quarter, normalBody, noteStem);
+      case half:    return new NoteImage(NoteLength.half, normalBody, normalHole, noteStem);
+      case whole:   return new NoteImage(NoteLength.whole, wholeBody, wholeHole);
       default:      throw new NoSuchNoteLengthException();
         /*
         *  TODO There is no reason this exception should be needed. We should
