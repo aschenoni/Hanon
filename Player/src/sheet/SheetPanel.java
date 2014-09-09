@@ -17,10 +17,6 @@ public class SheetPanel extends Application {
 
   @Override
   public void start(Stage stage) {
-
-    System.out.println("Working Directory = " +
-            System.getProperty("user.dir"));
-
     Group group = new Group();
     Canvas canvas = new Canvas(1000, 1000);
     group.getChildren().add(canvas);
