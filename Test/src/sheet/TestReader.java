@@ -1,7 +1,7 @@
 package sheet;
 
 public class TestReader implements Reader {
-  private String content;
+  private final String content;
 
   public TestReader(String content) {
     this.content = content;

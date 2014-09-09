@@ -1,7 +1,5 @@
 package recorder;
 
-import javax.sound.sampled.AudioFileFormat;
-
-public interface SoundDevice {
+interface SoundDevice {
   Recording getSound();
 }

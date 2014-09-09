@@ -12,7 +12,7 @@ public class StringOps {
     return concat(intersperse(ss, "\n"));
   }
 
-  public static String[] intersperse(String[] ss, String toIntersperse) {
+  private static String[] intersperse(String[] ss, String toIntersperse) {
     String[] res = new String[ss.length*2];
     for (int i = 0; i < ss.length; i++) {
       res[i*2] = ss[i];
@@ -21,7 +21,7 @@ public class StringOps {
     return Arrays.copyOfRange(res, 0, ss.length*2 - 1);
   }
 
-  public static String concat(String[] ss) {
+  private static String concat(String[] ss) {
     String res = "";
     for (String s : ss) res += s;
     return res;

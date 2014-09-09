@@ -15,12 +15,12 @@ public class Microphone implements SoundDevice {
     mic.stopRecording();
   }
 
-  public static final float SAMPLE_RATE = 8000.0f;
+  private static final float SAMPLE_RATE = 8000.0f;
 
-  public static final int SAMPLE_SIZE_BITS = 16;
-  public static final int CHANNEL = 1;
-  public static final boolean IS_SIGNED = true;
-  public static final boolean IS_BIG_ENDIAN = false;
+  private static final int SAMPLE_SIZE_BITS = 16;
+  private static final int CHANNEL = 1;
+  private static final boolean IS_SIGNED = true;
+  private static final boolean IS_BIG_ENDIAN = false;
   private static final AudioFormat DEFAULT_FORMAT =
           new AudioFormat(
                   SAMPLE_RATE,
@@ -33,9 +33,9 @@ public class Microphone implements SoundDevice {
 
 
   private TargetDataLine targetDataLine;
-  private Recording recording;
+  private final Recording recording;
 
-  public Microphone(Recording recording) {
+  private Microphone(Recording recording) {
     this.recording = recording;
     try {
       targetDataLine = (TargetDataLine) AudioSystem.getLine(DATA_LINE_INFO);
@@ -44,7 +44,7 @@ public class Microphone implements SoundDevice {
     }
   }
 
-  public void startRecord(){
+  void startRecord(){
     // Capture input data from the microphone
     try {
       targetDataLine.open(DEFAULT_FORMAT);
@@ -56,7 +56,7 @@ public class Microphone implements SoundDevice {
     }
   }
 
-  public void stopRecording() {
+  void stopRecording() {
     targetDataLine.stop();
     targetDataLine.close();
   }

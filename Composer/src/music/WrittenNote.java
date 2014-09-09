@@ -23,7 +23,7 @@ public class WrittenNote implements MusicNote, Recordable {
     return new WrittenNote(value, length);
   }
 
-  public WrittenNote(NoteValue value, NoteLength length) {
+  private WrittenNote(NoteValue value, NoteLength length) {
     this.value = value;
     this.length = length;
   }

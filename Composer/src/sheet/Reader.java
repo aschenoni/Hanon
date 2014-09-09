@@ -1,5 +1,5 @@
 package sheet;
 
-public interface Reader {
+interface Reader {
   String getContent();
 }

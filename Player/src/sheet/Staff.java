@@ -24,9 +24,9 @@ public class Staff {
     factory = new NoteImageFactory(y);
   }
 
-  public void draw(GraphicsContext g2, Group root) {
-    for (NoteImage n : notes) { n.draw(g2, root); }
-    for (int i = 0; i < 5; i++) { root.getChildren().add(new Rectangle(x, y+LINE_GAP*i, 300, 1)); }
+  public void draw(Brush brush) {
+    for (NoteImage n : notes) { n.draw(brush); }
+    for (int i = 0; i < 5; i++) { brush.paint(new Rectangle(x, y+LINE_GAP*i, 300, 1)); }
   }
 
   /**
@@ -37,4 +37,6 @@ public class Staff {
   public void addNote(NoteLength length, int x, int line) {
     notes.add(factory.buildImage(length, x, y + 5*line + 1));
   }
+
+
 }

@@ -2,7 +2,8 @@ package components;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
+import sheet.Brush;
 
 public interface NoteComponent {
-  void draw(GraphicsContext g2, Group root);
+  void draw(Brush brush);
 }

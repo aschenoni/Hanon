@@ -15,7 +15,7 @@ public class FileRecording implements Recording {
     new CaptureThread().start();
   }
 
-  class CaptureThread extends Thread {
+  private class CaptureThread extends Thread {
     public void run() {
       AudioFileFormat.Type fileType =  AudioFileFormat.Type.WAVE;
       File audioFile = new File("junk.wav");

@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import music.MusicNote;
-import music.NoteLength;
 import music.WrittenNote;
 
 public class SheetPanel extends Application {
@@ -24,16 +23,18 @@ public class SheetPanel extends Application {
   public void start(Stage stage) {
     Group root = new Group();
     Canvas canvas = new Canvas(500, 300);
-    GraphicsContext g = canvas.getGraphicsContext2D();
+
     root.getChildren().add(canvas);
     stage.setScene(new Scene(root));
     stage.show();
+
+    Brush brush = new Brush(root);
 
     MusicNote note = WrittenNote.fromString("440.0 quarter");
 
     Staff s = new Staff(25, 25);
     s.addNote(note.getLength(), 50, note.getStaffPosition());
-    s.draw(g, root);
+    s.draw(brush);
   }
 }
 

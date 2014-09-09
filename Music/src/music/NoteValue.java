@@ -20,10 +20,10 @@ public class NoteValue {
 
   }
   public static final float A4 = 440.0f;
-  public static final int A_INDEX = NoteName.indexOf(NoteName.A);
+  private static final int A_INDEX = NoteName.indexOf(NoteName.A);
 
-  public static final int NUM_HALF_STEPS_IN_OCTAVE = 12;
-  public static final float FREQ_CONST = (float) pow(2.0, (1.0 / NUM_HALF_STEPS_IN_OCTAVE));
+  private static final int NUM_HALF_STEPS_IN_OCTAVE = 12;
+  private static final float FREQ_CONST = (float) pow(2.0, (1.0 / NUM_HALF_STEPS_IN_OCTAVE));
   private final NoteName name;
 
   private final int octave;

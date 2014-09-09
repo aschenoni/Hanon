@@ -2,6 +2,7 @@ package components;
 
 import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
+import sheet.Brush;
 import sheet.Staff;
 
 import java.awt.*;
@@ -21,30 +22,30 @@ public class NoteBody implements NoteComponent {
     return (int) (BASE_OVAL_HEIGHT *scale);
   }
 
-  public NoteBody(int x, int y, float scale) {
+  public NoteBody(int x, int y) {
     this.x = x;
     this.y = y;
-    this.scale = scale;
+    this.scale = (float) 1;
   }
 
-  public int x() {
+  int x() {
     return x;
   }
 
-  public int y() {
+  int y() {
     return y;
   }
 
-  public int width() {
+  int width() {
     return adjustedWidth(scale);
   }
 
-  public int height() {
+  int height() {
     return adjustedHeight(scale);
   }
 
-  public void draw(GraphicsContext g2, Group root) {
+  public void draw(Brush brush) {
     RotatedEllipse e = new RotatedEllipse(x(), y(), width(), height(), -20);
-    e.draw(g2, root);
+    e.draw(brush);
   }
 }

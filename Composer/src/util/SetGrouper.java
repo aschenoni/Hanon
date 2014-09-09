@@ -3,7 +3,7 @@ package util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SetGrouper {
+class SetGrouper {
   private final String[] ss;
   private final List<String> groups = new ArrayList<String>();
 

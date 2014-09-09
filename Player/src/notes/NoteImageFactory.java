@@ -24,7 +24,7 @@ public class NoteImageFactory {
   }
 
   private BodyHole buildHole(int x, int y) {
-    return new BodyHole(x, y, 1);
+    return new BodyHole(x, y);
   }
 
   private NoteStem buildStem(int x, int y) {
@@ -32,7 +32,7 @@ public class NoteImageFactory {
   }
 
   private NoteBody buildNoteBody(int x, int y) {
-    return new NoteBody(x, y, 1);
+    return new NoteBody(x, y);
   }
 }
 
