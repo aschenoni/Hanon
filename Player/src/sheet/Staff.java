@@ -1,11 +1,9 @@
 package sheet;
 
-import javafx.scene.Group;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.shape.Rectangle;
 import music.NoteLength;
-import notes.NoteImage;
-import notes.NoteImageFactory;
+import note.NoteImage;
+import note.NoteImageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +24,7 @@ public class Staff {
 
   public void draw(Brush brush) {
     for (NoteImage n : notes) { n.draw(brush); }
-    for (int i = 0; i < 5; i++) { brush.paint(new Rectangle(x, y+LINE_GAP*i, 300, 1)); }
+    for (int i = 0; i < 5; i++) { brush.paint(new Rectangle(x, y + LINE_GAP * i, 300, 1)); }
   }
 
   /**

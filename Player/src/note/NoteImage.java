@@ -1,10 +1,9 @@
-package notes;
+package note;
 
-import components.NoteComponent;
 import sheet.Brush;
 
 /**
- * A Note Image is nothing more than the collection of different note components
+ * A Note Image is nothing more than the collection of different note component
  * that make up a given image.
  *
  * For instance, a whole note is a Note Body and a Body Hole.

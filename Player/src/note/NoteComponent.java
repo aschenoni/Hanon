@@ -1,4 +1,4 @@
-package components;
+package note;
 
 import sheet.Brush;
 

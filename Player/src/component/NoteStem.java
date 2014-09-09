@@ -1,6 +1,7 @@
-package components;
+package component;
 
 import javafx.scene.shape.Rectangle;
+import note.NoteComponent;
 import sheet.Brush;
 import sheet.Staff;
 

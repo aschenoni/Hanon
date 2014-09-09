@@ -1,4 +1,4 @@
-package components;
+package component;
 
 public class DownNoteStem extends NoteStem {
   private final int baseX, baseY;

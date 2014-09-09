@@ -1,13 +1,13 @@
-package notes;
+package note;
 
-import components.BodyHole;
-import components.NoteBody;
-import components.NoteStem;
+import component.BodyHole;
+import component.NoteBody;
+import component.NoteStem;
 import music.NoteLength;
 
 /**
  * The note image factory is responsible for putting together the correct
- * collection of note components into a note image. It makes this decision by
+ * collection of note component into a note image. It makes this decision by
  * looking at the length of the requested note.
  *
  * For instance, a quarter note has a body and a stem, while a half note

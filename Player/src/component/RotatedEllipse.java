@@ -1,4 +1,4 @@
-package components;
+package component;
 
 import javafx.scene.shape.Ellipse;
 import javafx.scene.transform.Rotate;
