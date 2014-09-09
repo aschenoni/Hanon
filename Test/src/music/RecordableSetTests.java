@@ -9,12 +9,29 @@ import static org.junit.Assert.assertEquals;
 
 public class RecordableSetTests {
 
-  private static final String NESTED_RECORD = "crescendo {\n\tchord {\n\t\t440.0 whole\n\t\t480.0 whole\n\t}\n}";
-  private static final String TWICE_NESTED_RECORD =
-          "forte {\n\tcrescendo {\n\t\tchord {\n\t\t\t440.0 whole\n\t\t\t480.0 whole\n\t\t}\n\t}\n}";
-  private static final WrittenNote NOTE1 = new WrittenNote(440.0f, NoteLength.whole);
+  private static final String NESTED_RECORD =
+          "crescendo {\n" +
+          "\tchord {\n" +
+          "\t\t" + MusicRecordTests.NOTE_RECORD_1 + "\n" +
+          "\t\t" + MusicRecordTests.NOTE_RECORD_2 + "\n" +
+          "\t}\n" +
+          "}";
 
-  private static final WrittenNote NOTE2 = new WrittenNote(480.0f, NoteLength.whole);
+
+  private static final String TWICE_NESTED_RECORD =
+          "forte {\n" +
+          "\tcrescendo {\n" +
+          "\t\tchord {\n" +
+          "\t\t\t" + MusicRecordTests.NOTE_RECORD_1 + "\n" +
+          "\t\t\t" + MusicRecordTests.NOTE_RECORD_2 + "\n" +
+          "\t\t}\n" +
+          "\t}\n" +
+          "}";
+
+
+  private static final WrittenNote NOTE1 = new WrittenNote(440.0f, NoteLength.eighth);
+  private static final WrittenNote NOTE2 = new WrittenNote(480.0f, NoteLength.eighth);
+
   private static final List<Recordable> NOTES = new ArrayList<Recordable>();
   private static final List<Recordable> CHORD_SET = new ArrayList<Recordable>();
   private static final List<Recordable> FORTE_SET = new ArrayList<Recordable>();

@@ -9,9 +9,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class MusicRecordTests {
-  private static final WrittenNote note1 = new WrittenNote(440.0f, NoteLength.eighth);
-  private static final WrittenNote note2 = new WrittenNote(480.0f, NoteLength.eighth);
-  private static final String NOTE_RECORD = "440.0 eighth";
+  public static final WrittenNote note1 = new WrittenNote(440.0f, NoteLength.eighth);
+  public static final WrittenNote note2 = new WrittenNote(480.0f, NoteLength.eighth);
+
+  public static final String NOTE_RECORD_1 = "440.0 eighth";
+  public static final String NOTE_RECORD_2 = "480.0 eighth";
 
   private static final List<Recordable> notes = new ArrayList<Recordable>();
   static {
@@ -24,18 +26,18 @@ public class MusicRecordTests {
 
   @Test
   public void testWriteNote() {
-    assertEquals(NOTE_RECORD, note1.record());
+    assertEquals(NOTE_RECORD_1, note1.record());
   }
 
   @Test
   public void testReadNote() {
-    assertEquals(note1, WrittenNote.fromString(NOTE_RECORD));
+    assertEquals(note1, WrittenNote.fromString(NOTE_RECORD_1));
   }
 
   @Test
   public void testInverseReadAndWriteNote() {
     assertEquals(note1, WrittenNote.fromString(note1.record()));
-    assertEquals(NOTE_RECORD, WrittenNote.fromString(NOTE_RECORD).record());
+    assertEquals(NOTE_RECORD_1, WrittenNote.fromString(NOTE_RECORD_1).record());
   }
 
   @Test
@@ -58,7 +60,7 @@ public class MusicRecordTests {
   public void testWriteToFile() {
     TestWriter w = new TestWriter();
     Sheet s = new Sheet(chord);
-    s.writeToFile(w);
+    s.write(w);
     assertEquals(CHORD_RECORD, w.readContent());
   }
 
