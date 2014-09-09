@@ -3,6 +3,8 @@ package music;
 import static java.lang.Math.*;
 
 public class NoteValue {
+  private final float frequency;
+
   public enum NoteName {
     C, CSharp,
     D, DSharp,
@@ -24,9 +26,11 @@ public class NoteValue {
 
   private static final int NUM_HALF_STEPS_IN_OCTAVE = 12;
   private static final float FREQ_CONST = (float) pow(2.0, (1.0 / NUM_HALF_STEPS_IN_OCTAVE));
-  private final NoteName name;
 
-  private final int octave;
+  //private final NoteName name;
+  //private final int octave;
+
+  /*
   public static NoteValue fromFrequency(float frequency) {
     int numHalfSteps = (int) round( log(frequency/A4) / log(FREQ_CONST) );
 
@@ -44,12 +48,46 @@ public class NoteValue {
 
     return new NoteValue(NoteName.values()[A_INDEX + halfStepsFromA], 4 + octavesFromA4);
   }
+  */
 
+  /*
   public NoteValue(NoteName name, int octave) {
     this.name = name;
     this.octave = octave;
   }
+  */
 
+  public NoteValue(float frequency) {
+    this.frequency = frequency;
+  }
+
+  public float getFrequency() {
+    return frequency;
+  }
+
+  public int getOctave() {
+    int numHalfSteps = (int) round( log(frequency/A4) / log(FREQ_CONST) );
+    int octavesFromA4 = numHalfSteps / NUM_HALF_STEPS_IN_OCTAVE;
+    int halfStepsFromA = numHalfSteps % NUM_HALF_STEPS_IN_OCTAVE;
+
+    if (halfStepsFromA + A_INDEX < 0)   octavesFromA4 -= 1;
+    if (halfStepsFromA + A_INDEX >= 12) octavesFromA4 += 1;
+
+    return 4 + octavesFromA4;
+  }
+
+  public NoteName getName() {
+    int numHalfSteps = (int) round( log(frequency/A4) / log(FREQ_CONST) );
+
+    int halfStepsFromA = numHalfSteps % NUM_HALF_STEPS_IN_OCTAVE;
+
+    if (halfStepsFromA + A_INDEX < 0)   halfStepsFromA += 12;
+    if (halfStepsFromA + A_INDEX >= 12) halfStepsFromA -= 12;
+
+    return NoteName.values()[A_INDEX + halfStepsFromA];
+  }
+
+  /*
   public float getFrequency() {
     int ind = NoteName.indexOf(name);
     int halfStepsFromA = ind - A_INDEX;
@@ -57,6 +95,7 @@ public class NoteValue {
     int halfStepsFromA4 = NUM_HALF_STEPS_IN_OCTAVE * octavesFromA4 + halfStepsFromA;
     return (float) (A4 * pow(FREQ_CONST, halfStepsFromA4));
   }
+  */
 
   /**
    * The line is the position on the staff where the note should lie. The top
@@ -65,12 +104,12 @@ public class NoteValue {
    */
   public int getStaffPosition() {
     // A4 = 4, A0 = 52, C0 = 61
-    return 61 - 12*octave - NoteName.indexOf(name);
+    return 61 - 12*getOctave() - NoteName.indexOf(getName());
   }
 
   @Override
   public String toString() {
-    return name.toString() + octave;
+    return getName().toString() + getOctave();
   }
 
   @Override
@@ -78,12 +117,12 @@ public class NoteValue {
     if (!(o instanceof NoteValue)) return false;
     else {
       NoteValue n = (NoteValue)o;
-      return name.equals(n.name) && octave == n.octave;
+      return getName().equals(n.getName()) && getOctave()== n.getOctave();
     }
   }
 
   @Override
   public int hashCode() {
-    return 17 * (octave + 31*name.hashCode());
+    return 17 * (getOctave() + 31*getName().hashCode());
   }
 }

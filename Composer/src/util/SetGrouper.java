@@ -3,6 +3,27 @@ package util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Helper class for grouping sets together based on braces.
+ *
+ * For example
+ *
+ * "item 1\n
+ *  group 1 {\n
+ *    item 2\n
+ *    item 3\n
+ *  }" ->
+ *
+ * {
+ *   "item 1",
+ *
+ *   "group 1 {\n
+ *      item 2\n
+ *      item 3\n
+ *    }"
+ * }
+ *
+ */
 class SetGrouper {
   private final String[] ss;
   private final List<String> groups = new ArrayList<String>();

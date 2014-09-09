@@ -19,7 +19,7 @@ public class WrittenNote implements MusicNote, Recordable {
     String[] words = s.split(" ");
     float frequency = Float.parseFloat(words[0]);
     NoteLength length = NoteLength.valueOf(words[1]);
-    NoteValue value = NoteValue.fromFrequency(frequency);
+    NoteValue value = new NoteValue(frequency);
     return new WrittenNote(value, length);
   }
 
@@ -29,7 +29,7 @@ public class WrittenNote implements MusicNote, Recordable {
   }
 
   public WrittenNote(float frequency, NoteLength length) {
-    this(NoteValue.fromFrequency(frequency), length);
+    this(new NoteValue(frequency), length);
   }
 
   public float getFrequency() {

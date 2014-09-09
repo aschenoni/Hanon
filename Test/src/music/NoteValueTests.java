@@ -9,18 +9,11 @@ public class NoteValueTests {
 
   @Test
   public void testFrequencyEquality() {
-    assertEquals(A4, fromFrequency(A4).getFrequency(), .1);
-
-    for (int octave = 0; octave < 8; octave++) {
-      for (NoteName name : NoteName.values()) {
-        NoteValue n = new NoteValue(name, octave);
-        assertEquals(n, NoteValue.fromFrequency(n.getFrequency()));
-      }
-    }
+    assertEquals(A4, new NoteValue(A4).getFrequency(), .1);
   }
 
   @Test
   public void testStaffPosition() {
-    assertEquals(4, NoteValue.fromFrequency(A4).getStaffPosition());
+    assertEquals(4, new NoteValue(A4).getStaffPosition());
   }
 }

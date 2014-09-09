@@ -6,6 +6,19 @@ import java.util.List;
 
 import static util.StringOps.*;
 
+/**
+ * A recordable set is a grouping of recordable items. It's type is given by
+ * RecordableSetType. For example,
+ *
+ * chord {
+ *   ...
+ *   ...
+ *   ...
+ * }
+ *
+ * is the representation of a chord. Recordable sets may be nested to allow for
+ * concepts such as grouping of chords, etc.
+ */
 public class RecordableSet implements Recordable {
   private final RecordableSetType type;
   private final List<Recordable> elements;
@@ -40,7 +53,7 @@ public class RecordableSet implements Recordable {
   public String record() {
     String s = type.toString() + " {\n";
     for (Recordable r : elements)
-      s += unLines(prependEach(lines(r.record()), "\t")) + "\n";
+      s += unlines(prependEach(lines(r.record()), "\t")) + "\n";
     return s + "}";
   }
 
