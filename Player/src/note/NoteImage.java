@@ -1,9 +1,10 @@
 package note;
 
+import music.NoteLength;
 import sheet.Brush;
 
 /**
- * A Note Image is nothing more than the collection of different note component
+ * A Note Image is nothing more than the collection of different note components
  * that make up a given image.
  *
  * For instance, a whole note is a Note Body and a Body Hole.

@@ -1,5 +1,6 @@
 package sheet;
 
+import image.Clef;
 import javafx.scene.shape.Rectangle;
 import music.NoteLength;
 import note.NoteImage;
@@ -13,18 +14,24 @@ public class Staff {
 
   private final int x;
   private final int y;
+  private int currentX;
+
   private final List<NoteImage> notes = new ArrayList<NoteImage>();
   private final NoteImageFactory factory;
+  private final Clef clef;
 
-  public Staff(int x, int y) {
+  public Staff(Clef clef, int x, int y) {
+    this.clef = clef;
+    factory = new NoteImageFactory(y);
     this.x = x;
     this.y = y;
-    factory = new NoteImageFactory(y);
+    currentX = x+100;
   }
 
   public void draw(Brush brush) {
     for (NoteImage n : notes) { n.draw(brush); }
     for (int i = 0; i < 5; i++) { brush.paint(new Rectangle(x, y + LINE_GAP * i, 300, 1)); }
+    clef.draw(brush, x, y-20);
   }
 
   /**
@@ -32,9 +39,9 @@ public class Staff {
    *             lie. The top space is 0, and the line below it is 1, etc. To
    *             go above the line, use negative values.
    */
-  public void addNote(NoteLength length, int x, int line) {
-    notes.add(factory.buildImage(length, x, y + 5*line + 1));
+  public void addNote(NoteLength length, int line) {
+    NoteImage im = factory.buildImage(length, currentX, y + 5 * line + 1);
+    notes.add(im);
+    currentX += length.getSpacing();
   }
-
-
 }

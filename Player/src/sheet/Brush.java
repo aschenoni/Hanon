@@ -1,6 +1,9 @@
 package sheet;
 
 import javafx.scene.Group;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
@@ -22,15 +25,17 @@ public class Brush {
   public static final Color DEFAULT_COLOR = Color.BLACK;
 
   private final Group group;
+  private final GraphicsContext graphicsContext;
   private final Paint paintColor;
 
-  private Brush(Group group, Paint paintColor) {
+  private Brush(Group group, GraphicsContext graphicsContext, Paint paintColor) {
     this.group = group;
+    this.graphicsContext = graphicsContext;
     this.paintColor = paintColor;
   }
 
-  public Brush(Group group) {
-    this(group, DEFAULT_COLOR);
+  public Brush(Group group, GraphicsContext graphicsContext) {
+    this(group, graphicsContext, DEFAULT_COLOR);
   }
 
   public void paint(Shape shape) {
@@ -38,11 +43,18 @@ public class Brush {
     group.getChildren().add(shape);
   }
 
+  public void paint(Image image, int x, int y) {
+    ImageView im = new ImageView(image);
+    im.setX(x);
+    im.setY(y);
+    group.getChildren().add(im);
+  }
+
   /**
    * Create a new brush that draws to the same shape group, but in a different
    * color.
    */
   public Brush withColor(Paint paintColor) {
-    return new Brush(group, paintColor);
+    return new Brush(group, graphicsContext, paintColor);
   }
 }
