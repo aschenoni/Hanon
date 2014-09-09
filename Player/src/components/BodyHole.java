@@ -1,54 +1,42 @@
 package components;
 
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.shape.Ellipse;
 import sheet.Brush;
 
+/**
+ * A body hole is the white gap of a half or whole note in sheet music.
+ */
 public class BodyHole implements NoteComponent {
-  private static final int BASE_HEIGHT_OFFSET = 1;
-  private static final int BASE_WIDTH_OFFSET = 4;
-  private static final int BASE_HOLE_HEIGHT = NoteBody.BASE_OVAL_HEIGHT - 2*BASE_HEIGHT_OFFSET;
-  private static final int BASE_HOLE_WIDTH = NoteBody.BASE_OVAL_WIDTH - 2*BASE_WIDTH_OFFSET;
 
-  private final int baseX;
-  private final int baseY;
-  private final float scale;
+  /**
+   * The height and width of the actual ellipse should be set in by some offset.
+   * This is because the passed adjustedX and adjustedY coordinates should be that of the actual
+   * note, and not of the hole.
+   */
+  private static final int HEIGHT_OFFSET = 1;
+  private static final int WIDTH_OFFSET = 4;
 
+  private static final int HEIGHT = NoteBody.HEIGHT - 2* HEIGHT_OFFSET;
+  private static final int WIDTH = NoteBody.WIDTH - 2* WIDTH_OFFSET;
+
+  private final Ellipse ellipse;
+
+  /**
+   * The x and y coordinates of the body hole should be the same as the
+   * coordinates of the note that it belongs to.
+   */
   public BodyHole(int x, int y) {
-    this.baseX = x;
-    this.baseY = y;
-    this.scale = (float) 1;
-  }
-
-  int x() {
-    return baseX + widthOffset();
-  }
-
-  int y() {
-    return baseY + heightOffset();
-  }
-
-  int width() {
-    return (int) (BASE_HOLE_WIDTH * scale);
-  }
-
-  int height() {
-    return (int) (BASE_HOLE_HEIGHT * scale);
-  }
-
-  private int widthOffset() {
-    return (int)(BASE_WIDTH_OFFSET*scale);
-  }
-
-  private int heightOffset() {
-    return (int)(BASE_HEIGHT_OFFSET*scale);
+    ellipse = RotatedEllipse.buildEllipse(
+            x + WIDTH_OFFSET,
+            y + HEIGHT_OFFSET,
+            WIDTH,
+            HEIGHT,
+            NoteBody.ANGLE);
   }
 
   public void draw(Brush brush) {
-    RotatedEllipse e = new RotatedEllipse(x(), y(), width(), height(), -20);
-    Paint p = brush.getPaintColor();
-    brush.setPaintColor(Color.WHITE);
-    e.draw(brush);
-    brush.setPaintColor(p);
+    Brush whiteBrush = brush.withColor(Color.WHITE);
+    whiteBrush.paint(ellipse);
   }
 }

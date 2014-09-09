@@ -1,51 +1,22 @@
 package components;
 
-import javafx.scene.Group;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.shape.Ellipse;
 import sheet.Brush;
 import sheet.Staff;
 
-import java.awt.*;
 
 public class NoteBody implements NoteComponent {
-  public static final int BASE_OVAL_HEIGHT = Staff.LINE_GAP-1;
-  public static final int BASE_OVAL_WIDTH = (int) (1.6*BASE_OVAL_HEIGHT);
+  public static final int HEIGHT = Staff.LINE_GAP-1;
+  public static final int WIDTH = (int) (1.6* HEIGHT);
+  public static final int ANGLE = -20;
 
-  private final int x, y;
-  private final float scale;
-
-  public static int adjustedWidth(float scale) {
-    return (int) (BASE_OVAL_WIDTH*scale);
-  }
-
-  public static int adjustedHeight(float scale) {
-    return (int) (BASE_OVAL_HEIGHT *scale);
-  }
+  private final Ellipse ellipse;
 
   public NoteBody(int x, int y) {
-    this.x = x;
-    this.y = y;
-    this.scale = (float) 1;
-  }
-
-  int x() {
-    return x;
-  }
-
-  int y() {
-    return y;
-  }
-
-  int width() {
-    return adjustedWidth(scale);
-  }
-
-  int height() {
-    return adjustedHeight(scale);
+    ellipse = RotatedEllipse.buildEllipse(x, y, WIDTH, HEIGHT, ANGLE);
   }
 
   public void draw(Brush brush) {
-    RotatedEllipse e = new RotatedEllipse(x(), y(), width(), height(), -20);
-    e.draw(brush);
+    brush.paint(ellipse);
   }
 }
