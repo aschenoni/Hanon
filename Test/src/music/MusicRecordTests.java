@@ -9,57 +9,109 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class MusicRecordTests {
-  public static final WrittenNote note1 = new WrittenNote(440.0f, NoteLength.eighth);
-  public static final WrittenNote note2 = new WrittenNote(480.0f, NoteLength.eighth);
+  public static final WrittenNote NOTE_1 = new WrittenNote(440.0f, NoteLength.eighth);
+  public static final WrittenNote NOTE_2 = new WrittenNote(480.0f, NoteLength.eighth);
 
   public static final String NOTE_RECORD_1 = "440.0 eighth";
   public static final String NOTE_RECORD_2 = "480.0 eighth";
 
-  private static final List<Recordable> notes = new ArrayList<Recordable>();
+  private static final List<Recordable> NOTES = new ArrayList<Recordable>();
   static {
-    notes.add(note1);
-    notes.add(note2);
+    NOTES.add(NOTE_1);
+    NOTES.add(NOTE_2);
   }
-  private static final RecordableSet chord = new RecordableSet(RecordableSetType.chord, notes);
+  public static final RecordableSet CHORD = new RecordableSet(RecordableSetType.chord, NOTES);
 
-  private static final String CHORD_RECORD = "chord {\n\t440.0 eighth\n\t480.0 eighth\n}";
+  private static final String CHORD_RECORD =
+          "chord {\n" +
+          "\t" + NOTE_RECORD_1 + "\n" +
+          "\t" + NOTE_RECORD_2 + "\n" +
+          "}";
+
+  private static final String NESTED_RECORD =
+          "crescendo {\n" +
+          "\tchord {\n" +
+          "\t\t" + MusicRecordTests.NOTE_RECORD_1 + "\n" +
+          "\t\t" + MusicRecordTests.NOTE_RECORD_2 + "\n" +
+          "\t}\n" +
+          "}";
+
+  private static final String TWICE_NESTED_RECORD =
+          "forte {\n" +
+          "\tcrescendo {\n" +
+          "\t\tchord {\n" +
+          "\t\t\t" + MusicRecordTests.NOTE_RECORD_1 + "\n" +
+          "\t\t\t" + MusicRecordTests.NOTE_RECORD_2 + "\n" +
+          "\t\t}\n" +
+          "\t}\n" +
+          "}";
+
+
+  private static final List<Recordable> CHORD_SET = new ArrayList<Recordable>();
+  private static final List<Recordable> FORTE_SET = new ArrayList<Recordable>();
+
+  private static final RecordableSet NESTED_SET = new RecordableSet(RecordableSetType.crescendo, CHORD_SET);
+  private static final RecordableSet TWICE_NESTED_SET = new RecordableSet(RecordableSetType.forte, FORTE_SET);
+
+  static {
+    CHORD_SET.add(MusicRecordTests.CHORD);
+    FORTE_SET.add(NESTED_SET);
+  }
 
   @Test
   public void testWriteNote() {
-    assertEquals(NOTE_RECORD_1, note1.record());
+    assertEquals(NOTE_RECORD_1, NOTE_1.record());
   }
 
   @Test
   public void testReadNote() {
-    assertEquals(note1, WrittenNote.fromString(NOTE_RECORD_1));
+    assertEquals(NOTE_1, WrittenNote.fromString(NOTE_RECORD_1));
   }
 
   @Test
   public void testInverseReadAndWriteNote() {
-    assertEquals(note1, WrittenNote.fromString(note1.record()));
+    assertEquals(NOTE_1, WrittenNote.fromString(NOTE_1.record()));
     assertEquals(NOTE_RECORD_1, WrittenNote.fromString(NOTE_RECORD_1).record());
   }
 
   @Test
   public void testWriteChord() {
-    assertEquals(CHORD_RECORD, chord.record());
+    assertEquals(CHORD_RECORD, CHORD.record());
   }
 
   @Test
   public void testReadChord() {
-    assertEquals(chord, RecordableSet.fromString(CHORD_RECORD));
+    assertEquals(CHORD, RecordableSet.fromString(CHORD_RECORD));
   }
 
   @Test
   public void testInverseReadAndWriteChord() {
-    assertEquals(chord, RecordableSet.fromString(chord.record()));
+    assertEquals(CHORD, RecordableSet.fromString(CHORD.record()));
     assertEquals(CHORD_RECORD, RecordableSet.fromString(CHORD_RECORD).record());
+  }
+
+  @Test
+  public void testWriteNestedSets() {
+    assertEquals(NESTED_RECORD, NESTED_SET.record());
+  }
+
+  @Test
+  public void testReadNestedSets() {
+    assertEquals(NESTED_SET, RecordableSet.fromString(NESTED_RECORD));
+  }
+
+  @Test
+  public void testWriteTwiceNestedSet() { assertEquals(TWICE_NESTED_RECORD, TWICE_NESTED_SET.record());}
+
+  @Test
+  public void testReadTwiceNestedSets() {
+    assertEquals(TWICE_NESTED_SET, RecordableSet.fromString(TWICE_NESTED_RECORD));
   }
 
   @Test
   public void testWriteToFile() {
     TestWriter w = new TestWriter();
-    Sheet s = new Sheet(chord);
+    Sheet s = new Sheet(CHORD);
     s.write(w);
     assertEquals(CHORD_RECORD, w.readContent());
   }
@@ -68,6 +120,6 @@ public class MusicRecordTests {
   public void testReadFromFile() {
     TestReader r = new TestReader(CHORD_RECORD);
     Sheet s = Sheet.fromReader(r);
-    assertEquals(chord, s.getRecord());
+    assertEquals(CHORD, s.getRecord());
   }
 }
