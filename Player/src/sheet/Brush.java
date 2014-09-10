@@ -19,7 +19,7 @@ import javafx.scene.shape.Shape;
  *   stage.show();
  *   Brush brush = new Brush(group);
  *
- * In this manner the brush can be used to draw shapes onto the canvas.
+ * In this manner the brush can be used to paint shapes onto the canvas.
  */
 public class Brush {
   public static final Color DEFAULT_COLOR = Color.BLACK;

@@ -2,7 +2,7 @@ package component;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
-import note.NoteComponent;
+import staff.NoteComponent;
 import sheet.Brush;
 
 /**

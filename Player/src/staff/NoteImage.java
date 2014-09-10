@@ -1,4 +1,4 @@
-package note;
+package staff;
 
 import music.NoteLength;
 import sheet.Brush;
@@ -10,7 +10,7 @@ import sheet.StaffPlaceable;
  *
  * For instance, a whole note is a Note Body and a Body Hole.
  */
-public class NoteImage implements StaffPlaceable {
+class NoteImage implements StaffPlaceable {
   private NoteLength length;
   private final NoteComponent[] components;
 

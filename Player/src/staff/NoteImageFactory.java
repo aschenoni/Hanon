@@ -1,11 +1,10 @@
-package note;
+package staff;
 
 import component.BodyHole;
 import component.NoteBody;
 import component.NoteStem;
 import music.MusicNote;
 import music.NoteLength;
-import music.WrittenNote;
 
 /**
  * The note image factory is responsible for putting together the correct

@@ -1,4 +1,4 @@
-package note;
+package staff;
 
 import sheet.Brush;
 

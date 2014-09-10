@@ -1,7 +1,7 @@
 package component;
 
 import javafx.scene.shape.Ellipse;
-import note.NoteComponent;
+import staff.NoteComponent;
 import sheet.Brush;
 import sheet.Staff;
 

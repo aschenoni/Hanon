@@ -1,16 +1,13 @@
 package sheet;
 
-import image.Clef;
-import image.TimeSignatureImage;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 import music.MusicNote;
-import music.TimeSignature;
 import music.WrittenNote;
-import note.NoteImageFactory;
+import staff.StaffPlaceableFactory;
 
 public class SheetPanel extends Application {
 
@@ -34,17 +31,18 @@ public class SheetPanel extends Application {
     MusicNote note4 = WrittenNote.fromString("440.0 quarter");
 
     Staff s = new Staff(100, 100);
-    NoteImageFactory factory = new NoteImageFactory(s.getY());
+    StaffPlaceableFactory factory = new StaffPlaceableFactory(100, 100);
 
-    s.addElement(new Clef(s.getCurrentX(), s.getY()-20));
-    s.addElement(new TimeSignatureImage(new TimeSignature(4, 4), s.getCurrentX(), s.getY()));
-    s.addElement(factory.buildImage(note1, s.getCurrentX()));
-    s.addMeasureLine();
-    s.addElement(factory.buildImage(note2, s.getCurrentX()));
-    s.addElement(factory.buildImage(note3, s.getCurrentX()));
-    s.addMeasureLine();
-    s.addElement(factory.buildImage(note4, s.getCurrentX()));
-    s.draw(brush);
+    s.addElement(factory.buildClef());
+    s.addElement(factory.buildTimeSignature(4, 4));
+    s.addElement(factory.buildNote(note1));
+    s.addElement(factory.buildMeasureLine());
+    s.addElement(factory.buildNote(note2));
+    s.addElement(factory.buildNote(note3));
+    s.addElement(factory.buildMeasureLine());
+    s.addElement(factory.buildNote(note4));
+    s.addElement(factory.buildStaffLines(500));
+    s.paint(brush);
   }
 }
 

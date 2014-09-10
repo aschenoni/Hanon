@@ -1,4 +1,4 @@
-package image;
+package staff;
 
 import javafx.scene.image.Image;
 import music.TimeSignature;
@@ -7,7 +7,7 @@ import sheet.StaffPlaceable;
 
 import java.io.File;
 
-public class TimeSignatureImage implements StaffPlaceable {
+class TimeSignatureImage implements StaffPlaceable {
   private static final File TIME_2 = new File("Player\\res\\images\\Time2.png");
   private static final File TIME_3 = new File("Player\\res\\images\\Time3.png");
   private static final File TIME_4 = new File("Player\\res\\images\\Time4.png");
