@@ -51,19 +51,28 @@ public class StaffPlaceableFactory {
   }
 
   public ChordImage buildChord(MusicNote... notes) {
+    NoteImage[] images = getNoteImages(notes);
+    NoteLength[] lengths = getNoteLengths(notes);
+
+    ChordImage c = new ChordImage(images);
+    spacer.spaceForChord(lengths);
+    return c;
+  }
+
+  private NoteImage[] getNoteImages(MusicNote[] notes) {
     boolean up = NoteStem.shouldStemGoUp(notes);
     NoteImage[] images = new NoteImage[notes.length];
     for (int i = 0; i < notes.length; i++)
       if (up) images[i] = noteFactory.buildUpImage(notes[i], spacer.getX());
       else    images[i] = noteFactory.buildDownImage(notes[i], spacer.getX());
+    return images;
+  }
 
-    ChordImage c = new ChordImage(images);
-
+  private NoteLength[] getNoteLengths(MusicNote[] notes) {
     NoteLength lengths[] = new NoteLength[notes.length];
     for (int i = 0; i < notes.length; i++)
       lengths[i] = notes[i].getLength();
-    spacer.spaceForChord(lengths);
-    return c;
+    return lengths;
   }
 
   /**
