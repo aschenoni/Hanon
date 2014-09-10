@@ -5,14 +5,11 @@ import java.util.List;
 
 public class Staff {
   public static final int LINE_GAP = 10;
-
-  private final int x;
   private final int y;
 
   private final List<StaffPlaceable> elements = new ArrayList<StaffPlaceable>();
 
-  public Staff(int x, int y) {
-    this.x = x;
+  public Staff(int y) {
     this.y = y;
   }
 
