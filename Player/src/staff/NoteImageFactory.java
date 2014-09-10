@@ -2,7 +2,6 @@ package staff;
 
 import component.*;
 import music.MusicNote;
-import music.NoteLength;
 
 /**
  * The note image factory is responsible for putting together the correct
@@ -47,9 +46,9 @@ public class NoteImageFactory {
     BodyHole wholeHole  = new BodyHole(x, y, 80);
 
     switch (note.getLength()) {
-      case quarter: return new NoteImage(NoteLength.quarter, normalBody, noteStem);
-      case half:    return new NoteImage(NoteLength.half, normalBody, normalHole, noteStem);
-      case whole:   return new NoteImage(NoteLength.whole, wholeBody, wholeHole);
+      case quarter: return new NoteImage(normalBody, noteStem);
+      case half:    return new NoteImage(normalBody, normalHole, noteStem);
+      case whole:   return new NoteImage(wholeBody, wholeHole);
       default:      throw new NoSuchNoteLengthException();
         /*
         *  TODO There is no reason this exception should be needed. We should

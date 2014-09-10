@@ -12,10 +12,10 @@ import sheet.Staff;
  * extended by the classes UpNoteStem and DownNoteStem.
  */
 public abstract class NoteStem implements NoteComponent {
-  public static final int CENTER_POSITION = 4;
+  private static final int CENTER_POSITION = 4;
 
-  public static final int WIDTH = 1;
-  public static final int HEIGHT = 35;
+  static final int WIDTH = 1;
+  static final int HEIGHT = 35;
 
   /**
    * Factory method for generating a note stem in the correct direction. If the
@@ -57,8 +57,7 @@ public abstract class NoteStem implements NoteComponent {
         farthestFromCenter = n.getStaffPosition();
       else if (equidistantFromCenter(farthestFromCenter, n) && isAboveCenter(n))
         farthestFromCenter = n.getStaffPosition();
-    if (farthestFromCenter < CENTER_POSITION) return false;
-    else return true;
+    return farthestFromCenter >= CENTER_POSITION;
   }
 
   private static boolean equidistantFromCenter(int farthestFromCenter, MusicNote n) {

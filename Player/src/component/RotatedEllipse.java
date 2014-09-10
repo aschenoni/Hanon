@@ -3,7 +3,7 @@ package component;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.transform.Rotate;
 
-public class RotatedEllipse {
+class RotatedEllipse {
 
   /**
    * Constructs an ellipse that has been rotated about its center by 'angle'

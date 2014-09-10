@@ -31,7 +31,7 @@ public class SheetPanel extends Application {
     MusicNote note4 = WrittenNote.fromString("440.0 quarter");
     MusicNote note5 = WrittenNote.fromString("440.0 half");
 
-    Staff s = new Staff(100, 100);
+    Staff s = new Staff(100);
     StaffPlaceableFactory factory = new StaffPlaceableFactory(100, 100);
 
     s.addElement(factory.buildClef());
