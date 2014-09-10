@@ -21,9 +21,4 @@ class ClefImage implements StaffPlaceable {
   public void paint(Brush brush) {
     brush.paint(IMAGE, x, y);
   }
-
-  @Override
-  public int getSpacing() {
-    return 50;
-  }
 }

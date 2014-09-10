@@ -26,17 +26,6 @@ public enum NoteLength {
     }
   }
 
-  public int getSpacing() {
-    switch (this) {
-      case sixteenth: return 20;
-      case eighth:    return 30;
-      case quarter:   return 50;
-      case half:      return 80;
-      case whole:     return 120;
-      default:        return 20;
-    }
-  }
-
   public int lengthRelativeTo256th() {
     return (int) Math.pow(2, index());
   }

@@ -15,9 +15,4 @@ class MeasureLine implements StaffPlaceable {
   public void paint(Brush brush) {
     brush.paint(rectangle);
   }
-
-  @Override
-  public int getSpacing() {
-    return 30;
-  }
 }

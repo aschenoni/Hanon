@@ -45,10 +45,5 @@ class TimeSignatureImage implements StaffPlaceable {
     brush.paint(whichGetsBeatImage, x, y + 20);
   }
 
-  @Override
-  public int getSpacing() {
-    return 50;
-  }
-
   private class NoSuchTimeException extends RuntimeException {  }
 }

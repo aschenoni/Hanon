@@ -15,7 +15,6 @@ class ChordImage implements StaffPlaceable{
     for (NoteImage n : notes) n.paint(brush);
   }
 
-  @Override
   public int getSpacing() {
     int max = 0;
     for (NoteImage n : notes)

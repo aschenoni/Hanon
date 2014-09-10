@@ -23,8 +23,7 @@ class NoteImage implements StaffPlaceable {
     for (NoteComponent c : components) { c.draw(brush); }
   }
 
-  @Override
   public int getSpacing() {
-    return length.getSpacing();
+    return StaffPlaceableFactory.getNoteSpacing(length);
   }
 }

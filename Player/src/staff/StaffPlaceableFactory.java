@@ -2,6 +2,7 @@ package staff;
 
 import component.NoteStem;
 import music.MusicNote;
+import music.NoteLength;
 import music.TimeSignature;
 import sheet.Staff;
 
@@ -10,6 +11,22 @@ import sheet.Staff;
  * could be drawn on the music staff.
  */
 public class StaffPlaceableFactory {
+  public static final int MEASURE_LINE_SPACING = 30;
+  public static final int TIME_SIGNATURE_SPACING = 50;
+  public static final int CLEF_SPACING = 50;
+
+  public static int getNoteSpacing(NoteLength length) {
+    switch (length) {
+      case sixteenth: return 20;
+      case eighth:    return 30;
+      case quarter:   return 50;
+      case half:      return 80;
+      case whole:     return 120;
+      default:        return 20;
+    }
+  }
+
+
   private final int originalX;
   private final int staffY;
   private int currentX;
@@ -25,7 +42,7 @@ public class StaffPlaceableFactory {
 
   public ClefImage buildClef() {
     ClefImage c =  new ClefImage(currentX, staffY-20);
-    currentX += c.getSpacing();
+    currentX += CLEF_SPACING;
     return c;
   }
 
@@ -34,7 +51,7 @@ public class StaffPlaceableFactory {
             new TimeSignature(beatsPerMeasure, whichGetsBeat),
             currentX,
             staffY);
-    currentX += t.getSpacing();
+    currentX += TIME_SIGNATURE_SPACING;
     return t;
   }
 
@@ -50,12 +67,15 @@ public class StaffPlaceableFactory {
     for (int i = 0; i < notes.length; i++)
       if (up) images[i] = noteFactory.buildUpImage(notes[i], currentX);
       else    images[i] = noteFactory.buildDownImage(notes[i], currentX);
-    return new ChordImage(images);
+
+    ChordImage c = new ChordImage(images);
+    currentX += c.getSpacing();
+    return c;
   }
 
   public MeasureLine buildMeasureLine() {
     MeasureLine l = new MeasureLine(currentX, staffY, 4* Staff.LINE_GAP);
-    currentX += l.getSpacing();
+    currentX += MEASURE_LINE_SPACING;
     return l;
   }
 
