@@ -27,8 +27,9 @@ public class SheetPanel extends Application {
 
     MusicNote note1 = WrittenNote.fromString("440.0 whole");
     MusicNote note2 = WrittenNote.fromString("470.0 half");
-    MusicNote note3 = WrittenNote.fromString("490.0 half");
+    MusicNote note3 = WrittenNote.fromString("510.0 half");
     MusicNote note4 = WrittenNote.fromString("440.0 quarter");
+    MusicNote note5 = WrittenNote.fromString("440.0 half");
 
     Staff s = new Staff(100, 100);
     StaffPlaceableFactory factory = new StaffPlaceableFactory(100, 100);
@@ -41,7 +42,8 @@ public class SheetPanel extends Application {
     s.addElement(factory.buildNote(note3));
     s.addElement(factory.buildMeasureLine());
     s.addElement(factory.buildNote(note4));
-    s.addElement(factory.buildStaffLines(500));
+    s.addElement(factory.buildChord(note5, note3));
+    s.addElement(factory.buildStaffLines(1000));
     s.paint(brush);
   }
 }

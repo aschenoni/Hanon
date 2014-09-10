@@ -1,5 +1,6 @@
 package staff;
 
+import component.NoteStem;
 import music.MusicNote;
 import music.TimeSignature;
 import sheet.Staff;
@@ -41,6 +42,15 @@ public class StaffPlaceableFactory {
     NoteImage n = noteFactory.buildImage(note, currentX);
     currentX += n.getSpacing();
     return n;
+  }
+
+  public ChordImage buildChord(MusicNote... notes) {
+    boolean up = NoteStem.shouldStemGoUp(notes);
+    NoteImage[] images = new NoteImage[notes.length];
+    for (int i = 0; i < notes.length; i++)
+      if (up) images[i] = noteFactory.buildUpImage(notes[i], currentX);
+      else    images[i] = noteFactory.buildDownImage(notes[i], currentX);
+    return new ChordImage(images);
   }
 
   public MeasureLine buildMeasureLine() {

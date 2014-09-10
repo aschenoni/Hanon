@@ -1,6 +1,7 @@
 package component;
 
 import javafx.scene.shape.Rectangle;
+import music.MusicNote;
 import staff.NoteComponent;
 import sheet.Brush;
 import sheet.Staff;
@@ -11,9 +12,10 @@ import sheet.Staff;
  * extended by the classes UpNoteStem and DownNoteStem.
  */
 public abstract class NoteStem implements NoteComponent {
+  public static final int CENTER_POSITION = 4;
+
   public static final int WIDTH = 1;
   public static final int HEIGHT = 35;
-
 
   /**
    * Factory method for generating a note stem in the correct direction. If the
@@ -40,5 +42,38 @@ public abstract class NoteStem implements NoteComponent {
 
   public void draw(Brush brush) {
     brush.paint(new Rectangle(adjustedX(), adjustedY(), WIDTH, HEIGHT));
+  }
+
+  /**
+   * "To determine the direction for a stem in a chord containing notes both
+   * above and below the middle line, the direction of the note farthest from
+   * that line governs. When the highest and the lowest notes are equidistant
+   * from the center of the staff, a down stem is used."
+   */
+  public static boolean shouldStemGoUp(MusicNote... notes) {
+    int farthestFromCenter = CENTER_POSITION;
+    for (MusicNote n : notes)
+      if (fartherFromCenter(farthestFromCenter, n))
+        farthestFromCenter = n.getStaffPosition();
+      else if (equidistantFromCenter(farthestFromCenter, n) && isAboveCenter(n))
+        farthestFromCenter = n.getStaffPosition();
+    if (farthestFromCenter < CENTER_POSITION) return false;
+    else return true;
+  }
+
+  private static boolean equidistantFromCenter(int farthestFromCenter, MusicNote n) {
+    return distFromCenter(n.getStaffPosition()) == distFromCenter(farthestFromCenter);
+  }
+
+  private static boolean fartherFromCenter(int farthestFromCenter, MusicNote n) {
+    return distFromCenter(n.getStaffPosition()) > distFromCenter(farthestFromCenter);
+  }
+
+  private static int distFromCenter(int position) {
+    return Math.abs(position - CENTER_POSITION);
+  }
+
+  private static boolean isAboveCenter(MusicNote n) {
+    return n.getStaffPosition() < CENTER_POSITION;
   }
 }

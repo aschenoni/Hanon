@@ -63,7 +63,7 @@ public class NoteValue {
    * negative values.
    */
   public int getStaffPosition() {
-    return 61 - 12*getOctave() - NoteName.indexOf(getName()); // A4 = 4, A0 = 52, C0 = 61
+    return 62 - 12*getOctave() - NoteName.indexOf(getName()); // A4 = 5, A0 = 53, C0 = 62
   }
 
   @Override

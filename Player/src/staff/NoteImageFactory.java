@@ -1,8 +1,6 @@
 package staff;
 
-import component.BodyHole;
-import component.NoteBody;
-import component.NoteStem;
+import component.*;
 import music.MusicNote;
 import music.NoteLength;
 
@@ -21,11 +19,30 @@ public class NoteImageFactory {
     this.staffY = staffY;
   }
 
+  private enum StemDirection {
+    UP,
+    DOWN,
+    NORMAL
+  }
+
   public NoteImage buildImage(MusicNote note, int x) {
-    int y = note.getStaffPosition()*5 + staffY + 1;
+    return doBuildImage(note, x, StemDirection.NORMAL);
+  }
+
+  public NoteImage buildUpImage(MusicNote note, int x) {
+    return doBuildImage(note, x, StemDirection.UP);
+  }
+
+
+  public NoteImage buildDownImage(MusicNote note, int x) {
+    return doBuildImage(note, x, StemDirection.DOWN);
+  }
+
+  private NoteImage doBuildImage(MusicNote note, int x, StemDirection d) {
+    int y = (note.getStaffPosition()-1)*5 + staffY + 1;
     NoteBody normalBody = new NoteBody(x, y, -20);
     NoteBody wholeBody  = new NoteBody(x, y, 0);
-    NoteStem noteStem   = NoteStem.fromPosition(x, y, staffY);
+    NoteStem noteStem   = buildStem(x, y, d);
     BodyHole normalHole = new BodyHole(x, y, -20);
     BodyHole wholeHole  = new BodyHole(x, y, 80);
 
@@ -38,6 +55,14 @@ public class NoteImageFactory {
         *  TODO There is no reason this exception should be needed. We should
         *  TODO have type safety since NoteLength is an enum.
         */
+    }
+  }
+
+  private NoteStem buildStem(int x, int y, StemDirection d) {
+    switch (d) {
+      case UP:   return new UpNoteStem(x, y);
+      case DOWN: return new DownNoteStem(x, y);
+      default:   return NoteStem.fromPosition(x, y, staffY);
     }
   }
 
