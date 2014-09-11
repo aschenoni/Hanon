@@ -3,7 +3,7 @@ package component;
 import javafx.scene.shape.Ellipse;
 import staff.NoteComponent;
 import sheet.Brush;
-import sheet.Staff;
+import staff.Staff;
 
 
 public class NoteBody implements NoteComponent {

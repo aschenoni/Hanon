@@ -4,7 +4,7 @@ import javafx.scene.shape.Rectangle;
 import music.MusicNote;
 import staff.NoteComponent;
 import sheet.Brush;
-import sheet.Staff;
+import staff.Staff;
 
 /**
  * In this case, a note stem refers only to a stem for a single note.
@@ -26,7 +26,7 @@ public abstract class NoteStem implements NoteComponent {
    * coordinates of the note that it belongs to.
    */
   public static NoteStem fromPosition(int x, int y, int staffY) {
-    if (y < staffY + 2*Staff.LINE_GAP)
+    if (y < staffY + 2* Staff.LINE_GAP)
       return new DownNoteStem(x, y);
     else
       return new UpNoteStem(x, y);

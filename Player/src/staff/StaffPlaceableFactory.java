@@ -1,16 +1,19 @@
 package staff;
 
 import component.NoteStem;
-import music.MusicNote;
-import music.NoteLength;
-import music.TimeSignature;
-import sheet.Staff;
+import music.*;
+import sheet.StaffPlaceable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Staff Placeable Factory is responsible for building any elements that
  * could be drawn on the music staff.
  */
 public class StaffPlaceableFactory {
+  public static final int LINE_GAP = 10;
+
   private final NoteImageFactory noteFactory;
   private final StaffSpacer spacer;
   private final int y;
@@ -23,34 +26,53 @@ public class StaffPlaceableFactory {
     spacer = new StaffSpacer(x);
   }
 
-  public ClefImage buildClef() {
-    ClefImage c =  new ClefImage(spacer.getX(), y -20);
+  public List<StaffPlaceable> buildPlaceables(List<StaffElement> elements) {
+    List<StaffPlaceable> placeables = new ArrayList<StaffPlaceable>();
+    for (StaffElement e : elements)
+      placeables.add(buildPlaceable(e));
+    return placeables;
+  }
+
+  private StaffPlaceable buildPlaceable(StaffElement element) {
+    switch (element.getType()) {
+      case NOTE:           return buildNote((MusicNote) element);
+      case CHORD:          return buildChord(((Chord)element).getNotes());
+      case TIME_SIGNATURE: return buildTimeSignature((TimeSignature)element);
+      case CLEF:           return buildClef();
+      case MEASURE_LINE:   return buildMeasureLine();
+      case STAFF_LINES:    return buildStaffLines(800);
+      default:             throw new NoSuchStaffElementException();
+    }
+  }
+
+  private ClefImage buildClef() {
+    ClefImage c = new ClefImage(spacer.getX(), y -20);
     spacer.spaceForClef();
     return c;
   }
 
-  public TimeSignatureImage buildTimeSignature(int beatsPerMeasure, int whichGetsBeat) {
+  private TimeSignatureImage buildTimeSignature(TimeSignature sig) {
     TimeSignatureImage t = new TimeSignatureImage(
-            new TimeSignature(beatsPerMeasure, whichGetsBeat),
+            sig,
             spacer.getX(),
             y);
     spacer.spaceForTimeSignature();
     return t;
   }
 
-  public MeasureLine buildMeasureLine() {
-    MeasureLine l = new MeasureLine(spacer.getX(), y, 4* Staff.LINE_GAP);
+  private MeasureLine buildMeasureLine() {
+    MeasureLine l = new MeasureLine(spacer.getX(), y, 4* LINE_GAP);
     spacer.spaceForMeasureLine();
     return l;
   }
 
-  public NoteImage buildNote(MusicNote note) {
+  private NoteImage buildNote(MusicNote note) {
     NoteImage n = noteFactory.buildImage(note, spacer.getX());
     spacer.spaceForNote(note.getLength());
     return n;
   }
 
-  public ChordImage buildChord(MusicNote... notes) {
+  private ChordImage buildChord(MusicNote... notes) {
     NoteImage[] images = getNoteImages(notes);
     NoteLength[] lengths = getNoteLengths(notes);
 
@@ -79,7 +101,10 @@ public class StaffPlaceableFactory {
    * Staff lines should be added to a staff AFTER everything else so that they
    * appear drawn over them.
    */
-  public StaffLines buildStaffLines(int width) {
+  private StaffLines buildStaffLines(int width) {
     return new StaffLines(x, y, width);
+  }
+
+  private class NoSuchStaffElementException extends RuntimeException {
   }
 }

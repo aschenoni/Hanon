@@ -14,6 +14,6 @@ public class NoteValueTests {
 
   @Test
   public void testStaffPosition() {
-    assertEquals(4, new NoteValue(A4).getStaffPosition());
+    assertEquals(5, new NoteValue(A4).getStaffPosition());
   }
 }

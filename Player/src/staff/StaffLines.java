@@ -2,7 +2,6 @@ package staff;
 
 import javafx.scene.shape.Rectangle;
 import sheet.Brush;
-import sheet.Staff;
 import sheet.StaffPlaceable;
 
 import java.util.ArrayList;
@@ -20,4 +19,5 @@ class StaffLines implements StaffPlaceable {
   public void paint(Brush brush) {
     for (Rectangle r : rectangles) brush.paint(r);
   }
+
 }

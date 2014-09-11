@@ -5,7 +5,7 @@ package music;
  * a frequency and a length. It can be written out to a format that can be used
  * for file storage.
  */
-public class WrittenNote implements MusicNote, Recordable {
+public class WrittenNote extends MusicNote implements Recordable {
   private final NoteValue value;
   private final NoteLength length;
 

@@ -3,7 +3,7 @@ package player;
 import music.MusicNote;
 import music.NoteLength;
 
-public class PositionedNote implements MusicNote {
+public class PositionedNote extends MusicNote {
   private final int position;
 
   public PositionedNote(int position) {

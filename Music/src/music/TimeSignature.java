@@ -1,6 +1,6 @@
 package music;
 
-public class TimeSignature {
+public class TimeSignature implements StaffElement {
   private final int beatsPerMeasure;
   private final int whichGetsBeat;
 
@@ -31,5 +31,10 @@ public class TimeSignature {
 
   public boolean needsNewMeasure() {
     return num256Notes == 0;
+  }
+
+  @Override
+  public StaffElementType getType() {
+    return StaffElementType.TIME_SIGNATURE;
   }
 }

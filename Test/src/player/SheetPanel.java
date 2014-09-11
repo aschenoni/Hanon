@@ -1,13 +1,20 @@
-package sheet;
+package player;
 
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
-import music.MusicNote;
-import music.WrittenNote;
-import staff.StaffPlaceableFactory;
+import music.*;
+import sheet.Brush;
+import sheet.StaffPlaceable;
+import staff.Staff;
+import staff.StaffSet;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static music.GeneralStaffElement.*;
 
 public class SheetPanel extends Application {
 
@@ -31,20 +38,20 @@ public class SheetPanel extends Application {
     MusicNote note4 = WrittenNote.fromString("440.0 quarter");
     MusicNote note5 = WrittenNote.fromString("440.0 half");
 
-    Staff s = new Staff(100);
-    StaffPlaceableFactory factory = new StaffPlaceableFactory(100, 100);
+    StaffSet factory = new StaffSet(100, 100, 400);
 
-    s.addElement(factory.buildClef());
-    s.addElement(factory.buildTimeSignature(4, 4));
-    s.addElement(factory.buildNote(note1));
-    s.addElement(factory.buildMeasureLine());
-    s.addElement(factory.buildNote(note2));
-    s.addElement(factory.buildNote(note3));
-    s.addElement(factory.buildMeasureLine());
-    s.addElement(factory.buildNote(note4));
-    s.addElement(factory.buildChord(note5, note3));
-    s.addElement(factory.buildStaffLines(1000));
-    s.paint(brush);
+    List<StaffElement> elements = new ArrayList<StaffElement>();
+    elements.add(new TimeSignature(4,4));
+    elements.add(note1);
+    elements.add(measureLine());
+    elements.add(note2);
+    elements.add(note3);
+    elements.add(measureLine());
+    elements.add(note4);
+    elements.add(new Chord(note5, note3));
+    elements.add(staffLines());
+
+    for (Staff s : factory.placeElements(elements)) s.paint(brush);
+
   }
 }
-
