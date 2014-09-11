@@ -9,6 +9,7 @@ import music.*;
 import sheet.Brush;
 import sheet.StaffPlaceable;
 import staff.Staff;
+import staff.StaffSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +38,9 @@ public class SheetPanel extends Application {
     MusicNote note4 = WrittenNote.fromString("440.0 quarter");
     MusicNote note5 = WrittenNote.fromString("440.0 half");
 
-    Staff factory = new Staff(100, 100);
+    StaffSet factory = new StaffSet(100, 100, 400);
 
     List<StaffElement> elements = new ArrayList<StaffElement>();
-    elements.add(clef());
     elements.add(new TimeSignature(4,4));
     elements.add(note1);
     elements.add(measureLine());
@@ -50,9 +50,8 @@ public class SheetPanel extends Application {
     elements.add(note4);
     elements.add(new Chord(note5, note3));
     elements.add(staffLines());
-    List<StaffPlaceable> placeables = factory.placeElements(elements);
 
-    for (StaffPlaceable p : placeables) p.paint(brush);;
+    for (Staff s : factory.placeElements(elements)) s.paint(brush);
 
   }
 }
