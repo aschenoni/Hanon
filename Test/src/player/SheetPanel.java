@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import music.*;
 import sheet.Brush;
 import sheet.StaffPlaceable;
-import staff.StaffPlaceableFactory;
+import staff.Staff;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +37,7 @@ public class SheetPanel extends Application {
     MusicNote note4 = WrittenNote.fromString("440.0 quarter");
     MusicNote note5 = WrittenNote.fromString("440.0 half");
 
-    StaffPlaceableFactory factory = new StaffPlaceableFactory(100, 100);
+    Staff factory = new Staff(100, 100);
 
     List<StaffElement> elements = new ArrayList<StaffElement>();
     elements.add(clef());
@@ -50,7 +50,7 @@ public class SheetPanel extends Application {
     elements.add(note4);
     elements.add(new Chord(note5, note3));
     elements.add(staffLines());
-    List<StaffPlaceable> placeables = factory.buildPlaceables(elements);
+    List<StaffPlaceable> placeables = factory.placeElements(elements);
 
     for (StaffPlaceable p : placeables) p.paint(brush);;
 
