@@ -24,7 +24,7 @@ public class StaffPlaceableFactory {
   }
 
   public ClefImage buildClef() {
-    ClefImage c =  new ClefImage(spacer.getX(), y -20);
+    ClefImage c = new ClefImage(spacer.getX(), y -20);
     spacer.spaceForClef();
     return c;
   }

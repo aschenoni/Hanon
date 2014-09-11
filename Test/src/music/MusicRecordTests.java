@@ -9,18 +9,18 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class MusicRecordTests {
-  public static final WrittenNote NOTE_1 = new WrittenNote(440.0f, NoteLength.eighth);
-  public static final WrittenNote NOTE_2 = new WrittenNote(480.0f, NoteLength.eighth);
+  private static final WrittenNote NOTE_1 = new WrittenNote(440.0f, NoteLength.eighth);
+  private static final WrittenNote NOTE_2 = new WrittenNote(480.0f, NoteLength.eighth);
 
-  public static final String NOTE_RECORD_1 = "440.0 eighth";
-  public static final String NOTE_RECORD_2 = "480.0 eighth";
+  private static final String NOTE_RECORD_1 = "440.0 eighth";
+  private static final String NOTE_RECORD_2 = "480.0 eighth";
 
   private static final List<Recordable> NOTES = new ArrayList<Recordable>();
   static {
     NOTES.add(NOTE_1);
     NOTES.add(NOTE_2);
   }
-  public static final RecordableSet CHORD = new RecordableSet(RecordableSetType.chord, NOTES);
+  private static final RecordableSet CHORD = new RecordableSet(RecordableSetType.chord, NOTES);
 
   private static final String CHORD_RECORD =
           "chord {\n" +

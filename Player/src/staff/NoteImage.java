@@ -19,4 +19,5 @@ class NoteImage implements StaffPlaceable {
   public void paint(Brush brush) {
     for (NoteComponent c : components) { c.draw(brush); }
   }
+
 }

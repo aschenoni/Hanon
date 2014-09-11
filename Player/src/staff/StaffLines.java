@@ -20,4 +20,5 @@ class StaffLines implements StaffPlaceable {
   public void paint(Brush brush) {
     for (Rectangle r : rectangles) brush.paint(r);
   }
+
 }

@@ -32,7 +32,6 @@ public class NoteImageFactory {
     return doBuildImage(note, x, StemDirection.UP);
   }
 
-
   public NoteImage buildDownImage(MusicNote note, int x) {
     return doBuildImage(note, x, StemDirection.DOWN);
   }

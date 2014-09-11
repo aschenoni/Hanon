@@ -14,4 +14,5 @@ class ChordImage implements StaffPlaceable{
   public void paint(Brush brush) {
     for (NoteImage n : notes) n.paint(brush);
   }
+
 }

@@ -1,4 +1,4 @@
-package sheet;
+package player;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -7,6 +7,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 import music.MusicNote;
 import music.WrittenNote;
+import sheet.Brush;
+import sheet.Staff;
 import staff.StaffPlaceableFactory;
 
 public class SheetPanel extends Application {
@@ -47,4 +49,3 @@ public class SheetPanel extends Application {
     s.paint(brush);
   }
 }
-

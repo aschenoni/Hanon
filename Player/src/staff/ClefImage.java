@@ -21,4 +21,5 @@ class ClefImage implements StaffPlaceable {
   public void paint(Brush brush) {
     brush.paint(IMAGE, x, y);
   }
+
 }
