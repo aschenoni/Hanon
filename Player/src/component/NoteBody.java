@@ -3,11 +3,11 @@ package component;
 import javafx.scene.shape.Ellipse;
 import staff.NoteComponent;
 import sheet.Brush;
-import sheet.Staff;
+import staff.StaffPlaceableFactory;
 
 
 public class NoteBody implements NoteComponent {
-  public static final int HEIGHT = Staff.LINE_GAP-1;
+  public static final int HEIGHT = StaffPlaceableFactory.LINE_GAP-1;
   public static final int WIDTH = (int) (1.6* HEIGHT);
 
   private final Ellipse ellipse;
