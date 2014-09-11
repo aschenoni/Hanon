@@ -1,7 +1,11 @@
 package music;
 
-public interface MusicNote {
-  public float getFrequency();
+public abstract class MusicNote implements StaffElement {
+  public StaffElementType getType() {
+    return StaffElementType.NOTE;
+  }
+
+  public abstract float getFrequency();
 
   /**
    * The staff position is given as follows:
@@ -22,6 +26,6 @@ public interface MusicNote {
    *           8
    *           ...
    */
-  public int getStaffPosition();
-  public NoteLength getLength();
+  public abstract int getStaffPosition();
+  public abstract NoteLength getLength();
 }
