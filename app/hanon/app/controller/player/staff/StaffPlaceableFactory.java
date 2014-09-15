@@ -1,6 +1,6 @@
 package hanon.app.controller.player.staff;
 
-import music.*;
+import hanon.app.controller.music.*;
 import hanon.app.controller.music.Chord;
 import hanon.app.controller.music.MusicNote;
 import hanon.app.controller.music.NoteLength;
