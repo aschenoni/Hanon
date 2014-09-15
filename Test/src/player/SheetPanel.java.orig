@@ -15,18 +15,18 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 import music.*;
-import hanon.app.controller.sheet.Brush;
-import hanon.app.controller.sheet.StaffPlaceable;
-import hanon.app.controller.staff.Staff;
-import hanon.app.controller.staff.StaffSet;
 
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import static hanon.app.controller.music.GeneralStaffElement.*;
-import static hanon.app.controller.music.NoteLength.*;
-import static hanon.app.controller.music.NoteValue.*;
-import static hanon.app.controller.music.NoteValue.NoteName.*;
+=======
+import static music.GeneralStaffElement.*;
+import static music.NoteLength.*;
+import static music.NoteValue.*;
+import static music.NoteValue.NoteName.*;
+>>>>>>> origin/master
 
 public class SheetPanel extends Application {
 

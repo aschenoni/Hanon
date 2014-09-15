@@ -1,7 +1,11 @@
 package music;
 
+<<<<<<< HEAD
 import hanon.app.controller.music.NoteValue;
 
+=======
+import org.junit.Assert;
+>>>>>>> origin/master
 import org.junit.Test;
 
 import static hanon.app.controller.music.NoteValue.*;
