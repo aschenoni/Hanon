@@ -3,8 +3,6 @@ package music;
 import static java.lang.Math.*;
 
 public class NoteValue {
-  private final float frequency;
-
   public enum NoteName {
     C, CSharp,
     D, DSharp,
@@ -20,12 +18,35 @@ public class NoteValue {
       return -1;
     }
 
+    private static int staffDiff(NoteName name) {
+      switch (name) {
+        case C: case CSharp: return 4;
+        case D: case DSharp: return 5;
+        case E:              return 6;
+        case F: case FSharp: return 7;
+        case G: case GSharp: return 8;
+        case A: case ASharp: return 9;
+        case B:              return 10;
+      }
+      return 0;
+    }
+
   }
   public static final float A4 = 440.0f;
   private static final int A_INDEX = NoteName.indexOf(NoteName.A);
-
   private static final int NUM_HALF_STEPS_IN_OCTAVE = 12;
   private static final float FREQ_CONST = (float) pow(2.0, (1.0 / NUM_HALF_STEPS_IN_OCTAVE));
+
+
+  public static NoteValue fromNameAndOctave(NoteName name, int octave) {
+    int halfStepsFromA = NoteName.indexOf(name) - A_INDEX;
+    int octaveHalfSteps = (octave - 4) * 12;
+    int halfSteps = halfStepsFromA + octaveHalfSteps;
+    return new NoteValue((float) (A4 * Math.pow(FREQ_CONST, halfSteps)));
+  }
+
+
+  private final float frequency;
 
   public NoteValue(float frequency) {
     this.frequency = frequency;
@@ -63,7 +84,7 @@ public class NoteValue {
    * negative values.
    */
   public int getStaffPosition() {
-    return 62 - 12*getOctave() - NoteName.indexOf(getName()); // A4 = 5, A0 = 53, C0 = 62
+    return 62 - (12*getOctave()) - NoteName.staffDiff(getName()); // A4 = 5, A0 = 53, C0 = 62
   }
 
   @Override

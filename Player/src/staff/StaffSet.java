@@ -32,14 +32,14 @@ public class StaffSet {
     while (!elements.isEmpty()) {
       elements.add(0, GeneralStaffElement.clef());
       staffs.add(buildStaff(elements));
-      elements = StaffLocation.getUnspacedElements(elements, width);
+      elements = new StaffSpacer(width, elements).getUnspacedElements();
       y += 100;
     }
     return staffs;
   }
 
   private Staff buildStaff(List<StaffElement> elements) {
-    List<Integer> spacings = StaffLocation.spaceLineOfNotes(elements, width);
+    List<Integer> spacings = new StaffSpacer(width, elements).getAllocatedSpacings();
     List<StaffPlaceable> placeables = new ArrayList<StaffPlaceable>();
     for (int i = 0; i < spacings.size(); i++)
       placeables.add(placeElement(spacings.get(i), elements.get(i)));

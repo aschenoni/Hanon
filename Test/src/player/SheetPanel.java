@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static music.GeneralStaffElement.*;
+import static music.NoteLength.*;
+import static music.NoteValue.*;
+import static music.NoteValue.NoteName.*;
 
 public class SheetPanel extends Application {
 
@@ -32,25 +35,82 @@ public class SheetPanel extends Application {
 
     Brush brush = new Brush(group, canvas.getGraphicsContext2D());
 
-    MusicNote note1 = WrittenNote.fromString("440.0 whole");
-    MusicNote note2 = WrittenNote.fromString("470.0 half");
-    MusicNote note3 = WrittenNote.fromString("510.0 half");
-    MusicNote note4 = WrittenNote.fromString("440.0 quarter");
-    MusicNote note5 = WrittenNote.fromString("440.0 half");
-
-    StaffSet factory = new StaffSet(100, 100, 400);
-
     List<StaffElement> elements = new ArrayList<StaffElement>();
-    elements.add(new TimeSignature(4,4));
-    elements.add(note1);
+    elements.add(new TimeSignature(2,4));
+    elements.add(new WrittenNote(fromNameAndOctave(C, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(C, 4), quarter));
     elements.add(measureLine());
-    elements.add(note2);
-    elements.add(note3);
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), quarter));
     elements.add(measureLine());
-    elements.add(note4);
-    elements.add(new Chord(note5, note3));
-    elements.add(staffLines());
+    elements.add(new WrittenNote(fromNameAndOctave(A, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(A, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), half));
+    elements.add(measureLine());
 
+    elements.add(new WrittenNote(fromNameAndOctave(F, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(F, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(E, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(E, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(D, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(D, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(C, 4), half));
+    elements.add(measureLine());
+
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(F, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(F, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(E, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(E, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(D, 4), half));
+    elements.add(measureLine());
+
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(F, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(F, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(E, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(E, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(D, 4), half));
+    elements.add(measureLine());
+
+    elements.add(new WrittenNote(fromNameAndOctave(C, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(C, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(A, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(A, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(G, 4), half));
+    elements.add(measureLine());
+
+    elements.add(new WrittenNote(fromNameAndOctave(F, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(F, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(E, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(E, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(D, 4), quarter));
+    elements.add(new WrittenNote(fromNameAndOctave(D, 4), quarter));
+    elements.add(measureLine());
+    elements.add(new WrittenNote(fromNameAndOctave(C, 4), half));
+    elements.add(measureLine());
+
+
+    StaffSet factory = new StaffSet(100, 100, 800);
     for (Staff s : factory.placeElements(elements)) s.paint(brush);
 
   }
