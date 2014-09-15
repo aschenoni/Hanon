@@ -1,5 +1,7 @@
 package recorder;
 
+import hanon.app.controller.recorder.Recording;
+
 import javax.sound.sampled.TargetDataLine;
 
 public class MockRecording implements Recording {

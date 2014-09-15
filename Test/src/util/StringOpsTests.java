@@ -1,5 +1,7 @@
 package util;
 
+import hanon.app.controller.composer.util.StringOps;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;

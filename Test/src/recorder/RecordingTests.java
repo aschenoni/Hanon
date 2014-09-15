@@ -1,5 +1,8 @@
 package recorder;
 
+import hanon.app.controller.recorder.Recording;
+import hanon.app.controller.recorder.SoundDevice;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

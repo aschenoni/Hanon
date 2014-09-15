@@ -1,0 +1,25 @@
+package hanon.app.controller.player.staff;
+
+import hanon.app.controller.player.sheet.Brush;
+import hanon.app.controller.player.sheet.StaffPlaceable;
+import javafx.scene.image.Image;
+
+import java.io.File;
+
+class ClefImage implements StaffPlaceable {
+  private static final File FILE = new File("Player\\res\\images\\TrebleClef.png");
+  private static final Image IMAGE = new Image(FILE.toURI().toString(), 50, 100, true, true);
+
+  private final int x;
+  private final int y;
+
+  public ClefImage(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public void paint(Brush brush) {
+    brush.paint(IMAGE, x, y);
+  }
+
+}

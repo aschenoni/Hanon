@@ -1,5 +1,7 @@
 package sheet;
 
+import hanon.app.controller.composer.sheet.Writer;
+
 public class TestWriter implements Writer {
   private String content;
 

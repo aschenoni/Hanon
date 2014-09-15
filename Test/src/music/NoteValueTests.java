@@ -1,8 +1,10 @@
 package music;
 
+import hanon.app.controller.music.NoteValue;
+
 import org.junit.Test;
 
-import static music.NoteValue.*;
+import static hanon.app.controller.music.NoteValue.*;
 import static org.junit.Assert.*;
 
 public class NoteValueTests {

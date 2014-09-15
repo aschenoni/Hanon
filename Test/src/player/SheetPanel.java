@@ -1,20 +1,25 @@
 package player;
 
+import hanon.app.controller.composer.record.WrittenNote;
+import hanon.app.controller.music.Chord;
+import hanon.app.controller.music.MusicNote;
+import hanon.app.controller.music.StaffElement;
+import hanon.app.controller.music.TimeSignature;
+import hanon.app.controller.player.sheet.Brush;
+import hanon.app.controller.player.sheet.StaffPlaceable;
+import hanon.app.controller.player.staff.Staff;
+import hanon.app.controller.player.staff.StaffSet;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 import music.*;
-import sheet.Brush;
-import sheet.StaffPlaceable;
-import staff.Staff;
-import staff.StaffSet;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static music.GeneralStaffElement.*;
+import static hanon.app.controller.music.GeneralStaffElement.*;
 
 public class SheetPanel extends Application {
 

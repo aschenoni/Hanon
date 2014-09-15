@@ -1,7 +1,7 @@
 package player;
 
-import music.MusicNote;
-import music.NoteLength;
+import hanon.app.controller.music.MusicNote;
+import hanon.app.controller.music.NoteLength;
 
 public class PositionedNote extends MusicNote {
   private final int position;
