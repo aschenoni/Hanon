@@ -15,7 +15,7 @@ import static hanon.app.model.music.NoteLength.*;
 import static hanon.app.model.music.NoteValue.NoteName.*;
 import static hanon.app.model.music.NoteValue.fromNameAndOctave;
 
-class TwinkleTwinkleLittleStar {
+public class TwinkleTwinkleLittleStar {
   public static final List<StaffElement> elements = new ArrayList<StaffElement>();
   static {
     elements.add(new TimeSignature(2, 4));
