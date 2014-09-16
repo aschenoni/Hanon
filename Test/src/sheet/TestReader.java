@@ -1,6 +1,6 @@
 package sheet;
 
-import hanon.app.controller.composer.sheet.Reader;
+import hanon.app.model.composer.sheet.Reader;
 
 public class TestReader implements Reader {
   private final String content;

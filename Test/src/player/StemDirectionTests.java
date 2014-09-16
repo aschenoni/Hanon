@@ -1,7 +1,7 @@
 package player;
 
-import hanon.app.controller.music.MusicNote;
-import hanon.app.controller.player.component.NoteStem;
+import hanon.app.model.music.MusicNote;
+import hanon.app.model.player.component.NoteStem;
 
 import org.junit.Test;
 

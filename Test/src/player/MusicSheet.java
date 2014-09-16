@@ -1,9 +1,9 @@
 package player;
 
-import hanon.app.controller.music.StaffElement;
-import hanon.app.controller.player.sheet.Brush;
-import hanon.app.controller.player.staff.Staff;
-import hanon.app.controller.player.staff.StaffSet;
+import hanon.app.model.music.StaffElement;
+import hanon.app.model.player.sheet.Brush;
+import hanon.app.model.player.staff.Staff;
+import hanon.app.model.player.staff.StaffSet;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;

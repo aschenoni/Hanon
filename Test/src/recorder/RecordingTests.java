@@ -1,7 +1,7 @@
 package recorder;
 
-import hanon.app.controller.recorder.Recording;
-import hanon.app.controller.recorder.SoundDevice;
+import hanon.app.model.recorder.Recording;
+import hanon.app.model.recorder.SoundDevice;
 
 import org.junit.Test;
 
