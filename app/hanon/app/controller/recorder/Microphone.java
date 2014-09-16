@@ -35,7 +35,7 @@ public class Microphone implements SoundDevice {
   private TargetDataLine targetDataLine;
   private final Recording recording;
 
-  private Microphone(Recording recording) {
+  public Microphone(Recording recording) {
     this.recording = recording;
     try {
       targetDataLine = (TargetDataLine) AudioSystem.getLine(DATA_LINE_INFO);
@@ -58,6 +58,9 @@ public class Microphone implements SoundDevice {
 
   void stopRecording() {
     targetDataLine.stop();
+  }
+
+  void closeRecording() {
     targetDataLine.close();
   }
 
