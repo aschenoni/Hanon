@@ -1,5 +1,5 @@
 package hanon.app.controller.composer.sheet;
 
-interface Reader {
+public interface Reader {
   String getContent();
 }

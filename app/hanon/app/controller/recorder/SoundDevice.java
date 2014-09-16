@@ -1,5 +1,5 @@
 package hanon.app.controller.recorder;
 
-interface SoundDevice {
+public interface SoundDevice {
   Recording getSound();
 }

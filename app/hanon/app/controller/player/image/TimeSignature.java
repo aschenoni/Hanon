@@ -43,7 +43,7 @@ public class TimeSignature {
   }
 
   public void draw(Brush brush, int x, int y) {
-    Text text = new Text("" + x);
+    System.out.println("Working Directory = " + System.getProperty("user.dir"));
     brush.paint(beatsPerMeasure, x+50, y);
     brush.paint(whichGetsBeat, x+50, y + 20);
   }

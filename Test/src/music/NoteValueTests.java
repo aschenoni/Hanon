@@ -1,11 +1,10 @@
 package music;
 
 import hanon.app.controller.music.NoteValue;
-
 import org.junit.Test;
 
 import static hanon.app.controller.music.NoteValue.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class NoteValueTests {
 
@@ -17,13 +16,13 @@ public class NoteValueTests {
   @Test
   public void testStaffPosition() {
     assertEquals(5, new NoteValue(A4).getStaffPosition());
-    assertEquals(6, NoteValue.fromNameAndOctave(NoteName.G, 4).getStaffPosition());
+    assertEquals(6, fromNameAndOctave(NoteName.G, 4).getStaffPosition());
 
   }
 
   @Test
   public void testFromNameAndOctave() {
-    assertEquals(110, NoteValue.fromNameAndOctave(NoteName.A, 2).getFrequency(), 1);
-    assertEquals(392, NoteValue.fromNameAndOctave(NoteName.G, 4).getFrequency(), 1);
+    assertEquals(110, fromNameAndOctave(NoteName.A, 2).getFrequency(), 1);
+    assertEquals(392, fromNameAndOctave(NoteName.G, 4).getFrequency(), 1);
   }
 }

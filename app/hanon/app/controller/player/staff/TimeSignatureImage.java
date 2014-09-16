@@ -7,11 +7,11 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 
-class TimeSignatureImage implements StaffPlaceable {
-  private static final File TIME_2 = new File("Player\\res\\images\\Time2.png");
-  private static final File TIME_3 = new File("Player\\res\\images\\Time3.png");
-  private static final File TIME_4 = new File("Player\\res\\images\\Time4.png");
-  private static final File TIME_8 = new File("Player\\res\\images\\Time8.png");
+public class TimeSignatureImage implements StaffPlaceable {
+  private static final File TIME_2 = new File("res\\images\\Time2.png");
+  private static final File TIME_3 = new File("res\\images\\Time3.png");
+  private static final File TIME_4 = new File("res\\images\\Time4.png");
+  private static final File TIME_8 = new File("res\\images\\Time8.png");
 
   private final Image beatsPerMeasureImage;
   private final Image whichGetsBeatImage;

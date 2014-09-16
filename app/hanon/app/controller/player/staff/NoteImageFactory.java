@@ -46,13 +46,16 @@ public class NoteImageFactory {
     NoteBody normalBody = new NoteBody(x, y, -20);
     NoteBody wholeBody  = new NoteBody(x, y, 0);
     NoteStem noteStem   = buildStem(x, y, d);
+    NoteFlag flag       = NoteFlag.fromPosition(x, y, staffY);
     BodyHole normalHole = new BodyHole(x, y, -20);
     BodyHole wholeHole  = new BodyHole(x, y, 80);
+    LedgerLine ledger   = new LedgerLine(x, y, note.getStaffPosition());
 
     switch (note.getLength()) {
-      case quarter: return new NoteImage(normalBody, noteStem);
-      case half:    return new NoteImage(normalBody, normalHole, noteStem);
-      case whole:   return new NoteImage(wholeBody, wholeHole);
+      case eighth:  return new NoteImage(normalBody, noteStem, flag, ledger);
+      case quarter: return new NoteImage(normalBody, noteStem, ledger);
+      case half:    return new NoteImage(normalBody, normalHole, noteStem, ledger);
+      case whole:   return new NoteImage(wholeBody, wholeHole, ledger);
       default:      throw new NoSuchNoteLengthException();
         /*
         *  TODO There is no reason this exception should be needed. We should

@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 import java.io.File;
 
 class ClefImage implements StaffPlaceable {
-  private static final File FILE = new File("Player\\res\\images\\TrebleClef.png");
+  private static final File FILE = new File("res\\images\\TrebleClef.png");
   private static final Image IMAGE = new Image(FILE.toURI().toString(), 50, 100, true, true);
 
   private final int x;
