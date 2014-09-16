@@ -1,4 +1,4 @@
-package hanon.app.controller.recorder;
+package hanon.app.model.recorder;
 
 import be.tarsos.dsp.pitch.FFTPitch;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
