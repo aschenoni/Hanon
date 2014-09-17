@@ -3,6 +3,7 @@ package player;
 import hanon.app.controller.music.StaffElementSet;
 import hanon.app.controller.player.sheet.Brush;
 import hanon.app.controller.player.staff.Staff;
+import hanon.app.controller.player.staff.StaffInfo;
 import hanon.app.controller.player.staff.StaffSet;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -30,8 +31,21 @@ public class MusicSheet {
 
     int i = 1;
     for (StaffElementSet s : sets) {
-      StaffSet set = new StaffSet(s.getClef(), 100, i*90, 100*sets.length, 800);
-      for (Staff staff : set.placeElements(s.getElements()))
+      StaffInfo.StaffInfoBuilder b = new StaffInfo.StaffInfoBuilder()
+              .clef(s.getClef())
+              .x(100)
+              .y(i*90)
+              .width(800);
+
+      if (i == 1 && sets.length == 2) {
+        b.measureLineHeight(130);
+      }
+
+
+      StaffSet set = new StaffSet(b.build(), 100*sets.length, s.getElements());
+
+
+      for (Staff staff : set.getStaffs())
         staff.paint(brush);
       i++;
     }

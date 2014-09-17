@@ -19,12 +19,13 @@ class ClefImage implements StaffPlaceable {
   private final Image image;
 
   public ClefImage(Clef type, int x, int y) {
-    this.x = x+2;
     if (type == Clef.BASS) {
+      this.x = x+4;
       this.y = y;
       image = BASS_IMAGE;
     }
     else {
+      this.x = x - 5;
       this.y = y-20;
       image = TREBLE_IMAGE;
     }
