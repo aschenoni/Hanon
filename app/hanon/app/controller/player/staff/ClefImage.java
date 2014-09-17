@@ -1,5 +1,6 @@
 package hanon.app.controller.player.staff;
 
+import hanon.app.controller.music.Clef;
 import hanon.app.controller.player.sheet.Brush;
 import hanon.app.controller.player.sheet.StaffPlaceable;
 import javafx.scene.image.Image;
@@ -7,19 +8,30 @@ import javafx.scene.image.Image;
 import java.io.File;
 
 class ClefImage implements StaffPlaceable {
-  private static final File FILE = new File("res\\images\\TrebleClef.png");
-  private static final Image IMAGE = new Image(FILE.toURI().toString(), 50, 100, true, true);
+  private static final File TREBLE_CLEF_FILE = new File("res\\images\\TrebleClef.png");
+  private static final File BASS_CLEF_FILE = new File("res\\images\\BassClef.png");
+
+  private static final Image TREBLE_IMAGE = new Image(TREBLE_CLEF_FILE.toURI().toString(), 50, 100, true, true);
+  private static final Image BASS_IMAGE =   new Image(BASS_CLEF_FILE.toURI().toString(), 50, 35, true, true);
 
   private final int x;
   private final int y;
+  private final Image image;
 
-  public ClefImage(int x, int y) {
-    this.x = x;
-    this.y = y;
+  public ClefImage(Clef type, int x, int y) {
+    this.x = x+2;
+    if (type == Clef.BASS) {
+      this.y = y;
+      image = BASS_IMAGE;
+    }
+    else {
+      this.y = y-20;
+      image = TREBLE_IMAGE;
+    }
   }
 
   public void paint(Brush brush) {
-    brush.paint(IMAGE, x, y);
+    brush.paint(image, x, y);
   }
 
 }

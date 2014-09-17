@@ -1,6 +1,6 @@
 package player;
 
-import hanon.app.controller.music.StaffElement;
+import hanon.app.controller.music.StaffElementSet;
 import hanon.app.controller.player.sheet.Brush;
 import hanon.app.controller.player.staff.Staff;
 import hanon.app.controller.player.staff.StaffSet;
@@ -9,15 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
-import java.util.List;
-
 public class MusicSheet {
-  private final List<StaffElement> elements;
   private final Stage stage;
+  private final StaffElementSet[] sets;
 
-  public MusicSheet(List<StaffElement> elements, Stage stage) {
-    this.elements = elements;
+  public MusicSheet(Stage stage, StaffElementSet... sets) {
     this.stage = stage;
+    this.sets = sets;
   }
 
   public void draw() {
@@ -29,7 +27,13 @@ public class MusicSheet {
     stage.show();
 
     Brush brush = new Brush(group, canvas.getGraphicsContext2D());
-    StaffSet set = new StaffSet(100, 100, 800);
-    for (Staff s : set.placeElements(elements)) s.paint(brush);
+
+    int i = 1;
+    for (StaffElementSet s : sets) {
+      StaffSet set = new StaffSet(s.getClef(), 100, i*90, 100*sets.length, 800);
+      for (Staff staff : set.placeElements(s.getElements()))
+        staff.paint(brush);
+      i++;
+    }
   }
 }

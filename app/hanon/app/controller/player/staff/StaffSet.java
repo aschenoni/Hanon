@@ -1,10 +1,6 @@
 package hanon.app.controller.player.staff;
 
-import hanon.app.controller.music.Chord;
-import hanon.app.controller.music.GeneralStaffElement;
-import hanon.app.controller.music.MusicNote;
-import hanon.app.controller.music.StaffElement;
-import hanon.app.controller.music.TimeSignature;
+import hanon.app.controller.music.*;
 import hanon.app.controller.player.component.NoteStem;
 import hanon.app.controller.player.sheet.StaffPlaceable;
 
@@ -16,14 +12,18 @@ import java.util.List;
  * could be drawn on the music staff.
  */
 public class StaffSet {
+  private final Clef clef;
   private final int x;
   private int y;
+  private final int dy;
   private final int width;
   private NoteImageFactory noteFactory;
 
-  public StaffSet(int x, int y, int width) {
+  public StaffSet(Clef clef, int x, int y, int dy, int width) {
+    this.clef = clef;
     this.x = x;
     this.y = y;
+    this.dy = dy;
     this.width = width;
   }
 
@@ -37,7 +37,7 @@ public class StaffSet {
       elements.add(0, GeneralStaffElement.clef());
       staffs.add(buildStaff(elements));
       elements = new StaffSpacer(width, elements).getUnspacedElements();
-      y += 100;
+      y += dy;
     }
     return staffs;
   }
@@ -52,20 +52,25 @@ public class StaffSet {
 
   private StaffPlaceable placeElement(int x, StaffElement element) {
     x += this.x;
-    noteFactory = new NoteImageFactory(y);
+    noteFactory = new NoteImageFactory(y, clef);
     switch (element.getType()) {
       case NOTE:           return noteFactory.buildImage((MusicNote) element, x);
       case CHORD:          return new ChordImage(getNoteImages(x, ((Chord)element).getNotes()));
       case TIME_SIGNATURE: return new TimeSignatureImage((TimeSignature)element, x, y);
-      case CLEF:           return new ClefImage(x, y -20);
+      case CLEF:           return getClef(x);
       case MEASURE_LINE:   return new MeasureLine(x, y, 4* Staff.LINE_GAP);
       case STAFF_LINES:    return new StaffLines(this.x, y, width);
       default:             throw new NoSuchStaffElementException();
     }
   }
 
+  private StaffPlaceable getClef(int x) {
+    if (clef == Clef.TREBLE) return new ClefImage(Clef.TREBLE, x, y);
+    else                     return new ClefImage(Clef.BASS, x, y);
+  }
+
   private NoteImage[] getNoteImages(int x, MusicNote[] notes) {
-    boolean up = NoteStem.shouldStemGoUp(notes);
+    boolean up = NoteStem.shouldStemGoUp(clef, notes);
     NoteImage[] images = new NoteImage[notes.length];
     for (int i = 0; i < notes.length; i++)
       if (up) images[i] = noteFactory.buildUpImage(notes[i], x);

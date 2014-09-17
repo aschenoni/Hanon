@@ -1,5 +1,6 @@
 package player;
 
+import hanon.app.controller.music.Clef;
 import hanon.app.controller.music.MusicNote;
 import hanon.app.controller.player.component.NoteStem;
 
@@ -17,17 +18,17 @@ public class StemDirectionTests {
 
   @Test
   public void testShouldGoUp() {
-    assertTrue(NoteStem.shouldStemGoUp(POSITION_3, POSITION_6));
+    assertTrue(NoteStem.shouldStemGoUp(Clef.TREBLE, POSITION_3, POSITION_6));
   }
 
   @Test
   public void testShouldGoDown() {
-    assertFalse(NoteStem.shouldStemGoUp(POSITION_2, POSITION_5));
+    assertFalse(NoteStem.shouldStemGoUp(Clef.TREBLE, POSITION_2, POSITION_5));
   }
 
   @Test
   public void testEquidistantGoesDown() {
-    assertFalse(NoteStem.shouldStemGoUp(POSITION_3, POSITION_5));
+    assertFalse(NoteStem.shouldStemGoUp(Clef.TREBLE, POSITION_3, POSITION_5));
   }
 
 }

@@ -6,10 +6,10 @@ public enum NoteLength {
   sixtyForth,
   thirtySecond,
   sixteenth,
-  eighth,
-  quarter,
-  half,
-  whole;
+  EIGHTH,
+  QUARTER,
+  HALF,
+  WHOLE;
 
   public static NoteLength fromInt(int i) {
     switch (i) {
@@ -18,10 +18,10 @@ public enum NoteLength {
       case 64:  return sixtyForth;
       case 32:  return thirtySecond;
       case 16:  return sixteenth;
-      case 8:   return eighth;
-      case 4:   return quarter;
-      case 2:   return half;
-      case 1:   return whole;
+      case 8:   return EIGHTH;
+      case 4:   return QUARTER;
+      case 2:   return HALF;
+      case 1:   return WHOLE;
       default:  throw new NoSuchLengthException();
     }
   }

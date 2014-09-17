@@ -16,11 +16,11 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class MusicRecordTests {
-  private static final WrittenNote NOTE_1 = new WrittenNote(440.0f, NoteLength.eighth);
-  private static final WrittenNote NOTE_2 = new WrittenNote(480.0f, NoteLength.eighth);
+  private static final WrittenNote NOTE_1 = new WrittenNote(440.0f, NoteLength.EIGHTH);
+  private static final WrittenNote NOTE_2 = new WrittenNote(480.0f, NoteLength.EIGHTH);
 
-  private static final String NOTE_RECORD_1 = "440.0 eighth";
-  private static final String NOTE_RECORD_2 = "480.0 eighth";
+  private static final String NOTE_RECORD_1 = "440.0 EIGHTH";
+  private static final String NOTE_RECORD_2 = "480.0 EIGHTH";
 
   private static final List<Recordable> NOTES = new ArrayList<Recordable>();
   static {

@@ -1,5 +1,6 @@
 package music;
 
+import hanon.app.controller.music.Clef;
 import hanon.app.controller.music.NoteValue;
 import org.junit.Test;
 
@@ -15,9 +16,8 @@ public class NoteValueTests {
 
   @Test
   public void testStaffPosition() {
-    assertEquals(5, new NoteValue(A4).getStaffPosition());
-    assertEquals(6, fromNameAndOctave(NoteName.G, 4).getStaffPosition());
-
+    assertEquals(5, new NoteValue(A4).getStaffPosition(Clef.TREBLE));
+    assertEquals(6, fromNameAndOctave(NoteName.G, 4).getStaffPosition(Clef.TREBLE));
   }
 
   @Test

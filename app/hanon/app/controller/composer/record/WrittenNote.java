@@ -1,5 +1,6 @@
 package hanon.app.controller.composer.record;
 
+import hanon.app.controller.music.Clef;
 import hanon.app.controller.music.MusicNote;
 import hanon.app.controller.music.NoteLength;
 import hanon.app.controller.music.NoteValue;
@@ -17,7 +18,7 @@ public class WrittenNote extends MusicNote implements Recordable {
    * Generate a written note from a string representation. The string
    * representation should be as follows: "{frequency length}. The frequency
    * is a decimal number and the length is a String found in NoteLength.
-   * For example: "440.0 eighth"
+   * For example: "440.0 EIGHTH"
    */
   public static WrittenNote fromString(String s) {
     String[] words = s.split(" ");
@@ -50,8 +51,8 @@ public class WrittenNote extends MusicNote implements Recordable {
   }
 
   @Override
-  public int getStaffPosition() {
-    return value.getStaffPosition();
+  public int getStaffPosition(Clef clef) {
+    return value.getStaffPosition(clef);
   }
 
   @Override

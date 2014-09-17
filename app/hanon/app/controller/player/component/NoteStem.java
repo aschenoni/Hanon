@@ -1,5 +1,6 @@
 package hanon.app.controller.player.component;
 
+import hanon.app.controller.music.Clef;
 import hanon.app.controller.music.MusicNote;
 import hanon.app.controller.player.sheet.Brush;
 import hanon.app.controller.player.staff.NoteComponent;
@@ -50,29 +51,29 @@ public abstract class NoteStem implements NoteComponent {
    * that line governs. When the highest and the lowest notes are equidistant
    * from the center of the staff, a down stem is used."
    */
-  public static boolean shouldStemGoUp(MusicNote... notes) {
+  public static boolean shouldStemGoUp(Clef clef, MusicNote... notes) {
     int farthestFromCenter = CENTER_POSITION;
     for (MusicNote n : notes)
-      if (fartherFromCenter(farthestFromCenter, n))
-        farthestFromCenter = n.getStaffPosition();
-      else if (equidistantFromCenter(farthestFromCenter, n) && isAboveCenter(n))
-        farthestFromCenter = n.getStaffPosition();
+      if (fartherFromCenter(clef, farthestFromCenter, n))
+        farthestFromCenter = n.getStaffPosition(clef);
+      else if (equidistantFromCenter(clef, farthestFromCenter, n) && isAboveCenter(clef, n))
+        farthestFromCenter = n.getStaffPosition(clef);
     return farthestFromCenter >= CENTER_POSITION;
   }
 
-  private static boolean equidistantFromCenter(int farthestFromCenter, MusicNote n) {
-    return distFromCenter(n.getStaffPosition()) == distFromCenter(farthestFromCenter);
+  private static boolean equidistantFromCenter(Clef clef, int farthestFromCenter, MusicNote n) {
+    return distFromCenter(n.getStaffPosition(clef)) == distFromCenter(farthestFromCenter);
   }
 
-  private static boolean fartherFromCenter(int farthestFromCenter, MusicNote n) {
-    return distFromCenter(n.getStaffPosition()) > distFromCenter(farthestFromCenter);
+  private static boolean fartherFromCenter(Clef clef, int farthestFromCenter, MusicNote n) {
+    return distFromCenter(n.getStaffPosition(clef)) > distFromCenter(farthestFromCenter);
   }
 
   private static int distFromCenter(int position) {
     return Math.abs(position - CENTER_POSITION);
   }
 
-  private static boolean isAboveCenter(MusicNote n) {
-    return n.getStaffPosition() < CENTER_POSITION;
+  private static boolean isAboveCenter(Clef clef, MusicNote n) {
+    return n.getStaffPosition(clef) < CENTER_POSITION;
   }
 }

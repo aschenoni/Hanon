@@ -175,10 +175,10 @@ public class StaffSpacer {
   private int getNoteSpacing(MusicNote note) {
     switch (note.getLength()) {
       case sixteenth: return 20;
-      case eighth:    return 30;
-      case quarter:   return 50;
-      case half:      return 80;
-      case whole:     return 120;
+      case EIGHTH:    return 30;
+      case QUARTER:   return 50;
+      case HALF:      return 80;
+      case WHOLE:     return 120;
       default:        return 20;
     }
   }

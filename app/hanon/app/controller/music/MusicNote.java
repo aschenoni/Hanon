@@ -25,7 +25,8 @@ public abstract class MusicNote implements StaffElement {
    * -----     7
    *           8
    *           ...
+   * @param clef
    */
-  public abstract int getStaffPosition();
+  public abstract int getStaffPosition(Clef clef);
   public abstract NoteLength getLength();
 }
