@@ -1,6 +1,6 @@
 package util;
 
-import hanon.app.controller.composer.util.StringOps;
+import hanon.app.model.composer.util.StringOps;
 
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
 package recorder;
 
-import hanon.app.controller.recorder.Recording;
+import hanon.app.model.recorder.Recording;
 
 import javax.sound.sampled.TargetDataLine;
 
