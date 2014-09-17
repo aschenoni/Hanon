@@ -1,10 +1,10 @@
-package hanon.app.controller.player.component;
+package hanon.app.model.player.component;
 
-import hanon.app.controller.music.Clef;
-import hanon.app.controller.music.MusicNote;
-import hanon.app.controller.player.sheet.Brush;
-import hanon.app.controller.player.staff.NoteComponent;
-import hanon.app.controller.player.staff.Staff;
+import hanon.app.model.music.Clef;
+import hanon.app.model.music.MusicNote;
+import hanon.app.model.player.sheet.Brush;
+import hanon.app.model.player.staff.NoteComponent;
+import hanon.app.model.player.staff.Staff;
 import javafx.scene.shape.Rectangle;
 
 /**

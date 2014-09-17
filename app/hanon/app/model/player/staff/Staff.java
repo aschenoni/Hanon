@@ -1,9 +1,9 @@
-package hanon.app.controller.player.staff;
+package hanon.app.model.player.staff;
 
-import hanon.app.controller.music.*;
-import hanon.app.controller.player.component.NoteStem;
-import hanon.app.controller.player.sheet.Brush;
-import hanon.app.controller.player.sheet.StaffPlaceable;
+import hanon.app.model.music.*;
+import hanon.app.model.player.component.NoteStem;
+import hanon.app.model.player.sheet.Brush;
+import hanon.app.model.player.sheet.StaffPlaceable;
 
 import java.util.ArrayList;
 import java.util.List;

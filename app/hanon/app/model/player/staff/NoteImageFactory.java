@@ -1,13 +1,8 @@
-package hanon.app.controller.player.staff;
+package hanon.app.model.player.staff;
 
-import hanon.app.controller.music.Clef;
-import hanon.app.controller.music.MusicNote;
-import hanon.app.controller.player.component.BodyHole;
-import hanon.app.controller.player.component.DownNoteStem;
-import hanon.app.controller.player.component.NoteBody;
-import hanon.app.controller.player.component.NoteStem;
-import hanon.app.controller.player.component.UpNoteStem;
-import hanon.app.controller.player.component.*;
+import hanon.app.model.music.Clef;
+import hanon.app.model.music.MusicNote;
+import hanon.app.model.player.component.*;
 
 /**
  * The note image factory is responsible for putting together the correct

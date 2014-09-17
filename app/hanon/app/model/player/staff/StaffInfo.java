@@ -1,6 +1,6 @@
-package hanon.app.controller.player.staff;
+package hanon.app.model.player.staff;
 
-import hanon.app.controller.music.Clef;
+import hanon.app.model.music.Clef;
 
 public class StaffInfo {
   private final Clef clef;
@@ -46,7 +46,7 @@ public class StaffInfo {
     private int x = Integer.MIN_VALUE;
     private int y = Integer.MIN_VALUE;
     private int width = Integer.MIN_VALUE;
-    private int measureLineHeight = 4*Staff.LINE_GAP;
+    private int measureLineHeight = 4* Staff.LINE_GAP;
 
     public StaffInfo build() {
       if (clef == null ||

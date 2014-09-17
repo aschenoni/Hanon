@@ -1,16 +1,20 @@
 package hanon.app;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import hanon.app.model.music.Clef;
+import hanon.app.model.music.StaffElementSet;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import player.TwinkleTwinkleLittleStar;
 import hanon.app.model.player.sheet.MusicSheet;
 
+import static hanon.app.TwinkleTwinkleLittleStar.*;
 
 
 public class MainDriver extends Application{
@@ -20,8 +24,7 @@ public class MainDriver extends Application{
 	private BorderPane rootLayout; //Main application node from which everything will be a child
 	
 	@Override
-	public void start(Stage primaryStage)
-	{
+	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Hanon");
 		
@@ -49,8 +52,11 @@ public class MainDriver extends Application{
 	}
 	
 	private void drawTwinkleTwinkleLittleStar() {
-		
-		MusicSheet twinkleMusic = new MusicSheet(FXCollections.observableArrayList(TwinkleTwinkleLittleStar.elements));
+
+    List<StaffElementSet> sets = new ArrayList<StaffElementSet>();
+    sets.add(new StaffElementSet(Clef.TREBLE, elements));
+
+		MusicSheet twinkleMusic = new MusicSheet(FXCollections.observableArrayList(sets));
 		rootLayout.setCenter(twinkleMusic);
 		twinkleMusic.draw(500, 500); //500 is a temporary arbitrary less than 800x600 size (800x600 is main window pref size)
 		

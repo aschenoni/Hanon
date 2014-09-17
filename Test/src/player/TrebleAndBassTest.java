@@ -1,20 +1,20 @@
 package player;
 
-import hanon.app.controller.composer.record.WrittenNote;
-import hanon.app.controller.music.Clef;
-import hanon.app.controller.music.StaffElement;
-import hanon.app.controller.music.StaffElementSet;
-import hanon.app.controller.music.TimeSignature;
+import hanon.app.model.music.Clef;
+import hanon.app.model.music.StaffElementSet;
+import hanon.app.model.composer.record.WrittenNote;
+import hanon.app.model.music.StaffElement;
+import hanon.app.model.music.TimeSignature;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static hanon.app.controller.music.GeneralStaffElement.measureLine;
-import static hanon.app.controller.music.NoteLength.QUARTER;
-import static hanon.app.controller.music.NoteValue.NoteName.*;
-import static hanon.app.controller.music.NoteValue.fromNameAndOctave;
+import static hanon.app.model.music.GeneralStaffElement.measureLine;
+import static hanon.app.model.music.NoteLength.*;
+import static hanon.app.model.music.NoteValue.NoteName.*;
+import static hanon.app.model.music.NoteValue.fromNameAndOctave;
 
 public class TrebleAndBassTest extends Application {
 
@@ -93,7 +93,7 @@ public class TrebleAndBassTest extends Application {
     trebleElements.add(new WrittenNote(fromNameAndOctave(C, 5), QUARTER));
     trebleElements.add(measureLine());
 
-    new MusicSheet(
+    new TestMusicSheet(
             stage,
             new StaffElementSet(Clef.TREBLE, trebleElements),
             new StaffElementSet(Clef.BASS, bassElements)).draw();

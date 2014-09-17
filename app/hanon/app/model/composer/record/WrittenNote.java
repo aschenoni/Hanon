@@ -1,9 +1,9 @@
-package hanon.app.controller.composer.record;
+package hanon.app.model.composer.record;
 
-import hanon.app.controller.music.Clef;
-import hanon.app.controller.music.MusicNote;
-import hanon.app.controller.music.NoteLength;
-import hanon.app.controller.music.NoteValue;
+import hanon.app.model.music.Clef;
+import hanon.app.model.music.MusicNote;
+import hanon.app.model.music.NoteLength;
+import hanon.app.model.music.NoteValue;
 
 /**
  * A written note is the implementation of a music note that is represented by

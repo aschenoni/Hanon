@@ -1,4 +1,4 @@
-package hanon.app.controller.music;
+package hanon.app.model.music;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package hanon.app.controller.player.staff;
+package hanon.app.model.player.staff;
 
-import hanon.app.controller.music.Clef;
-import hanon.app.controller.player.sheet.Brush;
-import hanon.app.controller.player.sheet.StaffPlaceable;
+import hanon.app.model.music.Clef;
+import hanon.app.model.player.sheet.Brush;
+import hanon.app.model.player.sheet.StaffPlaceable;
 import javafx.scene.image.Image;
 
 import java.io.File;

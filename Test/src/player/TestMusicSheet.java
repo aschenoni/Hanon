@@ -1,20 +1,20 @@
 package player;
 
-import hanon.app.controller.music.StaffElementSet;
-import hanon.app.controller.player.sheet.Brush;
-import hanon.app.controller.player.staff.Staff;
-import hanon.app.controller.player.staff.StaffInfo;
-import hanon.app.controller.player.staff.StaffSet;
+import hanon.app.model.music.StaffElementSet;
+import hanon.app.model.player.staff.StaffInfo;
+import hanon.app.model.player.sheet.Brush;
+import hanon.app.model.player.staff.Staff;
+import hanon.app.model.player.staff.StaffSet;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
-public class MusicSheet {
+public class TestMusicSheet {
   private final Stage stage;
   private final StaffElementSet[] sets;
 
-  public MusicSheet(Stage stage, StaffElementSet... sets) {
+  public TestMusicSheet(Stage stage, StaffElementSet... sets) {
     this.stage = stage;
     this.sets = sets;
   }

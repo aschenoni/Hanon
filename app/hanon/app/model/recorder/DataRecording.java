@@ -1,6 +1,5 @@
 package hanon.app.model.recorder;
 
-import be.tarsos.dsp.pitch.FFTPitch;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.Yin;
 

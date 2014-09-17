@@ -1,15 +1,15 @@
 package player;
 
-import hanon.app.controller.composer.record.WrittenNote;
-import hanon.app.controller.music.*;
+import hanon.app.model.composer.record.WrittenNote;
+import hanon.app.model.music.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static hanon.app.controller.music.GeneralStaffElement.measureLine;
-import static hanon.app.controller.music.NoteValue.fromNameAndOctave;
+import static hanon.app.model.music.GeneralStaffElement.measureLine;
+import static hanon.app.model.music.NoteValue.fromNameAndOctave;
 
 public class EighthTest extends Application {
 
@@ -20,13 +20,15 @@ public class EighthTest extends Application {
     elements.add(measureLine());
   }
 
+
+
   public static void main(String[] args) {
     launch(args);
   }
 
   @Override
   public void start(Stage stage) {
-    new MusicSheet(stage, new StaffElementSet(Clef.TREBLE, elements)).draw();
+    new TestMusicSheet(stage, new StaffElementSet(Clef.TREBLE, elements)).draw();
   }
 }
 

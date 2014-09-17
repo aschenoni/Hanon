@@ -1,6 +1,7 @@
-package hanon.app.controller.player.staff;
+package hanon.app.model.player.staff;
 
-import hanon.app.controller.music.*;
+import hanon.app.model.music.GeneralStaffElement;
+import hanon.app.model.music.StaffElement;
 
 import java.util.ArrayList;
 import java.util.List;

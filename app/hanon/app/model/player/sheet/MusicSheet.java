@@ -1,25 +1,22 @@
 package hanon.app.model.player.sheet;
 
+import hanon.app.model.music.StaffElementSet;
+import hanon.app.model.player.staff.StaffInfo;
+import hanon.app.model.player.staff.Staff;
+import hanon.app.model.player.staff.StaffSet;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
-import hanon.app.model.player.staff.Staff;
-import hanon.app.model.music.StaffElement;
-import hanon.app.model.player.staff.StaffSet;
-
 
 public class MusicSheet extends AnchorPane{
 	
 	//List of staff elements on the music sheet. The list May Change if notes are added or deleted
-	private final ObservableList<StaffElement> elements;
-	
-	
-	public MusicSheet(ObservableList<StaffElement> elements)
-	{
-		this.elements = elements;
-	}
-	
+  private final ObservableList<StaffElementSet> sets;
+
+  public MusicSheet(ObservableList<StaffElementSet> sets) {
+    this.sets = sets;
+  }
 	/**
 	 * Draws the music sheet, rendering the musical representation of each note
 	 * 
@@ -37,7 +34,31 @@ public class MusicSheet extends AnchorPane{
 		
 		//Not sure I like this required group here, it seems like we are adding an unnecessary middle layer)
 		Brush brush = new Brush(group, canvas.getGraphicsContext2D());
-		StaffSet set = new StaffSet(100, 100, 800);
-		for(Staff s : set.placeElements(elements)) s.paint(brush);
+
+
+
+
+    int i = 1;
+    for (StaffElementSet s : sets) {
+      StaffInfo.StaffInfoBuilder b = new StaffInfo.StaffInfoBuilder()
+              .clef(s.getClef())
+              .x(100)
+              .y(i*90)
+              .width(800);
+
+      if (i == 1 && sets.size() == 2) {
+        b.measureLineHeight(130);
+      }
+
+
+      StaffSet set = new StaffSet(b.build(), 100*sets.size(), s.getElements());
+
+
+      for (Staff staff : set.getStaffs())
+        staff.paint(brush);
+      i++;
+    }
+
+
 	}
 }

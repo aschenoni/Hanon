@@ -1,18 +1,19 @@
-package player;
+package hanon.app;
 
-import hanon.app.controller.composer.record.WrittenNote;
-import hanon.app.controller.music.StaffElement;
-import hanon.app.controller.music.TimeSignature;
+
+import hanon.app.model.composer.record.WrittenNote;
+import hanon.app.model.music.StaffElement;
+import hanon.app.model.music.TimeSignature;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static hanon.app.controller.music.GeneralStaffElement.measureLine;
-import static hanon.app.controller.music.NoteLength.*;
-import static hanon.app.controller.music.NoteValue.NoteName.*;
-import static hanon.app.controller.music.NoteValue.fromNameAndOctave;
+import static hanon.app.model.music.GeneralStaffElement.measureLine;
+import static hanon.app.model.music.NoteLength.*;
+import static hanon.app.model.music.NoteValue.NoteName.*;
+import static hanon.app.model.music.NoteValue.fromNameAndOctave;
 
-class TwinkleTwinkleLittleStar {
+public class TwinkleTwinkleLittleStar {
   public static final List<StaffElement> elements = new ArrayList<StaffElement>();
   static {
     elements.add(new TimeSignature(2, 4));
