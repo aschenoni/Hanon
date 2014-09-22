@@ -46,8 +46,8 @@ public class WrittenNote extends MusicNote implements Recordable {
 public JSONObject toJSON() {
 	
 	HashMap<String, String> map = new HashMap<String, String>();
-	map.put("NoteValue", this.value.toString());
-	map.put("NoteLength", this.length.toString());
+	map.put("NoteValue", this.getValue().toString());
+	map.put("NoteLength", this.getLength().toString());
 	
 	
 	return new JSONObject(map);

@@ -1,5 +1,7 @@
 package hanon.app.model.music;
 
+import org.json.simple.JSONObject;
+
 public class MusicNote implements StaffElement {
   private final NoteValue value;
   private final NoteLength length;
@@ -68,4 +70,10 @@ public class MusicNote implements StaffElement {
   public int hashCode() {
     return 17 * getValue().hashCode() + 17 * getLength().hashCode();
   }
+
+@Override
+public JSONObject toJSON() {
+	
+	return null;
+}
 }
