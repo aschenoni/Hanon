@@ -33,7 +33,7 @@ public class DataRecording implements Recording {
     System.out.println(pdr.getPitch());
     System.out.println(pdr.getProbability());
 
-    mic.closeRecording();
+    mic.stopRecording();
   }
 
   @Override

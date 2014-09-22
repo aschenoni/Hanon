@@ -10,8 +10,6 @@ import hanon.app.controller.music.NoteValue;
  * for file storage.
  */
 public class WrittenNote extends MusicNote implements Recordable {
-  private final NoteValue value;
-  private final NoteLength length;
 
   /**
    * Generate a written note from a string representation. The string
@@ -28,47 +26,15 @@ public class WrittenNote extends MusicNote implements Recordable {
   }
 
   public WrittenNote(NoteValue value, NoteLength length) {
-    this.value = value;
-    this.length = length;
+    super(value, length);
   }
 
   public WrittenNote(float frequency, NoteLength length) {
     this(new NoteValue(frequency), length);
   }
 
-  public float getFrequency() {
-    return value.getFrequency();
-  }
-
-  public NoteLength getLength() {
-    return length;
-  }
-
   @Override
   public String record() {
-    return getFrequency()+ " " + length.toString();
-  }
-
-  @Override
-  public int getStaffPosition() {
-    return value.getStaffPosition();
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (!(o instanceof WrittenNote))
-      return false;
-    else {
-      WrittenNote n = (WrittenNote) o;
-      return (n.value.equals(value) && n.length == length);
-    }
-  }
-
-  @Override
-  public int hashCode() {
-    int hash = 1;
-    hash = (hash * 17) + value.hashCode();
-    hash = (hash * 17) + length.hashCode();
-    return hash;
+    return getFrequency()+ " " + getLength().toString();
   }
 }

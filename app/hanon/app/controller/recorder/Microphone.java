@@ -44,7 +44,7 @@ public class Microphone implements SoundDevice {
     }
   }
 
-  void startRecord(){
+  public void startRecord(){
     // Capture input data from the microphone
     try {
       targetDataLine.open(DEFAULT_FORMAT);
@@ -56,11 +56,8 @@ public class Microphone implements SoundDevice {
     }
   }
 
-  void stopRecording() {
+  public void stopRecording() {
     targetDataLine.stop();
-  }
-
-  void closeRecording() {
     targetDataLine.close();
   }
 

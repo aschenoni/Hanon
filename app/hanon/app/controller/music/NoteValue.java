@@ -56,7 +56,7 @@ public class NoteValue {
     return frequency;
   }
 
-  int getOctave() {
+  public int getOctave() {
     int numHalfSteps = (int) round( log(frequency/A4) / log(FREQ_CONST) );
     int octavesFromA4 = numHalfSteps / NUM_HALF_STEPS_IN_OCTAVE;
     int halfStepsFromA = numHalfSteps % NUM_HALF_STEPS_IN_OCTAVE;
@@ -67,7 +67,7 @@ public class NoteValue {
     return 4 + octavesFromA4;
   }
 
-  NoteName getName() {
+  public NoteName getName() {
     int numHalfSteps = (int) round( log(frequency/A4) / log(FREQ_CONST) );
 
     int halfStepsFromA = numHalfSteps % NUM_HALF_STEPS_IN_OCTAVE;
