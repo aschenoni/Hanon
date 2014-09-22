@@ -12,6 +12,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import hanon.app.model.player.sheet.MusicSheet;
@@ -31,7 +32,7 @@ public class MainDriver extends Application{
 		
 		initRootLayout();
 		
-		drawTwinkleTwinkleLittleStar();
+		//drawTwinkleTwinkleLittleStar();
 	}
 
 	private void initRootLayout() {
@@ -40,10 +41,13 @@ public class MainDriver extends Application{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainDriver.class.getResource("view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
-			
+			loader = new FXMLLoader();
+			loader.setLocation(MainDriver.class.getResource("view/MusicView.fxml"));
+			AnchorPane musicView = (AnchorPane) loader.load();
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			rootLayout.setCenter(musicView);
 		}
 		catch (IOException e)
 		{
