@@ -9,19 +9,15 @@ import javax.xml.bind.Unmarshaller;
 
 public class StaffElementReader{
 	
-	StaffElementSet loadFromFile(File file)
+	static StaffElementSet loadFromFile(File file)
 	{
-		StaffElementSet wrapper = null;
+		StaffElementSet staffSet = null;
 		try {
-			JAXBContext context = JAXBContext.newInstance(StaffElementSet.class);
-			Unmarshaller um = context.createUnmarshaller();
 			
-			wrapper = (StaffElementSet) um.unmarshal(file);
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		catch (Exception e){
-			System.out.println("Could not load data from file");			
-		}
-		return wrapper;
+		return staffSet;
 	}
 
 }
