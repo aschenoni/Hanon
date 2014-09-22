@@ -1,23 +1,76 @@
 package hanon.app.model.composer.sheet;
 
+import hanon.app.model.composer.record.WrittenNote;
+import hanon.app.model.music.Clef;
+import hanon.app.model.music.GeneralStaffElement;
+import hanon.app.model.music.MusicNote;
+import hanon.app.model.music.NoteLength;
+import hanon.app.model.music.NoteValue;
+import hanon.app.model.music.NoteValue.NoteName;
+import hanon.app.model.music.StaffElement;
 import hanon.app.model.music.StaffElementSet;
 
 import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 public class StaffElementReader{
 	
-	static StaffElementSet loadFromFile(File file)
+	public static StaffElementSet loadFromFile(File file)
 	{
-		StaffElementSet staffSet = null;
+		JSONArray json = null;
+		JSONParser parser = new JSONParser();
 		try {
+			
+			Object fileIn = parser.parse(new FileReader(file));
+			json = (JSONArray) fileIn;
+			
+			return unMarshall(json);
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return staffSet;
+		return null;
+	}
+
+	private static StaffElementSet unMarshall(JSONArray json) {
+		List<StaffElement> staffElements = new ArrayList<StaffElement>();
+		StaffElementSet ste = null;
+		Clef clef = null;
+		for(Object obj: json){
+			JSONObject jsonObj = (JSONObject) obj;
+			
+			if(jsonObj.containsKey("Clef")){
+				clef = Clef.valueOf((String) jsonObj.get("Clef"));
+			}
+			else if(jsonObj.containsKey("General Element")) {
+				if(jsonObj.containsValue("MEASURE_LINE")){
+					staffElements.add(GeneralStaffElement.measureLine());
+				}
+			}
+			else if (jsonObj.containsKey("NoteLength")) {
+				NoteLength length = NoteLength.valueOf((String) jsonObj.get("NoteLength"));
+				String note = (String) jsonObj.get("NoteValue");
+				NoteName noteName = NoteValue.NoteName.valueOf(note.substring(0, 1));
+				Integer octave = new Integer(note.substring(1));
+				
+				NoteValue value = NoteValue.fromNameAndOctave(noteName, octave);
+				MusicNote noteOut = new MusicNote(value, length);
+				
+				staffElements.add(noteOut);
+			}
+			
+		  ste = new StaffElementSet(clef,staffElements);
+		}
+		return ste;
 	}
 
 }

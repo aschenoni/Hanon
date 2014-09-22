@@ -6,7 +6,7 @@ public class MusicNote implements StaffElement {
   private final NoteValue value;
   private final NoteLength length;
 
-  protected MusicNote(NoteValue value, NoteLength length) {
+  public MusicNote(NoteValue value, NoteLength length) {
     this.value = value;
     this.length = length;
   }
