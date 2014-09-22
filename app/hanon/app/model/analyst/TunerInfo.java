@@ -1,6 +1,6 @@
-package hanon.app.controller.analyst;
+package hanon.app.model.analyst;
 
-import hanon.app.controller.music.NoteValue;
+import hanon.app.model.music.NoteValue;
 
 public class TunerInfo {
 

@@ -1,9 +1,9 @@
-package hanon.app.controller.analyst;
+package hanon.app.model.analyst;
 
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.Yin;
-import hanon.app.controller.music.MusicNote;
-import hanon.app.controller.music.NoteValue;
+import hanon.app.model.music.MusicNote;
+import hanon.app.model.music.NoteValue;
 
 public class RecordedNote extends MusicNote {
   public static RecordedNote fromSoundArr(float[] floatArr) {

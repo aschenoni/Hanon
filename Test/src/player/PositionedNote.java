@@ -1,10 +1,8 @@
 package player;
 
-import hanon.app.controller.music.MusicNote;
-import hanon.app.controller.music.NoteLength;
-import hanon.app.controller.music.NoteValue;
+import hanon.app.model.music.Clef;
 
-public class PositionedNote extends MusicNote {
+public class PositionedNote extends hanon.app.model.music.MusicNote {
   private final int position;
 
   public PositionedNote(int position) {
@@ -13,7 +11,7 @@ public class PositionedNote extends MusicNote {
   }
 
   @Override
-  public int getStaffPosition() {
+  public int getStaffPosition(Clef clef) {
     return position;
   }
 }

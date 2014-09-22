@@ -1,7 +1,7 @@
-package hanon.app.controller.analyst;
+package hanon.app.model.analyst;
 
-import hanon.app.controller.recorder.DataRecording;
-import hanon.app.controller.recorder.Microphone;
+import hanon.app.model.recorder.DataRecording;
+import hanon.app.model.recorder.Microphone;
 
 import java.util.ArrayList;
 import java.util.List;

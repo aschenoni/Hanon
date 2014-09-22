@@ -1,4 +1,4 @@
-package hanon.app.controller.music;
+package hanon.app.model.music;
 
 public class MusicNote implements StaffElement {
   private final NoteValue value;
@@ -31,9 +31,10 @@ public class MusicNote implements StaffElement {
    * -----     7
    *           8
    *           ...
+   * @param clef
    */
-  public int getStaffPosition() {
-    return value.getStaffPosition();
+  public int getStaffPosition(Clef clef) {
+    return value.getStaffPosition(clef);
   }
 
   public NoteLength getLength() {

@@ -1,6 +1,6 @@
 package analyst;
 
-import hanon.app.controller.analyst.RecordedNote;
+import hanon.app.model.analyst.RecordedNote;
 import org.junit.Assert;
 import org.junit.Test;
 
