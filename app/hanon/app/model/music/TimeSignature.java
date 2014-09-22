@@ -1,5 +1,9 @@
 package hanon.app.model.music;
 
+import java.util.HashMap;
+
+import org.json.simple.JSONObject;
+
 public class TimeSignature implements StaffElement {
   private final int beatsPerMeasure;
   private final int whichGetsBeat;
@@ -37,4 +41,11 @@ public class TimeSignature implements StaffElement {
   public StaffElementType getType() {
     return StaffElementType.TIME_SIGNATURE;
   }
+
+@Override
+public JSONObject toJSON() {
+	HashMap<String, String> map = new HashMap<String, String>();
+	map.put("TimeSignature", this.beatsPerMeasure + ":" + this.whichGetsBeat);
+	return new JSONObject(map);
+}
 }

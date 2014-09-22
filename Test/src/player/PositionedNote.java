@@ -1,5 +1,7 @@
 package player;
 
+import org.json.simple.JSONObject;
+
 import hanon.app.model.music.Clef;
 import hanon.app.model.music.MusicNote;
 import hanon.app.model.music.NoteLength;
@@ -24,5 +26,11 @@ public class PositionedNote extends MusicNote {
   @Override
   public NoteLength getLength() {
     return null;
+  }
+
+  @Override
+  public JSONObject toJSON() {
+	// TODO 
+	return null;
   }
 }

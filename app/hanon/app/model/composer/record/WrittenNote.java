@@ -1,5 +1,9 @@
 package hanon.app.model.composer.record;
 
+import java.util.HashMap;
+
+import org.json.simple.JSONObject;
+
 import hanon.app.model.music.Clef;
 import hanon.app.model.music.MusicNote;
 import hanon.app.model.music.NoteLength;
@@ -72,4 +76,15 @@ public class WrittenNote extends MusicNote implements Recordable {
     hash = (hash * 17) + length.hashCode();
     return hash;
   }
+
+@Override
+public JSONObject toJSON() {
+	
+	HashMap<String, String> map = new HashMap<String, String>();
+	map.put("NoteValue", this.value.toString());
+	map.put("NoteLength", this.length.toString());
+	
+	
+	return new JSONObject(map);
+}
 }
