@@ -1,4 +1,4 @@
-package hanon.app.model.player.component;
+package hanon.app.model.player.noteimage;
 
 import javafx.scene.shape.Ellipse;
 import javafx.scene.transform.Rotate;

@@ -1,10 +1,9 @@
-package hanon.app.model.player.component;
+package hanon.app.model.player.noteimage;
 
 import hanon.app.model.player.sheet.Brush;
-import hanon.app.model.player.staff.NoteComponent;
 import javafx.scene.shape.Rectangle;
 
-public class LedgerLine implements NoteComponent {
+class LedgerLine implements NoteComponent {
   private final Rectangle rectangle;
   private final int staffPosition;
 

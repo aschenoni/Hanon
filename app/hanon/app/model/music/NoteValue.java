@@ -82,7 +82,6 @@ public class NoteValue {
    * The line is the position on the staff where the note should lie. The top
    * space is 0, and the line below it is 1, etc. To go above the line, use
    * negative values.
-   * @param clef
    */
   public int getStaffPosition(Clef clef) {
     if (clef == Clef.TREBLE) return 42 - (7*getOctave()) - NoteName.staffDiff(getName()); // A4 = 5, A0 = 33, C0 = 38

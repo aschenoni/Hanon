@@ -1,11 +1,11 @@
-package hanon.app.model.player.component;
+package hanon.app.model.player.noteimage;
 
 import hanon.app.model.player.sheet.Brush;
 import javafx.scene.image.Image;
 
 import java.io.File;
 
-public class UpNoteFlag extends NoteFlag {
+class UpNoteFlag extends NoteFlag {
   private static final File FILE = new File("res\\images\\UpNoteFlag.png");
   private static final Image IMAGE = new Image(FILE.toURI().toString(), (3/4.0)*NoteBody.WIDTH, 100, true, true);
 

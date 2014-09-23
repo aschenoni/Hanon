@@ -1,4 +1,4 @@
-package hanon.app.model.player.staff;
+package hanon.app.model.player.noteimage;
 
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.StaffPlaceable;
@@ -9,10 +9,10 @@ import hanon.app.model.player.sheet.StaffPlaceable;
  *
  * For instance, a whole note is a Note Body and a Body Hole.
  */
-class NoteImage implements StaffPlaceable {
+public class NoteImage implements StaffPlaceable {
   private final NoteComponent[] components;
 
-  public NoteImage(NoteComponent... components) {
+  NoteImage(NoteComponent... components) {
     this.components = components;
   }
 

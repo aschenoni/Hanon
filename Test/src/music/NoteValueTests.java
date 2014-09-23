@@ -5,7 +5,6 @@ import hanon.app.model.music.NoteValue;
 import org.junit.Test;
 
 import static hanon.app.model.music.NoteValue.*;
-import static hanon.app.model.music.NoteValue.fromNameAndOctave;
 import static org.junit.Assert.assertEquals;
 
 public class NoteValueTests {

@@ -2,6 +2,9 @@ package hanon.app.model.music.jsonutil;
 
 import org.json.simple.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class JSONUtil {
 
   /**
@@ -15,10 +18,10 @@ public class JSONUtil {
    * values[n-1] -> values[n]
    */
   public static JSONObject stringsToJSON(String... values) {
-    JSONObject obj = new JSONObject();
+    Map<String, String> map = new HashMap<String, String>();
     for (int i = 0; i < values.length; i+=2) {
-      obj.put(values[i], values[i+1]);
+      map.put(values[i], values[i+1]);
     }
-    return obj;
+    return new JSONObject(map);
   }
 }

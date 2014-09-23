@@ -1,7 +1,7 @@
-package hanon.app.model.player.staff;
+package hanon.app.model.player.noteimage;
 
 import hanon.app.model.player.sheet.Brush;
 
-public interface NoteComponent {
+interface NoteComponent {
   void paint(Brush brush);
 }

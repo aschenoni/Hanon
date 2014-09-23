@@ -42,7 +42,6 @@ public class MusicNote implements StaffElement {
    * -----     7
    *           8
    *           ...
-   * @param clef
    */
   public int getStaffPosition(Clef clef) {
     return value.getStaffPosition(clef);

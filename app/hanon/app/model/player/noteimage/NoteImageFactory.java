@@ -1,8 +1,7 @@
-package hanon.app.model.player.staff;
+package hanon.app.model.player.noteimage;
 
 import hanon.app.model.music.Clef;
 import hanon.app.model.music.MusicNote;
-import hanon.app.model.player.component.*;
 
 /**
  * The note image factory is responsible for putting together the correct

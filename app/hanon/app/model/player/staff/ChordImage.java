@@ -1,5 +1,6 @@
 package hanon.app.model.player.staff;
 
+import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.StaffPlaceable;
 

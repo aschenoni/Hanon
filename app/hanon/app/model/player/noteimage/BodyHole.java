@@ -1,14 +1,13 @@
-package hanon.app.model.player.component;
+package hanon.app.model.player.noteimage;
 
 import hanon.app.model.player.sheet.Brush;
-import hanon.app.model.player.staff.NoteComponent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
 /**
  * A body hole is the white gap of a half or whole note in sheet music.
  */
-public class BodyHole implements NoteComponent {
+class BodyHole implements NoteComponent {
 
   /**
    * The height and width of the actual ellipse should be set in by some offset.

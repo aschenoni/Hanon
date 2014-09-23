@@ -1,7 +1,9 @@
 package hanon.app.model.player.staff;
 
 import hanon.app.model.music.*;
-import hanon.app.model.player.component.NoteStem;
+import hanon.app.model.player.noteimage.NoteImage;
+import hanon.app.model.player.noteimage.NoteImageFactory;
+import hanon.app.model.player.noteimage.NoteStem;
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.StaffPlaceable;
 

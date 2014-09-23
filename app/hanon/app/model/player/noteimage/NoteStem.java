@@ -1,9 +1,8 @@
-package hanon.app.model.player.component;
+package hanon.app.model.player.noteimage;
 
 import hanon.app.model.music.Clef;
 import hanon.app.model.music.MusicNote;
 import hanon.app.model.player.sheet.Brush;
-import hanon.app.model.player.staff.NoteComponent;
 import hanon.app.model.player.staff.Staff;
 import javafx.scene.shape.Rectangle;
 
@@ -30,14 +29,14 @@ public class NoteStem implements NoteComponent {
    * The x and getY coordinates of the body hole should be the same as the
    * coordinates of the note that it belongs to.
    */
-  public static NoteStem fromPosition(int x, int y, int staffY) {
+  static NoteStem fromPosition(int x, int y, int staffY) {
     if (y < staffY + 2* Staff.LINE_GAP)
       return new NoteStem(false, x, y);
     else
       return new NoteStem(true, x, y);
   }
 
-  public NoteStem(boolean isUp, int x, int y) {
+  NoteStem(boolean isUp, int x, int y) {
     this.isUp = isUp;
     this.x = x;
     this.y = y;

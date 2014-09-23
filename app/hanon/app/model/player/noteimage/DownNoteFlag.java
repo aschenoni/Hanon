@@ -1,11 +1,11 @@
-package hanon.app.model.player.component;
+package hanon.app.model.player.noteimage;
 
 import hanon.app.model.player.sheet.Brush;
 import javafx.scene.image.Image;
 
 import java.io.File;
 
-public class DownNoteFlag extends NoteFlag {
+class DownNoteFlag extends NoteFlag {
 
   public static final int WIDTH = (int) (3/4.0*NoteBody.WIDTH);
 
