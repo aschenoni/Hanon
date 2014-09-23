@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import java.io.File;
 
 public class UpNoteFlag extends NoteFlag {
-
   private static final File FILE = new File("res\\images\\UpNoteFlag.png");
   private static final Image IMAGE = new Image(FILE.toURI().toString(), (3/4.0)*NoteBody.WIDTH, 100, true, true);
 
@@ -19,7 +18,7 @@ public class UpNoteFlag extends NoteFlag {
   }
 
   @Override
-  public void draw(Brush brush) {
+  public void paint(Brush brush) {
     brush.paint(IMAGE, x, y);
   }
 }

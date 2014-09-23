@@ -36,7 +36,7 @@ public class BodyHole implements NoteComponent {
             angle);
   }
 
-  public void draw(Brush brush) {
+  public void paint(Brush brush) {
     Brush whiteBrush = brush.withColor(Color.WHITE);
     whiteBrush.paint(ellipse);
   }

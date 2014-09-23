@@ -1,9 +1,7 @@
 package sheet;
 
 import hanon.app.TwinkleTwinkleLittleStar;
-import hanon.app.model.composer.sheet.StaffElementReader;
-import hanon.app.model.composer.sheet.StaffElementWriter;
-import hanon.app.model.music.Clef;
+import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElement;
 import hanon.app.model.music.StaffElementSet;
 
@@ -17,7 +15,7 @@ public class TestStaffElementReader {
 		List<StaffElement> newList = TwinkleTwinkleLittleStar.elements;
 		
 		StaffElementSet ste = StaffElementReader.loadFromFile(file);
-		
+
 	}
 
 }

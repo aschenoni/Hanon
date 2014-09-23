@@ -1,21 +1,23 @@
 package analyst;
 
-import hanon.app.model.analyst.RecordedNote;
-import org.junit.Assert;
+import hanon.app.model.music.MusicNote;
+import hanon.app.model.music.NoteValue;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TunerTests {
 
   @Test
   public void testPositiveFrequencyOffset() {
-    RecordedNote played = RecordedNote.fromFrequency(450.0f);
-    Assert.assertEquals(10.0f, played.getFrequencyOffset(), .1f);
+    MusicNote played = new MusicNote(new NoteValue(450.0f), null);
+    assertEquals(10.0f, played.getFrequencyOffset(), .1f);
   }
 
   @Test
   public void testNegativeFrequencyOffset() {
-    RecordedNote played = RecordedNote.fromFrequency(430.0f);
-    Assert.assertEquals(-10.0f, played.getFrequencyOffset(), .1f);
+    MusicNote played = new MusicNote(new NoteValue(430.0f), null);
+    assertEquals(-10.0f, played.getFrequencyOffset(), .1f);
   }
 
 }

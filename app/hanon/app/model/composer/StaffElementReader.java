@@ -1,26 +1,15 @@
-package hanon.app.model.composer.sheet;
+package hanon.app.model.composer;
 
-import hanon.app.model.composer.record.WrittenNote;
-import hanon.app.model.music.Clef;
-import hanon.app.model.music.GeneralStaffElement;
-import hanon.app.model.music.MusicNote;
-import hanon.app.model.music.NoteLength;
-import hanon.app.model.music.NoteValue;
+import hanon.app.model.music.*;
 import hanon.app.model.music.NoteValue.NoteName;
-import hanon.app.model.music.StaffElement;
-import hanon.app.model.music.StaffElementSet;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 public class StaffElementReader{
 	

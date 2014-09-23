@@ -12,11 +12,15 @@ import javafx.scene.shape.Rectangle;
  * Note Stem is not intended to be extended! It should only be
  * extended by the classes UpNoteStem and DownNoteStem.
  */
-public abstract class NoteStem implements NoteComponent {
+public class NoteStem implements NoteComponent {
   private static final int CENTER_POSITION = 4;
 
   static final int WIDTH = 1;
   static final int HEIGHT = 35;
+
+  private final boolean isUp;
+  private final int x;
+  private final int y;
 
   /**
    * Factory method for generating a note stem in the correct direction. If the
@@ -28,9 +32,15 @@ public abstract class NoteStem implements NoteComponent {
    */
   public static NoteStem fromPosition(int x, int y, int staffY) {
     if (y < staffY + 2* Staff.LINE_GAP)
-      return new DownNoteStem(x, y);
+      return new NoteStem(false, x, y);
     else
-      return new UpNoteStem(x, y);
+      return new NoteStem(true, x, y);
+  }
+
+  public NoteStem(boolean isUp, int x, int y) {
+    this.isUp = isUp;
+    this.x = x;
+    this.y = y;
   }
 
   /**
@@ -38,10 +48,20 @@ public abstract class NoteStem implements NoteComponent {
    * are the same as the x and getY coordinates of the note itself, there needs to
    * be some adjustment to correctly place the stem.
    */
-  protected abstract int adjustedX();
-  protected abstract int adjustedY();
+  private int adjustedX() {
+    if (isUp)
+      return x - NoteStem.WIDTH + NoteBody.WIDTH;
+    else
+      return x;
+  }
+  private int adjustedY() {
+    if (isUp)
+      return y - NoteStem.HEIGHT + (NoteBody.HEIGHT / 2);
+    else
+      return y + (NoteBody.HEIGHT / 2) + 1;
+  }
 
-  public void draw(Brush brush) {
+  public void paint(Brush brush) {
     brush.paint(new Rectangle(adjustedX(), adjustedY(), WIDTH, HEIGHT));
   }
 

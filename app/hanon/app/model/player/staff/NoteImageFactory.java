@@ -64,8 +64,8 @@ public class NoteImageFactory {
 
   private NoteStem buildStem(int x, int y, StemDirection d) {
     switch (d) {
-      case UP:   return new UpNoteStem(x, y);
-      case DOWN: return new DownNoteStem(x, y);
+      case UP:   return new NoteStem(true, x, y);
+      case DOWN: return new NoteStem(false, x, y);
       default:   return NoteStem.fromPosition(x, y, staffY);
     }
   }

@@ -1,8 +1,8 @@
 package player;
 
 import hanon.app.model.music.Clef;
+import hanon.app.model.music.MusicNote;
 import hanon.app.model.music.StaffElementSet;
-import hanon.app.model.composer.record.WrittenNote;
 import hanon.app.model.music.StaffElement;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -26,14 +26,14 @@ public class BassClefTest extends Application {
   public void start(Stage stage) {
     List<StaffElement> elements = new ArrayList<StaffElement>();
 
-    elements.add(new WrittenNote(fromNameAndOctave(G, 2), QUARTER));
-    elements.add(new WrittenNote(fromNameAndOctave(A, 2), QUARTER));
-    elements.add(new WrittenNote(fromNameAndOctave(B, 2), QUARTER));
-    elements.add(new WrittenNote(fromNameAndOctave(C, 3), QUARTER));
-    elements.add(new WrittenNote(fromNameAndOctave(D, 3), QUARTER));
-    elements.add(new WrittenNote(fromNameAndOctave(E, 3), QUARTER));
-    elements.add(new WrittenNote(fromNameAndOctave(F, 3), QUARTER));
-    elements.add(new WrittenNote(fromNameAndOctave(G, 3), QUARTER));
+    elements.add(new MusicNote(fromNameAndOctave(G, 2), QUARTER));
+    elements.add(new MusicNote(fromNameAndOctave(A, 2), QUARTER));
+    elements.add(new MusicNote(fromNameAndOctave(B, 2), QUARTER));
+    elements.add(new MusicNote(fromNameAndOctave(C, 3), QUARTER));
+    elements.add(new MusicNote(fromNameAndOctave(D, 3), QUARTER));
+    elements.add(new MusicNote(fromNameAndOctave(E, 3), QUARTER));
+    elements.add(new MusicNote(fromNameAndOctave(F, 3), QUARTER));
+    elements.add(new MusicNote(fromNameAndOctave(G, 3), QUARTER));
     elements.add(measureLine());
 
     new TestMusicSheet(stage, new StaffElementSet(Clef.BASS, elements)).draw();
