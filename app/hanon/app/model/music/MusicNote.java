@@ -2,6 +2,8 @@ package hanon.app.model.music;
 
 import org.json.simple.JSONObject;
 
+import java.util.HashMap;
+
 public class MusicNote implements StaffElement {
   private final NoteValue value;
   private final NoteLength length;
@@ -71,9 +73,11 @@ public class MusicNote implements StaffElement {
     return 17 * getValue().hashCode() + 17 * getLength().hashCode();
   }
 
-@Override
-public JSONObject toJSON() {
-	
-	return null;
-}
+  @Override
+  public JSONObject toJSON() {
+    HashMap<String, String> map = new HashMap<String, String>();
+    map.put("NoteValue", this.getValue().toString());
+    map.put("NoteLength", this.getLength().toString());
+    return new JSONObject(map);
+  }
 }

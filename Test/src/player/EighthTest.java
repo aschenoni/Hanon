@@ -1,6 +1,5 @@
 package player;
 
-import hanon.app.model.composer.record.WrittenNote;
 import hanon.app.model.music.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -15,8 +14,8 @@ public class EighthTest extends Application {
 
   private static final List<StaffElement> elements = new ArrayList<StaffElement>();
   static {
-    elements.add(new WrittenNote(fromNameAndOctave(NoteValue.NoteName.A, 4), NoteLength.EIGHTH));
-    elements.add(new WrittenNote(fromNameAndOctave(NoteValue.NoteName.B, 4), NoteLength.EIGHTH));
+    elements.add(new MusicNote(fromNameAndOctave(NoteValue.NoteName.A, 4), NoteLength.EIGHTH));
+    elements.add(new MusicNote(fromNameAndOctave(NoteValue.NoteName.B, 4), NoteLength.EIGHTH));
     elements.add(measureLine());
   }
 
@@ -31,4 +30,3 @@ public class EighthTest extends Application {
     new TestMusicSheet(stage, new StaffElementSet(Clef.TREBLE, elements)).draw();
   }
 }
-
