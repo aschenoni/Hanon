@@ -10,11 +10,13 @@ import hanon.app.model.music.Clef;
 import hanon.app.model.music.StaffElementSet;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import hanon.app.model.player.sheet.MusicSheet;
 import static hanon.app.TwinkleTwinkleLittleStar.*;
 
@@ -70,5 +72,18 @@ public class MainDriver extends Application{
 	public static void main(String[] args)
 	{
 		launch(args);
+	}
+
+	public Window getPrimaryStage() {
+		return this.primaryStage;
+	}
+
+	public void loadSheetMusic(File file) {
+		StaffElementSet ste  = StaffElementReader.loadFromFile(file);
+		ArrayList<StaffElementSet> list = new ArrayList<StaffElementSet>();
+		
+		MusicSheet sheet = new MusicSheet(FXCollections.observableArrayList(list));
+		rootLayout.setCenter(sheet);
+		sheet.draw(500, 500);
 	}
 }
