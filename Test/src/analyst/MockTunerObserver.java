@@ -1,8 +1,8 @@
 package analyst;
 
-import hanon.app.model.analyst.Tuner;
-import hanon.app.model.analyst.TunerInfo;
-import hanon.app.model.analyst.TunerObserver;
+import hanon.app.model.analyst.tuner.Tuner;
+import hanon.app.model.analyst.tuner.TunerInfo;
+import hanon.app.model.analyst.tuner.TunerObserver;
 
 public class MockTunerObserver implements TunerObserver{
 

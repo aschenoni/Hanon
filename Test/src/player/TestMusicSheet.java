@@ -27,7 +27,7 @@ public class TestMusicSheet {
     stage.setScene(new Scene(group));
     stage.show();
 
-    Brush brush = new Brush(group, canvas.getGraphicsContext2D());
+    Brush brush = new Brush(group);
 
     int i = 1;
     for (StaffElementSet s : sets) {

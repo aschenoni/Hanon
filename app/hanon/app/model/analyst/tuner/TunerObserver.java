@@ -1,4 +1,4 @@
-package hanon.app.model.analyst;
+package hanon.app.model.analyst.tuner;
 
 public interface TunerObserver {
 

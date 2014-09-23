@@ -1,5 +1,6 @@
-package hanon.app.model.analyst;
+package hanon.app.model.analyst.tuner;
 
+import hanon.app.model.analyst.StoppableTool;
 import hanon.app.model.music.MusicNote;
 import hanon.app.model.recorder.DataRecording;
 import hanon.app.model.recorder.Microphone;
@@ -7,11 +8,10 @@ import hanon.app.model.recorder.Microphone;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tuner implements Runnable {
+public class Tuner extends StoppableTool {
 
   private final List<TunerObserver> observers = new ArrayList<TunerObserver>();
   private final int timeBetweenReadings;
-  private volatile boolean isRunning = false;
 
   public Tuner(int timeBetweenReadings) {
     this.timeBetweenReadings = timeBetweenReadings;
@@ -22,16 +22,13 @@ public class Tuner implements Runnable {
   }
 
   @Override
-  public void run() {
-    isRunning = true;
-    while (isRunning) {
-      MusicNote note = getMusicNote();
-      informAll(new TunerInfo(
-              note.getFrequency(),
-              note.getName(),
-              note.getOctave(),
-              note.getFrequencyOffset()));
-    }
+  protected void runLoop() {
+    MusicNote note = getMusicNote();
+    informAll(new TunerInfo(
+            note.getFrequency(),
+            note.getName(),
+            note.getOctave(),
+            note.getFrequencyOffset()));
   }
 
   private MusicNote getMusicNote() {
@@ -59,9 +56,5 @@ public class Tuner implements Runnable {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-  }
-
-  public void stop() {
-    isRunning = false;
   }
 }

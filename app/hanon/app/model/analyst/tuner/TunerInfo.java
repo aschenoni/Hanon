@@ -1,4 +1,4 @@
-package hanon.app.model.analyst;
+package hanon.app.model.analyst.tuner;
 
 import hanon.app.model.music.NoteValue;
 
