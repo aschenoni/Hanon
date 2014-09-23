@@ -25,18 +25,26 @@ public class Tuner implements Runnable {
   public void run() {
     isRunning = true;
     while (isRunning) {
-      DataRecording sound = new DataRecording();
-      Microphone mic = new Microphone(sound);
-      mic.startRecord();
-      safeSleep(timeBetweenReadings);
-      mic.stopRecording();
-      MusicNote note = MusicNote.fromSoundArr(sound.getFloatArray());
+      MusicNote note = getMusicNote();
       informAll(new TunerInfo(
               note.getFrequency(),
               note.getName(),
               note.getOctave(),
               note.getFrequencyOffset()));
     }
+  }
+
+  private MusicNote getMusicNote() {
+    DataRecording sound = new DataRecording();
+    recordOnMicrophone(sound);
+    return MusicNote.fromSoundArr(sound.getFloatArray());
+  }
+
+  private void recordOnMicrophone(DataRecording sound) {
+    Microphone mic = new Microphone(sound);
+    mic.startRecord();
+    safeSleep(timeBetweenReadings);
+    mic.stopRecording();
   }
 
   private void informAll(TunerInfo info) {

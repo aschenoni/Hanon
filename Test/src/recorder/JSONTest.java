@@ -1,17 +1,15 @@
 package recorder;
 
-import java.util.List;
-
 import hanon.app.TwinkleTwinkleLittleStar;
 import hanon.app.model.music.Clef;
 import hanon.app.model.music.StaffElement;
 import hanon.app.model.music.StaffElementSet;
 
+import java.util.List;
+
 public class JSONTest {
 
 	public static void main(String[] args) {
-		
-		
 		List<StaffElement> ttls = TwinkleTwinkleLittleStar.elements;
 		
 		for(StaffElement element: ttls){

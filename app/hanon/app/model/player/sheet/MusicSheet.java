@@ -9,7 +9,7 @@ import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.AnchorPane;
 
-public class MusicSheet extends AnchorPane{
+public class MusicSheet extends AnchorPane {
 	
 	//List of staff elements on the music sheet. The list May Change if notes are added or deleted
   private final ObservableList<StaffElementSet> sets;
@@ -31,9 +31,8 @@ public class MusicSheet extends AnchorPane{
 		
 		
 		this.getChildren().add(group);
-		
-		//Not sure I like this required group here, it seems like we are adding an unnecessary middle layer)
-		Brush brush = new Brush(group, canvas.getGraphicsContext2D());
+
+	  Brush brush = new Brush(group);
 
 
 

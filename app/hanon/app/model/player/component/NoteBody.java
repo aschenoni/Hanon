@@ -16,7 +16,7 @@ public class NoteBody implements NoteComponent {
     ellipse = RotatedEllipse.buildEllipse(x, y, WIDTH, HEIGHT, angle);
   }
 
-  public void draw(Brush brush) {
+  public void paint(Brush brush) {
     brush.paint(ellipse);
   }
 }

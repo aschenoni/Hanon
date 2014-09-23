@@ -1,4 +1,4 @@
-package hanon.app.model.composer.sheet;
+package hanon.app.model.composer;
 
 import hanon.app.model.music.*;
 import hanon.app.model.music.NoteValue.NoteName;

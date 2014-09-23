@@ -19,7 +19,7 @@ public class UpNoteFlag extends NoteFlag {
   }
 
   @Override
-  public void draw(Brush brush) {
+  public void paint(Brush brush) {
     brush.paint(IMAGE, x, y);
   }
 }

@@ -41,7 +41,7 @@ public abstract class NoteStem implements NoteComponent {
   protected abstract int adjustedX();
   protected abstract int adjustedY();
 
-  public void draw(Brush brush) {
+  public void paint(Brush brush) {
     brush.paint(new Rectangle(adjustedX(), adjustedY(), WIDTH, HEIGHT));
   }
 

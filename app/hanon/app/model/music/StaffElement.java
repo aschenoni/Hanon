@@ -4,6 +4,5 @@ import org.json.simple.JSONObject;
 
 public interface StaffElement {
   StaffElementType getType();
-  
   JSONObject toJSON();
 }

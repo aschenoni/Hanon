@@ -1,7 +1,7 @@
 package sheet;
 
 import hanon.app.TwinkleTwinkleLittleStar;
-import hanon.app.model.composer.sheet.StaffElementWriter;
+import hanon.app.model.composer.StaffElementWriter;
 import hanon.app.model.music.Clef;
 import hanon.app.model.music.StaffElement;
 import hanon.app.model.music.StaffElementSet;

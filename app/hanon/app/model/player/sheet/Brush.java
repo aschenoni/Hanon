@@ -1,7 +1,6 @@
 package hanon.app.model.player.sheet;
 
 import javafx.scene.Group;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -25,17 +24,15 @@ public class Brush {
   private static final Color DEFAULT_COLOR = Color.BLACK;
 
   private final Group group;
-  private final GraphicsContext graphicsContext;
   private final Paint paintColor;
 
-  private Brush(Group group, GraphicsContext graphicsContext, Paint paintColor) {
+  private Brush(Group group, Paint paintColor) {
     this.group = group;
-    this.graphicsContext = graphicsContext;
     this.paintColor = paintColor;
   }
 
-  public Brush(Group group, GraphicsContext graphicsContext) {
-    this(group, graphicsContext, DEFAULT_COLOR);
+  public Brush(Group group) {
+    this(group, DEFAULT_COLOR);
   }
 
   public void paint(Shape shape) {
@@ -55,6 +52,6 @@ public class Brush {
    * color.
    */
   public Brush withColor(Paint paintColor) {
-    return new Brush(group, graphicsContext, paintColor);
+    return new Brush(group, paintColor);
   }
 }

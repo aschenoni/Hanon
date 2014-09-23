@@ -14,7 +14,7 @@ public class LedgerLine implements NoteComponent {
   }
 
   @Override
-  public void draw(Brush brush) {
+  public void paint(Brush brush) {
     if (staffPosition < -2 || staffPosition > 9) brush.paint(rectangle);
   }
 }

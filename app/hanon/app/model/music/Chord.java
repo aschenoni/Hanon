@@ -19,10 +19,7 @@ public class Chord implements StaffElement {
   }
   
   @Override
-  public JSONObject toJSON(){
-	  
-	  
-	return null;
-	  
+  public JSONObject toJSON() {
+    return null; //TODO
   }
 }
