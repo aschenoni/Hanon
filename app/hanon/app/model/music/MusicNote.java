@@ -2,10 +2,8 @@ package hanon.app.model.music;
 
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.Yin;
+import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MusicNote implements StaffElement {
   public static MusicNote fromSoundArr(float[] floatArr) {
@@ -84,10 +82,9 @@ public class MusicNote implements StaffElement {
 
   @Override
   public JSONObject toJSON() {
-    Map<String, String> map = new HashMap<String, String>();
-    map.put("NoteValue", this.getValue().toString());
-    map.put("NoteLength", this.getLength().toString());
-    return new JSONObject(map);
+    return JSONUtil.stringsToJSON(
+            "NoteValue", getValue().toString(),
+            "NoteLength", getLength().toString());
   }
 
   /**

@@ -1,7 +1,7 @@
 package hanon.app.model.music;
 
+import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import java.util.List;
 
@@ -24,9 +24,8 @@ public class StaffElementSet {
   
   public JSONArray toJSON(){
 	  JSONArray array = new JSONArray();
-	  JSONObject jsonClef = new JSONObject();
-	  jsonClef.put("Clef", clef.toString());
-	  array.add(jsonClef);
+
+    array.add(JSONUtil.stringsToJSON("Clef", clef.toString()));
 	  for(StaffElement element: elements){
 		  array.add(element.toJSON());
 	  }
