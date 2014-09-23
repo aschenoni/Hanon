@@ -1,6 +1,6 @@
 package hanon.app;
 
-import hanon.app.model.music.Clef;
+import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
 import javafx.application.Application;
@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +57,9 @@ public class MainDriver extends Application{
 	private void drawTwinkleTwinkleLittleStar() {
 
     List<StaffElementSet> sets = new ArrayList<StaffElementSet>();
-    //sets.add(StaffElementReader.loadFromFile(new File("musicLibrary/twinkletwinkle.hanon")));
+    sets.add(StaffElementReader.loadFromFile(new File("musicLibrary/twinkletwinkle.hanon")));
 
-    sets.add(new StaffElementSet(Clef.TREBLE, TwinkleTwinkleLittleStar.elements));
+    //sets.add(new StaffElementSet(Clef.TREBLE, TwinkleTwinkleLittleStar.elements));
 
 		MusicSheet twinkleMusic = new MusicSheet(FXCollections.observableArrayList(sets));
 		rootLayout.setCenter(twinkleMusic);
