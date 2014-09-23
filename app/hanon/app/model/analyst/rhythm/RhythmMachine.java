@@ -1,14 +1,13 @@
 package hanon.app.model.analyst.rhythm;
 
+import hanon.app.model.analyst.StoppableTool;
 import hanon.app.model.music.NoteLength;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RhythmMachine implements Runnable {
+public class RhythmMachine extends StoppableTool {
   private final List<RhythmObserver> observers = new ArrayList<RhythmObserver>();
-  private volatile boolean running = false;
-
   private final List<NoteLength> rhythm;
   private final NoteLength lengthWithBeat;
   private final int bpm;
@@ -28,19 +27,27 @@ public class RhythmMachine implements Runnable {
   }
 
   @Override
-  public void run() {
-    running = true;
-    while (running) {
-      for (NoteLength n : rhythm) {
-        waitForLength(n);
-        informAll();
-      }
+  protected void runLoop() {
+    for (NoteLength n : rhythm) {
+      waitForLength(n);
+      informAll();
     }
   }
 
   private void waitForLength(NoteLength n) {
+    float bps = bpm / 60;
+    float spb = 1 / bps;
+    float mspb = spb * 1000;
+    float time = (mspb * n.lengthRelativeTo256th()) / lengthWithBeat.lengthRelativeTo256th();
+    safeSleep((int) time);
+  }
 
-    n.lengthRelativeTo256th();
+  private void safeSleep(int time1) {
+    try {
+      Thread.sleep(time1);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   private void informAll() {
