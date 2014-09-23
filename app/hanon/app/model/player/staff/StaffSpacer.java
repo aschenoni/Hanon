@@ -1,9 +1,6 @@
 package hanon.app.model.player.staff;
 
-import hanon.app.model.music.Chord;
-import hanon.app.model.music.MusicNote;
-import hanon.app.model.music.StaffElement;
-import hanon.app.model.music.StaffElementType;
+import hanon.app.model.music.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,12 +152,13 @@ public class StaffSpacer {
   private int getSpacing(StaffElement element) {
     switch (element.getType()) {
       case NOTE:           return getNoteSpacing((MusicNote) element);
+      case REST:           return getNoteLengthSpacing(((Rest) element).getLength());
       case CHORD:          return getChordSpacing((Chord) element);
       case TIME_SIGNATURE: return TIME_SIGNATURE_SPACING;
       case CLEF:           return CLEF_SPACING;
       case MEASURE_LINE:   return MEASURE_LINE_SPACING;
       case STAFF_LINES:    return 0;
-      default:             throw new NoSuchStaffElementException();
+      default:             throw new RuntimeException("No such staff element type");
     }
   }
 
@@ -173,7 +171,11 @@ public class StaffSpacer {
   }
 
   private int getNoteSpacing(MusicNote note) {
-    switch (note.getLength()) {
+    return getNoteLengthSpacing(note.getLength());
+  }
+
+  private int getNoteLengthSpacing(NoteLength length) {
+    switch (length) {
       case sixteenth: return 20;
       case EIGHTH:    return 30;
       case QUARTER:   return 50;

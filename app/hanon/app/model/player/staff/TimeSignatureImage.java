@@ -35,7 +35,7 @@ public class TimeSignatureImage implements StaffPlaceable {
       case 3:  return TIME_3;
       case 4:  return TIME_4;
       case 8:  return TIME_8;
-      default: throw new NoSuchTimeException();
+      default: throw new RuntimeException("No such time");
     }
   }
 
@@ -44,6 +44,4 @@ public class TimeSignatureImage implements StaffPlaceable {
     brush.paint(beatsPerMeasureImage, x, y);
     brush.paint(whichGetsBeatImage, x, y + 20);
   }
-
-  private class NoSuchTimeException extends RuntimeException {  }
 }
