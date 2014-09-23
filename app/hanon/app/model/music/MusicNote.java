@@ -1,10 +1,19 @@
 package hanon.app.model.music;
 
+import be.tarsos.dsp.pitch.PitchDetectionResult;
+import be.tarsos.dsp.pitch.Yin;
 import org.json.simple.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MusicNote implements StaffElement {
+  public static MusicNote fromSoundArr(float[] floatArr) {
+    Yin pitch = new Yin(8000, 1024);
+    PitchDetectionResult pdr = pitch.getPitch(floatArr);
+    return new MusicNote(new NoteValue(pdr.getPitch()), null);
+  }
+
   private final NoteValue value;
   private final NoteLength length;
 
@@ -75,9 +84,23 @@ public class MusicNote implements StaffElement {
 
   @Override
   public JSONObject toJSON() {
-    HashMap<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<String, String>();
     map.put("NoteValue", this.getValue().toString());
     map.put("NoteLength", this.getLength().toString());
     return new JSONObject(map);
+  }
+
+  /**
+   * @return the difference between the actual note frequency and the closest
+   * theoretical note frequency.
+   *
+   * Example: a 450 Hz note would yield 10, because the closest theoretical
+   * note is 440 Hz (A4)
+   */
+  public float getFrequencyOffset() {
+    int closestOctave = getValue().getOctave();
+    NoteValue.NoteName closestName = getValue().getName();
+    NoteValue closestValue = NoteValue.fromNameAndOctave(closestName, closestOctave);
+    return getValue().getFrequency() - closestValue.getFrequency();
   }
 }

@@ -1,5 +1,6 @@
 package hanon.app.model.analyst;
 
+import hanon.app.model.music.MusicNote;
 import hanon.app.model.recorder.DataRecording;
 import hanon.app.model.recorder.Microphone;
 
@@ -29,7 +30,7 @@ public class Tuner implements Runnable {
       mic.startRecord();
       safeSleep(timeBetweenReadings);
       mic.stopRecording();
-      RecordedNote note = RecordedNote.fromSoundArr(sound.getFloatArray());
+      MusicNote note = MusicNote.fromSoundArr(sound.getFloatArray());
       informAll(new TunerInfo(
               note.getFrequency(),
               note.getName(),
