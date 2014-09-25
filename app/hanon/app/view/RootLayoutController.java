@@ -22,13 +22,18 @@ public class RootLayoutController {
 		
 		//Create fileChooser for user to pick file to load
 		FileChooser fileChooser = new FileChooser();
+		fileChooser.setInitialDirectory(new File("musicLibrary"));
 		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("HANON files (*.hanon)", "*.hanon");
 		fileChooser.getExtensionFilters().add(extFilter);
 		
 		File file = fileChooser.showOpenDialog(mainDriver.getPrimaryStage());
 		
+		//Hitting cancel returns a null file so...
+		if(file != null)
+		{
 			mainDriver.loadSheetMusic(file);
-
+		}
+			
 	}
 	
 	@FXML
