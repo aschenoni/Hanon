@@ -65,7 +65,7 @@ public class StaffLocation {
       case CLEF:           return CLEF_SPACING;
       case MEASURE_LINE:   return MEASURE_LINE_SPACING;
       case STAFF_LINES:    return 0;
-      default:             throw new NoSuchStaffElementException();
+      default:             throw new RuntimeException("No such staff element type");
     }
   }
 

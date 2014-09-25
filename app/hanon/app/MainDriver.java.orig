@@ -30,9 +30,15 @@ public class MainDriver extends Application{
 		this.primaryStage.setTitle("Hanon");
 		
 		initRootLayout();
+<<<<<<< HEAD
+		
+		//drawTwinkleTwinkleLittleStar();
+	}
+=======
 
     loadSheetMusic(new File("musicLibrary/twinkletwinkle.hanon"));
   }
+>>>>>>> origin/master
 
 	private void initRootLayout() {
 		try {
@@ -68,9 +74,16 @@ public class MainDriver extends Application{
 	}
 
 	public void loadSheetMusic(File file) {
-		StaffElementSet set  = StaffElementReader.loadFromFile(file);
+<<<<<<< HEAD
+		StaffElementSet ste  = StaffElementReader.loadFromFile(file);
 		List<StaffElementSet> list = new ArrayList<StaffElementSet>();
+		list.add(ste);
+=======
+		StaffElementSet set  = StaffElementReader.loadFromFile(file);
+		ArrayList<StaffElementSet> list = new ArrayList<StaffElementSet>();
     list.add(set);
+		
+>>>>>>> origin/master
 		MusicSheet sheet = new MusicSheet(FXCollections.observableArrayList(list));
 		sheet.draw(500, 500);
 		rootLayout.setCenter(sheet);

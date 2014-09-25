@@ -3,7 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
+<<<<<<< HEAD
+
 <BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.view.RootLayoutController">
+=======
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.RootLayoutController">
+>>>>>>> origin/master
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>

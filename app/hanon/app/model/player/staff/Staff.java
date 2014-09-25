@@ -1,7 +1,9 @@
 package hanon.app.model.player.staff;
 
 import hanon.app.model.music.*;
-import hanon.app.model.player.component.NoteStem;
+import hanon.app.model.player.noteimage.NoteImage;
+import hanon.app.model.player.noteimage.NoteImageFactory;
+import hanon.app.model.player.noteimage.NoteStem;
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.StaffPlaceable;
 
@@ -35,12 +37,13 @@ public class Staff {
     noteFactory = new NoteImageFactory(info.getY(), info.getClef());
     switch (element.getType()) {
       case NOTE:           return noteFactory.buildImage((MusicNote) element, x);
+      case REST:           return RestImage.fromRest((Rest) element, x, info.getY());
       case CHORD:          return new ChordImage(getNoteImages(x, ((Chord)element).getNotes()));
       case TIME_SIGNATURE: return new TimeSignatureImage((TimeSignature)element, x, info.getY());
       case CLEF:           return getClef(x);
       case MEASURE_LINE:   return new MeasureLine(x, info.getY(), info.getMeasureLineHeight());
       case STAFF_LINES:    return new StaffLines(info.getX(), info.getX(), info.getWidth());
-      default:             throw new NoSuchStaffElementException();
+      default:             throw new RuntimeException("No such staff element type");
     }
   }
 

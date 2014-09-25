@@ -1,7 +1,0 @@
-package hanon.app.model.player.staff;
-
-import hanon.app.model.player.sheet.Brush;
-
-public interface NoteComponent {
-  void paint(Brush brush);
-}

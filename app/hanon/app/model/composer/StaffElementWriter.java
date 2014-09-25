@@ -1,6 +1,5 @@
 package hanon.app.model.composer;
 
-import hanon.app.model.music.StaffElement;
 import hanon.app.model.music.StaffElementSet;
 
 import java.io.File;

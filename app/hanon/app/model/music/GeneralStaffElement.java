@@ -1,10 +1,9 @@
 package hanon.app.model.music;
 
-import static hanon.app.model.music.StaffElementType.*;
-
-import java.util.HashMap;
-
+import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONObject;
+
+import static hanon.app.model.music.StaffElementType.*;
 
 public class GeneralStaffElement implements StaffElement {
   private final StaffElementType type;
@@ -32,9 +31,7 @@ public class GeneralStaffElement implements StaffElement {
 
 @Override
 public JSONObject toJSON() {
-	HashMap<String,String> map = new HashMap<String,String>();
-	map.put("General Element", this.type.toString());
-	return new JSONObject(map);
+  return JSONUtil.stringsToJSON("General Element", type.toString());
 }
 
 }

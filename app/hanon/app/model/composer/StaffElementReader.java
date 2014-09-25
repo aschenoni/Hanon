@@ -13,21 +13,17 @@ import java.util.List;
 
 public class StaffElementReader{
 	
-	public static StaffElementSet loadFromFile(File file)
-	{
-		JSONArray json = null;
-		JSONParser parser = new JSONParser();
+	public static StaffElementSet loadFromFile(File file) {
+    StaffElementSet set = null;
 		try {
-			
+      JSONParser parser = new JSONParser();
 			Object fileIn = parser.parse(new FileReader(file));
-			json = (JSONArray) fileIn;
-			
-			return unMarshall(json);
-			
+			JSONArray json = (JSONArray) fileIn;
+			set = unMarshall(json);
 		} catch (Exception e) {
-			System.out.println(e);
+      e.printStackTrace();
 		}
-		return null;
+		return set;
 	}
 
 	private static StaffElementSet unMarshall(JSONArray json) {

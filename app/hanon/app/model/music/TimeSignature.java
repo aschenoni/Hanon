@@ -1,7 +1,6 @@
 package hanon.app.model.music;
 
-import java.util.HashMap;
-
+import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONObject;
 
 public class TimeSignature implements StaffElement {
@@ -42,10 +41,9 @@ public class TimeSignature implements StaffElement {
     return StaffElementType.TIME_SIGNATURE;
   }
 
-@Override
-public JSONObject toJSON() {
-	HashMap<String, String> map = new HashMap<String, String>();
-	map.put("TimeSignature", this.beatsPerMeasure + ":" + this.whichGetsBeat);
-	return new JSONObject(map);
-}
+  @Override
+  public JSONObject toJSON() {
+    return JSONUtil.stringsToJSON(
+            "TimeSignature", beatsPerMeasure + ":" + whichGetsBeat);
+  }
 }

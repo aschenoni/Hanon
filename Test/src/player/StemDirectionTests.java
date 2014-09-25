@@ -3,7 +3,7 @@ package player;
 import hanon.app.model.music.Clef;
 
 import hanon.app.model.music.MusicNote;
-import hanon.app.model.player.component.NoteStem;
+import hanon.app.model.player.noteimage.NoteStem;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

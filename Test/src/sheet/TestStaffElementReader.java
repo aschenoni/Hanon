@@ -14,7 +14,7 @@ public class TestStaffElementReader {
 		File file = new File("musicLibrary/twinkletwinkle.hanon");
 		List<StaffElement> newList = TwinkleTwinkleLittleStar.elements;
 		
-		StaffElementSet ste = StaffElementReader.loadFromFile(file);
+		StaffElementSet set = StaffElementReader.loadFromFile(file);
 
 	}
 
