@@ -1,7 +1,7 @@
 package hanon.app.model.analyst.rhythm;
 
 import hanon.app.model.analyst.StoppableTool;
-import hanon.app.model.music.NoteLength;
+import hanon.app.model.music.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,14 @@ public class RhythmMachine extends StoppableTool {
   private final List<NoteLength> rhythm;
   private final NoteLength lengthWithBeat;
   private final int bpm;
+
+  public static RhythmMachine fromElements(List<StaffElement> elements, int bpm) {
+    List<NoteLength> lengths = new ArrayList<NoteLength>();
+    for (StaffElement e : elements)
+      if (e.getType() == StaffElementType.NOTE)
+        lengths.add(((MusicNote) e).getLength());
+    return new RhythmMachine(lengths, bpm);
+  }
 
   public RhythmMachine(List<NoteLength> rhythm, int bpm, NoteLength lengthWithBeat) {
     this.rhythm = rhythm;

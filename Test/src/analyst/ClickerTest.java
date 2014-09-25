@@ -1,17 +1,14 @@
 package analyst;
 
+import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
-import hanon.app.model.analyst.rhythm.RhythmObserver;
 import hanon.app.model.music.NoteLength;
+import hanon.app.view.TwinkleTwinkleLittleStar;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MockRhythmObserver implements RhythmObserver {
-  @Override
-  public void inform() {
-    System.out.println("Beat!");
-  }
+public class ClickerTest {
 
   public static void main(String[] args) {
     List<NoteLength> lengths = new ArrayList<NoteLength>();
@@ -20,8 +17,10 @@ public class MockRhythmObserver implements RhythmObserver {
     lengths.add(NoteLength.WHOLE);
     lengths.add(NoteLength.HALF);
 
-    RhythmMachine machine = new RhythmMachine(lengths, 140);
-    machine.register(new MockRhythmObserver());
+    RhythmMachine machine = RhythmMachine.fromElements(TwinkleTwinkleLittleStar.elements, 140);
+    Clicker c = new Clicker();
+    c.run();
+    machine.register(c);
     machine.run();
   }
 }
