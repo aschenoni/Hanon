@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 
 public class RootLayoutController {
+	
+	//Allows for communication with other parts of the application
 	private MainDriver mainDriver;
 	
 	public void setMainDriver(MainDriver mainDriver){
@@ -30,12 +32,22 @@ public class RootLayoutController {
 	}
 	
 	@FXML
+	private void handleSave(){
+		
+	}
+	
+	@FXML
+	private void handleSaveAs(){
+		
+	}
+	
+	@FXML
 	private void handleAbout(){
 		System.out.println("HELLO");
 	}
 	
-	public String toString(){
-		return "HELLO";
-		
+	@FXML
+	private void handleExit(){
+		//TODO
 	}
 }

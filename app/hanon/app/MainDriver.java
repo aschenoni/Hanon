@@ -16,6 +16,7 @@ import javafx.stage.Window;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainDriver extends Application{
@@ -44,7 +45,6 @@ public class MainDriver extends Application{
 			rootLayout = (BorderPane) loader.load();
 			RootLayoutController controller = loader.getController();
 			controller.setMainDriver(this);
-			System.out.println(controller.toString());
 			loader = new FXMLLoader();
 			loader.setLocation(MainDriver.class.getResource("view/MusicView.fxml"));
 			AnchorPane musicView = (AnchorPane) loader.load();
@@ -69,9 +69,7 @@ public class MainDriver extends Application{
 
 	public void loadSheetMusic(File file) {
 		StaffElementSet set  = StaffElementReader.loadFromFile(file);
-		List<StaffElementSet> list = new ArrayList<StaffElementSet>();
-    list.add(set);
-		MusicSheet sheet = new MusicSheet(FXCollections.observableArrayList(list));
+		MusicSheet sheet = new MusicSheet(set);
 		sheet.draw(500, 500);
 		rootLayout.setCenter(sheet);
 		

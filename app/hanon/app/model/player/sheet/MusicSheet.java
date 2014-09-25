@@ -1,9 +1,13 @@
 package hanon.app.model.player.sheet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.staff.StaffInfo;
 import hanon.app.model.player.staff.Staff;
 import hanon.app.model.player.staff.StaffSet;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
@@ -16,6 +20,12 @@ public class MusicSheet extends AnchorPane {
 
   public MusicSheet(ObservableList<StaffElementSet> sets) {
     this.sets = sets;
+  }
+  
+  public MusicSheet(StaffElementSet set){
+	List<StaffElementSet> list = new ArrayList<StaffElementSet>();
+	list.add(set);
+	this.sets = FXCollections.observableArrayList(list);
   }
 	/**
 	 * Draws the music sheet, rendering the musical representation of each note
