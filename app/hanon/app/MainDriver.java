@@ -79,7 +79,10 @@ public class MainDriver extends Application{
 		sheet.draw(500, 500);
 		rootLayout.setCenter(sheet);
 	}
-	
+
+	public BorderPane getRootLayout(){
+		return this.rootLayout;
+	}
 	/*
 	 * Main method, consists only of launch as
 	 * JavaFX handles all application stuff within launch
@@ -87,4 +90,6 @@ public class MainDriver extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+
 }

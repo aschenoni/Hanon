@@ -70,4 +70,8 @@ public class MusicSheet extends AnchorPane {
 
 
 	}
+	
+	public ObservableList<StaffElementSet> getSets(){
+		return this.sets;
+	}
 }
