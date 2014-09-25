@@ -3,6 +3,7 @@ package hanon.app;
 import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
+import hanon.app.view.RootLayoutController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class MainDriver extends Application{
 		
 		initRootLayout();
 		
-		drawTwinkleTwinkleLittleStar();
+		//drawTwinkleTwinkleLittleStar();
 	}
 
 	private void initRootLayout() {
@@ -39,13 +41,24 @@ public class MainDriver extends Application{
 			// Load the root layout from the fxml file
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainDriver.class.getResource("view/RootLayout.fxml"));
+
+
 			rootLayout = (BorderPane) loader.load();
+			RootLayoutController controller = loader.getController();
+			controller.setMainDriver(this);
+			System.out.println(controller.toString());
 			loader = new FXMLLoader();
 			loader.setLocation(MainDriver.class.getResource("view/MusicView.fxml"));
 			AnchorPane musicView = (AnchorPane) loader.load();
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
+			
+			
+
+			//controller.setMainDriver(this);
 			primaryStage.show();
+			
+
 			rootLayout.setCenter(musicView);
 		}
 		catch (IOException e)
