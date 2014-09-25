@@ -25,9 +25,8 @@ public class RootLayoutController {
 		
 		File file = fileChooser.showOpenDialog(mainDriver.getPrimaryStage());
 		
-		if(file != null){
 			mainDriver.loadSheetMusic(file);
-		}
+
 	}
 	
 	@FXML

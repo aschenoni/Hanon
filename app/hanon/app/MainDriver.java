@@ -52,12 +52,7 @@ public class MainDriver extends Application{
 			AnchorPane musicView = (AnchorPane) loader.load();
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
-			
-			
-
-			//controller.setMainDriver(this);
 			primaryStage.show();
-			
 
 			rootLayout.setCenter(musicView);
 		}
@@ -92,10 +87,11 @@ public class MainDriver extends Application{
 
 	public void loadSheetMusic(File file) {
 		StaffElementSet ste  = StaffElementReader.loadFromFile(file);
-		ArrayList<StaffElementSet> list = new ArrayList<StaffElementSet>();
-		
+		List<StaffElementSet> list = new ArrayList<StaffElementSet>();
+		list.add(ste);
 		MusicSheet sheet = new MusicSheet(FXCollections.observableArrayList(list));
-		rootLayout.setCenter(sheet);
 		sheet.draw(500, 500);
+		rootLayout.setCenter(sheet);
+		
 	}
 }
