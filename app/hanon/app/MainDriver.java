@@ -1,10 +1,9 @@
 package hanon.app;
 
-import hanon.app.model.analyst.tuner.Tuner;
-import hanon.app.model.analyst.tuner.TunerObserver;
 import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
+import hanon.app.view.RhythmController;
 import hanon.app.view.RootLayoutController;
 import hanon.app.view.TunerController;
 import javafx.application.Application;
@@ -12,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -25,10 +23,11 @@ public class MainDriver extends Application{
 	private Stage primaryStage;
 	
 	private TunerController tunerController;
-	private BorderPane rootLayout; //Main application node from which everything will be a child
-	private AnchorPane musicView;
-	
-	/**
+  private RhythmController rhythmController;
+  private BorderPane rootLayout; //Main application node from which everything will be a child
+  private AnchorPane musicView;
+
+  /**
 	 * JavaFX application main method
 	 */
 	@Override
@@ -95,6 +94,22 @@ public class MainDriver extends Application{
 		tunerController.handleTuner();
 		tunerStage.show();
 	}
+
+  public void initRhythm() throws IOException {
+    Stage stage = new Stage();
+    FXMLLoader loader = new FXMLLoader();
+    loader.setLocation(MainDriver.class.getResource("view/Rhythm.fxml"));
+    AnchorPane page = (AnchorPane) loader.load();
+    RhythmController controller = loader.getController();
+    controller.setMainDriver(this);
+    this.rhythmController = controller;
+    stage.setTitle("Rhythm Machine");
+    Scene scene = new Scene(page);
+    stage.setScene(scene);
+    MusicSheet sheet = (MusicSheet)rootLayout.getCenter();
+    controller.handleRhythm(sheet.getSets().get(0).getElements());
+    stage.show();
+  }
 	
 	public Window getPrimaryStage() {
 		return this.primaryStage;
@@ -119,7 +134,6 @@ public class MainDriver extends Application{
 	}
 
 	public TunerController getTunerController() {
-		
 		return this.tunerController;
 	}
 

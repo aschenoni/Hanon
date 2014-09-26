@@ -1,17 +1,18 @@
 package hanon.app.view;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import hanon.app.MainDriver;
 import hanon.app.model.analyst.tuner.Tuner;
 import hanon.app.model.analyst.tuner.TunerInfo;
 import hanon.app.model.analyst.tuner.TunerObserver;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class TunerController {
+
+  private Tuner tuner = new Tuner(200);
 
 	@FXML
 	TunerInfo tunerVal;
@@ -32,8 +33,6 @@ public class TunerController {
 	}
 
 	public void handleTuner() throws InterruptedException {
-		Tuner tuner = new Tuner(200);
-		
     Updater u = new Updater();
 		tuner.register(u);
 
@@ -45,7 +44,6 @@ public class TunerController {
 
 	public void setMainDriver(MainDriver mainDriver) {
 		this.mainDriver = mainDriver;
-		
 	}
 
   class Updater extends Task implements TunerObserver {
