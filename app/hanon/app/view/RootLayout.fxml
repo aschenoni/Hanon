@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.input.*?>
@@ -30,17 +31,17 @@
                   <KeyCodeCombination alt="UP" code="DIGIT1" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                </accelerator>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="Tools">
               <items>
                 <MenuItem mnemonicParsing="false" text="Tuner" />
                   <MenuItem mnemonicParsing="false" text="Rhythm" />
               </items>
             </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
@@ -49,4 +50,11 @@
         </menus>
       </MenuBar>
    </top>
+   <center>
+      <ImageView fitHeight="350.0" fitWidth="463.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../../../../res/images/hanonSplashv1.0.png" />
+         </image>
+      </ImageView>
+   </center>
 </BorderPane>

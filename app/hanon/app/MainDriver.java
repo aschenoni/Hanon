@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -62,13 +63,27 @@ public class MainDriver extends Application{
 			primaryStage.show();
 			
 			// Draw music view in the center
-			rootLayout.setCenter(musicView);
+			//rootLayout.setCenter(musicView);
+			
+
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * called when the tuner window is requested
+	 */
+	public void initTuner() {
+		Stage tunerStage = new Stage();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainDriver.class.getResource("view/tuner.fxml"));
+		tunerStage.setTitle("Tuner");
+		tunerStage.initModality(Modality.WINDOW_MODAL);
+		tunerStage.initOwner(primaryStage);
+	}
+	
 	public Window getPrimaryStage() {
 		return this.primaryStage;
 	}
@@ -90,6 +105,7 @@ public class MainDriver extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 
 
 }

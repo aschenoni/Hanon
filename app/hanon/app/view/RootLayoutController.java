@@ -42,6 +42,7 @@ public class RootLayoutController {
 	
 	@FXML
 	private void handleSave(){
+		//TODO: Once the getPath and setPath methods are instantiated for the default;
 		handleSaveAs();
 	}
 	
@@ -67,6 +68,11 @@ public class RootLayoutController {
 			}
 			
 		}
+	}
+	
+	@FXML
+	private void handleTuner(){
+		mainDriver.initTuner();
 	}
 	
 	@FXML
