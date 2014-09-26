@@ -33,8 +33,7 @@ public class TunerController {
 
 	public void handleTuner() throws InterruptedException {
 		Tuner tuner = new Tuner(200);
-
-    System.out.println("Here");
+		
     Updater u = new Updater();
 		tuner.register(u);
 

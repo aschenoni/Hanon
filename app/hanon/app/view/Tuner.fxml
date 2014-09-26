@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="270.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.view.TunerController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Listening...">
@@ -14,7 +13,7 @@
             <Font size="23.0" />
          </font>
       </Label>
-      <Label layoutX="99.0" layoutY="73.0" text="Note">
+      <Label layoutX="46.0" layoutY="73.0" text="Note">
          <font>
             <Font size="20.0" />
          </font>
@@ -24,12 +23,12 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="noteName" layoutX="106.0" layoutY="117.0" prefHeight="36.0" prefWidth="35.0">
+      <Label fx:id="noteName" layoutX="42.0" layoutY="117.0" prefHeight="36.0" prefWidth="107.0">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Label fx:id="octave" layoutX="184.0" layoutY="117.0" prefHeight="36.0" prefWidth="44.0">
+      <Label fx:id="octave" layoutX="184.0" layoutY="117.0" prefHeight="36.0" prefWidth="56.0">
          <font>
             <Font size="25.0" />
          </font>
