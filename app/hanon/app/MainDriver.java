@@ -87,14 +87,13 @@ public class MainDriver extends Application{
 		loader.setLocation(MainDriver.class.getResource("view/Tuner.fxml"));
 		AnchorPane page = (AnchorPane) loader.load();
 		TunerController tunerController = loader.getController();
-		//tunerController.setMainDriver();
+		tunerController.setMainDriver(this);
 		this.tunerController=tunerController;
 		tunerStage.setTitle("Tuner");
-		tunerStage.initModality(Modality.WINDOW_MODAL);
-		tunerStage.initOwner(primaryStage);
 		Scene scene = new Scene(page);
 		tunerStage.setScene(scene);
 		tunerController.handleTuner();
+		tunerStage.show();
 	}
 	
 	public Window getPrimaryStage() {

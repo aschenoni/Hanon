@@ -1,6 +1,8 @@
 package hanon.app.view;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import hanon.app.MainDriver;
@@ -13,13 +15,13 @@ public class TunerController implements TunerObserver {
 	@FXML
 	TunerInfo tunerVal;
 	@FXML
-	String noteName;
+	Label noteName;
 	@FXML
-	String octave;
+	Label octave;
 	@FXML
-	String frequency;
+	Label frequency;
 	@FXML
-	String difference;
+	Label difference;
 	
 	Stage primaryStage;
 	MainDriver mainDriver;
@@ -27,10 +29,10 @@ public class TunerController implements TunerObserver {
 	@Override
 	public void inform(TunerInfo info) {
 		tunerVal = info;
-		noteName = tunerVal.getName().toString();
-		octave = new Integer(tunerVal.getOctave()).toString();
-		frequency = new Float(tunerVal.getFrequency()).toString();
-		difference = new Float(tunerVal.getDifference()).toString();
+		noteName.setText(tunerVal.getName().toString());
+		octave.setText(new Integer(tunerVal.getOctave()).toString());
+		//frequency.setText(new Float(tunerVal.getFrequency()).toString());
+		//difference.setText(new Float(tunerVal.getDifference()).toString());
 	}
 
 	public Stage getPrimaryStage(){
@@ -41,7 +43,7 @@ public class TunerController implements TunerObserver {
 		Tuner tuner = new Tuner(500);
 		tuner.register(this);
 		new Thread(tuner).start();
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 		tuner.stop();
 	}
 
