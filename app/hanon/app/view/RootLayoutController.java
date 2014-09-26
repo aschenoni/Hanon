@@ -7,6 +7,7 @@ import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -71,7 +72,7 @@ public class RootLayoutController {
 	}
 	
 	@FXML
-	private void handleTuner(){
+	private void handleTuner() throws InterruptedException, IOException{
 		mainDriver.initTuner();
 	}
 	

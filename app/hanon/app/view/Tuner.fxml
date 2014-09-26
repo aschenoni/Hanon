@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<AnchorPane prefHeight="270.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.view.TunerController">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="Listening...">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="99.0" layoutY="73.0" text="Note">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="182.0" layoutY="73.0" text="Octave">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="noteName" layoutX="106.0" layoutY="117.0" prefHeight="36.0" prefWidth="35.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="octave" layoutX="184.0" layoutY="117.0" prefHeight="36.0" prefWidth="44.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Button layoutX="328.0" layoutY="216.0" mnemonicParsing="false" text="Done" />
+   </children>
+</AnchorPane>

@@ -1,9 +1,12 @@
 package hanon.app;
 
+import hanon.app.model.analyst.tuner.Tuner;
+import hanon.app.model.analyst.tuner.TunerObserver;
 import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
 import hanon.app.view.RootLayoutController;
+import hanon.app.view.TunerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +24,7 @@ public class MainDriver extends Application{
 
 	private Stage primaryStage;
 	
+	private TunerController tunerController;
 	private BorderPane rootLayout; //Main application node from which everything will be a child
 	private AnchorPane musicView;
 	
@@ -74,14 +78,23 @@ public class MainDriver extends Application{
 
 	/**
 	 * called when the tuner window is requested
+	 * @throws InterruptedException 
+	 * @throws IOException 
 	 */
-	public void initTuner() {
+	public void initTuner() throws InterruptedException, IOException {
 		Stage tunerStage = new Stage();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainDriver.class.getResource("view/tuner.fxml"));
+		loader.setLocation(MainDriver.class.getResource("view/Tuner.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+		TunerController tunerController = loader.getController();
+		//tunerController.setMainDriver();
+		this.tunerController=tunerController;
 		tunerStage.setTitle("Tuner");
 		tunerStage.initModality(Modality.WINDOW_MODAL);
 		tunerStage.initOwner(primaryStage);
+		Scene scene = new Scene(page);
+		tunerStage.setScene(scene);
+		tunerController.handleTuner();
 	}
 	
 	public Window getPrimaryStage() {
@@ -104,6 +117,11 @@ public class MainDriver extends Application{
 	 */
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public TunerObserver getTunerController() {
+		
+		return this.tunerController;
 	}
 
 
