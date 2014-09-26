@@ -2,10 +2,9 @@ package player;
 
 import hanon.app.model.music.Clef;
 import hanon.app.model.music.StaffElementSet;
+import hanon.app.view.TwinkleTwinkleLittleStar;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
-import static hanon.app.TwinkleTwinkleLittleStar.*;
 
 public class TwinkleTest extends Application {
 
@@ -15,7 +14,7 @@ public class TwinkleTest extends Application {
 
   @Override
   public void start(Stage stage) {
-    new TestMusicSheet(stage, new StaffElementSet(Clef.TREBLE, elements)).draw();
+    new TestMusicSheet(stage, new StaffElementSet(Clef.TREBLE, TwinkleTwinkleLittleStar.elements)).draw();
   }
 }
 
