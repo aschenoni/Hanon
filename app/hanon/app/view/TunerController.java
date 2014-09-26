@@ -1,6 +1,7 @@
 package hanon.app.view;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -10,7 +11,7 @@ import hanon.app.model.analyst.tuner.Tuner;
 import hanon.app.model.analyst.tuner.TunerInfo;
 import hanon.app.model.analyst.tuner.TunerObserver;
 
-public class TunerController implements TunerObserver {
+public class TunerController {
 
 	@FXML
 	TunerInfo tunerVal;
@@ -25,30 +26,51 @@ public class TunerController implements TunerObserver {
 	
 	Stage primaryStage;
 	MainDriver mainDriver;
-	
-	@Override
-	public void inform(TunerInfo info) {
-		tunerVal = info;
-		noteName.setText(tunerVal.getName().toString());
-		octave.setText(new Integer(tunerVal.getOctave()).toString());
-		//frequency.setText(new Float(tunerVal.getFrequency()).toString());
-		//difference.setText(new Float(tunerVal.getDifference()).toString());
-	}
 
 	public Stage getPrimaryStage(){
 		return this.primaryStage;
 	}
 
 	public void handleTuner() throws InterruptedException {
-		Tuner tuner = new Tuner(500);
-		tuner.register(this);
-		new Thread(tuner).start();
-		Thread.sleep(1000);
-		tuner.stop();
+		Tuner tuner = new Tuner(200);
+
+    System.out.println("Here");
+    Updater u = new Updater();
+		tuner.register(u);
+
+    Thread th = new Thread(u);
+    th.setDaemon(true);
+    th.start();
+    new Thread(tuner).start();
 	}
 
 	public void setMainDriver(MainDriver mainDriver) {
 		this.mainDriver = mainDriver;
 		
 	}
+
+  class Updater extends Task implements TunerObserver {
+
+    @Override
+    public void run() {
+
+    }
+
+    @Override
+    public void inform(TunerInfo info) {
+      tunerVal = info;
+      Platform.runLater(new Runnable() {
+        @Override
+        public void run() {
+          noteName.setText(tunerVal.getName().toString());
+          octave.setText(new Integer(tunerVal.getOctave()).toString());
+        }
+      });
+    }
+
+    @Override
+    protected Object call() throws Exception {
+      return null;
+    }
+  }
 }

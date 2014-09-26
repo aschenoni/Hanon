@@ -118,7 +118,7 @@ public class MainDriver extends Application{
 		launch(args);
 	}
 
-	public TunerObserver getTunerController() {
+	public TunerController getTunerController() {
 		
 		return this.tunerController;
 	}
