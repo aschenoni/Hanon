@@ -34,7 +34,7 @@
             <Menu mnemonicParsing="false" text="Tools">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleTuner" text="Tuner" />
-                  <MenuItem mnemonicParsing="false" text="Rhythm" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleClicker" text="Rhythm" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Edit">

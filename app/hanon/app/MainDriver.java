@@ -94,22 +94,6 @@ public class MainDriver extends Application{
 		tunerController.handleTuner();
 		tunerStage.show();
 	}
-
-  public void initRhythm() throws IOException {
-    Stage stage = new Stage();
-    FXMLLoader loader = new FXMLLoader();
-    loader.setLocation(MainDriver.class.getResource("view/Rhythm.fxml"));
-    AnchorPane page = (AnchorPane) loader.load();
-    RhythmController controller = loader.getController();
-    controller.setMainDriver(this);
-    this.rhythmController = controller;
-    stage.setTitle("Rhythm Machine");
-    Scene scene = new Scene(page);
-    stage.setScene(scene);
-    MusicSheet sheet = (MusicSheet)rootLayout.getCenter();
-    controller.handleRhythm(sheet.getSets().get(0).getElements());
-    stage.show();
-  }
 	
 	public Window getPrimaryStage() {
 		return this.primaryStage;

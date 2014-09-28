@@ -2,13 +2,17 @@ package hanon.app.view;
 
 
 import hanon.app.MainDriver;
+import hanon.app.model.analyst.rhythm.Clicker;
+import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.composer.StaffElementWriter;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
+import hanon.app.view.TunerController.Updater;
 
 import java.io.File;
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.FileChooser;
@@ -71,9 +75,25 @@ public class RootLayoutController {
 		}
 	}
 	
-	@FXML
-	private void handleTuner() throws InterruptedException, IOException{
+	@FXML private void handleTuner() throws InterruptedException, IOException{
 		mainDriver.initTuner();
+	}
+	
+	@FXML
+	private void handleClicker(){
+		Node currentSheet = mainDriver.getRootLayout().getCenter();
+		if(currentSheet instanceof MusicSheet){
+			ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
+			StaffElementSet set = sets.get(0);
+			RhythmMachine machine = RhythmMachine.fromElements(set.getElements(), 140);
+			Clicker c = new Clicker();
+			c.run();
+			machine.register(c);
+		    Thread th = new Thread(machine);
+		    th.setDaemon(true);
+		    th.start();
+		    new Thread(machine).start();
+		}
 	}
 	
 	@FXML
