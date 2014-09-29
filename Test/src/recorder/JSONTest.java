@@ -3,7 +3,7 @@ package recorder;
 import hanon.app.model.music.Clef;
 import hanon.app.model.music.StaffElement;
 import hanon.app.model.music.StaffElementSet;
-import hanon.app.view.TwinkleTwinkleLittleStar;
+import hanon.app.musicpiece.TwinkleTwinkleLittleStar;
 
 import java.util.List;
 

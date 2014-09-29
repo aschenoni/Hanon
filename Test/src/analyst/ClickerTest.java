@@ -3,7 +3,7 @@ package analyst;
 import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.music.NoteLength;
-import hanon.app.view.TwinkleTwinkleLittleStar;
+import hanon.app.musicpiece.TwinkleTwinkleLittleStar;
 
 import java.util.ArrayList;
 import java.util.List;

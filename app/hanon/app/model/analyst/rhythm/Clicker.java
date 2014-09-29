@@ -1,18 +1,21 @@
 package hanon.app.model.analyst.rhythm;
 
+import hanon.app.model.analyst.Observer;
+import hanon.app.model.music.NoteLength;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
-public class Clicker implements RhythmObserver, Runnable {
+public class Clicker implements Observer<NoteLength>, Runnable {
 
-  public static final File AUDIO = new File("res\\audio\\click.wav");
+  public static final File AUDIO = new File("./res/audio/click.WAV");
 
   private Clip clip;
 
   @Override
-  public void inform() {
+  public void inform(NoteLength length) {
     clip.setFramePosition(0);
     clip.start();
   }

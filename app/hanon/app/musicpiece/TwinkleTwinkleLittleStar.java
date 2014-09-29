@@ -1,4 +1,4 @@
-package hanon.app.view;
+package hanon.app.musicpiece;
 
 import hanon.app.model.music.*;
 

@@ -8,19 +8,12 @@ import hanon.app.model.recorder.Microphone;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tuner extends StoppableTool {
-
-  private final List<TunerObserver> observers = new ArrayList<TunerObserver>();
+public class Tuner extends StoppableTool<TunerInfo> {
   private final int timeBetweenReadings;
 
   public Tuner(int timeBetweenReadings) {
     this.timeBetweenReadings = timeBetweenReadings;
   }
-
-  public void register(TunerObserver observer) {
-    observers.add(observer);
-  }
-
   @Override
   protected void runLoop() {
     MusicNote note = getMusicNote();
@@ -42,12 +35,6 @@ public class Tuner extends StoppableTool {
     mic.startRecord();
     safeSleep(timeBetweenReadings);
     mic.stopRecording();
-  }
-
-  private void informAll(TunerInfo info) {
-    for (TunerObserver observer:observers) {
-      observer.inform(info);
-    }
   }
 
   private void safeSleep(int millis) {

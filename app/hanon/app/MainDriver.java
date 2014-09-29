@@ -3,9 +3,9 @@ package hanon.app;
 import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
-import hanon.app.view.RhythmController;
-import hanon.app.view.RootLayoutController;
-import hanon.app.view.TunerController;
+import hanon.app.controller.RhythmController;
+import hanon.app.controller.TunerController;
+import hanon.app.controller.RootLayoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,7 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class MainDriver extends Application{
+public class MainDriver extends Application {
 
 	private Stage primaryStage;
 	

@@ -1,9 +1,9 @@
-package hanon.app.view;
+package hanon.app.controller;
 
 import hanon.app.MainDriver;
+import hanon.app.model.analyst.Observer;
 import hanon.app.model.analyst.tuner.Tuner;
 import hanon.app.model.analyst.tuner.TunerInfo;
-import hanon.app.model.analyst.tuner.TunerObserver;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -46,7 +46,7 @@ public class TunerController {
 		this.mainDriver = mainDriver;
 	}
 
-  class Updater extends Task implements TunerObserver {
+  class Updater extends Task implements Observer<TunerInfo> {
 
     @Override
     public void run() {

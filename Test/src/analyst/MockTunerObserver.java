@@ -1,10 +1,10 @@
 package analyst;
 
+import hanon.app.model.analyst.Observer;
 import hanon.app.model.analyst.tuner.Tuner;
 import hanon.app.model.analyst.tuner.TunerInfo;
-import hanon.app.model.analyst.tuner.TunerObserver;
 
-public class MockTunerObserver implements TunerObserver{
+public class MockTunerObserver implements Observer<TunerInfo> {
 
   @Override
   public void inform(TunerInfo info) {

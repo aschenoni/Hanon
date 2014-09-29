@@ -6,8 +6,7 @@ import hanon.app.model.music.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RhythmMachine extends StoppableTool {
-  private final List<RhythmObserver> observers = new ArrayList<RhythmObserver>();
+public class RhythmMachine extends StoppableTool<NoteLength> {
   private final List<NoteLength> rhythm;
   private final NoteLength lengthWithBeat;
   private final int bpm;
@@ -30,15 +29,11 @@ public class RhythmMachine extends StoppableTool {
     this(rhythm, bpm, NoteLength.QUARTER);
   }
 
-  public void register(RhythmObserver o) {
-    observers.add(o);
-  }
-
   @Override
   protected void runLoop() {
     for (NoteLength n : rhythm) {
       waitForLength(n);
-      informAll();
+      informAll(n);
     }
   }
 
@@ -56,10 +51,5 @@ public class RhythmMachine extends StoppableTool {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
-  }
-
-  private void informAll() {
-    for (RhythmObserver o : observers)
-      o.inform();
   }
 }

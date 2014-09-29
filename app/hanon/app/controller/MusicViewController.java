@@ -1,4 +1,4 @@
-package hanon.app.view;
+package hanon.app.controller;
 
 public class MusicViewController {
 

@@ -1,7 +1,12 @@
 package hanon.app.model.analyst;
 
-public abstract class StoppableTool implements Runnable {
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class StoppableTool<T> implements Runnable {
   private volatile boolean isRunning = false;
+
+  private final List<Observer<T>> observers = new ArrayList<Observer<T>>();
 
   public void stop() {
     isRunning = false;
@@ -12,6 +17,16 @@ public abstract class StoppableTool implements Runnable {
     isRunning = true;
     while (isRunning) {
       runLoop();
+    }
+  }
+
+  public void register(Observer<T> observer) {
+    observers.add(observer);
+  }
+
+  protected void informAll(T info) {
+    for (Observer<T> observer : observers) {
+      observer.inform(info);
     }
   }
 

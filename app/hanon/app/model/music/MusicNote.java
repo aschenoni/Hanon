@@ -5,14 +5,27 @@ import be.tarsos.dsp.pitch.Yin;
 import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONObject;
 
+import java.util.List;
+
 public class MusicNote implements StaffElement {
+
   public static MusicNote fromSoundArr(float[] floatArr) {
     Yin pitch = new Yin(8000, 1024);
     PitchDetectionResult pdr = pitch.getPitch(floatArr);
     return new MusicNote(new NoteValue(pdr.getPitch()), null);
   }
 
+  static MusicNote noteFromJSON(JSONObject jsonObj) {
+    NoteLength length = NoteLength.valueOf((String) jsonObj.get("NoteLength"));
+    String note = (String) jsonObj.get("NoteValue");
+    NoteValue.NoteName noteName = NoteValue.NoteName.valueOf(note.substring(0, 1));
+    Integer octave = new Integer(note.substring(1));
+    NoteValue value = NoteValue.fromNameAndOctave(noteName, octave);
+    return new MusicNote(value, length);
+  }
+
   private final NoteValue value;
+
   private final NoteLength length;
 
   public MusicNote(NoteValue value, NoteLength length) {

@@ -1,4 +1,4 @@
-package hanon.app.view;
+package hanon.app.controller;
 
 import hanon.app.MainDriver;
 import hanon.app.model.analyst.rhythm.Clicker;

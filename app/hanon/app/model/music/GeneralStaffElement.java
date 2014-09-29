@@ -3,6 +3,8 @@ package hanon.app.model.music;
 import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONObject;
 
+import java.util.List;
+
 import static hanon.app.model.music.StaffElementType.*;
 
 public class GeneralStaffElement implements StaffElement {
@@ -22,6 +24,15 @@ public class GeneralStaffElement implements StaffElement {
 
   private GeneralStaffElement(StaffElementType type) {
     this.type = type;
+  }
+
+  static GeneralStaffElement fromJSON(JSONObject jsonObj) {
+    if(jsonObj.containsValue("MEASURE_LINE")){
+      return measureLine();
+    }
+    else {
+      throw new RuntimeException("No such GeneralStaffElement");
+    }
   }
 
   @Override
