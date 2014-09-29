@@ -1,5 +1,6 @@
 package hanon.app.model.player.staff;
 
+import hanon.app.model.music.Clef;
 import hanon.app.model.music.GeneralStaffElement;
 import hanon.app.model.music.StaffElement;
 
@@ -28,8 +29,12 @@ public class StaffSet {
   public List<Staff> getStaffs() {
     List<Staff> staffs = new ArrayList<Staff>();
     List<StaffElement> temp = elements;
+    boolean first = true;
     while (!temp.isEmpty()) {
-      temp.add(0, GeneralStaffElement.clef());
+      if (!first) {
+        temp.add(0, info.getClef());
+      }
+      first = false;
       staffs.add(new Staff(info, temp));
       temp = new StaffSpacer(info.getWidth(), temp).getUnspacedElements();
       info = info.movedDown(dy);

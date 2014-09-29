@@ -22,6 +22,7 @@ public class TrebleAndBassTest extends Application {
   public void start(Stage stage) {
     List<StaffElement> bassElements = new ArrayList<StaffElement>();
 
+    bassElements.add(Clef.BASS);
     bassElements.add(new TimeSignature(2, 4));
     bassElements.add(new MusicNote(fromNameAndOctave(C, 3), QUARTER));
     bassElements.add(new MusicNote(fromNameAndOctave(D, 3), QUARTER));
@@ -57,6 +58,7 @@ public class TrebleAndBassTest extends Application {
 
     List<StaffElement> trebleElements = new ArrayList<StaffElement>();
 
+    trebleElements.add(Clef.TREBLE);
     trebleElements.add(new TimeSignature(2, 4));
     trebleElements.add(new MusicNote(fromNameAndOctave(C, 4), QUARTER));
     trebleElements.add(new MusicNote(fromNameAndOctave(D, 4), QUARTER));
@@ -91,8 +93,8 @@ public class TrebleAndBassTest extends Application {
 
     new TestMusicSheet(
             stage,
-            new StaffElementSet(Clef.TREBLE, trebleElements),
-            new StaffElementSet(Clef.BASS, bassElements)).draw();
+            new StaffElementSet(trebleElements),
+            new StaffElementSet(bassElements)).draw();
   }
 }
 

@@ -8,10 +8,10 @@ import javafx.scene.image.Image;
 import java.io.File;
 
 public class TimeSignatureImage implements StaffPlaceable {
-  private static final File TIME_2 = new File("res\\images\\Time2.png");
-  private static final File TIME_3 = new File("res\\images\\Time3.png");
-  private static final File TIME_4 = new File("res\\images\\Time4.png");
-  private static final File TIME_8 = new File("res\\images\\Time8.png");
+  private static final File TIME_2 = new File("res/images/time2.png");
+  private static final File TIME_3 = new File("res/images/time3.png");
+  private static final File TIME_4 = new File("res/images/time4.png");
+  private static final File TIME_8 = new File("res/images/time8.png");
 
   private final Image beatsPerMeasureImage;
   private final Image whichGetsBeatImage;

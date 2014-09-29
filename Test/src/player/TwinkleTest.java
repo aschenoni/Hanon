@@ -14,7 +14,7 @@ public class TwinkleTest extends Application {
 
   @Override
   public void start(Stage stage) {
-    new TestMusicSheet(stage, new StaffElementSet(Clef.TREBLE, TwinkleTwinkleLittleStar.elements)).draw();
+    new TestMusicSheet(stage, new StaffElementSet(TwinkleTwinkleLittleStar.elements)).draw();
   }
 }
 

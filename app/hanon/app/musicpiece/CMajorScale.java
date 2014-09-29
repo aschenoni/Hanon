@@ -10,6 +10,8 @@ import static hanon.app.model.music.NoteValue.fromNameAndOctave;
 public class CMajorScale {
   public static final List<StaffElement> elements = new ArrayList<StaffElement>();
   static {
+    elements.add(Clef.TREBLE);
+
     elements.add(new TimeSignature(4, 4));
     elements.add(new MusicNote(fromNameAndOctave(NoteValue.NoteName.C, 4), NoteLength.QUARTER));
     elements.add(new MusicNote(fromNameAndOctave(NoteValue.NoteName.D, 4), NoteLength.QUARTER));

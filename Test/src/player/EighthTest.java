@@ -14,6 +14,7 @@ public class EighthTest extends Application {
 
   private static final List<StaffElement> elements = new ArrayList<StaffElement>();
   static {
+    elements.add(Clef.TREBLE);
     elements.add(new MusicNote(fromNameAndOctave(NoteValue.NoteName.A, 4), NoteLength.EIGHTH));
     elements.add(new MusicNote(fromNameAndOctave(NoteValue.NoteName.B, 4), NoteLength.EIGHTH));
     elements.add(measureLine());
@@ -27,6 +28,6 @@ public class EighthTest extends Application {
 
   @Override
   public void start(Stage stage) {
-    new TestMusicSheet(stage, new StaffElementSet(Clef.TREBLE, elements)).draw();
+    new TestMusicSheet(stage, new StaffElementSet(elements)).draw();
   }
 }

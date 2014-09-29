@@ -16,7 +16,7 @@ public class JSONTest {
 			System.out.println(element.toJSON().toString());
 		}
 		
-		StaffElementSet ste = new StaffElementSet(Clef.TREBLE, ttls);
+		StaffElementSet ste = new StaffElementSet(ttls);
 		System.out.println(ste.toJSON());
 	}
 	

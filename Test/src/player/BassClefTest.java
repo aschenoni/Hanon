@@ -26,6 +26,7 @@ public class BassClefTest extends Application {
   public void start(Stage stage) {
     List<StaffElement> elements = new ArrayList<StaffElement>();
 
+    elements.add(Clef.BASS);
     elements.add(new MusicNote(fromNameAndOctave(G, 2), QUARTER));
     elements.add(new MusicNote(fromNameAndOctave(A, 2), QUARTER));
     elements.add(new MusicNote(fromNameAndOctave(B, 2), QUARTER));
@@ -36,7 +37,7 @@ public class BassClefTest extends Application {
     elements.add(new MusicNote(fromNameAndOctave(G, 3), QUARTER));
     elements.add(measureLine());
 
-    new TestMusicSheet(stage, new StaffElementSet(Clef.BASS, elements)).draw();
+    new TestMusicSheet(stage, new StaffElementSet(elements)).draw();
   }
 }
 

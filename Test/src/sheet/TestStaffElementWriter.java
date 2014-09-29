@@ -15,7 +15,7 @@ public class TestStaffElementWriter {
 	{
 		File file = new File("musicLibrary/cmajorscale.hanon");
 		List<StaffElement> newList = CMajorScale.elements;
-		StaffElementSet ste = new StaffElementSet(Clef.TREBLE,newList);
+		StaffElementSet ste = new StaffElementSet(newList);
 		
 		StaffElementWriter.saveToFile(file, ste);
 		

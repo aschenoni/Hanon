@@ -15,7 +15,7 @@ public class MusicNote implements StaffElement {
     return new MusicNote(new NoteValue(pdr.getPitch()), null);
   }
 
-  static MusicNote noteFromJSON(JSONObject jsonObj) {
+  static MusicNote fromJSON(JSONObject jsonObj) {
     NoteLength length = NoteLength.valueOf((String) jsonObj.get("NoteLength"));
     String note = (String) jsonObj.get("NoteValue");
     NoteValue.NoteName noteName = NoteValue.NoteName.valueOf(note.substring(0, 1));

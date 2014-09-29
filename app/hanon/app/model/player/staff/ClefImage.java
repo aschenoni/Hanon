@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 import java.io.File;
 
 class ClefImage implements StaffPlaceable {
-  private static final File TREBLE_CLEF_FILE = new File("res\\images\\TrebleClef.png");
-  private static final File BASS_CLEF_FILE = new File("res\\images\\BassClef.png");
+  private static final File TREBLE_CLEF_FILE = new File("res/images/TrebleClef.png");
+  private static final File BASS_CLEF_FILE = new File("res/images/BassClef.png");
 
   private static final Image TREBLE_IMAGE = new Image(TREBLE_CLEF_FILE.toURI().toString(), 50, 100, true, true);
   private static final Image BASS_IMAGE =   new Image(BASS_CLEF_FILE.toURI().toString(), 50, 35, true, true);

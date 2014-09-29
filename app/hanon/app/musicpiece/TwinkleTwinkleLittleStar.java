@@ -10,6 +10,8 @@ import static hanon.app.model.music.NoteValue.*;
 public class TwinkleTwinkleLittleStar {
   public static final List<StaffElement> elements = new ArrayList<StaffElement>();
   static {
+    elements.add(Clef.TREBLE);
+
     elements.add(new TimeSignature(2, 4));
     elements.add(new MusicNote(fromNameAndOctave(NoteName.C, 4), NoteLength.QUARTER));
     elements.add(new MusicNote(fromNameAndOctave(NoteName.C, 4), NoteLength.QUARTER));

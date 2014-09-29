@@ -46,4 +46,12 @@ public class TimeSignature implements StaffElement {
     return JSONUtil.stringsToJSON(
             "TimeSignature", beatsPerMeasure + ":" + whichGetsBeat);
   }
+
+  public static TimeSignature fromJSON(JSONObject jsonObj) {
+    String s = jsonObj.get("TimeSignature").toString();
+    String[] info = s.split(":");
+    int beatsPerMeasure = Integer.parseInt(info[0]);
+    int whichGetsBeat = Integer.parseInt(info[1]);
+    return new TimeSignature(beatsPerMeasure, whichGetsBeat);
+  }
 }

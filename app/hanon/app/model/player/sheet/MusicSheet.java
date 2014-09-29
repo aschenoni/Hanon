@@ -23,9 +23,9 @@ public class MusicSheet extends AnchorPane {
   }
   
   public MusicSheet(StaffElementSet set){
-	List<StaffElementSet> list = new ArrayList<StaffElementSet>();
-	list.add(set);
-	this.sets = FXCollections.observableArrayList(list);
+    List<StaffElementSet> list = new ArrayList<StaffElementSet>();
+    list.add(set);
+    this.sets = FXCollections.observableArrayList(list);
   }
 	/**
 	 * Draws the music sheet, rendering the musical representation of each note
@@ -43,9 +43,6 @@ public class MusicSheet extends AnchorPane {
 		this.getChildren().add(group);
 
 	  Brush brush = new Brush(group);
-
-
-
 
     int i = 1;
     for (StaffElementSet s : sets) {
