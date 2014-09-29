@@ -1,6 +1,5 @@
 package hanon.app.model.music;
 
-import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -8,27 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StaffElementSet {
-  private Clef clef;
-  private final List<StaffElement> elements;
-
   public static StaffElementSet fromJSON(JSONArray array) {
     List<StaffElement> staffElements = new ArrayList<StaffElement>();
-    Clef clef = null;
-    for(Object obj: array){
-      JSONObject jsonObj = (JSONObject) obj;
-      if(jsonObj.containsKey("Clef"))
-        clef = Clef.valueOf((String) jsonObj.get("Clef"));
-      else if(jsonObj.containsKey("General Element"))
-        staffElements.add(GeneralStaffElement.fromJSON(jsonObj));
-      else if (jsonObj.containsKey("NoteLength"))
-        staffElements.add(MusicNote.noteFromJSON(jsonObj));
-    }
-    StaffElementSet set = new StaffElementSet(clef, staffElements);
-    return set;
+    for(Object obj: array)
+      staffElements.add(elementFromJSON((JSONObject) obj));
+    return new StaffElementSet(staffElements);
   }
 
-  public StaffElementSet(Clef clef, List<StaffElement> elements) {
-    this.clef = clef;
+  public static StaffElement elementFromJSON(JSONObject jsonObj) {
+    if(jsonObj.containsKey("Clef"))
+      return Clef.valueOf((String) jsonObj.get("Clef"));
+    else if(jsonObj.containsKey("General Element"))
+      return GeneralStaffElement.fromJSON(jsonObj);
+    else if (jsonObj.containsKey("NoteLength"))
+      return MusicNote.fromJSON(jsonObj);
+    else if (jsonObj.containsKey("TimeSignature"))
+      return TimeSignature.fromJSON(jsonObj);
+    else
+      throw new RuntimeException("No such StaffElement: " + jsonObj.toString());
+  }
+
+
+  private final List<StaffElement> elements;
+
+  public StaffElementSet(List<StaffElement> elements) {
     this.elements = elements;
   }
 
@@ -37,16 +39,16 @@ public class StaffElementSet {
   }
 
   public Clef getClef() {
-    return clef;  
+    for (StaffElement e : elements)
+      if (e.getType() == StaffElementType.CLEF)
+        return (Clef) e;
+    throw new RuntimeException("StaffSet has no clef");
   }
   
   public JSONArray toJSON(){
 	  JSONArray array = new JSONArray();
-
-    array.add(JSONUtil.stringsToJSON("Clef", clef.toString()));
-	  for(StaffElement element: elements){
+	  for(StaffElement element: elements)
 		  array.add(element.toJSON());
-	  }
 	  return array;
   }
 }
