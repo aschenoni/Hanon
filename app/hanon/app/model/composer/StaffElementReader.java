@@ -21,9 +21,7 @@ public class StaffElementReader{
     Object fileIn = null;
     try {
       fileIn = parser.parse(new FileReader(file));
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (ParseException e) {
+    } catch (IOException | ParseException e) {
       e.printStackTrace();
     }
     return (JSONArray) fileIn;

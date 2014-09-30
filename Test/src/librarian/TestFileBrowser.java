@@ -2,7 +2,7 @@ package librarian;
 
 import hanon.app.model.librarian.FileRepository;
 
-public class TestFileBrowser {
+class TestFileBrowser {
 
   /**
    * Make sure that the server is running before performing this test.

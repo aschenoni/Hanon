@@ -7,7 +7,7 @@ import java.io.File;
 
 class DownNoteFlag extends NoteFlag {
 
-  public static final int WIDTH = (int) (3/4.0*NoteBody.WIDTH);
+  private static final int WIDTH = (int) (3/4.0*NoteBody.WIDTH);
 
   private static final File FILE = new File("res\\images\\DownNoteFlag.png");
   private static final Image IMAGE = new Image(FILE.toURI().toString(), WIDTH, 100, true, true);

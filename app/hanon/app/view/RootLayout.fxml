@@ -1,60 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import javafx.scene.input.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
-
 <BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.RootLayoutController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleOpen" text="Open">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
-                     </accelerator>
-                  </MenuItem>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
                <accelerator>
-                  <KeyCodeCombination alt="UP" code="DIGIT1" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                   <KeyCodeCombination alt="UP" code="DIGIT1" control="UP" meta="UP" shift="DOWN" shortcut="UP"/>
                </accelerator>
-          </Menu>
-            <Menu mnemonicParsing="false" text="Tools">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#handleTuner" text="Tuner" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleClicker" text="Rhythm" />
-              </items>
-            </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+               <MenuItem mnemonicParsing="false" onAction="#handleOpen" text="Open">
+                   <accelerator>
+                       <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                   </accelerator>
+               </MenuItem>
+               <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save">
+                   <accelerator>
+                       <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP"/>
+                   </accelerator>
+               </MenuItem>
+               <MenuItem mnemonicParsing="false" text="Close"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Tools">
+               <items>
+                   <MenuItem mnemonicParsing="false" onAction="#handleTuner" text="Tuner"/>
+                   <MenuItem mnemonicParsing="false" onAction="#handleClicker" text="Rhythm"/>
+               </items>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                   <MenuItem mnemonicParsing="false" text="Delete"/>
+               </items>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <items>
+                   <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About"/>
+               </items>
+           </Menu>
+       </MenuBar>
    </top>
    <center>
-      <ImageView fitHeight="350.0" fitWidth="463.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../../../../res/images/hanonSplashv1.0.png" />
-         </image>
-      </ImageView>
+       <ImageView fitHeight="350.0" fitWidth="463.0" pickOnBounds="true" preserveRatio="true"
+                  BorderPane.alignment="CENTER">
+           <Image url="@../../../../res/images/hanonSplashv1.0.png"/>
+       </ImageView>
    </center>
 </BorderPane>

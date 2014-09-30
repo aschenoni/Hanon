@@ -23,7 +23,7 @@ public class MusicSheet extends AnchorPane {
   }
   
   public MusicSheet(StaffElementSet set){
-    List<StaffElementSet> list = new ArrayList<StaffElementSet>();
+    List<StaffElementSet> list = new ArrayList<>();
     list.add(set);
     this.sets = FXCollections.observableArrayList(list);
   }

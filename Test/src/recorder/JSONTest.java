@@ -1,13 +1,12 @@
 package recorder;
 
-import hanon.app.model.music.Clef;
 import hanon.app.model.music.StaffElement;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.musicpiece.TwinkleTwinkleLittleStar;
 
 import java.util.List;
 
-public class JSONTest {
+class JSONTest {
 
 	public static void main(String[] args) {
 		List<StaffElement> ttls = TwinkleTwinkleLittleStar.elements;

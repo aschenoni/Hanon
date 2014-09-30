@@ -62,7 +62,7 @@ public class DataRecording implements Recording {
     return floatArr;
   }
 
-  public float bytesToFloat(byte b0, byte b1){
+  float bytesToFloat(byte b0, byte b1){
     return (float) ((double)((b1 << 8)|(b0 & 0xFF))/32767.0);
   }
 }

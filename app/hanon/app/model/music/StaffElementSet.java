@@ -8,13 +8,13 @@ import java.util.List;
 
 public class StaffElementSet {
   public static StaffElementSet fromJSON(JSONArray array) {
-    List<StaffElement> staffElements = new ArrayList<StaffElement>();
+    List<StaffElement> staffElements = new ArrayList<>();
     for(Object obj: array)
       staffElements.add(elementFromJSON((JSONObject) obj));
     return new StaffElementSet(staffElements);
   }
 
-  public static StaffElement elementFromJSON(JSONObject jsonObj) {
+  private static StaffElement elementFromJSON(JSONObject jsonObj) {
     if(jsonObj.containsKey("Clef"))
       return Clef.valueOf((String) jsonObj.get("Clef"));
     else if(jsonObj.containsKey("General Element"))

@@ -14,7 +14,7 @@ import javafx.scene.shape.Rectangle;
 public class NoteStem implements NoteComponent {
   private static final int CENTER_POSITION = 4;
 
-  static final int WIDTH = 1;
+  private static final int WIDTH = 1;
   static final int HEIGHT = 35;
 
   private final boolean isUp;

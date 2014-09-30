@@ -1,7 +1,5 @@
 package hanon.app.model.player.staff;
 
-import hanon.app.model.music.Clef;
-import hanon.app.model.music.GeneralStaffElement;
 import hanon.app.model.music.StaffElement;
 
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import java.util.List;
 public class StaffSet {
   private StaffInfo info;
   private final int dy;
-  private List<StaffElement> elements;
+  private final List<StaffElement> elements;
 
   public StaffSet(StaffInfo info, int dy, List<StaffElement> elements) {
     this.info = info;
@@ -27,7 +25,7 @@ public class StaffSet {
    * staff.
    */
   public List<Staff> getStaffs() {
-    List<Staff> staffs = new ArrayList<Staff>();
+    List<Staff> staffs = new ArrayList<>();
     List<StaffElement> temp = elements;
     boolean first = true;
     while (!temp.isEmpty()) {

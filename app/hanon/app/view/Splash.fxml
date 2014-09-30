@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
-
-<AnchorPane prefHeight="264.0" prefWidth="334.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-   <children>
-      <ImageView fitHeight="308.0" fitWidth="369.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../res/images/hanonSplashv1.0.png" />
-         </image>
-      </ImageView>
-   </children>
+<AnchorPane prefHeight="264.0" prefWidth="334.0" xmlns="http://javafx.com/javafx/8">
+    <ImageView fitHeight="308.0" fitWidth="369.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+          <Image url="@../../../../res/images/hanonSplashv1.0.png"/>
+        </image>
+    </ImageView>
 </AnchorPane>

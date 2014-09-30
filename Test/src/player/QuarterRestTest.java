@@ -12,7 +12,7 @@ import static hanon.app.model.music.NoteValue.fromNameAndOctave;
 
 public class QuarterRestTest extends Application {
 
-  private static final List<StaffElement> elements = new ArrayList<StaffElement>();
+  private static final List<StaffElement> elements = new ArrayList<>();
   static {
     elements.add(Clef.TREBLE);
     elements.add(new Rest(NoteLength.QUARTER));

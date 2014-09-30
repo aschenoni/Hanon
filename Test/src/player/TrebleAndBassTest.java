@@ -20,7 +20,7 @@ public class TrebleAndBassTest extends Application {
 
   @Override
   public void start(Stage stage) {
-    List<StaffElement> bassElements = new ArrayList<StaffElement>();
+    List<StaffElement> bassElements = new ArrayList<>();
 
     bassElements.add(Clef.BASS);
     bassElements.add(new TimeSignature(2, 4));
@@ -56,7 +56,7 @@ public class TrebleAndBassTest extends Application {
     bassElements.add(measureLine());
 
 
-    List<StaffElement> trebleElements = new ArrayList<StaffElement>();
+    List<StaffElement> trebleElements = new ArrayList<>();
 
     trebleElements.add(Clef.TREBLE);
     trebleElements.add(new TimeSignature(2, 4));

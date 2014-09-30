@@ -22,9 +22,9 @@ public class Staff {
     this.elements = elements;
   }
 
-  public List<StaffPlaceable> getPlaceableElements() {
+  List<StaffPlaceable> getPlaceableElements() {
     List<Integer> spacings = new StaffSpacer(info.getWidth(), elements).getAllocatedSpacings();
-    List<StaffPlaceable> placeables = new ArrayList<StaffPlaceable>();
+    List<StaffPlaceable> placeables = new ArrayList<>();
     for (int i = 0; i < spacings.size(); i++)
       placeables.add(placeElement(spacings.get(i), elements.get(i)));
     placeables.add(0, new MeasureLine(info.getX(), info.getY(), info.getMeasureLineHeight()));

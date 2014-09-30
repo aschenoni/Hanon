@@ -1,7 +1,6 @@
 package sheet;
 
 import hanon.app.model.composer.StaffElementWriter;
-import hanon.app.model.music.Clef;
 import hanon.app.model.music.StaffElement;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.musicpiece.CMajorScale;
@@ -9,7 +8,7 @@ import hanon.app.musicpiece.CMajorScale;
 import java.io.File;
 import java.util.List;
 
-public class TestStaffElementWriter {
+class TestStaffElementWriter {
 
 	public static void main(String[] args)
 	{

@@ -5,8 +5,6 @@ import be.tarsos.dsp.pitch.Yin;
 import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONObject;
 
-import java.util.List;
-
 public class MusicNote implements StaffElement {
 
   public static MusicNote fromSoundArr(float[] floatArr) {
@@ -72,7 +70,7 @@ public class MusicNote implements StaffElement {
     return value.getName();
   }
 
-  public NoteValue getValue() {
+  NoteValue getValue() {
     return value;
   }
 

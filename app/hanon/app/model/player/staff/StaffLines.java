@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class StaffLines implements StaffPlaceable {
-  private final List<Rectangle> rectangles = new ArrayList<Rectangle>();
+  private final List<Rectangle> rectangles = new ArrayList<>();
 
   public StaffLines(int x, int y, int width) {
     for (int i = 0; i < 5; i++)

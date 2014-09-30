@@ -5,9 +5,6 @@ import hanon.app.model.music.MusicNote;
 import hanon.app.model.recorder.DataRecording;
 import hanon.app.model.recorder.Microphone;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Tuner extends StoppableTool<TunerInfo> {
   private final int timeBetweenReadings;
 

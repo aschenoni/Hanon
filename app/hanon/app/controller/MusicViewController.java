@@ -1,5 +1,5 @@
 package hanon.app.controller;
 
-public class MusicViewController {
+class MusicViewController {
 
 }

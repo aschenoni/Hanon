@@ -3,8 +3,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-   <children>
-      <Label layoutX="1.0" layoutY="-1.0" prefHeight="600.0" prefWidth="222.0" text="MUSIC VIEW" />
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="1000.0"
+            xmlns="http://javafx.com/javafx/8">
+    <Label layoutX="1.0" layoutY="-1.0" prefHeight="600.0" prefWidth="222.0" text="MUSIC VIEW"/>
 </AnchorPane>

@@ -24,7 +24,7 @@ public class BassClefTest extends Application {
 
   @Override
   public void start(Stage stage) {
-    List<StaffElement> elements = new ArrayList<StaffElement>();
+    List<StaffElement> elements = new ArrayList<>();
 
     elements.add(Clef.BASS);
     elements.add(new MusicNote(fromNameAndOctave(G, 2), QUARTER));

@@ -26,7 +26,7 @@ public class RestImage implements StaffPlaceable {
   private final int x, y;
   private final Image image;
 
-  public RestImage(int x, int y, Image image) {
+  private RestImage(int x, int y, Image image) {
     this.x = x;
     this.y = y;
     this.image = image;

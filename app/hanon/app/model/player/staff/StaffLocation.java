@@ -30,9 +30,9 @@ public class StaffLocation {
     return doSpaceLineOfNotes(originalElements, maxWidth).unallocatedElements;
   }
 
-  public static SpacingResult doSpaceLineOfNotes(List<StaffElement> elements, int maxWidth) {
+  private static SpacingResult doSpaceLineOfNotes(List<StaffElement> elements, int maxWidth) {
     int x = 0;
-    List<Integer> spacings = new ArrayList<Integer>();
+    List<Integer> spacings = new ArrayList<>();
     for (StaffElement e : elements) {
       spacings.add(x);
       x += getSpacing(e);
@@ -40,7 +40,7 @@ public class StaffLocation {
 
     List<Integer> underMaxWidth = getUnderMaxWidth(maxWidth, spacings);
 
-    List<StaffElement> remaining = new ArrayList<StaffElement>();
+    List<StaffElement> remaining = new ArrayList<>();
     for (int i = underMaxWidth.size(); i < elements.size(); i++) {
       remaining.add(elements.get(i));
     }
@@ -50,7 +50,7 @@ public class StaffLocation {
 
 
   private static List<Integer> getUnderMaxWidth(int maxWidth, List<Integer> spacings) {
-    List<Integer> underMaxWidth = new ArrayList<Integer>();
+    List<Integer> underMaxWidth = new ArrayList<>();
     for (int i : spacings)
       if (i < maxWidth)
         underMaxWidth.add(i);

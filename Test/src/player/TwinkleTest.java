@@ -1,6 +1,5 @@
 package player;
 
-import hanon.app.model.music.Clef;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.musicpiece.TwinkleTwinkleLittleStar;
 import javafx.application.Application;

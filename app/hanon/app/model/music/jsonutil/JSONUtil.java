@@ -18,7 +18,7 @@ public class JSONUtil {
    * values[n-1] -> values[n]
    */
   public static JSONObject stringsToJSON(String... values) {
-    Map<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<>();
     for (int i = 0; i < values.length; i+=2) {
       map.put(values[i], values[i+1]);
     }

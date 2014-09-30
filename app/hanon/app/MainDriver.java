@@ -1,15 +1,13 @@
 package hanon.app;
 
+import hanon.app.controller.BaseController;
 import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
-import hanon.app.controller.RhythmController;
-import hanon.app.controller.TunerController;
 import hanon.app.controller.RootLayoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -21,11 +19,7 @@ import java.io.IOException;
 public class MainDriver extends Application {
 
 	private Stage primaryStage;
-	
-	private TunerController tunerController;
-  private RhythmController rhythmController;
   private BorderPane rootLayout; //Main application node from which everything will be a child
-  private AnchorPane musicView;
 
   /**
 	 * JavaFX application main method
@@ -36,8 +30,6 @@ public class MainDriver extends Application {
 		this.primaryStage.setTitle("Hanon");
 		
 		initPrimaryScene();
-
-    //loadSheetMusic(new File("musicLibrary/twinkletwinkle.hanon"));
   }
 	
 	/**
@@ -46,56 +38,28 @@ public class MainDriver extends Application {
 	 */
 	private void initPrimaryScene() {
 		try {
-			// Load the root layout view from the fxml file
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainDriver.class.getResource("view/RootLayout.fxml"));
-			rootLayout = (BorderPane) loader.load();
-			
-			// Link rootLayoutController to the main app
-			RootLayoutController controller = loader.getController();
-			controller.setMainDriver(this);
-			
-			// Load MusicView
-			loader = new FXMLLoader();
-			loader.setLocation(MainDriver.class.getResource("view/MusicView.fxml"));
-			this.musicView = (AnchorPane) loader.load();
-			
-			// Draw the scene and show it
-			Scene scene = new Scene(rootLayout);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			
-			// Draw music view in the center
-			//rootLayout.setCenter(musicView);
-			
-
+      FXMLLoader loader = BaseController.buildLoader("RootLayout");
+			rootLayout = loader.load();
+      buildController(loader);
+      buildScene();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	/**
-	 * called when the tuner window is requested
-	 * @throws InterruptedException 
-	 * @throws IOException 
-	 */
-	public void initTuner() throws InterruptedException, IOException {
-		Stage tunerStage = new Stage();
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(MainDriver.class.getResource("view/Tuner.fxml"));
-		AnchorPane page = (AnchorPane) loader.load();
-		TunerController tunerController = loader.getController();
-		tunerController.setMainDriver(this);
-		this.tunerController=tunerController;
-		tunerStage.setTitle("Tuner");
-		Scene scene = new Scene(page);
-		tunerStage.setScene(scene);
-		tunerController.handleTuner();
-		tunerStage.show();
-	}
-	
-	public Window getPrimaryStage() {
+  private void buildController(FXMLLoader loader) {
+    RootLayoutController controller = loader.getController();
+    controller.setMainDriver(this);
+  }
+
+  private void buildScene() {
+    Scene scene = new Scene(rootLayout);
+    primaryStage.setScene(scene);
+    primaryStage.show();
+  }
+
+  public Window getPrimaryStage() {
 		return this.primaryStage;
 	}
 
@@ -109,18 +73,8 @@ public class MainDriver extends Application {
 	public BorderPane getRootLayout(){
 		return this.rootLayout;
 	}
-	/*
-	 * Main method, consists only of launch as
-	 * JavaFX handles all application stuff within launch
-	 */
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-
-	public TunerController getTunerController() {
-		return this.tunerController;
-	}
-
-
-
 }

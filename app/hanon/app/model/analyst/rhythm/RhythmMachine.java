@@ -12,26 +12,27 @@ public class RhythmMachine extends StoppableTool<NoteLength> {
   private final int bpm;
 
   public static RhythmMachine fromElements(List<StaffElement> elements, int bpm) {
-    List<NoteLength> lengths = new ArrayList<NoteLength>();
+    List<NoteLength> lengths = new ArrayList<>();
     for (StaffElement e : elements)
       if (e.getType() == StaffElementType.NOTE)
         lengths.add(((MusicNote) e).getLength());
     return new RhythmMachine(lengths, bpm);
   }
 
-  public RhythmMachine(List<NoteLength> rhythm, int bpm, NoteLength lengthWithBeat) {
+  private RhythmMachine(List<NoteLength> rhythm, int bpm, NoteLength lengthWithBeat) {
     this.rhythm = rhythm;
     this.bpm = bpm;
     this.lengthWithBeat = lengthWithBeat;
   }
 
-  public RhythmMachine(List<NoteLength> rhythm, int bpm) {
+  private RhythmMachine(List<NoteLength> rhythm, int bpm) {
     this(rhythm, bpm, NoteLength.QUARTER);
   }
 
   @Override
   protected void runLoop() {
     for (NoteLength n : rhythm) {
+      if (isStopped()) break;
       waitForLength(n);
       informAll(n);
     }

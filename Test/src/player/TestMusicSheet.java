@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.stage.Stage;
 
-public class TestMusicSheet {
+class TestMusicSheet {
   private final Stage stage;
   private final StaffElementSet[] sets;
 

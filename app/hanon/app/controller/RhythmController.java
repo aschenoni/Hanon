@@ -1,28 +1,26 @@
 package hanon.app.controller;
 
-import hanon.app.MainDriver;
 import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.music.StaffElement;
 
 import java.util.List;
 
-public class RhythmController {
-
+public class RhythmController extends BaseController {
   private RhythmMachine machine;
-  private MainDriver mainDriver;
 
   public RhythmController() {
   }
 
   public void handleRhythm(List<StaffElement> elements) {
     machine = RhythmMachine.fromElements(elements, 140);
-    Clicker c = new Clicker();
-    machine.register(c);
-    new Thread(c).run();
-  }
+    Clicker clicker = new Clicker();
+    machine.register(clicker);
+    new Thread(clicker).run();
+    new Thread(machine).start();  }
 
-  public void setMainDriver(MainDriver mainDriver) {
-    this.mainDriver = mainDriver;
+  @Override
+  protected void stop() {
+    machine.stop();
   }
 }

@@ -5,7 +5,7 @@ import hanon.app.model.music.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaffSpacer {
+class StaffSpacer {
   private static final int MEASURE_LINE_SPACING = 30;
   private static final int TIME_SIGNATURE_SPACING = 50;
   private static final int CLEF_SPACING = 50;
@@ -74,7 +74,7 @@ public class StaffSpacer {
    * @param ind The index of the last element to be fit into the staff.
    */
   private List<Integer> reviseSpacings(List<Integer> spacings, int diff, int ind) {
-    List<Integer> revisedSpacings = new ArrayList<Integer>();
+    List<Integer> revisedSpacings = new ArrayList<>();
     for (int i = 0; i < spacings.size(); i++) {
       int newSpacing = (int) (spacings.get(i) + diff*(i/(float)ind));
       revisedSpacings.add(newSpacing);
@@ -88,7 +88,7 @@ public class StaffSpacer {
    */
   private List<Integer> getAllSpacings() {
     int x = 0;
-    List<Integer> spacings = new ArrayList<Integer>();
+    List<Integer> spacings = new ArrayList<>();
     for (StaffElement e : elements) {
       spacings.add(x);
       x += getSpacing(e);
@@ -101,7 +101,7 @@ public class StaffSpacer {
    * lines.
    */
   private List<Integer> getMeasureSpacings(List<Integer> spacings) {
-    List<Integer> sp = new ArrayList<Integer>();
+    List<Integer> sp = new ArrayList<>();
     for (int i = 0; i < spacings.size(); i++)
       if (elements.get(i).getType() == StaffElementType.MEASURE_LINE)
         sp.add(spacings.get(i));
@@ -112,7 +112,7 @@ public class StaffSpacer {
    * Given a set of measure spacings, get the spacing that is closest to the
    * width of the staff.
    */
-  public int getClosestMeasurePositionToWidth(List<Integer> measureSpacings) {
+  int getClosestMeasurePositionToWidth(List<Integer> measureSpacings) {
     int dist = Integer.MAX_VALUE;
     int closest = Integer.MAX_VALUE;
     for (int i : measureSpacings) {
@@ -131,7 +131,7 @@ public class StaffSpacer {
    */
   private SpacingResult getSpacingResult(List<Integer> spacings) {
     List<Integer> underMaxWidth = getUnderMaxWidth(spacings);
-    List<StaffElement> remaining = new ArrayList<StaffElement>();
+    List<StaffElement> remaining = new ArrayList<>();
     for (int i = underMaxWidth.size(); i < elements.size(); i++)
       remaining.add(elements.get(i));
     return new SpacingResult(underMaxWidth, remaining);
@@ -142,7 +142,7 @@ public class StaffSpacer {
    * those spacings that are inside the width of the staff.
    */
   private List<Integer> getUnderMaxWidth(List<Integer> spacings) {
-    List<Integer> underMaxWidth = new ArrayList<Integer>();
+    List<Integer> underMaxWidth = new ArrayList<>();
     for (int i : spacings)
       if (i <= width)
         underMaxWidth.add(i);

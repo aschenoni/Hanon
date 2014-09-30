@@ -2,8 +2,6 @@ package hanon.app.controller;
 
 
 import hanon.app.MainDriver;
-import hanon.app.model.analyst.rhythm.Clicker;
-import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.composer.StaffElementWriter;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
@@ -16,7 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.FileChooser;
 
-public class RootLayoutController {
+public class RootLayoutController extends BaseController {
 	
 	//Allows for communication with other parts of the application
 	private MainDriver mainDriver;
@@ -37,11 +35,9 @@ public class RootLayoutController {
 		File file = fileChooser.showOpenDialog(mainDriver.getPrimaryStage());
 		
 		//Hitting cancel returns a null file so...
-		if(file != null)
-		{
+		if(file != null) {
 			mainDriver.loadSheetMusic(file);
 		}
-			
 	}
 	
 	@FXML
@@ -75,27 +71,22 @@ public class RootLayoutController {
 	}
 	
 	@FXML private void handleTuner() throws InterruptedException, IOException{
-		mainDriver.initTuner();
-	}
+    TunerController controller = (TunerController)BaseController.loadFromTitle("Tuner");
+    controller.handleTuner();
+  }
 	
-	@FXML
-	private void handleClicker(){
+	@FXML private void handleClicker() throws IOException {
 		Node currentSheet = mainDriver.getRootLayout().getCenter();
 		if(currentSheet instanceof MusicSheet){
-			ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
+      RhythmController controller = (RhythmController)BaseController.loadFromTitle("Rhythm");
+
+      ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
 			StaffElementSet set = sets.get(0);
-			RhythmMachine machine = RhythmMachine.fromElements(set.getElements(), 140);
-			Clicker c = new Clicker();
-      new Thread(c).start();
-			machine.register(c);
-      Thread th = new Thread(machine);
-      th.setDaemon(true);
-      th.start();
-      new Thread(machine).start();
+      controller.handleRhythm(set.getElements());
 		}
 	}
-	
-	@FXML
+
+  @FXML
 	private void handleAbout(){
 		System.out.println("HELLO");
 	}

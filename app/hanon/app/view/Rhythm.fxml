@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="270.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="hanon.app.controller.RhythmController">
+    <Label alignment="CENTER" layoutX="116.0" layoutY="128.0" text="Playing Rhythm..." AnchorPane.bottomAnchor="70.0"
+           AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="70.0">
+        <font>
+          <Font size="20.0"/>
+        </font>
+    </Label>
+</AnchorPane>

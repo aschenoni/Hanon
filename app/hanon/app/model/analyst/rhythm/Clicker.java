@@ -10,7 +10,7 @@ import java.io.File;
 
 public class Clicker implements Observer<NoteLength>, Runnable {
 
-  public static final File AUDIO = new File("./res/audio/click.WAV");
+  private static final File AUDIO = new File("./res/audio/click.WAV");
 
   private Clip clip;
 

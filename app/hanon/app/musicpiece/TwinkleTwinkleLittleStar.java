@@ -8,7 +8,7 @@ import java.util.List;
 import static hanon.app.model.music.NoteValue.*;
 
 public class TwinkleTwinkleLittleStar {
-  public static final List<StaffElement> elements = new ArrayList<StaffElement>();
+  public static final List<StaffElement> elements = new ArrayList<>();
   static {
     elements.add(Clef.TREBLE);
 
