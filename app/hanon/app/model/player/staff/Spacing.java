@@ -16,6 +16,7 @@ public class Spacing {
       case CLEF:           return CLEF_SPACING;
       case MEASURE_LINE:   return MEASURE_LINE_SPACING;
       case STAFF_LINES:    return 0;
+      case TIE:            return 0;
       default:             throw new RuntimeException("No such staff element type");
     }
   }

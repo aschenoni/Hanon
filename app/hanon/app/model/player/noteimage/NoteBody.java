@@ -5,7 +5,7 @@ import hanon.app.model.player.staff.Staff;
 import javafx.scene.shape.Ellipse;
 
 
-class NoteBody implements NoteComponent {
+public class NoteBody implements NoteComponent {
   public static final int HEIGHT = Staff.LINE_GAP-1;
   public static final int WIDTH = (int) (1.6* HEIGHT);
 

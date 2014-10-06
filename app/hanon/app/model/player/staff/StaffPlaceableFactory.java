@@ -5,10 +5,14 @@ import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.noteimage.NoteImageFactory;
 import hanon.app.model.player.noteimage.NoteStem;
 import hanon.app.model.player.sheet.StaffPlaceable;
+import hanon.app.model.util.Pair;
+
+import java.util.Stack;
 
 public class StaffPlaceableFactory {
   private final StaffInfo info;
   private final NoteImageFactory noteFactory;
+  private final TieRepository tieRepository = new TieRepository();
 
   public StaffPlaceableFactory(StaffInfo info) {
     this.info = info;
@@ -17,7 +21,10 @@ public class StaffPlaceableFactory {
 
   public StaffPlaceable placeElement(int x, StaffElement element) {
     switch (element.getType()) {
-      case NOTE:           return noteFactory.buildImage((MusicNote) element, x);
+      case NOTE:           NoteImage image = noteFactory.buildImage((MusicNote) element, x);
+                           tieRepository.addNote(image);
+                           return image;
+      case TIE:            return new TieImage(tieRepository.getLastTwoNotes());
       case REST:           return RestImage.fromRest((Rest) element, x, info.getY());
       case CHORD:          return new ChordImage(getNoteImages(x, ((Chord)element).getNotes()));
       case TIME_SIGNATURE: return new TimeSignatureImage((TimeSignature)element, x, info.getY());
@@ -42,5 +49,20 @@ public class StaffPlaceableFactory {
       return new ClefImage(Clef.TREBLE, x, info.getY());
     else
       return new ClefImage(Clef.BASS, x, info.getY());
+  }
+
+  class TieRepository {
+    private final Stack<NoteImage> images = new Stack<>();
+
+    Pair<NoteImage, NoteImage> getLastTwoNotes() {
+      NoteImage i1 = images.pop();
+      Pair<NoteImage, NoteImage> res = new Pair<>(i1, images.peek());
+      images.push(i1);
+      return res;
+    }
+
+    void addNote(NoteImage image) {
+      images.push(image);
+    }
   }
 }

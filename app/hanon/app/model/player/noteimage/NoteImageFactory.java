@@ -48,16 +48,25 @@ public class NoteImageFactory {
     BodyHole wholeHole  = new BodyHole(x, y, 80);
     LedgerLine ledger   = new LedgerLine(x, y, note.getStaffPosition(clef));
 
+    boolean up = goesUp(d, note);
     switch (note.getLength()) {
-      case EIGHTH:  return new NoteImage(normalBody, noteStem, flag, ledger);
-      case QUARTER: return new NoteImage(normalBody, noteStem, ledger);
-      case HALF:    return new NoteImage(normalBody, normalHole, noteStem, ledger);
-      case WHOLE:   return new NoteImage(wholeBody, wholeHole, ledger);
+      case EIGHTH:  return new NoteImage(up, x, y, normalBody, noteStem, flag, ledger);
+      case QUARTER: return new NoteImage(up, x, y, normalBody, noteStem, ledger);
+      case HALF:    return new NoteImage(up, x, y, normalBody, normalHole, noteStem, ledger);
+      case WHOLE:   return new NoteImage(up, x, y, wholeBody, wholeHole, ledger);
       default:      throw new NoSuchNoteLengthException();
         /*
         *  TODO There is no reason this exception should be needed. We should
         *  TODO have type safety since NoteLength is an enum.
         */
+    }
+  }
+
+  boolean goesUp(StemDirection d, MusicNote... notes) {
+    switch (d) {
+      case UP: return true;
+      case DOWN: return false;
+      default: return NoteStem.shouldStemGoUp(clef, notes);
     }
   }
 

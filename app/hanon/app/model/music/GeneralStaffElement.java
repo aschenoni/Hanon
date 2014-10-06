@@ -16,17 +16,18 @@ public class GeneralStaffElement implements StaffElement {
     return new GeneralStaffElement(STAFF_LINES);
   }
 
+  public static GeneralStaffElement tie() {
+    return new GeneralStaffElement(TIE);
+  }
+
   private GeneralStaffElement(StaffElementType type) {
     this.type = type;
   }
 
   static GeneralStaffElement fromJSON(JSONObject jsonObj) {
-    if(jsonObj.containsValue("MEASURE_LINE")){
-      return measureLine();
-    }
-    else {
-      throw new RuntimeException("No such GeneralStaffElement");
-    }
+    if (jsonObj.containsValue("MEASURE_LINE")) return measureLine();
+    else if (jsonObj.containsValue("TIE"))     return tie();
+    else throw new RuntimeException("No such GeneralStaffElement");
   }
 
   @Override

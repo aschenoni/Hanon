@@ -10,9 +10,15 @@ import hanon.app.model.player.sheet.StaffPlaceable;
  * For instance, a whole note is a Note Body and a Body Hole.
  */
 public class NoteImage implements StaffPlaceable {
+  private final boolean up;
+  private final int x;
+  private final int y;
   private final NoteComponent[] components;
 
-  NoteImage(NoteComponent... components) {
+  NoteImage(boolean up, int x, int y, NoteComponent... components) {
+    this.up = up;
+    this.x = x;
+    this.y = y;
     this.components = components;
   }
 
@@ -20,4 +26,15 @@ public class NoteImage implements StaffPlaceable {
     for (NoteComponent c : components) { c.paint(brush); }
   }
 
+  public int x() {
+    return x;
+  }
+
+  public int y() {
+    return y;
+  }
+
+  public boolean goesUp() {
+    return up;
+  }
 }
