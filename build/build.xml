@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Hanon">
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="../build/Hanon.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="hanon.app.MainDriver"/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="../bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="N:/dev/app/eclipse(Java)/plugins/org.junit_4.11.0.v201303080030/junit.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="N:/dev/app/eclipse(Java)/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="N:/dev/Hanon/libs/TarsosDSP-latest.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="N:/dev/Hanon/libs/json-simple-1.1.1.jar"/>
+        </jar>
+    </target>
+</project>
