@@ -34,7 +34,7 @@ public class StaffSet {
       }
       first = false;
       staffs.add(new Staff(info, temp));
-      temp = new StaffSpacer(info.getWidth(), temp).getUnspacedElements();
+      temp = new StaffSpacer(info.getWidth(), temp).unallocatedElements().toArrayList();
       info = info.movedDown(dy);
     }
     return staffs;

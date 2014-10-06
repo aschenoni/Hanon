@@ -6,6 +6,7 @@ import hanon.app.model.player.noteimage.NoteImageFactory;
 import hanon.app.model.player.noteimage.NoteStem;
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.StaffPlaceable;
+import hanon.app.model.util.FunctionalList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,53 +16,26 @@ public class Staff {
 
   private final List<StaffElement> elements;
   private final StaffInfo info;
-  private NoteImageFactory noteFactory;
+  private final StaffPlaceableFactory factory;
 
   public Staff(StaffInfo info, List<StaffElement> elements) {
     this.info = info;
     this.elements = elements;
+    factory = new StaffPlaceableFactory(info);
   }
 
   List<StaffPlaceable> getPlaceableElements() {
-    List<Integer> spacings = new StaffSpacer(info.getWidth(), elements).getAllocatedSpacings();
-    List<StaffPlaceable> placeables = new ArrayList<>();
-    for (int i = 0; i < spacings.size(); i++)
-      placeables.add(placeElement(spacings.get(i), elements.get(i)));
-    placeables.add(0, new MeasureLine(info.getX(), info.getY(), info.getMeasureLineHeight()));
-    placeables.add(0, new StaffLines(info.getX(), info.getY(), info.getWidth()));
-    return placeables;
+    FunctionalList<StaffSpacedElement> spacings = new StaffSpacer(info.getWidth(), elements).allocatedElements();
+    return spacings.map(this::placeElement)
+            .prepend(new MeasureLine(info.getX(), info.getY(), info.getMeasureLineHeight()))
+            .prepend(new StaffLines(info.getX(), info.getY(), info.getWidth())).toArrayList();
   }
 
-  private StaffPlaceable placeElement(int x, StaffElement element) {
-    x += info.getX();
-    noteFactory = new NoteImageFactory(info.getY(), info.getClef());
-    switch (element.getType()) {
-      case NOTE:           return noteFactory.buildImage((MusicNote) element, x);
-      case REST:           return RestImage.fromRest((Rest) element, x, info.getY());
-      case CHORD:          return new ChordImage(getNoteImages(x, ((Chord)element).getNotes()));
-      case TIME_SIGNATURE: return new TimeSignatureImage((TimeSignature)element, x, info.getY());
-      case CLEF:           return getClef(x);
-      case MEASURE_LINE:   return new MeasureLine(x, info.getY(), info.getMeasureLineHeight());
-      case STAFF_LINES:    return new StaffLines(info.getX(), info.getX(), info.getWidth());
-      default:             throw new RuntimeException("No such staff element type");
-    }
+  private StaffPlaceable placeElement(StaffSpacedElement e) {
+    int x = e.getX() + info.getX();
+    return factory.placeElement(x, e.getElement());
   }
 
-  private StaffPlaceable getClef(int x) {
-    if (info.getClef() == Clef.TREBLE)
-      return new ClefImage(Clef.TREBLE, x, info.getY());
-    else
-      return new ClefImage(Clef.BASS, x, info.getY());
-  }
-
-  private NoteImage[] getNoteImages(int x, MusicNote[] notes) {
-    boolean up = NoteStem.shouldStemGoUp(info.getClef(), notes);
-    NoteImage[] images = new NoteImage[notes.length];
-    for (int i = 0; i < notes.length; i++)
-      if (up) images[i] = noteFactory.buildUpImage(notes[i], x);
-      else    images[i] = noteFactory.buildDownImage(notes[i], x);
-    return images;
-  }
 
   public void paint(Brush brush) {
     for (StaffPlaceable e : getPlaceableElements()) e.paint(brush);
