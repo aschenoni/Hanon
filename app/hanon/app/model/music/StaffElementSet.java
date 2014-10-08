@@ -17,8 +17,10 @@ public class StaffElementSet {
   private static StaffElement elementFromJSON(JSONObject jsonObj) {
     if(jsonObj.containsKey("Clef"))
       return Clef.valueOf((String) jsonObj.get("Clef"));
-    else if(jsonObj.containsKey("General Element"))
+    else if (jsonObj.containsKey("General Element"))
       return GeneralStaffElement.fromJSON(jsonObj);
+    else if (jsonObj.containsKey("Slur"))
+      return Slur.fromJSON(jsonObj);
     else if (jsonObj.containsKey("NoteLength"))
       return MusicNote.fromJSON(jsonObj);
     else if (jsonObj.containsKey("TimeSignature"))

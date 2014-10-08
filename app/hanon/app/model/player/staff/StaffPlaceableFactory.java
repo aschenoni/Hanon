@@ -5,6 +5,7 @@ import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.noteimage.NoteImageFactory;
 import hanon.app.model.player.noteimage.NoteStem;
 import hanon.app.model.player.sheet.StaffPlaceable;
+import hanon.app.model.util.FunctionalList;
 import hanon.app.model.util.Pair;
 
 import java.util.Stack;
@@ -25,6 +26,7 @@ public class StaffPlaceableFactory {
                            tieRepository.addNote(image);
                            return image;
       case TIE:            return new TieImage(tieRepository.getLastTwoNotes());
+      case SLUR:           return new SlurImage(tieRepository.getLastNNotes(((Slur)element).getNumNotes()));
       case REST:           return RestImage.fromRest((Rest) element, x, info.getY());
       case CHORD:          return new ChordImage(getNoteImages(x, ((Chord)element).getNotes()));
       case TIME_SIGNATURE: return new TimeSignatureImage((TimeSignature)element, x, info.getY());
@@ -52,17 +54,19 @@ public class StaffPlaceableFactory {
   }
 
   class TieRepository {
-    private final Stack<NoteImage> images = new Stack<>();
+    private FunctionalList<NoteImage> images = FunctionalList.empty();
 
     Pair<NoteImage, NoteImage> getLastTwoNotes() {
-      NoteImage i1 = images.pop();
-      Pair<NoteImage, NoteImage> res = new Pair<>(i1, images.peek());
-      images.push(i1);
-      return res;
+      FunctionalList<NoteImage> lastTwo = images.take(2);
+      return new Pair<>(lastTwo.head(), lastTwo.tail().head());
+    }
+
+    FunctionalList<NoteImage> getLastNNotes(int n) {
+      return images.take(n);
     }
 
     void addNote(NoteImage image) {
-      images.push(image);
+      images = images.prepend(image);
     }
   }
 }

@@ -25,18 +25,20 @@ public class TieImage implements StaffPlaceable {
     curve.setControlX1(leftControlX);
     curve.setControlX2(rightControlX);
 
-    if (notes.first().goesUp()) {
-      curve.setStartY(notes.first().y() + 5*NoteBody.HEIGHT/4);
-      curve.setEndY(notes.second().y() + 5*NoteBody.HEIGHT/4);
-      curve.setControlY1(notes.second().y() + 3*NoteBody.HEIGHT);
-      curve.setControlY2(notes.first().y() + 3*NoteBody.HEIGHT);
-    }
-    else {
+    if (!notes.first().hasStem() || !notes.first().goesUp()) {
       curve.setStartY(notes.first().y() - NoteBody.HEIGHT/4);
       curve.setEndY(notes.second().y() - NoteBody.HEIGHT/4);
       curve.setControlY1(notes.second().y() - 2*NoteBody.HEIGHT);
       curve.setControlY2(notes.first().y() - 2*NoteBody.HEIGHT);
     }
+
+    else {
+      curve.setStartY(notes.first().y() + 5*NoteBody.HEIGHT/4);
+      curve.setEndY(notes.second().y() + 5*NoteBody.HEIGHT/4);
+      curve.setControlY1(notes.second().y() + 3*NoteBody.HEIGHT);
+      curve.setControlY2(notes.first().y() + 3*NoteBody.HEIGHT);
+    }
+
 
     curve.setStroke(Color.BLACK);
     curve.setStrokeWidth(1);

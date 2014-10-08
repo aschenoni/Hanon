@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import java.io.File;
 
 class UpNoteFlag extends NoteFlag {
-  private static final File FILE = new File("res\\images\\UpNoteFlag.png");
+  private static final File FILE = new File("res/images/UpNoteFlag.png");
   private static final Image IMAGE = new Image(FILE.toURI().toString(), (3/4.0)*NoteBody.WIDTH, 100, true, true);
 
   private final int x;

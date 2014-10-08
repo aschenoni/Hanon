@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class FunctionalList<A> {
+public class FunctionalList<A> implements Monad<A> {
   private final A head;
   private final FunctionalList<A> tail;
 
@@ -38,6 +38,11 @@ public class FunctionalList<A> {
     FunctionalList<A> fl = FunctionalList.<A>empty();
     for(A a : array) fl = fl.prepend(a);
     return fl.reverse();
+  }
+
+  public Maybe<A> toMaybe() {
+    if (isEmpty()) return Maybe.nothing();
+    else return Maybe.maybe(head);
   }
 
   public List<A> toArrayList() {
@@ -158,6 +163,17 @@ public class FunctionalList<A> {
   }
 
   /**
+   * Test if any of the elements in the list satisfy the predicate.
+   */
+  public boolean any(Predicate<A> p) {
+    return foldl((Boolean acc, A x) -> acc || p.test(x), false);
+  }
+
+  public boolean all(Predicate<A> p) {
+    return foldl((Boolean acc, A x) -> acc && p.test(x), true);
+  }
+
+  /**
    * Get a new list with the contents of the original list reversed.
    *
    * [1,2,3].reverse() -> [3,2,1]
@@ -178,6 +194,12 @@ public class FunctionalList<A> {
     else
       if (p.test(head)) return tail.takeWhile(p).prepend(head);
       else return empty();
+  }
+
+  public FunctionalList<A> take(int n) {
+    if (isEmpty()) return empty();
+    else if (n == 0) return empty();
+    else return tail.take(n-1).prepend(head);
   }
 
   /**
@@ -217,14 +239,6 @@ public class FunctionalList<A> {
   }
 
   /**
-   * Non-deterministically apply a function to the list.
-   *
-   * [4,5,6].bind(MyMath::primeFactors) -> [2,5,2,3]
-   */
-  public <B> FunctionalList<B> bind(Function<A, FunctionalList<B>> f) {
-    return concat(map(f));
-  }
-  /**
    * Flatten a list of lists into one list.
    *
    * concat([[1,2], [3,4]]) -> [1,2,3,4]
@@ -232,7 +246,6 @@ public class FunctionalList<A> {
   public static <A> FunctionalList<A> concat(FunctionalList<FunctionalList<A>> list) {
     return list.foldr((FunctionalList<A>::append), FunctionalList.<A>empty());
   }
-
   public static Comparable minimum(FunctionalList<Comparable> list) {
     return list.foldl1((a1, a2) -> a1.compareTo(a2) > 0 ? a2 : a1);
   }
@@ -242,24 +255,43 @@ public class FunctionalList<A> {
   }
 
   @Override
+  public <B> FunctionalList<B> fmap(Function<A, B> f) {
+    return map(f);
+  }
+
+  /**
+   * Non-deterministically apply a function to the list.
+   *
+   * [4,5,6].bind(MyMath::primeFactors) -> [2,5,2,3]
+   */
+  public <B> FunctionalList<B> bind(Function<A, Monad<B>> f) {
+    return concat(bindMap(f));
+  }
+  private <B> FunctionalList<FunctionalList<B>> bindMap(Function<A, Monad<B>> f) {
+    if (isEmpty()) return empty();
+    else return tail.bindMap(f).prepend((FunctionalList<B>) f.apply(head));
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (!(o instanceof FunctionalList)) return false;
     else {
       FunctionalList<A> fl = (FunctionalList<A>)o;
       return isEmpty() && fl.isEmpty() ||
-             head().equals(fl.head()) && tail().equals(fl.tail());
+              head().equals(fl.head()) && tail().equals(fl.tail());
     }
   }
+
   @Override
   public int hashCode() {
     if (isEmpty()) return 1337;
     else return 13 * (head.hashCode() + 31*tail.hashCode());
   }
-
   @Override
   public String toString() {
     return "[" + toStringHelper();
   }
+
   private String toStringHelper() {
     if (isEmpty()) return "]";
     else if (tail.isEmpty()) return head().toString() + tail.toStringHelper();

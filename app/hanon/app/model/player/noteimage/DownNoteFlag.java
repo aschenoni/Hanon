@@ -9,7 +9,7 @@ class DownNoteFlag extends NoteFlag {
 
   private static final int WIDTH = (int) (3/4.0*NoteBody.WIDTH);
 
-  private static final File FILE = new File("res\\images\\DownNoteFlag.png");
+  private static final File FILE = new File("res/images/DownNoteFlag.png");
   private static final Image IMAGE = new Image(FILE.toURI().toString(), WIDTH, 100, true, true);
 
   private final int x;

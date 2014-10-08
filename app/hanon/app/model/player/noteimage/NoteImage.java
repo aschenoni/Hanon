@@ -37,4 +37,25 @@ public class NoteImage implements StaffPlaceable {
   public boolean goesUp() {
     return up;
   }
+
+  public boolean hasStem() {
+    for (NoteComponent c : components) {
+      if (c instanceof NoteStem) return true;
+    }
+    return false;
+  }
+
+  public int top() {
+    if (goesUp() && hasStem())
+      return y - NoteStem.HEIGHT;
+    else
+      return y;
+  }
+
+  public int bottom() {
+    if (!goesUp() && hasStem())
+      return y + NoteBody.HEIGHT + NoteStem.HEIGHT;
+    else
+      return y + NoteBody.HEIGHT;
+  }
 }
