@@ -2,6 +2,7 @@ package hanon.app.controller;
 
 
 import hanon.app.MainDriver;
+import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.composer.StaffElementWriter;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
@@ -36,7 +37,12 @@ public class RootLayoutController extends BaseController {
 		
 		//Hitting cancel returns a null file so...
 		if(file != null) {
-			mainDriver.loadSheetMusic(file);
+			StaffElementSet set = StaffElementReader.loadFromFile(file);
+			MusicSheet sheet = new MusicSheet(set);
+			sheet.draw(500,500);
+			mainDriver.getRootLayout().setCenter(sheet);
+			
+			//mainDriver.loadSheetMusic(file);
 		}
 	}
 	

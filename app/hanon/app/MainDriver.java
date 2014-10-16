@@ -19,9 +19,9 @@ import java.io.IOException;
 public class MainDriver extends Application {
 
 	private Stage primaryStage;
-  private BorderPane rootLayout; //Main application node from which everything will be a child
+	private BorderPane rootLayout; //Main application node from which everything will be a child
 
-  /**
+  	/**
 	 * JavaFX application main method
 	 */
 	@Override
@@ -48,11 +48,18 @@ public class MainDriver extends Application {
 		}
 	}
 
+	/**
+	 * attaches the rootlayout controller to the rootlayout view
+	 * @param loader
+	 */
   private void buildController(FXMLLoader loader) {
     RootLayoutController controller = loader.getController();
     controller.setMainDriver(this);
   }
 
+  /**
+   * Builds and presents the Base of the Application to the user
+   */
   private void buildScene() {
     Scene scene = new Scene(rootLayout);
     primaryStage.setScene(scene);
@@ -63,13 +70,10 @@ public class MainDriver extends Application {
 		return this.primaryStage;
 	}
 
-	public void loadSheetMusic(File file) {
-		StaffElementSet set  = StaffElementReader.loadFromFile(file);
-		MusicSheet sheet = new MusicSheet(set);
-		sheet.draw(500, 500);
-		rootLayout.setCenter(sheet);
-	}
-
+  /**
+   * Gives other controllers permission to edit the main window
+   * @return
+   */
 	public BorderPane getRootLayout(){
 		return this.rootLayout;
 	}
