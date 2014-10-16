@@ -41,8 +41,6 @@ public class RootLayoutController extends BaseController {
 			MusicSheet sheet = new MusicSheet(set);
 			sheet.draw(500,500);
 			mainDriver.getRootLayout().setCenter(sheet);
-			
-			//mainDriver.loadSheetMusic(file);
 		}
 	}
 	
