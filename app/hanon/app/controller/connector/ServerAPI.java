@@ -1,4 +1,4 @@
-package hanon.app.model.connector;
+package hanon.app.controller.connector;
 
 import org.json.simple.JSONArray;
 

@@ -1,10 +1,10 @@
 package hanon.app;
 
 import hanon.app.controller.BaseController;
+import hanon.app.controller.LoginController;
 import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
-import hanon.app.view.LoginController;
 import hanon.app.controller.RootLayoutController;
 import javafx.application.Application;
 import javafx.event.EventHandler;

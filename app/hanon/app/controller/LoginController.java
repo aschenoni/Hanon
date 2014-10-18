@@ -1,9 +1,9 @@
-package hanon.app.view;
+package hanon.app.controller;
 
 import org.json.simple.JSONArray;
 
 import hanon.app.MainDriver;
-import hanon.app.model.connector.ServerAPI;
+import hanon.app.controller.connector.ServerAPI;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

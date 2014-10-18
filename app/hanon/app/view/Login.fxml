@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="288.0" maxWidth="250.0" onMouseClicked="#pin" onMouseEntered="#pin" prefHeight="272.0" prefWidth="250.0" style="-fx-background-color: rgba(0,0,255,.75);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.view.LoginController">
+<AnchorPane maxHeight="288.0" maxWidth="250.0" onMouseClicked="#pin" onMouseEntered="#pin" prefHeight="272.0" prefWidth="250.0" style="-fx-background-color: rgba(0,0,255,.75);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.LoginController">
    <children>
       <Label layoutX="22.0" layoutY="53.0" text="Login" textFill="WHITE">
          <font>
