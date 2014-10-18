@@ -6,12 +6,22 @@ import hanon.app.model.music.StaffElement;
 
 import java.util.List;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+
 public class RhythmController extends BaseController {
   private RhythmMachine machine;
 
+  @FXML Label rhythmStatus;
+  
   public RhythmController() {
   }
-
+  
+  @FXML public void handleStop() {
+	stop();
+	rhythmStatus.setText("Rhythm Stopped");
+  }
+  
   public void handleRhythm(List<StaffElement> elements) {
     machine = RhythmMachine.fromElements(elements, 140);
     Clicker clicker = new Clicker();
@@ -20,7 +30,7 @@ public class RhythmController extends BaseController {
     new Thread(machine).start();  }
 
   @Override
-  protected void stop() {
+ @FXML protected void stop() {
     machine.stop();
   }
 }

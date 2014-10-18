@@ -11,7 +11,7 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 
 public abstract class BaseController {
-  static BaseController loadFromTitle(String title) throws IOException {
+  static BaseController loadWindowFromTitle(String title) throws IOException {
     FXMLLoader loader = buildLoader(title);
     Stage stage = buildStage(title, loader);
     return buildController(loader, stage);

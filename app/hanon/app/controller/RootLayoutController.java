@@ -12,8 +12,13 @@ import java.io.IOException;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class RootLayoutController extends BaseController {
 	
@@ -75,18 +80,23 @@ public class RootLayoutController extends BaseController {
 	}
 	
 	@FXML private void handleTuner() throws InterruptedException, IOException{
-    TunerController controller = (TunerController)BaseController.loadFromTitle("Tuner");
+    TunerController controller = (TunerController)BaseController.loadWindowFromTitle("Tuner");
     controller.handleTuner();
   }
 	
 	@FXML private void handleClicker() throws IOException {
 		Node currentSheet = mainDriver.getRootLayout().getCenter();
 		if(currentSheet instanceof MusicSheet){
-      RhythmController controller = (RhythmController)BaseController.loadFromTitle("Rhythm");
-
-      ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
+      
+			FXMLLoader loader = buildLoader("Rhythm");
+			AnchorPane rhythmPane = loader.load();
+			RhythmController rhythmController = loader.getController();
+			mainDriver.getHPane().setBottom(rhythmPane);
+			mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
+			
+			ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
 			StaffElementSet set = sets.get(0);
-      controller.handleRhythm(set.getElements());
+			rhythmController.handleRhythm(set.getElements());
 		}
 	}
 

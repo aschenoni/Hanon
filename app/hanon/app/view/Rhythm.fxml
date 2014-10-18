@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="270.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="hanon.app.controller.RhythmController">
-    <Label alignment="CENTER" layoutX="116.0" layoutY="128.0" text="Playing Rhythm..." AnchorPane.bottomAnchor="70.0"
-           AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="70.0">
-        <font>
-          <Font size="20.0"/>
-        </font>
-    </Label>
+
+<AnchorPane prefHeight="177.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.RhythmController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="440.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+             <Label fx:id="rhythmStatus" alignment="CENTER" prefHeight="38.0" prefWidth="184.0" text="Playing Rhythm...">
+                 <font>
+                   <Font size="20.0" />
+                 </font>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+             </Label>
+            <Button mnemonicParsing="false" onAction="#handleStop" text="Stop" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
