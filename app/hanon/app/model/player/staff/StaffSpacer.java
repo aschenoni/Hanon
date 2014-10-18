@@ -51,13 +51,12 @@ public class StaffSpacer {
   public StaffSpacedElement closestMeasureToWidth() {
     FunctionalList<StaffSpacedElement> spacings = spacedElements();
     FunctionalList<StaffSpacedElement> lines = spacings.filter(StaffSpacedElement::isStaffLine);
-    return lines.foldl1((a, b) ->
-            distanceFromWidth(a.getX()) < distanceFromWidth(b.getX()) ? a : b);
+    return lines.foldl1((a, b) ->            distanceFromWidth(a.getX()) < distanceFromWidth(b.getX()) ? a : b);
   }
 
   private FunctionalList<StaffSpacedElement> spacedElements() {
     return getUnadjustedPositions().zipWith((x, e) ->
-              new StaffSpacedElement(e, x), elements);
+            new StaffSpacedElement(e, x), elements);
   }
 
   private int distanceFromWidth(int x) {

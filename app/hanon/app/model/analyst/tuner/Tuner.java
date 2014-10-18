@@ -1,44 +1,24 @@
 package hanon.app.model.analyst.tuner;
 
 import hanon.app.model.analyst.StoppableTool;
+import hanon.app.model.analyst.TimedRecorder;
 import hanon.app.model.music.MusicNote;
-import hanon.app.model.recorder.DataRecording;
 import hanon.app.model.recorder.Microphone;
 
 public class Tuner extends StoppableTool<TunerInfo> {
-  private final int timeBetweenReadings;
+  private final TimedRecorder recorder;
 
   public Tuner(int timeBetweenReadings) {
-    this.timeBetweenReadings = timeBetweenReadings;
+    recorder = new TimedRecorder(timeBetweenReadings, new Microphone());
   }
+
   @Override
   protected void runLoop() {
-    MusicNote note = getMusicNote();
+    MusicNote note = MusicNote.fromSoundArr(recorder.record().getFloatArray());
     informAll(new TunerInfo(
             note.getFrequency(),
             note.getName(),
             note.getOctave(),
             note.getFrequencyOffset()));
-  }
-
-  private MusicNote getMusicNote() {
-    DataRecording sound = new DataRecording();
-    recordOnMicrophone(sound);
-    return MusicNote.fromSoundArr(sound.getFloatArray());
-  }
-
-  private void recordOnMicrophone(DataRecording sound) {
-    Microphone mic = new Microphone(sound);
-    mic.startRecord();
-    safeSleep(timeBetweenReadings);
-    mic.stopRecording();
-  }
-
-  private void safeSleep(int millis) {
-    try {
-      Thread.sleep(millis);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
   }
 }

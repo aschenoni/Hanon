@@ -13,8 +13,8 @@ public class DataRecording implements Recording {
 
   public static void main(String args[]){
     DataRecording recording = new DataRecording();
-    Microphone mic = new Microphone(recording);
-    mic.startRecord();
+    Microphone mic = new Microphone();
+    mic.startRecording(recording);
     try {
       Thread.sleep(2000);
     } catch (InterruptedException e) {
@@ -42,12 +42,10 @@ public class DataRecording implements Recording {
   }
 
   private class CaptureThread extends Thread{
-
     public void run(){
       byteArr = new byte[2048];
       targetDataLine.read(byteArr, 0, 2048);
     }
-
   }
 
   public byte[] getByteArray() {

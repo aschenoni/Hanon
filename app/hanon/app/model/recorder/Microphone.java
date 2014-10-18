@@ -1,19 +1,14 @@
 package hanon.app.model.recorder;
 
+import be.tarsos.dsp.AudioDispatcher;
+import be.tarsos.dsp.SilenceDetector;
+import be.tarsos.dsp.io.jvm.JVMAudioInputStream;
+
 import javax.sound.sampled.*;
 
-public class Microphone implements SoundDevice {
+import static be.tarsos.dsp.SilenceDetector.DEFAULT_SILENCE_THRESHOLD;
 
-  public static void main(String [] args) {
-    Microphone mic = new Microphone(new FileRecording());
-    mic.startRecord();
-    try {
-      Thread.sleep(2000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    mic.stopRecording();
-  }
+public class Microphone implements SoundDevice {
 
   private static final float SAMPLE_RATE = 8000.0f;
 
@@ -21,6 +16,7 @@ public class Microphone implements SoundDevice {
   private static final int CHANNEL = 1;
   private static final boolean IS_SIGNED = true;
   private static final boolean IS_BIG_ENDIAN = false;
+  private static final int BUFFER_SIZE = 512;
   private static final AudioFormat DEFAULT_FORMAT =
           new AudioFormat(
                   SAMPLE_RATE,
@@ -33,21 +29,40 @@ public class Microphone implements SoundDevice {
 
 
   private TargetDataLine targetDataLine;
-  private final Recording recording;
+  private Recording recording;
+  private final AudioDispatcher dispatcher;
+  private final SilenceDetector volumeDetector =
+          new SilenceDetector(DEFAULT_SILENCE_THRESHOLD, false);
 
-  public Microphone(Recording recording) {
-    this.recording = recording;
+
+  public Microphone() {
+    targetDataLine = getDataLine();
+    dispatcher = getDispatcher();
+    new Thread(dispatcher).start();
+  }
+
+  private TargetDataLine getDataLine() {
+    TargetDataLine line = null;
     try {
-      targetDataLine = (TargetDataLine) AudioSystem.getLine(DATA_LINE_INFO);
+      line = (TargetDataLine) AudioSystem.getLine(DATA_LINE_INFO);
     } catch (LineUnavailableException e) {
       e.printStackTrace();
     }
+    return line;
   }
 
-  public void startRecord(){
-    // Capture input data from the microphone
+  private AudioDispatcher getDispatcher() {
+    AudioInputStream inputStream = new AudioInputStream(targetDataLine);
+    final JVMAudioInputStream audioStream = new JVMAudioInputStream(inputStream);
+    AudioDispatcher dis = new AudioDispatcher(audioStream, BUFFER_SIZE, 0);
+    dis.addAudioProcessor(volumeDetector);
+    return dis;
+  }
+
+  public void startRecording(Recording recording){
+    this.recording = recording;
     try {
-      targetDataLine.open(DEFAULT_FORMAT);
+      targetDataLine.open(DEFAULT_FORMAT, BUFFER_SIZE);
       targetDataLine.start();
       recording.record(targetDataLine);
     }
@@ -56,15 +71,18 @@ public class Microphone implements SoundDevice {
     }
   }
 
-  public void stopRecording() {
+  public Recording stopRecording() {
     targetDataLine.stop();
     targetDataLine.close();
+    return recording;
+  }
+
+  public double getVolume() {
+    return volumeDetector.currentSPL();
   }
 
   @Override
   public Recording getSound() {
     return recording;
   }
-
-
 }
