@@ -93,7 +93,7 @@ public class RootLayoutController extends BaseController {
 			RhythmController rhythmController = loader.getController();
 			mainDriver.getHPane().setBottom(rhythmPane);
 			mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
-			
+			rhythmController.setMainDriver(mainDriver);
 			ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
 			StaffElementSet set = sets.get(0);
 			rhythmController.handleRhythm(set.getElements());

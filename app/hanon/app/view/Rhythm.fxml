@@ -20,7 +20,7 @@
                   <Insets bottom="10.0" />
                </padding>
              </Label>
-            <Button mnemonicParsing="false" onAction="#handleStop" text="Stop" />
+            <Button fx:id="stopButton" mnemonicParsing="false" onAction="#handleStop" text="Stop" />
          </children>
       </VBox>
    </children>

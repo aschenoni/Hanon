@@ -1,5 +1,6 @@
 package hanon.app.controller;
 
+import hanon.app.MainDriver;
 import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.music.StaffElement;
@@ -7,19 +8,32 @@ import hanon.app.model.music.StaffElement;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class RhythmController extends BaseController {
   private RhythmMachine machine;
+  private MainDriver mainDriver;
 
-  @FXML Label rhythmStatus;
+  @FXML public Label rhythmStatus;
+  
+  @FXML public Button stopButton;
   
   public RhythmController() {
   }
   
   @FXML public void handleStop() {
-	stop();
-	rhythmStatus.setText("Rhythm Stopped");
+	if(rhythmStatus.getText().equals("Playing Rhythm..."))
+	{
+		stop();
+		stopButton.setText("Close");
+		rhythmStatus.setText("Rhythm Stopped");
+	}
+	else
+	{
+		mainDriver.getHPane().setBottom(null);
+	}
+	
   }
   
   public void handleRhythm(List<StaffElement> elements) {
@@ -30,7 +44,12 @@ public class RhythmController extends BaseController {
     new Thread(machine).start();  }
 
   @Override
- @FXML protected void stop() {
+  @FXML protected void stop() {
     machine.stop();
+  }
+  
+  public void setMainDriver(MainDriver driver)
+  {
+	  this.mainDriver = driver;
   }
 }
