@@ -41,7 +41,9 @@ public class RhythmController extends BaseController {
     machine = RhythmMachine.fromElements(elements, 140);
     Clicker clicker = new Clicker();
     machine.register(clicker);
-    new Thread(clicker).run();
+    Thread clickThread = new Thread(clicker);
+    clickThread.setDaemon(false);
+    clickThread.run();
 
 
     PitchEvaluator pe = new PitchEvaluator();

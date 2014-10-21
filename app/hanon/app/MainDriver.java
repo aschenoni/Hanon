@@ -33,7 +33,6 @@ public class MainDriver extends Application {
 	private BorderPane rootLayout; //Main application node from which everything will be a child
 	private HiddenSidesPane hPane;
 	
-	private RhythmController rhythmController;
   	/**
 	 * JavaFX application main method
 	 */
@@ -45,7 +44,6 @@ public class MainDriver extends Application {
 		
 		
 		initPrimaryScene();
-		setupClose();
   }
 	
 	/**
@@ -71,19 +69,6 @@ public class MainDriver extends Application {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private void setupClose() {
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
-				@Override
-				public void handle(WindowEvent we) {
-					if(rhythmController != null) {
-						rhythmController.handleStop();
-					}
-					
-				}
-			});
-		
 	}
 
 	private void addLoginSideBar(HiddenSidesPane hPane2) throws IOException {
@@ -148,9 +133,5 @@ public class MainDriver extends Application {
 
 	        }
 	 }
-
-	public void register(RhythmController rhythmController) {
-		this.rhythmController = rhythmController; 
-	}
 	 
 }
