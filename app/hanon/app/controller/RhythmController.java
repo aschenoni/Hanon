@@ -50,7 +50,10 @@ public class RhythmController extends BaseController {
     machine.register(pe);
 
     ensureClickerReady();
-    new Thread(machine).start();
+    Thread thread = new Thread(machine);
+    thread.setDaemon(true);
+    thread.start();
+    
   }
 
   private void ensureClickerReady() {
