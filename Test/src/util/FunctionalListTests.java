@@ -105,12 +105,14 @@ public class FunctionalListTests {
   @Test
   public void testMinimum() {
     Integer[] l1 = {3,4,5,4,2,4,7};
-    assertEquals(2, minimum(fromArray(l1)));
+    Integer e = 2;
+    assertEquals(e, minimum(FunctionalList.<Integer>fromArray(l1)));
   }
   @Test
   public void testMaximum() {
     Integer[] l1 = {3,4,5,4,2,4,7};
-    assertEquals(7, maximum(fromArray(l1)));
+    Integer e = 7;
+    assertEquals(e, maximum(FunctionalList.<Integer>fromArray(l1)));
   }
 
   @Test
@@ -141,5 +143,23 @@ public class FunctionalListTests {
     Integer[] nums = {3, 4, 5};
     Integer[] expected = {4, 5};
     assertEquals(fromArray(expected), fromArray(nums).drop(1));
+  }
+
+  @Test
+  public void testGroupN() {
+    Integer[] nums = {3, 4, 5, 6, 7, 8, 9};
+    Integer[][] grouped = {{3,4}, {5,6}, {7,8}, {9}};
+
+    FunctionalList<Integer[]> listOfArrays = FunctionalList.fromArray(grouped);
+    FunctionalList<FunctionalList<Integer>> expected = listOfArrays.map(arr -> FunctionalList.fromArray(arr));
+    assertEquals(expected, FunctionalList.fromArray(nums).groupN(2));
+  }
+
+  @Test
+  public void testSort() {
+    Integer[] unsorted = {4,2,6,1,3,7,5};
+    Integer[] sorted   = {1,2,3,4,5,6,7};
+
+    assertEquals(FunctionalList.fromArray(sorted), FunctionalList.sort(FunctionalList.fromArray(unsorted)));
   }
 }

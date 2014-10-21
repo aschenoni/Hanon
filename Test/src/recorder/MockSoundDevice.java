@@ -14,4 +14,14 @@ public class MockSoundDevice implements SoundDevice {
   public Recording getSound() {
     return rec;
   }
+
+  @Override
+  public void startRecording(Recording sound) {
+
+  }
+
+  @Override
+  public Recording stopRecording() {
+    return null;
+  }
 }
