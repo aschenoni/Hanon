@@ -15,6 +15,16 @@ public class FileRecording implements Recording {
     new CaptureThread().start();
   }
 
+  @Override
+  public void setVolume(double volume) {
+    
+  }
+
+  @Override
+  public double getVolume() {
+    return 0;
+  }
+
   private class CaptureThread extends Thread {
     public void run() {
       AudioFileFormat.Type fileType =  AudioFileFormat.Type.WAVE;
