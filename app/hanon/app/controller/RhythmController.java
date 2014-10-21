@@ -3,6 +3,7 @@ package hanon.app.controller;
 import hanon.app.MainDriver;
 import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
+import hanon.app.model.analyst.tuner.PitchEvaluator;
 import hanon.app.model.music.StaffElement;
 
 import java.util.List;
@@ -41,6 +42,11 @@ public class RhythmController extends BaseController {
     Clicker clicker = new Clicker();
     machine.register(clicker);
     new Thread(clicker).run();
+
+
+    PitchEvaluator pe = new PitchEvaluator();
+    machine.register(pe);
+
     ensureClickerReady();
     new Thread(machine).start();
   }

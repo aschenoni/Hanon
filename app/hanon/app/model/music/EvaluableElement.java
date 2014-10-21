@@ -29,4 +29,6 @@ public abstract class EvaluableElement implements Evaluable, StaffElement {
 	{
 		return length;
 	}
+
+  public abstract float getFrequency();
 }
