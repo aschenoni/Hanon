@@ -15,8 +15,9 @@ public class PitchEvaluator implements Observer<EvaluableElement> {
     MusicNote toEmulate = (MusicNote)info;
     DataRecording rec = recorder.record();
     MusicNote played = MusicNote.fromSoundArr(rec.getFloatArray());
+
     System.out.println(toEmulate.getFrequency());
     System.out.println(played.getFrequency());
-    System.out.println(played.getFrequencyOffset());
+    System.out.println(played.getFrequencyOffset(toEmulate));
   }
 }

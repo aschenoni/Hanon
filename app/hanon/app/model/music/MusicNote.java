@@ -97,6 +97,11 @@ public class MusicNote extends EvaluableElement {
             "NoteLength", getLength().toString());
   }
 
+
+  public float getFrequencyOffset(MusicNote toCompareTo) {
+    return getValue().getFrequency() - toCompareTo.getFrequency();
+  }
+
   /**
    * @return the difference between the actual note frequency and the closest
    * theoretical note frequency.
@@ -105,10 +110,10 @@ public class MusicNote extends EvaluableElement {
    * note is 440 Hz (A4)
    */
   public float getFrequencyOffset() {
-    int closestOctave = getValue().getOctave();
-    NoteValue.NoteName closestName = getValue().getName();
-    NoteValue closestValue = NoteValue.fromNameAndOctave(closestName, closestOctave);
-    return getValue().getFrequency() - closestValue.getFrequency();
+    return getFrequencyOffset(new MusicNote(
+            NoteValue.fromNameAndOctave(getName(), getOctave()),
+            getLength()
+    ));
   }
 
   @Override
