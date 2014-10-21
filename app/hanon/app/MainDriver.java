@@ -2,6 +2,7 @@ package hanon.app;
 
 import hanon.app.controller.BaseController;
 import hanon.app.controller.LoginController;
+import hanon.app.controller.RhythmController;
 import hanon.app.model.composer.StaffElementReader;
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.sheet.MusicSheet;
@@ -18,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class MainDriver extends Application {
 	private BorderPane rootLayout; //Main application node from which everything will be a child
 	private HiddenSidesPane hPane;
 	
+	private RhythmController rhythmController;
   	/**
 	 * JavaFX application main method
 	 */
@@ -39,7 +42,10 @@ public class MainDriver extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Hanon");
 		
+		
+		
 		initPrimaryScene();
+		setupClose();
   }
 	
 	/**
@@ -65,6 +71,19 @@ public class MainDriver extends Application {
 		catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void setupClose() {
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
+				@Override
+				public void handle(WindowEvent we) {
+					if(rhythmController != null) {
+						rhythmController.handleStop();
+					}
+					
+				}
+			});
+		
 	}
 
 	private void addLoginSideBar(HiddenSidesPane hPane2) throws IOException {
@@ -129,5 +148,9 @@ public class MainDriver extends Application {
 
 	        }
 	 }
+
+	public void register(RhythmController rhythmController) {
+		this.rhythmController = rhythmController; 
+	}
 	 
 }
