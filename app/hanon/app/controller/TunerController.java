@@ -24,7 +24,10 @@ public class TunerController extends BaseController {
     Thread th = new Thread(u);
     th.setDaemon(true);
     th.start();
-    new Thread(tuner).start();
+
+    Thread th2 = new Thread(tuner);
+    th2.setDaemon(true);
+    th2.start();
 	}
 
   @Override

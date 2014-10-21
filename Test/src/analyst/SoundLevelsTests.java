@@ -12,6 +12,7 @@ public class SoundLevelsTests {
     LevelCollector collector = new LevelCollector();
     meter.register(collector);
     Thread t = new Thread(meter);
+    t.setDaemon(true);
     t.start();
     try {
       Thread.sleep(5000);

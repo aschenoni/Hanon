@@ -42,7 +42,7 @@ public class RhythmController extends BaseController {
     Clicker clicker = new Clicker();
     machine.register(clicker);
     Thread clickThread = new Thread(clicker);
-    clickThread.setDaemon(false);
+    clickThread.setDaemon(true);
     clickThread.run();
 
 

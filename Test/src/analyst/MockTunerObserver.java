@@ -15,7 +15,9 @@ public class MockTunerObserver implements Observer<TunerInfo> {
     Tuner tuner = new Tuner(500);
     MockTunerObserver me = new MockTunerObserver();
     tuner.register(me);
-    new Thread(tuner).start();
+    Thread th = new Thread(tuner);
+    th.setDaemon(true);
+    th.start();
     Thread.sleep(10000);
     tuner.stop();
   }

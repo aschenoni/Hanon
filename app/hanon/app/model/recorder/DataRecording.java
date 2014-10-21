@@ -53,6 +53,12 @@ public class DataRecording implements Recording {
   }
 
   private class CaptureThread extends Thread{
+
+    public CaptureThread() {
+      super();
+      setDaemon(true);
+    }
+
     public void run(){
       byteArr = new byte[2048];
       targetDataLine.read(byteArr, 0, 2048);

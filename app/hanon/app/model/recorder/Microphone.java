@@ -38,7 +38,9 @@ public class Microphone implements SoundDevice {
   public Microphone() {
     targetDataLine = getDataLine();
     dispatcher = getDispatcher();
-    new Thread(dispatcher).start();
+    Thread th = new Thread(dispatcher);
+    th.setDaemon(true);
+    th.start();
   }
 
   private TargetDataLine getDataLine() {
