@@ -1,6 +1,8 @@
 package hanon.app.model.music;
 
+import hanon.app.model.analyst.Evaluable;
 import hanon.app.model.music.jsonutil.JSONUtil;
+
 import org.json.simple.JSONObject;
 
 public class Slur implements StaffElement {
@@ -28,4 +30,5 @@ public class Slur implements StaffElement {
     int numNotes = Integer.parseInt((String)jsonObj.get("Slur"));
     return new Slur(numNotes);
   }
+
 }

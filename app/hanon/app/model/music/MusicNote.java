@@ -5,7 +5,7 @@ import be.tarsos.dsp.pitch.Yin;
 import hanon.app.model.music.jsonutil.JSONUtil;
 import org.json.simple.JSONObject;
 
-public class MusicNote implements StaffElement {
+public class MusicNote extends EvaluableElement {
 
   public static MusicNote fromSoundArr(float[] floatArr) {
     Yin pitch = new Yin(8000, 1024);
@@ -109,5 +109,11 @@ public class MusicNote implements StaffElement {
     NoteValue.NoteName closestName = getValue().getName();
     NoteValue closestValue = NoteValue.fromNameAndOctave(closestName, closestOctave);
     return getValue().getFrequency() - closestValue.getFrequency();
+  }
+
+  @Override
+  public int evaluate() {
+	  // TODO Auto-generated method stub
+	  return 0;
   }
 }
