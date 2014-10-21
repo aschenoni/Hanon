@@ -9,4 +9,14 @@ public class MockRecording implements Recording {
   public void record(TargetDataLine targetDataLine) {
 
   }
+
+  @Override
+  public void setVolume(double volume) {
+
+  }
+
+  @Override
+  public double getVolume() {
+    return 0;
+  }
 }

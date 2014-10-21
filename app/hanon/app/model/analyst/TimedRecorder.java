@@ -31,8 +31,4 @@ public class TimedRecorder {
       e.printStackTrace();
     }
   }
-
-  public double getVolume() {
-    return device.getVolume();
-  }
 }

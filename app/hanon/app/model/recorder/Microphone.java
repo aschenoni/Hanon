@@ -74,11 +74,8 @@ public class Microphone implements SoundDevice {
   public Recording stopRecording() {
     targetDataLine.stop();
     targetDataLine.close();
+    recording.setVolume(volumeDetector.currentSPL());
     return recording;
-  }
-
-  public double getVolume() {
-    return volumeDetector.currentSPL();
   }
 
   @Override

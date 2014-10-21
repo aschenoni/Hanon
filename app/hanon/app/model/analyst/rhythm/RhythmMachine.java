@@ -6,35 +6,35 @@ import hanon.app.model.music.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RhythmMachine extends StoppableTool<NoteLength> {
-  private final List<NoteLength> rhythm;
+public class RhythmMachine extends StoppableTool<EvaluableElement> {
+  private final List<EvaluableElement> rhythm;
   private final NoteLength lengthWithBeat;
   private final int bpm;
 
   public static RhythmMachine fromElements(List<StaffElement> elements, int bpm) {
-    List<NoteLength> lengths = new ArrayList<>();
+    List<EvaluableElement> lengths = new ArrayList<>();
     for (StaffElement e : elements)
       if (e.getType() == StaffElementType.NOTE)
-        lengths.add(((MusicNote) e).getLength());
+        lengths.add((EvaluableElement) e);
     return new RhythmMachine(lengths, bpm);
   }
 
-  private RhythmMachine(List<NoteLength> rhythm, int bpm, NoteLength lengthWithBeat) {
+  private RhythmMachine(List<EvaluableElement> rhythm, int bpm, NoteLength lengthWithBeat) {
     this.rhythm = rhythm;
     this.bpm = bpm;
     this.lengthWithBeat = lengthWithBeat;
   }
 
-  private RhythmMachine(List<NoteLength> rhythm, int bpm) {
+  private RhythmMachine(List<EvaluableElement> rhythm, int bpm) {
     this(rhythm, bpm, NoteLength.QUARTER);
   }
 
   @Override
   protected void runLoop() {
-    for (NoteLength n : rhythm) {
+    for (EvaluableElement n : rhythm) {
       if (isStopped()) break;
-      waitForLength(n);
       informAll(n);
+      waitForLength(n.getLength());
     }
   }
 

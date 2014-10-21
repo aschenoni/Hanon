@@ -20,8 +20,7 @@ public class SoundLevelMeter extends StoppableTool<Double> {
 
   @Override
   protected void runLoop() {
-    recorder.record();
-    informAll(recorder.getVolume());
+    informAll(recorder.record().getVolume());
   }
 }
 

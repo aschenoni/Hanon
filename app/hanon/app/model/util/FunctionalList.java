@@ -3,6 +3,7 @@ package hanon.app.model.util;
 import hanon.app.model.music.StaffElement;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -93,6 +94,10 @@ public class FunctionalList<A> implements Monad<A> {
 
   public boolean isEmpty() {
     return tail == null;
+  }
+
+  public boolean isSingleton() {
+    return !(isEmpty()) && tail.isEmpty();
   }
 
   public int size() {
@@ -207,10 +212,19 @@ public class FunctionalList<A> implements Monad<A> {
    *
    * [3,4,5,6,7].drop(3) -> [6,7]
    */
-  public FunctionalList<A> drop(int num) {
+  public FunctionalList<A> drop(int n) {
     if (isEmpty()) return empty();
-    else if (num <= 0) return this;
-    else return tail.drop(num - 1);
+    else if (n <= 0) return this;
+    else return tail.drop(n - 1);
+  }
+
+  public Pair<FunctionalList<A>, FunctionalList<A>> splitAt(int n) {
+    return new Pair<>(take(n), drop(n));
+  }
+
+  public FunctionalList<FunctionalList<A>> groupN(int n) {
+    if (isEmpty()) return empty();
+    else return splitAt(n).second().groupN(n).prepend(splitAt(n).first());
   }
 
   /**
@@ -246,11 +260,11 @@ public class FunctionalList<A> implements Monad<A> {
   public static <A> FunctionalList<A> concat(FunctionalList<FunctionalList<A>> list) {
     return list.foldr((FunctionalList<A>::append), FunctionalList.<A>empty());
   }
-  public static Comparable minimum(FunctionalList<Comparable> list) {
+  public static <B extends Comparable> B minimum(FunctionalList<B> list) {
     return list.foldl1((a1, a2) -> a1.compareTo(a2) > 0 ? a2 : a1);
   }
 
-  public static Comparable maximum(FunctionalList<Comparable> list) {
+  public static <B extends Comparable> B maximum(FunctionalList<B> list) {
     return list.foldl1((a1, a2) -> a1.compareTo(a2) < 0 ? a2 : a1);
   }
 
@@ -271,6 +285,28 @@ public class FunctionalList<A> implements Monad<A> {
     if (isEmpty()) return empty();
     else return tail.bindMap(f).prepend((FunctionalList<B>) f.apply(head));
   }
+
+  public static <B extends Comparable> FunctionalList<B> sort(FunctionalList<B> list) {
+    return list.sortBy(Comparable::compareTo);
+  }
+
+  public FunctionalList<A> sortBy(Comparator<A> cmp) {
+    if (isEmpty()) return empty();
+    else if (isSingleton()) return pure(head);
+    else {
+      Pair<FunctionalList<A>, FunctionalList<A>> halves = splitAt(size()/2);
+      return merge(cmp, halves.first().sortBy(cmp), halves.second().sortBy(cmp));
+    }
+  }
+  private FunctionalList<A> merge(Comparator<A> cmp, FunctionalList<A> first, FunctionalList<A> second) {
+    if (first.isEmpty()) return second;
+    else if (second.isEmpty()) return first;
+    else if (cmp.compare(first.head, second.head) <= 0)
+      return merge(cmp, first.tail, second).prepend(first.head);
+    else
+      return merge(cmp, first, second.tail).prepend(second.head);
+  }
+
 
   @Override
   public boolean equals(Object o) {

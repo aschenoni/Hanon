@@ -41,7 +41,17 @@ public class RhythmController extends BaseController {
     Clicker clicker = new Clicker();
     machine.register(clicker);
     new Thread(clicker).run();
-    new Thread(machine).start();  }
+    ensureClickerReady();
+    new Thread(machine).start();
+  }
+
+  private void ensureClickerReady() {
+    try {
+      Thread.sleep(1000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
 
   @Override
   @FXML protected void stop() {

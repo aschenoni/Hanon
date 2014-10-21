@@ -9,6 +9,7 @@ public class DataRecording implements Recording {
 
   private TargetDataLine targetDataLine;
   private byte[] byteArr;
+  private double volume;
 
 
   public static void main(String args[]){
@@ -39,6 +40,16 @@ public class DataRecording implements Recording {
   public void record(TargetDataLine targetDataLine) {
     this.targetDataLine = targetDataLine;
     new CaptureThread().start();
+  }
+
+  @Override
+  public void setVolume(double volume) {
+    this.volume = volume;
+  }
+
+  @Override
+  public double getVolume() {
+    return volume;
   }
 
   private class CaptureThread extends Thread{

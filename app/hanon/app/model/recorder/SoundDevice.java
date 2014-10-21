@@ -6,6 +6,4 @@ public interface SoundDevice {
   void startRecording(Recording sound);
 
   Recording stopRecording();
-
-  double getVolume();
 }
