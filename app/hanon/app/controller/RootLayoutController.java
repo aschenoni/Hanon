@@ -97,6 +97,7 @@ public class RootLayoutController extends BaseController {
 			ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
 			StaffElementSet set = sets.get(0);
 			rhythmController.handleRhythm(set.getElements());
+			mainDriver.register(rhythmController);
 		}
 	}
 
