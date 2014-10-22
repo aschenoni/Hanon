@@ -1,9 +1,8 @@
 package hanon.app.controller;
 
 import hanon.app.MainDriver;
-import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
-import hanon.app.model.analyst.tuner.PitchEvaluator;
+import hanon.app.model.analyst.rhythm.RhythmObservers;
 import hanon.app.model.music.StaffElement;
 
 import java.util.List;
@@ -24,14 +23,12 @@ public class RhythmController extends BaseController {
   }
   
   @FXML public void handleStop() {
-	if(rhythmStatus.getText().equals("Playing Rhythm..."))
-	{
+	if(rhythmStatus.getText().equals("Playing Rhythm...")) {
 		stop();
 		stopButton.setText("Close");
 		rhythmStatus.setText("Rhythm Stopped");
 	}
-	else
-	{
+	else {
 		mainDriver.getHPane().setBottom(null);
 	}
 	
@@ -39,21 +36,13 @@ public class RhythmController extends BaseController {
   
   public void handleRhythm(List<StaffElement> elements) {
     machine = RhythmMachine.fromElements(elements, 140);
-    Clicker clicker = new Clicker();
-    machine.register(clicker);
-    Thread clickThread = new Thread(clicker);
-    clickThread.setDaemon(true);
-    clickThread.run();
-
-
-    PitchEvaluator pe = new PitchEvaluator();
-    machine.register(pe);
+    machine.register(RhythmObservers.clicker);
+    machine.register(RhythmObservers.pitchEvaluator);
 
     ensureClickerReady();
     Thread thread = new Thread(machine);
     thread.setDaemon(true);
     thread.start();
-    
   }
 
   private void ensureClickerReady() {
