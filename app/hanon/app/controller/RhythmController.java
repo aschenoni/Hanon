@@ -8,9 +8,14 @@ import hanon.app.model.music.StaffElement;
 
 import java.util.List;
 
+import org.controlsfx.control.SegmentedButton;
+
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.AnchorPane;
 
 public class RhythmController extends BaseController {
   private RhythmMachine machine;
@@ -18,7 +23,7 @@ public class RhythmController extends BaseController {
 
   @FXML public Label rhythmStatus;
   
-  @FXML public Button stopButton;
+  @FXML public ToggleButton stopButton;
   
   public RhythmController() {
   }
@@ -44,7 +49,6 @@ public class RhythmController extends BaseController {
     Thread clickThread = new Thread(clicker);
     clickThread.setDaemon(true);
     clickThread.run();
-
 
     PitchEvaluator pe = new PitchEvaluator();
     machine.register(pe);
@@ -73,4 +77,5 @@ public class RhythmController extends BaseController {
   {
 	  this.mainDriver = driver;
   }
+
 }

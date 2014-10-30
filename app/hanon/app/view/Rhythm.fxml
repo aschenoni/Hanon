@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -20,7 +21,34 @@
                   <Insets bottom="10.0" />
                </padding>
              </Label>
-            <Button fx:id="stopButton" mnemonicParsing="false" onAction="#handleStop" text="Stop" />
+            <HBox alignment="TOP_CENTER" prefHeight="25.0" prefWidth="345.0">
+               <children>
+                  <ToggleButton mnemonicParsing="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../../../../res/images/PlayButtonSmall.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
+                  <ToggleButton mnemonicParsing="false">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../../../../res/images/PauseButtonSmall.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
+                  <ToggleButton fx:id="stopButton" mnemonicParsing="false" onAction="#handleStop">
+                     <graphic>
+                        <ImageView>
+                           <image>
+                              <Image url="@../../../../res/images/StopButtonSmall.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></ToggleButton>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

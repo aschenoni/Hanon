@@ -121,17 +121,4 @@ public class MainDriver extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	 class SideNode extends Label {
-
-
-	        public SideNode(final String text, final Side side,
-	            final HiddenSidesPane pane) {
-	            super(text + " (Click to pin / unpin)");
-	            setAlignment(Pos.CENTER);
-	            setPrefSize(200, 200);
-
-	        }
-	 }
-	 
 }
