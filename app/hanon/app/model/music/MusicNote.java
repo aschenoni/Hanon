@@ -3,6 +3,7 @@ package hanon.app.model.music;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.Yin;
 import hanon.app.model.music.jsonutil.JSONUtil;
+import hanon.app.model.util.FunctionalList;
 import org.json.simple.JSONObject;
 
 public class MusicNote extends EvaluableElement {
@@ -10,7 +11,7 @@ public class MusicNote extends EvaluableElement {
   public static MusicNote fromSoundArr(float[] floatArr) {
     Yin pitch = new Yin(8000, 1024);
     PitchDetectionResult pdr = pitch.getPitch(floatArr);
-    return new MusicNote(new NoteValue(pdr.getPitch()), null);
+    return new MusicNote(new NoteValue(pdr.getPitch()), NoteLength.QUARTER); //TODO how do we determine note length
   }
 
   static MusicNote fromJSON(JSONObject jsonObj) {
@@ -90,6 +91,10 @@ public class MusicNote extends EvaluableElement {
     return 17 * getValue().hashCode() + 17 * getLength().hashCode();
   }
 
+  public String toString() {
+    return "Value: " + getValue() + ", Length: " + getLength();
+  }
+
   @Override
   public JSONObject toJSON() {
     return JSONUtil.stringsToJSON(
@@ -120,5 +125,10 @@ public class MusicNote extends EvaluableElement {
   public int evaluate() {
 	  // TODO Auto-generated method stub
 	  return 0;
+  }
+
+  public static MusicNote average(FunctionalList<MusicNote> noteList) {
+    Float frequency = FunctionalList.average(noteList.map(MusicNote::getFrequency).filter(f -> f > 0));
+    return new MusicNote(new NoteValue(frequency), NoteLength.QUARTER); //TODO how do we determine the length
   }
 }

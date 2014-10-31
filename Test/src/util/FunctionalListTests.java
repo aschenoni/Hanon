@@ -162,4 +162,10 @@ public class FunctionalListTests {
 
     assertEquals(FunctionalList.fromArray(sorted), FunctionalList.sort(FunctionalList.fromArray(unsorted)));
   }
+
+  @Test
+  public void testAverage() {
+    Float[] nums = {1.5f, 2.5f, 3.5f};
+    assertEquals(7.5f/3f, average(fromArray(nums)), .1);
+  }
 }

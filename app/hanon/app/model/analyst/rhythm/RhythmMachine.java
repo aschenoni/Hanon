@@ -10,6 +10,7 @@ public class RhythmMachine extends StoppableTool<EvaluableElement> {
   private final List<EvaluableElement> rhythm;
   private final NoteLength lengthWithBeat;
   private final int bpm;
+  private boolean done = false;
 
   public static RhythmMachine fromElements(List<StaffElement> elements, int bpm) {
     List<EvaluableElement> lengths = new ArrayList<>();
@@ -36,6 +37,8 @@ public class RhythmMachine extends StoppableTool<EvaluableElement> {
       informAll(n);
       waitForLength(n.getLength());
     }
+    stop();
+    done = true;
   }
 
   private void waitForLength(NoteLength n) {
@@ -52,5 +55,9 @@ public class RhythmMachine extends StoppableTool<EvaluableElement> {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public boolean isDone() {
+    return done;
   }
 }
