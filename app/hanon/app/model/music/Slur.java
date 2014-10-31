@@ -1,6 +1,6 @@
 package hanon.app.model.music;
 
-import hanon.app.model.analyst.Evaluable;
+import hanon.app.model.analyst.evaluator.Evaluable;
 import hanon.app.model.music.jsonutil.JSONUtil;
 
 import org.json.simple.JSONObject;

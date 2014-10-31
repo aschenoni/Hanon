@@ -1,8 +1,10 @@
 package hanon.app.model.music;
 
+import javafx.scene.paint.Color;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.Yin;
 import hanon.app.model.music.jsonutil.JSONUtil;
+
 import org.json.simple.JSONObject;
 
 public class MusicNote extends EvaluableElement {
@@ -19,18 +21,45 @@ public class MusicNote extends EvaluableElement {
     NoteValue.NoteName noteName = NoteValue.NoteName.valueOf(note.substring(0, 1));
     Integer octave = new Integer(note.substring(1));
     NoteValue value = NoteValue.fromNameAndOctave(noteName, octave);
-    return new MusicNote(value, length);
-  }
+    
+    	if(jsonObj.get("NoteColor") != null)
+    	{
+    		Long rawColor = Long.parseLong(((String) jsonObj.get("NoteColor")).substring(2), 16);
+    		Long red =     rawColor & 0xff000000;
+    		System.out.println(red);
+    		red = red >> 6*4;
+    		System.out.println(red);
+    		Long green =   rawColor & 0x00ff0000;
+    		green = green >> 4*4;
+    		Long blue =    rawColor & 0x0000ff00;
+    		blue = blue >> 2*4;
+    		Long opacity = rawColor & 0x000000ff;
+
+    		Color color = new Color(red.doubleValue()/255, green.doubleValue()/255, blue.doubleValue()/255, opacity.doubleValue()/255);
+    		return new MusicNote(value, length, color);
+    	}
+    	
+   return new MusicNote(value, length); 
+   }
 
   private final NoteValue value;
 
   private final NoteLength length;
+  
+  private Color noteColor;
 
   public MusicNote(NoteValue value, NoteLength length) {
     this.value = value;
     this.length = length;
+    this.noteColor = Color.BLACK;
   }
 
+  public MusicNote(NoteValue value, NoteLength length, Color color) {
+	  this.value = value;
+	  this.length = length;
+	  this.noteColor = color;
+  }
+  
   public StaffElementType getType() {
     return StaffElementType.NOTE;
   }
@@ -74,6 +103,10 @@ public class MusicNote extends EvaluableElement {
     return value;
   }
 
+  public Color getColor() {
+	  return noteColor;
+  }
+  
   public float getFrequency() {
     return value.getFrequency();
   }
@@ -94,7 +127,8 @@ public class MusicNote extends EvaluableElement {
   public JSONObject toJSON() {
     return JSONUtil.stringsToJSON(
             "NoteValue", getValue().toString(),
-            "NoteLength", getLength().toString());
+            "NoteLength", getLength().toString(),
+            "NoteColor", getColor().toString());
   }
 
 
@@ -117,8 +151,17 @@ public class MusicNote extends EvaluableElement {
   }
 
   @Override
-  public int evaluate() {
-	  // TODO Auto-generated method stub
-	  return 0;
+  public void evaluate(MusicNote toCompareTo) {
+	float offset = getFrequencyOffset(toCompareTo);
+	
+	int eval = 0;//TODO add threshold to evaluate to: 1 for good, 0 for default, -1 for bad
+	switch (eval) {
+		case 1: noteColor = new Color(255,0,0,1); //RED
+		case -1: noteColor = new Color(0,255,150,1); //custom green color that is calmer than just pure green
+		default: noteColor = Color.BLACK;
+		
+	}
+	
+
   }
 }

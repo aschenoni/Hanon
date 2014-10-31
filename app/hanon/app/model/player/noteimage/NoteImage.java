@@ -1,5 +1,6 @@
 package hanon.app.model.player.noteimage;
 
+import javafx.scene.paint.Color;
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.StaffPlaceable;
 
@@ -13,16 +14,19 @@ public class NoteImage implements StaffPlaceable {
   private final boolean up;
   private final int x;
   private final int y;
+  private final Color color;
   private final NoteComponent[] components;
 
-  NoteImage(boolean up, int x, int y, NoteComponent... components) {
+  NoteImage(boolean up, int x, int y, Color color, NoteComponent... components) {
     this.up = up;
     this.x = x;
     this.y = y;
+    this.color = color;
     this.components = components;
   }
 
   public void paint(Brush brush) {
+	brush = brush.withColor(color);
     for (NoteComponent c : components) { c.paint(brush); }
   }
 
