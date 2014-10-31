@@ -24,7 +24,7 @@ public class Staff {
     factory = new StaffPlaceableFactory(info);
   }
 
-  List<StaffPlaceable> getPlaceableElements() {
+  public List<StaffPlaceable> getPlaceableElements() {
     FunctionalList<StaffSpacedElement> spacings = new StaffSpacer(info.getWidth(), elements).allocatedElements();
     return spacings.map(this::placeElement)
             .prepend(new MeasureLine(info.getX(), info.getY(), info.getMeasureLineHeight()))

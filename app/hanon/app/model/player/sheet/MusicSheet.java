@@ -102,4 +102,11 @@ public class MusicSheet extends AnchorPane {
 	public ObservableList<StaffElementSet> getSets(){
 		return this.sets;
 	}
+
+	public void redraw(int i, int j) {
+		if(!this.getChildren().isEmpty()) {
+			this.getChildren().remove(0);
+		}
+		draw(i, j);	
+	}
 }

@@ -173,6 +173,6 @@ public class MusicNote extends EvaluableElement {
 	}
 
   public void setColor(Color color) {
-    this.color = color;
+    this.noteColor = color;
   }
 }
