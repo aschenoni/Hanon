@@ -24,8 +24,17 @@ public class MusicNoteEvaluation {
     return compareFrequencies() > NoteValue.FREQ_CONST;
   }
 
+  public boolean isGood() {
+    return compareFrequencies() < NoteValue.FREQ_CONST;
+  }
+
   private float compareFrequencies() {
     return Float.max(played.getFrequency() / expected.getFrequency(),
             expected.getFrequency() / played.getFrequency());
+  }
+
+  @Override
+  public String toString() {
+    return "Played: {" + played + "}, Expected:{" + expected + "}";
   }
 }

@@ -34,23 +34,25 @@ public class MusicSheet extends AnchorPane {
     return brush;
   }
 
+  public void setup(int width, int height) {
+    Canvas canvas = new Canvas(width, height);
+
+    Group group = new Group();
+    group.getChildren().add(canvas);
+
+
+    this.getChildren().add(group);
+
+    brush = new Brush(group);
+  }
+
 	/**
 	 * Draws the music sheet, rendering the musical representation of each note
 	 * 
 	 * @param width - width of the canvas (eventually should have this automatically resized)
 	 * @param height - height of the canvas (eventually should have this automatically resized)
 	 */
-	public void draw(double width, double height) {
-		Canvas canvas = new Canvas(width, height);
-	
-		Group group = new Group();
-		group.getChildren().add(canvas);
-		
-		
-		this.getChildren().add(group);
-
-	  brush = new Brush(group);
-
+	public void draw() {
     int i = 1;
     for (StaffElementSet s : sets) {
       StaffInfo.StaffInfoBuilder b = new StaffInfo.StaffInfoBuilder()
@@ -62,11 +64,7 @@ public class MusicSheet extends AnchorPane {
       if (i == 1 && sets.size() == 2) {
         b.measureLineHeight(130);
       }
-
-
       StaffSet set = new StaffSet(b.build(), 100*sets.size(), s.getElements());
-
-
       for (Staff staff : set.getStaffs())
         staff.paint(brush);
       i++;
@@ -101,12 +99,5 @@ public class MusicSheet extends AnchorPane {
 	
 	public ObservableList<StaffElementSet> getSets(){
 		return this.sets;
-	}
-
-	public void redraw(int i, int j) {
-		if(!this.getChildren().isEmpty()) {
-			this.getChildren().remove(0);
-		}
-		draw(i, j);	
 	}
 }

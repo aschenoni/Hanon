@@ -13,11 +13,11 @@ public class RhythmMachine extends StoppableTool<EvaluableElement> {
   private boolean done = false;
 
   public static RhythmMachine fromElements(List<StaffElement> elements, int bpm) {
-    List<EvaluableElement> lengths = new ArrayList<>();
+    List<EvaluableElement> notes = new ArrayList<>();
     for (StaffElement e : elements)
       if (e.getType() == StaffElementType.NOTE)
-        lengths.add((EvaluableElement) e);
-    return new RhythmMachine(lengths, bpm);
+        notes.add((EvaluableElement) e);
+    return new RhythmMachine(notes, bpm);
   }
 
   private RhythmMachine(List<EvaluableElement> rhythm, int bpm, NoteLength lengthWithBeat) {

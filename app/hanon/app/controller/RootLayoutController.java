@@ -45,7 +45,8 @@ public class RootLayoutController extends BaseController {
 		if(file != null) {
 			StaffElementSet set = StaffElementReader.loadFromFile(file);
 			sheet = new MusicSheet(set);
-      sheet.draw(500, 500);
+      sheet.setup(500, 500);
+      sheet.draw();
 			mainDriver.getRootLayout().setCenter(sheet);
 		}
 	}

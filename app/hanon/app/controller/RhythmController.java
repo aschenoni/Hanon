@@ -10,8 +10,8 @@ import hanon.app.model.music.MusicNote;
 import hanon.app.model.music.NoteLength;
 import hanon.app.model.music.NoteValue;
 import hanon.app.model.music.StaffElement;
-import hanon.app.model.music.StaffElementType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -49,7 +49,6 @@ public class RhythmController extends BaseController {
   }
   
   public void handleRhythm(List<StaffElement> elements) {
-    elements.add(0, new MusicNote(new NoteValue(0), NoteLength.QUARTER));
     machine = RhythmMachine.fromElements(elements, 120);
     machine.register(new Clicker());
     IntonationJudge intonationJudge = new IntonationJudge();
@@ -89,12 +88,11 @@ public class RhythmController extends BaseController {
   class ColorChanger extends Task implements Observer<MusicNoteEvaluation> {
     private final MusicSheet sheet;
     private FunctionalList<NoteImage> notes;
-    private int elementIndex;
-    
+
     public ColorChanger(MusicSheet sheet) {
       this.sheet = sheet;
-      int elementIndex = 0;
       notes = FunctionalList.fromIterable(sheet.getAllNoteImages());
+      notes = notes.prepend(null); // must prepend a dummy note so first note is redrawn
     }
 
     @Override
@@ -106,21 +104,16 @@ public class RhythmController extends BaseController {
     public void inform(MusicNoteEvaluation info) {
       if (info.isPoor()) {
         Platform.runLater(() -> {
-        	if(sheet.getSets().get(0).getElements().get(elementIndex).getType() == StaffElementType.NOTE)
-        	{
-        		((MusicNote) (sheet.getSets().get(0).getElements().get(elementIndex))).setColor(Color.RED);
-        		
-        		//NASTY workaround, for some reason an extra note is getting added to the beginning of the elements each iteration (maybe from the draw function?)
-        		if(sheet.getSets().get(0).getElements().get(0).getType() != StaffElementType.CLEF)
-        		{
-        			sheet.getSets().get(0).getElements().remove(0);
-        		}
-        		sheet.redraw(500, 500);
-        	}
-          
+          notes.head().setColor(Color.RED);
+          notes.head().paint(sheet.getBrush());
+        });
+      } else if (info.isGood()) {
+        Platform.runLater(() -> {
+          notes.head().setColor(Color.YELLOWGREEN);
+          notes.head().paint(sheet.getBrush());
         });
       }
-      elementIndex++;
+      notes = notes.tail();
     }
   }
 }
