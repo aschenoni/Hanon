@@ -107,7 +107,7 @@ public class RhythmController extends BaseController {
           notes.head().paint(sheet.getBrush().withColor(Color.RED)));
       } else if (info.isGood()) {
         Platform.runLater(() ->
-          notes.head().paint(sheet.getBrush().withColor(Color.YELLOWGREEN)));
+          notes.head().paint(sheet.getBrush().withColor(Color.SEAGREEN)));
       }
       notes = notes.tail();
     }

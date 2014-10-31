@@ -1,5 +1,7 @@
 package hanon.app.controller;
 
+import java.io.IOException;
+
 import org.json.simple.JSONArray;
 
 import hanon.app.MainDriver;
@@ -7,10 +9,12 @@ import hanon.app.controller.connector.ServerAPI;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class LoginController implements EventHandler{
 	
@@ -21,13 +25,16 @@ public class LoginController implements EventHandler{
 	@FXML public PasswordField password;
 	@FXML public Button closeButton;
 	
-	@FXML public void handleLogin() {
+	@FXML public void handleLogin() throws IOException {
 		String user = username.getText();
 		String pw = password.getText();
 		password.clear();
 		if(isValidFormat(user, pw))
 		{
 			JSONArray userProfile = ServerAPI.login(user, pw);
+			FXMLLoader loader = BaseController.buildLoader("Profile");
+			AnchorPane profile = loader.load();
+			mainDriver.getHPane().setRight(profile);
 		}
 		else
 		{
