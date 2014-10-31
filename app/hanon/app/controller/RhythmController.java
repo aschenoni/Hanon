@@ -1,20 +1,17 @@
 package hanon.app.controller;
 
 import hanon.app.MainDriver;
+import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
-import hanon.app.model.analyst.rhythm.RhythmObservers;
+import hanon.app.model.analyst.tuner.IntonationJudge;
 import hanon.app.model.music.StaffElement;
 
 import java.util.List;
 
-import org.controlsfx.control.SegmentedButton;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.AnchorPane;
 
 public class RhythmController extends BaseController {
   private RhythmMachine machine;
@@ -28,21 +25,23 @@ public class RhythmController extends BaseController {
   }
   
   @FXML public void handleStop() {
-	if(rhythmStatus.getText().equals("Playing Rhythm...")) {
-		stop();
-		stopButton.setText("Close");
-		rhythmStatus.setText("Rhythm Stopped");
-	}
-	else {
-		mainDriver.getHPane().setBottom(null);
-	}
+    if(rhythmStatus.getText().equals("Playing Rhythm...")) {
+      stop();
+      stopButton.setText("Close");
+      rhythmStatus.setText("Rhythm Stopped");
+    }
+    else {
+      mainDriver.getHPane().setBottom(null);
+    }
 	
   }
   
   public void handleRhythm(List<StaffElement> elements) {
     machine = RhythmMachine.fromElements(elements, 140);
-    machine.register(RhythmObservers.clicker);
-    machine.register(RhythmObservers.pitchEvaluator);
+    machine.register(new Clicker());
+    IntonationJudge intonationJudge = new IntonationJudge();
+    intonationJudge.register(System.out::println);
+    machine.register(intonationJudge);
 
     ensureClickerReady();
     Thread thread = new Thread(machine);

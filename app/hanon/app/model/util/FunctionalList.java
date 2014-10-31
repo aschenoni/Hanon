@@ -59,7 +59,7 @@ public class FunctionalList<A> implements Monad<A> {
    * A functional list should only be constructed by a user using one of the
    * static constructor methods provided.
    */
-  private FunctionalList(A head, FunctionalList<A> tail) {
+  public FunctionalList(A head, FunctionalList<A> tail) {
     this.head = head;
     this.tail = tail;
   }
@@ -266,6 +266,14 @@ public class FunctionalList<A> implements Monad<A> {
 
   public static <B extends Comparable> B maximum(FunctionalList<B> list) {
     return list.foldl1((a1, a2) -> a1.compareTo(a2) < 0 ? a2 : a1);
+  }
+
+  public static Float average(FunctionalList<Float> list) {
+    return sum(list)/list.size();
+  }
+
+  public static Float sum(FunctionalList<Float> list) {
+    return list.foldl((a, b) -> a + b, 0f);
   }
 
   @Override
