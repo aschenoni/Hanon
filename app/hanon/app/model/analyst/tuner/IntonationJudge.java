@@ -7,7 +7,7 @@ import hanon.app.model.util.ThreadedObserverObservable;
 
 import static hanon.app.model.music.MusicNote.average;
 
-public class IntonationJudge extends ThreadedObserverObservable<EvaluableElement, EvaluableElement> {
+public class IntonationJudge extends ThreadedObserverObservable<EvaluableElement, MusicNoteEvaluation> {
   private final NoteCollector collector = new NoteCollector();
 
   public IntonationJudge() {
@@ -17,6 +17,6 @@ public class IntonationJudge extends ThreadedObserverObservable<EvaluableElement
   @Override
   public void consume(EvaluableElement element) {
     MusicNote average = average(collector.takeCollection());
-    informAll(average);
+    informAll(new MusicNoteEvaluation(average, (MusicNote) element));
   }
 }

@@ -41,8 +41,6 @@ public class MainDriver extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Hanon");
 		
-		
-		
 		initPrimaryScene();
   }
 	
@@ -53,15 +51,14 @@ public class MainDriver extends Application {
 	private void initPrimaryScene() {
 		try {
 	  
-	  //Add hPane as top layer to allow for hidden sides on RootLayout
-	  hPane = new HiddenSidesPane();
+	    //Add hPane as top layer to allow for hidden sides on RootLayout
+	    hPane = new HiddenSidesPane();
 
 	  
       FXMLLoader loader = BaseController.buildLoader("RootLayout");
 			rootLayout = loader.load();
       buildController(loader);
-	  addLoginSideBar(hPane);
-
+	    addLoginSideBar(hPane);
 
       buildScene();
       
@@ -73,12 +70,12 @@ public class MainDriver extends Application {
 
 	private void addLoginSideBar(HiddenSidesPane hPane2) throws IOException {
 		FXMLLoader loader = BaseController.buildLoader("Login");
-	    hPane.setContent(rootLayout);
+	  hPane.setContent(rootLayout);
 		AnchorPane rightA = loader.load();
 		LoginController controller = loader.getController();
 		controller.setMainDriver(this);
-	    hPane.setRight(rightA);
-	    hPane.getContent().setOnMouseClicked(new EventHandler<MouseEvent>() {
+	  hPane.setRight(rightA);
+	  hPane.getContent().setOnMouseClicked(new EventHandler<MouseEvent>() {
 	    	public void handle(MouseEvent me) {
 	    		controller.unPin();
 	    	}

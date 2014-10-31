@@ -1,12 +1,17 @@
 package hanon.app.model.analyst.rhythm;
 
+import hanon.app.model.analyst.Observable;
+import hanon.app.model.analyst.Observer;
 import hanon.app.model.analyst.TimedRecorder;
 import hanon.app.model.music.MusicNote;
 import hanon.app.model.recorder.DataRecording;
 import hanon.app.model.recorder.Microphone;
 import hanon.app.model.util.FunctionalList;
 
-public class NoteCollector extends Thread {
+import java.util.ArrayList;
+import java.util.List;
+
+public class NoteCollector extends Thread implements Observable<MusicNote> {
   private FunctionalList<MusicNote> notes;
   private final TimedRecorder recorder;
 
@@ -26,7 +31,11 @@ public class NoteCollector extends Thread {
   public synchronized FunctionalList<MusicNote> takeCollection() {
     FunctionalList<MusicNote> copy = notes;
     notes = FunctionalList.empty();
-    return copy;
+    return copy.reverse();
+  }
+
+  public synchronized MusicNote getMostRecent() {
+    return notes.head();
   }
 
   @Override
@@ -34,6 +43,20 @@ public class NoteCollector extends Thread {
     while (true) {
       DataRecording rec = recorder.record();
       addNote(MusicNote.fromSoundArr(rec.getFloatArray()));
+      informAll(getMostRecent());
     }
+  }
+
+  private final List<Observer<MusicNote>> observers = new ArrayList<>();
+
+  @Override
+  public void register(Observer<MusicNote> observer) {
+    observers.add(observer);
+  }
+
+  @Override
+  public void informAll(MusicNote info) {
+    for (Observer<MusicNote> obs: observers)
+      obs.inform(info);
   }
 }

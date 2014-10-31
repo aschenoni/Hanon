@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hanon.app.model.music.StaffElementSet;
+import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.staff.StaffInfo;
 import hanon.app.model.player.staff.Staff;
 import hanon.app.model.player.staff.StaffSet;
@@ -17,6 +18,7 @@ public class MusicSheet extends AnchorPane {
 	
 	//List of staff elements on the music sheet. The list May Change if notes are added or deleted
   private final ObservableList<StaffElementSet> sets;
+  private Brush brush;
 
   public MusicSheet(ObservableList<StaffElementSet> sets) {
     this.sets = sets;
@@ -27,6 +29,11 @@ public class MusicSheet extends AnchorPane {
     list.add(set);
     this.sets = FXCollections.observableArrayList(list);
   }
+
+  public Brush getBrush() {
+    return brush;
+  }
+
 	/**
 	 * Draws the music sheet, rendering the musical representation of each note
 	 * 
@@ -42,7 +49,7 @@ public class MusicSheet extends AnchorPane {
 		
 		this.getChildren().add(group);
 
-	  Brush brush = new Brush(group);
+	  brush = new Brush(group);
 
     int i = 1;
     for (StaffElementSet s : sets) {
@@ -64,9 +71,33 @@ public class MusicSheet extends AnchorPane {
         staff.paint(brush);
       i++;
     }
-
-
 	}
+
+  public List<NoteImage> getAllNoteImages() {
+    List<NoteImage> images = new ArrayList<>();
+    int i = 1;
+    for (StaffElementSet s : sets) {
+      StaffInfo.StaffInfoBuilder b = new StaffInfo.StaffInfoBuilder()
+              .clef(s.getClef())
+              .x(100)
+              .y(i*90)
+              .width(800);
+
+      if (i == 1 && sets.size() == 2) {
+        b.measureLineHeight(130);
+      }
+      StaffSet set = new StaffSet(b.build(), 100*sets.size(), s.getElements());
+      for (Staff staff : set.getStaffs()) {
+        for (StaffPlaceable sp : staff.getPlaceableElements()) {
+          if (sp instanceof NoteImage) {
+            images.add((NoteImage) sp);
+          }
+        }
+      }
+      i++;
+    }
+    return images;
+  }
 	
 	public ObservableList<StaffElementSet> getSets(){
 		return this.sets;

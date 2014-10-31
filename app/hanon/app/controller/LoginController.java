@@ -72,7 +72,5 @@ public class LoginController implements EventHandler{
 	public void handle(Event arg0) {
 		unPin();
 		
-	}
-	
-	
+  }
 }

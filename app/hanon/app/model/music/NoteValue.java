@@ -35,7 +35,7 @@ public class NoteValue {
   public static final float A4 = 440.0f;
   private static final int A_INDEX = NoteName.indexOf(NoteName.A);
   private static final int NUM_HALF_STEPS_IN_OCTAVE = 12;
-  private static final float FREQ_CONST = (float) pow(2.0, (1.0 / NUM_HALF_STEPS_IN_OCTAVE));
+  public static final float FREQ_CONST = (float) pow(2.0, (1.0 / NUM_HALF_STEPS_IN_OCTAVE));
 
 
   public static NoteValue fromNameAndOctave(NoteName name, int octave) {

@@ -14,7 +14,7 @@ public class NoteImage implements StaffPlaceable {
   private final boolean up;
   private final int x;
   private final int y;
-  private final Color color;
+  private Color color;
   private final NoteComponent[] components;
 
   NoteImage(boolean up, int x, int y, Color color, NoteComponent... components) {
@@ -26,8 +26,12 @@ public class NoteImage implements StaffPlaceable {
   }
 
   public void paint(Brush brush) {
-	brush = brush.withColor(color);
+    brush = brush.withColor(color);
     for (NoteComponent c : components) { c.paint(brush); }
+  }
+
+  public void setColor(Color color) {
+    this.color = color;
   }
 
   public int x() {

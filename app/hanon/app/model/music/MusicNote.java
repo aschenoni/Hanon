@@ -156,13 +156,14 @@ public class MusicNote extends EvaluableElement {
 
   @Override
   public void evaluate(MusicNote toCompareTo) {
-	float offset = getFrequencyOffset(toCompareTo);
-	
-	int eval = 0;//TODO add threshold to evaluate to: 1 for good, 0 for default, -1 for bad
-	switch (eval) {
-		case 1: noteColor = new Color(255,0,0,1); //RED
-		case -1: noteColor = new Color(0,255,150,1); //custom green color that is calmer than just pure green
-		default: noteColor = Color.BLACK;
+    float offset = getFrequencyOffset(toCompareTo);
+
+    int eval = 0; //TODO add threshold to evaluate to: 1 for good, 0 for default, -1 for bad
+    switch (eval) {
+      case 1: noteColor = new Color(255,0,0,1); //RED
+      case -1: noteColor = new Color(0,255,150,1); //custom green color that is calmer than just pure green
+      default: noteColor = Color.BLACK;
+    }
   }
 
   public static MusicNote average(FunctionalList<MusicNote> noteList) {
@@ -170,7 +171,8 @@ public class MusicNote extends EvaluableElement {
     return new MusicNote(new NoteValue(frequency), NoteLength.QUARTER); //TODO how do we determine the length
 		
 	}
-	
 
+  public void setColor(Color color) {
+    this.color = color;
   }
 }
