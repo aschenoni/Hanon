@@ -50,10 +50,10 @@ public class NoteImageFactory {
 
     boolean up = goesUp(d, note);
     switch (note.getLength()) {
-      case EIGHTH:  return new NoteImage(up, x, y, note.getColor(), normalBody, noteStem, flag, ledger);
-      case QUARTER: return new NoteImage(up, x, y, note.getColor(), normalBody, noteStem, ledger);
-      case HALF:    return new NoteImage(up, x, y, note.getColor(), normalBody, normalHole, noteStem, ledger);
-      case WHOLE:   return new NoteImage(up, x, y, note.getColor(), wholeBody, wholeHole, ledger);
+      case EIGHTH:  return new NoteImage(up, x, y, normalBody, noteStem, flag, ledger);
+      case QUARTER: return new NoteImage(up, x, y, normalBody, noteStem, ledger);
+      case HALF:    return new NoteImage(up, x, y, normalBody, normalHole, noteStem, ledger);
+      case WHOLE:   return new NoteImage(up, x, y, wholeBody, wholeHole, ledger);
       default:      throw new NoSuchNoteLengthException();
         /*
         *  TODO There is no reason this exception should be needed. We should

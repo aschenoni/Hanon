@@ -103,15 +103,11 @@ public class RhythmController extends BaseController {
     @Override
     public void inform(MusicNoteEvaluation info) {
       if (info.isPoor()) {
-        Platform.runLater(() -> {
-          notes.head().setColor(Color.RED);
-          notes.head().paint(sheet.getBrush());
-        });
+        Platform.runLater(() ->
+          notes.head().paint(sheet.getBrush().withColor(Color.RED)));
       } else if (info.isGood()) {
-        Platform.runLater(() -> {
-          notes.head().setColor(Color.YELLOWGREEN);
-          notes.head().paint(sheet.getBrush());
-        });
+        Platform.runLater(() ->
+          notes.head().paint(sheet.getBrush().withColor(Color.YELLOWGREEN)));
       }
       notes = notes.tail();
     }
