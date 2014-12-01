@@ -25,9 +25,11 @@ public class Clicker extends ThreadedObserver<EvaluableElement> {
   }
 
   @Override
-  public void consume(EvaluableElement el) {
-    clip.setFramePosition(0);
-    clip.start();
+  public void consume(EvaluableElement e) {
+    if (e != null) {
+      clip.setFramePosition(0);
+      clip.start();
+    }
   }
 }
 

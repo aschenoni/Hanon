@@ -29,6 +29,7 @@ public class RhythmController extends BaseController {
   private RhythmMachine machine;
   private MainDriver mainDriver;
 
+
   @FXML public Label rhythmStatus;
   
   @FXML public ToggleButton stopButton;
@@ -49,17 +50,34 @@ public class RhythmController extends BaseController {
   }
   
   public void handleRhythm(List<StaffElement> elements) {
+    List<StaffElement> quarters = new ArrayList<>();
+    quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
+    quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
+    quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
+    quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
+    RhythmMachine counter = RhythmMachine.fromElements(quarters, 120);
+    counter.register(new Clicker());
+    counter.register(this::startMachine);
+
     machine = RhythmMachine.fromElements(elements, 120);
     machine.register(new Clicker());
     IntonationJudge intonationJudge = new IntonationJudge();
-    intonationJudge.register(System.out::println);
     intonationJudge.register(new ColorChanger(sheet));
     machine.register(intonationJudge);
 
     ensureClickerReady();
-    Thread thread = new Thread(machine);
+    Thread thread = new Thread(counter);
     thread.setDaemon(true);
     thread.start();
+
+  }
+
+  private void startMachine(StaffElement e) {
+    if (e == null) {
+      Thread thread = new Thread(machine);
+      thread.setDaemon(true);
+      thread.start();
+    }
   }
 
   private void ensureClickerReady() {
@@ -111,5 +129,6 @@ public class RhythmController extends BaseController {
       }
       notes = notes.tail();
     }
+
   }
 }
