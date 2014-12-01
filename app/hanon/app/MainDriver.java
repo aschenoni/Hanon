@@ -2,26 +2,17 @@ package hanon.app;
 
 import hanon.app.controller.BaseController;
 import hanon.app.controller.LoginController;
-import hanon.app.controller.RhythmController;
-import hanon.app.model.composer.StaffElementReader;
-import hanon.app.model.music.StaffElementSet;
-import hanon.app.model.player.sheet.MusicSheet;
 import hanon.app.controller.RootLayoutController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.geometry.Side;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import javafx.stage.WindowEvent;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.controlsfx.control.HiddenSidesPane;

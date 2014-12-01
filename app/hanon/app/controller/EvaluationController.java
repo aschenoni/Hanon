@@ -25,7 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.paint.Color;
 
-public class RhythmController extends BaseController {
+public class EvaluationController extends BaseController {
   private RhythmMachine machine;
   private MainDriver mainDriver;
 
@@ -35,7 +35,7 @@ public class RhythmController extends BaseController {
   @FXML public ToggleButton stopButton;
   private MusicSheet sheet;
 
-  public RhythmController() {
+  public EvaluationController() {
   }
   
   @FXML public void handleStop() {

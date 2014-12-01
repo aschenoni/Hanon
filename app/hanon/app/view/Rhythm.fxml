@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="177.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.RhythmController">
+<AnchorPane prefHeight="177.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.EvaluationController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="440.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -27,7 +27,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../../../../res/images/PlayButtonSmall.png" />
+                              <Image url="@PlayButtonSmall.png" />
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>
@@ -35,7 +35,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../../../../res/images/PauseButtonSmall.png" />
+                              <Image url="@PauseButtonSmall.png" />
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>
@@ -43,7 +43,7 @@
                      <graphic>
                         <ImageView>
                            <image>
-                              <Image url="@../../../../res/images/StopButtonSmall.png" />
+                              <Image url="@StopButtonSmall.png" />
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>

@@ -17,22 +17,22 @@
       </Label>
       <ImageView fitHeight="77.0" fitWidth="75.0" layoutX="18.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../res/images/avatar.jpg" />
+            <Image url="@avatar.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="18.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../res/images/blueStar.png" />
+            <Image url="@blueStar.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="18.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../res/images/yellowStar.png" />
+            <Image url="@yellowStar.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="35.0" fitWidth="169.0" layoutX="18.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../res/images/levelBar.png" />
+            <Image url="@levelBar.png" />
          </image>
       </ImageView>
       <Label layoutX="72.0" layoutY="229.0" text="248" textFill="WHITE">

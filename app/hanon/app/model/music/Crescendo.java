@@ -1,13 +1,12 @@
 package hanon.app.model.music;
 
 import hanon.app.model.music.jsonutil.JSONUtil;
-
 import org.json.simple.JSONObject;
 
-public class Slur implements StaffElement {
+public class Crescendo implements StaffElement {
   private final int numNotes;
 
-  public Slur(int numNotes) {
+  public Crescendo(int numNotes) {
     this.numNotes = numNotes;
   }
 
@@ -17,16 +16,16 @@ public class Slur implements StaffElement {
 
   @Override
   public StaffElementType getType() {
-    return StaffElementType.SLUR;
+    return StaffElementType.CRESCENDO;
   }
 
   @Override
   public JSONObject toJSON() {
-    return JSONUtil.stringsToJSON("Slur", Integer.toString(numNotes));
+    return JSONUtil.stringsToJSON("Crescendo", Integer.toString(numNotes));
   }
 
   public static StaffElement fromJSON(JSONObject jsonObj) {
-    int numNotes = Integer.parseInt((String)jsonObj.get("Slur"));
-    return new Slur(numNotes);
+    int numNotes = Integer.parseInt((String)jsonObj.get("Crescendo"));
+    return new Crescendo(numNotes);
   }
 }

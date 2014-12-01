@@ -3,38 +3,47 @@ package hanon.app.model.analyst.rhythm;
 import hanon.app.model.analyst.StoppableTool;
 import hanon.app.model.music.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RhythmMachine extends StoppableTool<EvaluableElement> {
-  private final List<EvaluableElement> rhythm;
+  private final List<StaffElement> elements;
   private final NoteLength lengthWithBeat;
   private final int bpm;
 
+  private int crescendoNoteCount = 0;
+
   public static RhythmMachine fromElements(List<StaffElement> elements, int bpm) {
-    List<EvaluableElement> notes = new ArrayList<>();
-    for (StaffElement e : elements)
-      if (e.getType() == StaffElementType.NOTE)
-        notes.add((EvaluableElement) e);
-    return new RhythmMachine(notes, bpm);
+    return new RhythmMachine(elements, bpm);
   }
 
-  private RhythmMachine(List<EvaluableElement> rhythm, int bpm, NoteLength lengthWithBeat) {
-    this.rhythm = rhythm;
+  private RhythmMachine(List<StaffElement> elements, int bpm, NoteLength lengthWithBeat) {
+    this.elements = elements;
     this.bpm = bpm;
     this.lengthWithBeat = lengthWithBeat;
   }
 
-  private RhythmMachine(List<EvaluableElement> rhythm, int bpm) {
-    this(rhythm, bpm, NoteLength.QUARTER);
+  private RhythmMachine(List<StaffElement> elements, int bpm) {
+    this(elements, bpm, NoteLength.QUARTER);
   }
 
   @Override
   protected void runLoop() {
-    for (EvaluableElement n : rhythm) {
+    for (StaffElement e : elements) {
       if (isStopped()) break;
-      informAll(n);
-      waitForLength(n.getLength());
+      else if (e.getType() == StaffElementType.NOTE) {
+        EvaluableElement n = (EvaluableElement)e;
+
+        if (crescendoNoteCount > 0) {
+          n.setInCrescendo();
+          crescendoNoteCount--;
+        }
+
+        informAll(n);
+        waitForLength(n.getLength());
+      } else if (e.getType() == StaffElementType.CRESCENDO) {
+        Crescendo c = (Crescendo)e;
+        crescendoNoteCount = c.getNumNotes();
+      }
     }
     informAll(null); // done
     stop();
