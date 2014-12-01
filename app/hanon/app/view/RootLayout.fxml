@@ -45,7 +45,7 @@
    <center>
        <ImageView fitHeight="350.0" fitWidth="463.0" pickOnBounds="true" preserveRatio="true"
                   BorderPane.alignment="CENTER">
-           <Image url="@../../../../res/images/hanonSplashv1.0.png"/>
+           <Image url="@hanonSplashv1.0.png"/>
        </ImageView>
    </center>
 </BorderPane>

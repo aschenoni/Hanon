@@ -25,10 +25,11 @@ public class StaffElementSet {
       return MusicNote.fromJSON(jsonObj);
     else if (jsonObj.containsKey("TimeSignature"))
       return TimeSignature.fromJSON(jsonObj);
+    else if (jsonObj.containsKey("Crescendo"))
+      return Crescendo.fromJSON(jsonObj);
     else
       throw new RuntimeException("No such StaffElement: " + jsonObj.toString());
   }
-
 
   private final List<StaffElement> elements;
 

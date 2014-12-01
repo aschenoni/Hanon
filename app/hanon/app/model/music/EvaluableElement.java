@@ -23,4 +23,8 @@ public abstract class EvaluableElement implements Evaluable, StaffElement {
 	}
 
   public abstract float getFrequency();
+
+  public abstract void setInCrescendo();
+
+  public abstract boolean isInCrescendo();
 }

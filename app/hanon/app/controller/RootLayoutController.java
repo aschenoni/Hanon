@@ -16,9 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class RootLayoutController extends BaseController {
 	
@@ -91,14 +89,14 @@ public class RootLayoutController extends BaseController {
 		if(currentSheet instanceof MusicSheet){
 			FXMLLoader loader = buildLoader("Rhythm");
 			AnchorPane rhythmPane = loader.load();
-			RhythmController rhythmController = loader.getController();
+			EvaluationController evaluationController = loader.getController();
 			mainDriver.getHPane().setBottom(rhythmPane);
 			mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
-			rhythmController.setMainDriver(mainDriver);
-      rhythmController.setSheet(sheet);
+			evaluationController.setMainDriver(mainDriver);
+      evaluationController.setSheet(sheet);
 			ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
 			StaffElementSet set = sets.get(0);
-			rhythmController.handleRhythm(set.getElements());
+			evaluationController.handleRhythm(set.getElements());
     }
 	}
 

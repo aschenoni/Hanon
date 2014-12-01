@@ -27,6 +27,8 @@ public class MusicNote extends EvaluableElement {
   private final NoteValue value;
   private final NoteLength length;
 
+  private boolean inCrescendo = false;
+
   public MusicNote(NoteValue value, NoteLength length) {
     this.value = value;
     this.length = length;
@@ -82,6 +84,15 @@ public class MusicNote extends EvaluableElement {
 
   public float getFrequency() {
     return value.getFrequency();
+  }
+
+  @Override
+  public void setInCrescendo() {
+    inCrescendo = true;
+  }
+
+  public boolean isInCrescendo() {
+    return inCrescendo;
   }
 
   public boolean equals(Object o) {
