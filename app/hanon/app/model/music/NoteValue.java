@@ -85,7 +85,7 @@ public class NoteValue {
    */
   public int getStaffPosition(Clef clef) {
     if (clef == Clef.TREBLE) return 42 - (7*getOctave()) - NoteName.staffDiff(getName()); // A4 = 5, A0 = 33, C0 = 38
-    else                     return 29 - (7*getOctave()) - NoteName.staffDiff(getName()); // A4 = -8, A0 = 20, C0 = 25
+    else                     return 30 - (7*getOctave()) - NoteName.staffDiff(getName()); // A4 = -8, A0 = 20, C0 = 25
   }
 
   @Override
