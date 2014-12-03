@@ -18,8 +18,8 @@ public class MusicNote extends EvaluableElement {
   static MusicNote fromJSON(JSONObject jsonObj) {
     NoteLength length = NoteLength.valueOf((String) jsonObj.get("NoteLength"));
     String note = (String) jsonObj.get("NoteValue");
-    NoteValue.NoteName noteName = NoteValue.NoteName.valueOf(note.substring(0, 1));
-    Integer octave = new Integer(note.substring(1));
+    NoteValue.NoteName noteName = NoteValue.NoteName.valueOf(note.substring(0, note.length() - 1));
+    Integer octave = new Integer(note.substring(note.length() - 1));
     NoteValue value = NoteValue.fromNameAndOctave(noteName, octave);
     return new MusicNote(value, length);
   }
