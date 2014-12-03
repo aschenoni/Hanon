@@ -9,7 +9,7 @@ public class Tuner extends StoppableTool<TunerInfo> {
   private final TimedRecorder recorder;
 
   public Tuner(int timeBetweenReadings) {
-    recorder = new TimedRecorder(timeBetweenReadings, new Microphone());
+    recorder = new TimedRecorder(timeBetweenReadings, Microphone.getInstance());
   }
 
   @Override

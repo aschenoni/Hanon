@@ -16,7 +16,7 @@ public class NoteCollector extends Collector<MusicNote> {
   private final TimedRecorder recorder;
 
   public NoteCollector() {
-    recorder = new TimedRecorder(50, new Microphone());
+    recorder = new TimedRecorder(50, Microphone.getInstance());
   }
 
   @Override

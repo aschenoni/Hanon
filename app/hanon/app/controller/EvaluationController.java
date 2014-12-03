@@ -59,11 +59,13 @@ public class EvaluationController extends BaseController {
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     RhythmMachine counter = RhythmMachine.fromElements(quarters, 120);
-    counter.register(new Clicker());
+
+    Clicker clicker = new Clicker();
+    counter.register(clicker);
     counter.register(this::startMachine);
 
     machine = RhythmMachine.fromElements(elements, 120);
-    machine.register(new Clicker());
+    machine.register(clicker);
     IntonationJudge intonationJudge = new IntonationJudge();
     intonationJudge.register(new NoteColorChanger(sheet));
     machine.register(intonationJudge);
@@ -73,6 +75,7 @@ public class EvaluationController extends BaseController {
     machine.register(dynamicsJudge);
 
     ensureClickerReady();
+
     Thread thread = new Thread(counter);
     thread.setDaemon(true);
     thread.start();
@@ -88,7 +91,7 @@ public class EvaluationController extends BaseController {
 
   private void ensureClickerReady() {
     try {
-      Thread.sleep(1000);
+      Thread.sleep(2000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

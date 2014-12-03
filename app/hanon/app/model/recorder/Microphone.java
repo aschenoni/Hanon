@@ -35,7 +35,12 @@ public class Microphone implements SoundDevice {
           new SilenceDetector(DEFAULT_SILENCE_THRESHOLD, false);
 
 
-  public Microphone() {
+  private static Microphone instance = new Microphone();
+  public static Microphone getInstance() {
+    return instance;
+  }
+
+  private Microphone() {
     targetDataLine = getDataLine();
     dispatcher = getDispatcher();
     Thread th = new Thread(dispatcher);

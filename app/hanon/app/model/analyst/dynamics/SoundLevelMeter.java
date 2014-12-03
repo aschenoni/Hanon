@@ -15,7 +15,7 @@ public class SoundLevelMeter extends StoppableTool<Double> {
   private final TimedRecorder recorder;
 
   public SoundLevelMeter(int timeBetweenRecordings) {
-    recorder = new TimedRecorder(timeBetweenRecordings, new Microphone());
+    recorder = new TimedRecorder(timeBetweenRecordings, Microphone.getInstance());
   }
 
   @Override

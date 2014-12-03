@@ -14,7 +14,7 @@ public class DataRecording implements Recording {
 
   public static void main(String args[]){
     DataRecording recording = new DataRecording();
-    Microphone mic = new Microphone();
+    Microphone mic = Microphone.getInstance();
     mic.startRecording(recording);
     try {
       Thread.sleep(2000);

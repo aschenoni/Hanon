@@ -9,7 +9,7 @@ public class VolumeCollector extends Collector<Double> {
 
 
   public VolumeCollector() {
-    recorder = new TimedRecorder(50, new Microphone());
+    recorder = new TimedRecorder(50, Microphone.getInstance());
   }
 
   @Override
