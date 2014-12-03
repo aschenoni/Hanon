@@ -2,6 +2,7 @@ package hanon.app.controller;
 
 import hanon.app.MainDriver;
 import hanon.app.model.analyst.Observer;
+import hanon.app.model.analyst.RecordingGenerator;
 import hanon.app.model.analyst.dynamics.DynamicsJudge;
 import hanon.app.model.analyst.dynamics.SoundLevels;
 import hanon.app.model.analyst.rhythm.Clicker;
@@ -59,6 +60,10 @@ public class EvaluationController extends BaseController {
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     RhythmMachine counter = RhythmMachine.fromElements(quarters, 120);
+
+    Thread recThread = new Thread(RecordingGenerator.getInstance());
+    recThread.setDaemon(true);
+    recThread.start();
 
     Clicker clicker = new Clicker();
     counter.register(clicker);

@@ -1,9 +1,6 @@
 package hanon.app.model.analyst.rhythm;
 
-import hanon.app.model.analyst.Collector;
-import hanon.app.model.analyst.Observable;
-import hanon.app.model.analyst.Observer;
-import hanon.app.model.analyst.TimedRecorder;
+import hanon.app.model.analyst.*;
 import hanon.app.model.music.MusicNote;
 import hanon.app.model.recorder.DataRecording;
 import hanon.app.model.recorder.Microphone;
@@ -13,18 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NoteCollector extends Collector<MusicNote> {
-  private final TimedRecorder recorder;
+  private final RecordingGenerator generator = RecordingGenerator.getInstance();
 
   public NoteCollector() {
-    recorder = TimedRecorder.getMicInstance();
   }
 
   @Override
   public void run() {
     while (true) {
-      DataRecording rec = recorder.record();
-      addToCollection(MusicNote.fromSoundArr(rec.getFloatArray()));
-      informAll(getMostRecent());
+      DataRecording rec = generator.getRecording();
+      if (rec != null) {
+        addToCollection(MusicNote.fromSoundArr(rec.getFloatArray()));
+        informAll(getMostRecent());
+        try {
+          sleep(50);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
     }
   }
 }
