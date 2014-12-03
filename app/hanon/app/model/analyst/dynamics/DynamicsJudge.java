@@ -16,7 +16,7 @@ public class DynamicsJudge extends ThreadedObserverObservable<EvaluableElement, 
   public void consume(EvaluableElement element) {
     if (isRecording && !element.isInCrescendo()) {
       FunctionalList<Double> items = collector.takeCollection();
-      SoundLevels levels = new SoundLevels(items, 5);
+      SoundLevels levels = new SoundLevels(items, 10);
       informAll(levels);
       isRecording = false;
     } else if (!isRecording && element.isInCrescendo()) {

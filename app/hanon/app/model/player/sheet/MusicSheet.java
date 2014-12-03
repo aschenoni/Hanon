@@ -5,6 +5,7 @@ import java.util.List;
 
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.noteimage.NoteImage;
+import hanon.app.model.player.staff.CrescendoImage;
 import hanon.app.model.player.staff.StaffInfo;
 import hanon.app.model.player.staff.Staff;
 import hanon.app.model.player.staff.StaffSet;
@@ -19,6 +20,7 @@ public class MusicSheet extends AnchorPane {
 	//List of staff elements on the music sheet. The list May Change if notes are added or deleted
   private final ObservableList<StaffElementSet> sets;
   private Brush brush;
+  private List<StaffSet> staffSets = new ArrayList<>();
 
   public MusicSheet(ObservableList<StaffElementSet> sets) {
     this.sets = sets;
@@ -36,14 +38,26 @@ public class MusicSheet extends AnchorPane {
 
   public void setup(int width, int height) {
     Canvas canvas = new Canvas(width, height);
-
     Group group = new Group();
     group.getChildren().add(canvas);
-
-
     this.getChildren().add(group);
-
     brush = new Brush(group);
+
+    int i = 1;
+    for (StaffElementSet s : sets) {
+      StaffInfo.StaffInfoBuilder b = new StaffInfo.StaffInfoBuilder()
+              .clef(s.getClef())
+              .x(100)
+              .y(i*90)
+              .width(800);
+
+      if (i == 1 && sets.size() == 2) {
+        b.measureLineHeight(130);
+      }
+      StaffSet set = new StaffSet(b.build(), 100*sets.size(), s.getElements());
+      staffSets.add(set);
+      i++;
+    }
   }
 
 	/**
@@ -53,46 +67,21 @@ public class MusicSheet extends AnchorPane {
 	 * @param height - height of the canvas (eventually should have this automatically resized)
 	 */
 	public void draw() {
-    int i = 1;
-    for (StaffElementSet s : sets) {
-      StaffInfo.StaffInfoBuilder b = new StaffInfo.StaffInfoBuilder()
-              .clef(s.getClef())
-              .x(100)
-              .y(i*90)
-              .width(800);
-
-      if (i == 1 && sets.size() == 2) {
-        b.measureLineHeight(130);
-      }
-      StaffSet set = new StaffSet(b.build(), 100*sets.size(), s.getElements());
+    for (StaffSet set : staffSets)
       for (Staff staff : set.getStaffs())
         staff.paint(brush);
-      i++;
-    }
 	}
 
   public List<NoteImage> getAllNoteImages() {
     List<NoteImage> images = new ArrayList<>();
-    int i = 1;
-    for (StaffElementSet s : sets) {
-      StaffInfo.StaffInfoBuilder b = new StaffInfo.StaffInfoBuilder()
-              .clef(s.getClef())
-              .x(100)
-              .y(i*90)
-              .width(800);
-
-      if (i == 1 && sets.size() == 2) {
-        b.measureLineHeight(130);
-      }
-      StaffSet set = new StaffSet(b.build(), 100*sets.size(), s.getElements());
+    for (StaffSet set : staffSets) {
       for (Staff staff : set.getStaffs()) {
-        for (StaffPlaceable sp : staff.getPlaceableElements()) {
-          if (sp instanceof NoteImage) {
-            images.add((NoteImage) sp);
+        for (StaffPlaceable p : staff.getPlaceableElements()) {
+          if (p instanceof NoteImage) {
+            images.add((NoteImage)p);
           }
         }
       }
-      i++;
     }
     return images;
   }
@@ -100,4 +89,14 @@ public class MusicSheet extends AnchorPane {
 	public ObservableList<StaffElementSet> getSets(){
 		return this.sets;
 	}
+
+  public Iterable<CrescendoImage> getAllCrescendos() {
+    List<CrescendoImage> images = new ArrayList<>();
+    for (StaffSet set : staffSets)
+      for (Staff staff : set.getStaffs())
+        for (StaffPlaceable p : staff.getPlaceableElements())
+          if (p instanceof CrescendoImage)
+            images.add((CrescendoImage)p);
+    return images;
+  }
 }

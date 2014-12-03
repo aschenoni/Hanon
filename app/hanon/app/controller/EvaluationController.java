@@ -2,6 +2,8 @@ package hanon.app.controller;
 
 import hanon.app.MainDriver;
 import hanon.app.model.analyst.Observer;
+import hanon.app.model.analyst.dynamics.DynamicsJudge;
+import hanon.app.model.analyst.dynamics.SoundLevels;
 import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.analyst.tuner.IntonationJudge;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.sheet.MusicSheet;
+import hanon.app.model.player.staff.CrescendoImage;
 import hanon.app.model.util.FunctionalList;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -62,14 +65,17 @@ public class EvaluationController extends BaseController {
     machine = RhythmMachine.fromElements(elements, 120);
     machine.register(new Clicker());
     IntonationJudge intonationJudge = new IntonationJudge();
-    intonationJudge.register(new ColorChanger(sheet));
+    intonationJudge.register(new NoteColorChanger(sheet));
     machine.register(intonationJudge);
+
+    DynamicsJudge dynamicsJudge = new DynamicsJudge();
+    dynamicsJudge.register(new CrescendoColorChanger(sheet));
+    machine.register(dynamicsJudge);
 
     ensureClickerReady();
     Thread thread = new Thread(counter);
     thread.setDaemon(true);
     thread.start();
-
   }
 
   private void startMachine(StaffElement e) {
@@ -102,13 +108,10 @@ public class EvaluationController extends BaseController {
     this.sheet = sheet;
   }
 
-
-  class ColorChanger extends Task implements Observer<MusicNoteEvaluation> {
-    private final MusicSheet sheet;
+  class NoteColorChanger extends Task implements Observer<MusicNoteEvaluation> {
     private FunctionalList<NoteImage> notes;
 
-    public ColorChanger(MusicSheet sheet) {
-      this.sheet = sheet;
+    public NoteColorChanger(MusicSheet sheet) {
       notes = FunctionalList.fromIterable(sheet.getAllNoteImages());
       notes = notes.prepend(null); // must prepend a dummy note so first note is redrawn
     }
@@ -129,6 +132,31 @@ public class EvaluationController extends BaseController {
       }
       notes = notes.tail();
     }
+  }
 
+  class CrescendoColorChanger extends Task implements Observer<SoundLevels> {
+    private FunctionalList<CrescendoImage> crescendos;
+
+    public CrescendoColorChanger(MusicSheet sheet) {
+      crescendos = FunctionalList.fromIterable(sheet.getAllCrescendos());
+    }
+
+    @Override
+    public void inform(SoundLevels levels) {
+      Color color;
+      if (levels.isCrescendo()) {
+        color = Color.SEAGREEN;
+      } else {
+        color = Color.RED;
+      }
+      CrescendoImage c = crescendos.head();
+      Platform.runLater(() -> c.paint(sheet.getBrush().withColor(color)));
+      crescendos = crescendos.tail();
+    }
+
+    @Override
+    protected Object call() throws Exception {
+      return null;
+    }
   }
 }

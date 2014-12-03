@@ -10,22 +10,10 @@ import java.util.List;
  * could be drawn on the music staff.
  */
 public class StaffSet {
-  private StaffInfo info;
-  private final int dy;
-  private final List<StaffElement> elements;
+  private final List<Staff> staffs;
 
   public StaffSet(StaffInfo info, int dy, List<StaffElement> elements) {
-    this.info = info;
-    this.dy = dy;
-    this.elements = elements;
-  }
-
-  /**
-   * Takes a list of Staff Elements and correctly places their images on a
-   * staff.
-   */
-  public List<Staff> getStaffs() {
-    List<Staff> staffs = new ArrayList<>();
+    staffs = new ArrayList<>();
     List<StaffElement> temp = elements;
     boolean first = true;
     while (!temp.isEmpty()) {
@@ -37,6 +25,13 @@ public class StaffSet {
       temp = new StaffSpacer(info.getWidth(), temp).unallocatedElements().toArrayList();
       info = info.movedDown(dy);
     }
+  }
+
+  /**
+   * Takes a list of Staff Elements and correctly places their images on a
+   * staff.
+   */
+  public List<Staff> getStaffs() {
     return staffs;
   }
 }

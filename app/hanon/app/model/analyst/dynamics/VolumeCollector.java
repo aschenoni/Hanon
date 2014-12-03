@@ -14,6 +14,9 @@ public class VolumeCollector extends Collector<Double> {
 
   @Override
   public void run() {
-    informAll(recorder.record().getVolume());
+    while (true) {
+      addToCollection(recorder.record().getVolume());
+      informAll(getMostRecent());
+    }
   }
 }

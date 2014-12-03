@@ -14,21 +14,22 @@ import java.util.List;
 public class Staff {
   public static final int LINE_GAP = 10;
 
-  private final List<StaffElement> elements;
   private final StaffInfo info;
   private final StaffPlaceableFactory factory;
+  private final List<StaffPlaceable> placeables;
 
   public Staff(StaffInfo info, List<StaffElement> elements) {
     this.info = info;
-    this.elements = elements;
     factory = new StaffPlaceableFactory(info);
+
+    FunctionalList<StaffSpacedElement> spacings = new StaffSpacer(info.getWidth(), elements).allocatedElements();
+    placeables = spacings.map(this::placeElement)
+            .prepend(new MeasureLine(info.getX(), info.getY(), info.getMeasureLineHeight()))
+            .prepend(new StaffLines(info.getX(), info.getY(), info.getWidth())).toArrayList();
   }
 
   public List<StaffPlaceable> getPlaceableElements() {
-    FunctionalList<StaffSpacedElement> spacings = new StaffSpacer(info.getWidth(), elements).allocatedElements();
-    return spacings.map(this::placeElement)
-            .prepend(new MeasureLine(info.getX(), info.getY(), info.getMeasureLineHeight()))
-            .prepend(new StaffLines(info.getX(), info.getY(), info.getWidth())).toArrayList();
+    return placeables;
   }
 
   private StaffPlaceable placeElement(StaffSpacedElement e) {
@@ -38,6 +39,6 @@ public class Staff {
 
 
   public void paint(Brush brush) {
-    for (StaffPlaceable e : getPlaceableElements()) e.paint(brush);
+    for (StaffPlaceable e : placeables) e.paint(brush);
   }
 }

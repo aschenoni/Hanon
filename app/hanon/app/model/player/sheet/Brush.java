@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Shape;
 
 /**
@@ -36,7 +37,12 @@ public class Brush {
   }
 
   public void paint(Shape shape) {
-    shape.setFill(paintColor);
+    if (shape instanceof Line)
+      shape.setStroke(paintColor);
+    else
+      shape.setFill(paintColor);
+    if (group.getChildren().contains(shape))
+      group.getChildren().remove(shape);
     group.getChildren().add(shape);
   }
 
