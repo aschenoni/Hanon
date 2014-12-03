@@ -27,6 +27,8 @@ public class StaffElementSet {
       return TimeSignature.fromJSON(jsonObj);
     else if (jsonObj.containsKey("Crescendo"))
       return Crescendo.fromJSON(jsonObj);
+    else if (jsonObj.containsKey("Decrescendo"))
+      return Decrescendo.fromJSON(jsonObj);
     else
       throw new RuntimeException("No such StaffElement: " + jsonObj.toString());
   }

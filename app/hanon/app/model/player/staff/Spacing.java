@@ -19,6 +19,7 @@ public class Spacing {
       case TIE:            return 0;
       case SLUR:           return 0;
       case CRESCENDO:      return 0;
+      case DECRESCENDO:   return 0;
       default:             throw new RuntimeException("No such staff element type");
     }
   }

@@ -25,9 +25,11 @@ public class MusicNote extends EvaluableElement {
   }
 
   private final NoteValue value;
+
   private final NoteLength length;
 
   private boolean inCrescendo = false;
+  private boolean inDecrescendo = false;
 
   public MusicNote(NoteValue value, NoteLength length) {
     this.value = value;
@@ -93,6 +95,16 @@ public class MusicNote extends EvaluableElement {
 
   public boolean isInCrescendo() {
     return inCrescendo;
+  }
+
+  @Override
+  public void setInDecrescendo() {
+    inDecrescendo = true;
+  }
+
+  @Override
+  public boolean isInDecrescendo() {
+    return inDecrescendo;
   }
 
   public boolean equals(Object o) {

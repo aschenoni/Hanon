@@ -6,19 +6,19 @@ import hanon.app.model.player.sheet.StaffPlaceable;
 import hanon.app.model.util.FunctionalList;
 import javafx.scene.shape.Line;
 
-public class CrescendoImage implements StaffPlaceable {
+public class DecrescendoImage implements StaffPlaceable {
   private final Line lineUp;
   private final Line lineDown;
 
-  public CrescendoImage(FunctionalList<NoteImage> lastNNotes, int y) {
+  public DecrescendoImage(FunctionalList<NoteImage> lastNNotes, int y) {
     int startX = lastNNotes.head().x();
     int endX = lastNNotes.last().x() + 10;
-    int startY = y + 60;
-    int endTopY = y + 55;
-    int endBottomY = y + 65;
+    int startTopY = y + 55;
+    int startBottomY = y + 65;
+    int endY = y + 60;
 
-    lineUp = new Line(startX, startY, endX, endTopY);
-    lineDown = new Line(startX, startY, endX, endBottomY);
+    lineUp = new Line(startX, startTopY, endX, endY);
+    lineDown = new Line(startX, startBottomY, endX, endY);
   }
 
   @Override

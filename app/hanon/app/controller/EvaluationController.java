@@ -20,7 +20,9 @@ import java.util.List;
 
 import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.sheet.MusicSheet;
+import hanon.app.model.player.sheet.StaffPlaceable;
 import hanon.app.model.player.staff.CrescendoImage;
+import hanon.app.model.player.staff.DecrescendoImage;
 import hanon.app.model.util.FunctionalList;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -121,7 +123,6 @@ public class EvaluationController extends BaseController {
 
     public NoteColorChanger(MusicSheet sheet) {
       notes = FunctionalList.fromIterable(sheet.getAllNoteImages());
-      notes = notes.prepend(null); // must prepend a dummy note so first note is redrawn
     }
 
     @Override
@@ -131,19 +132,20 @@ public class EvaluationController extends BaseController {
 
     @Override
     public void inform(MusicNoteEvaluation info) {
+      NoteImage n = notes.head();
       if (info.isPoor()) {
         Platform.runLater(() ->
-          notes.head().paint(sheet.getBrush().withColor(Color.RED)));
+          n.paint(sheet.getBrush().withColor(Color.RED)));
       } else if (info.isGood()) {
         Platform.runLater(() ->
-          notes.head().paint(sheet.getBrush().withColor(Color.SEAGREEN)));
+          n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
       }
       notes = notes.tail();
     }
   }
 
   class CrescendoColorChanger extends Task implements Observer<SoundLevels> {
-    private FunctionalList<CrescendoImage> crescendos;
+    private FunctionalList<StaffPlaceable> crescendos;
 
     public CrescendoColorChanger(MusicSheet sheet) {
       crescendos = FunctionalList.fromIterable(sheet.getAllCrescendos());
@@ -152,12 +154,15 @@ public class EvaluationController extends BaseController {
     @Override
     public void inform(SoundLevels levels) {
       Color color;
-      if (levels.isCrescendo()) {
+      StaffPlaceable c = crescendos.head();
+
+      if (levels.isCrescendo() && c instanceof CrescendoImage) {
+        color = Color.SEAGREEN;
+      } else if (levels.isDecrescendo() && c instanceof DecrescendoImage) {
         color = Color.SEAGREEN;
       } else {
         color = Color.RED;
       }
-      CrescendoImage c = crescendos.head();
       Platform.runLater(() -> c.paint(sheet.getBrush().withColor(color)));
       crescendos = crescendos.tail();
     }

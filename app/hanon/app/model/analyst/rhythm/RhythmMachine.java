@@ -36,6 +36,9 @@ public class RhythmMachine extends StoppableTool<EvaluableElement> {
         if (crescendoNoteCount > 0) {
           n.setInCrescendo();
           crescendoNoteCount--;
+        } else if (crescendoNoteCount < 0) {
+          n.setInDecrescendo();
+          crescendoNoteCount++;
         }
 
         informAll(n);
@@ -43,6 +46,9 @@ public class RhythmMachine extends StoppableTool<EvaluableElement> {
       } else if (e.getType() == StaffElementType.CRESCENDO) {
         Crescendo c = (Crescendo)e;
         crescendoNoteCount = c.getNumNotes();
+      } else if (e.getType() == StaffElementType.DECRESCENDO) {
+        Decrescendo d = (Decrescendo)e;
+        crescendoNoteCount = -d.getNumNotes();
       }
     }
     informAll(null); // done

@@ -27,7 +27,8 @@ public class StaffPlaceableFactory {
                            return image;
       case TIE:            return new TieImage(tieRepository.getLastTwoNotes());
       case SLUR:           return new SlurImage(tieRepository.getLastNNotes(((Slur)element).getNumNotes()));
-      case CRESCENDO:      return new CrescendoImage(tieRepository.getLastNNotes(((Crescendo)element).getNumNotes()), x, info.getY());
+      case CRESCENDO:      return new CrescendoImage(tieRepository.getLastNNotes(((Crescendo)element).getNumNotes()), info.getY());
+      case DECRESCENDO:    return new DecrescendoImage(tieRepository.getLastNNotes(((Decrescendo)element).getNumNotes()), info.getY());
       case REST:           return RestImage.fromRest((Rest) element, x, info.getY());
       case CHORD:          return new ChordImage(getNoteImages(x, ((Chord)element).getNotes()));
       case TIME_SIGNATURE: return new TimeSignatureImage((TimeSignature)element, x, info.getY());

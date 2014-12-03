@@ -7,6 +7,8 @@ import hanon.app.model.util.ThreadedObserverObservable;
 public class DynamicsJudge extends ThreadedObserverObservable<EvaluableElement, SoundLevels> {
   private final VolumeCollector collector = new VolumeCollector();
   private boolean isRecording = false;
+  private boolean inCrescendo = false;
+  private boolean inDecrescendo = false;
 
   public DynamicsJudge() {
     collector.start();
@@ -15,14 +17,37 @@ public class DynamicsJudge extends ThreadedObserverObservable<EvaluableElement, 
   @Override
   public void consume(EvaluableElement element) {
     if (element != null) {
-      if (isRecording && !element.isInCrescendo()) {
+      if (isRecording && inCrescendo && element.isInDecrescendo()) {
+        FunctionalList<Double> items = collector.takeCollection();
+        SoundLevels levels = new SoundLevels(items, 10);
+        informAll(levels);
+        inCrescendo = false;
+        inDecrescendo = true;
+      }
+      else if (isRecording && inDecrescendo && element.isInCrescendo()) {
+        FunctionalList<Double> items = collector.takeCollection();
+        SoundLevels levels = new SoundLevels(items, 10);
+        informAll(levels);
+        inCrescendo = true;
+        inDecrescendo = false;
+      }
+      else if (isRecording && !element.isInCrescendo() && !element.isInDecrescendo()) {
         FunctionalList<Double> items = collector.takeCollection();
         SoundLevels levels = new SoundLevels(items, 10);
         informAll(levels);
         isRecording = false;
-      } else if (!isRecording && element.isInCrescendo()) {
+        inCrescendo = false;
+        inDecrescendo = false;
+      }
+      else if (!isRecording && element.isInCrescendo()) {
         collector.takeCollection();
         isRecording = true;
+        inCrescendo = true;
+      }
+      else if (!isRecording && element.isInDecrescendo()) {
+        collector.takeCollection();
+        isRecording = true;
+        inDecrescendo = true;
       }
     }
   }

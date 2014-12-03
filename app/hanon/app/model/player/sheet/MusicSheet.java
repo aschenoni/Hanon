@@ -5,10 +5,7 @@ import java.util.List;
 
 import hanon.app.model.music.StaffElementSet;
 import hanon.app.model.player.noteimage.NoteImage;
-import hanon.app.model.player.staff.CrescendoImage;
-import hanon.app.model.player.staff.StaffInfo;
-import hanon.app.model.player.staff.Staff;
-import hanon.app.model.player.staff.StaffSet;
+import hanon.app.model.player.staff.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -62,9 +59,6 @@ public class MusicSheet extends AnchorPane {
 
 	/**
 	 * Draws the music sheet, rendering the musical representation of each note
-	 * 
-	 * @param width - width of the canvas (eventually should have this automatically resized)
-	 * @param height - height of the canvas (eventually should have this automatically resized)
 	 */
 	public void draw() {
     for (StaffSet set : staffSets)
@@ -90,13 +84,13 @@ public class MusicSheet extends AnchorPane {
 		return this.sets;
 	}
 
-  public Iterable<CrescendoImage> getAllCrescendos() {
-    List<CrescendoImage> images = new ArrayList<>();
+  public Iterable<StaffPlaceable> getAllCrescendos() {
+    List<StaffPlaceable> images = new ArrayList<>();
     for (StaffSet set : staffSets)
       for (Staff staff : set.getStaffs())
         for (StaffPlaceable p : staff.getPlaceableElements())
-          if (p instanceof CrescendoImage)
-            images.add((CrescendoImage)p);
+          if (p instanceof CrescendoImage || p instanceof DecrescendoImage)
+            images.add(p);
     return images;
   }
 }

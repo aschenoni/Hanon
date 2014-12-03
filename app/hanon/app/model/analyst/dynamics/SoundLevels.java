@@ -17,6 +17,12 @@ public class SoundLevels {
     return isOrdered(averages);
   }
 
+  public boolean isDecrescendo() {
+    FunctionalList<FunctionalList<Double>> grouped = levels.groupN(granularity);
+    FunctionalList<Double> averages = grouped.map(SoundLevels::average);
+    return isOrdered(averages.reverse());
+  }
+
   private static double average(FunctionalList<Double> list) {
     Double sum = list.foldl((a, b) -> a + b, 0.0);
     return sum / list.size();

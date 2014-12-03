@@ -27,4 +27,8 @@ public abstract class EvaluableElement implements Evaluable, StaffElement {
   public abstract void setInCrescendo();
 
   public abstract boolean isInCrescendo();
+
+  public abstract void setInDecrescendo();
+
+  public abstract boolean isInDecrescendo();
 }
