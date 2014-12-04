@@ -48,9 +48,19 @@ public class Brush {
 
   public void paint(Image image, int x, int y) {
     ImageView im = new ImageView(image);
-    im.setX(x);
-    im.setY(y);
-    group.getChildren().add(im);
+    paint(im, x, y);
+  }
+
+  public void paint(ImageView i, int x, int y) {
+    i.setX(x);
+    i.setY(y);
+    group.getChildren().add(i);
+  }
+
+
+  public void unpaint(ImageView i) {
+    if (group.getChildren().contains(i))
+      group.getChildren().remove(i);
   }
 
   /**

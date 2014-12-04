@@ -9,11 +9,9 @@ import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.analyst.tuner.IntonationJudge;
 import hanon.app.model.analyst.tuner.MusicNoteEvaluation;
-import hanon.app.model.music.MusicNote;
-import hanon.app.model.music.NoteLength;
-import hanon.app.model.music.NoteValue;
-import hanon.app.model.music.StaffElement;
+import hanon.app.model.music.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +27,8 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public class EvaluationController extends BaseController {
@@ -70,6 +70,7 @@ public class EvaluationController extends BaseController {
     Clicker clicker = new Clicker();
     counter.register(clicker);
     counter.register(this::startMachine);
+    counter.register(new CountInShower());
 
     machine = RhythmMachine.fromElements(elements, 120);
     machine.register(clicker);
@@ -165,6 +166,48 @@ public class EvaluationController extends BaseController {
       }
       Platform.runLater(() -> c.paint(sheet.getBrush().withColor(color)));
       crescendos = crescendos.tail();
+    }
+
+    @Override
+    protected Object call() throws Exception {
+      return null;
+    }
+  }
+
+  class CountInShower extends Task implements Observer<EvaluableElement> {
+    private int index = 0;
+    private String[] files = {"count_1.png", "count_2.png", "count_ready.png", "count_go.png"};
+    private List<ImageView> images = new ArrayList<>();
+
+    public CountInShower() {
+      for (String f : files) {
+        String path = "res/images/" + f;
+        File file = new File(path);
+        images.add(new ImageView(new Image(file.toURI().toString())));
+      }
+    }
+
+    @Override
+    public void inform(EvaluableElement info) {
+      Platform.runLater(() -> {
+        if (index > 0)
+          sheet.getBrush().unpaint(images.get(index-1));
+        if (index < 4)
+          sheet.getBrush().paint(images.get(index), getX(), getY());
+        index++;
+      });
+    }
+
+    private int getX() {
+      int fullWidth = (int)sheet.getWidth();
+      int imageWidth = 450;
+      return (fullWidth - imageWidth)/2;
+    }
+
+    private int getY() {
+      int fullHeight = (int)sheet.getHeight();
+      int imageHeight = 200;
+      return fullHeight - imageHeight - 150;
     }
 
     @Override
