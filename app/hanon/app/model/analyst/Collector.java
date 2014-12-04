@@ -5,12 +5,12 @@ import hanon.app.model.util.FunctionalList;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Collector<T> extends Thread implements Observable<T> {
+public abstract class Collector<T> extends StoppableTool<T> {
   private FunctionalList<T> collection;
 
   public Collector() {
-    this.setDaemon(true);
     this.collection = FunctionalList.empty();
+    start();
   }
 
   protected synchronized void addToCollection(T item) {

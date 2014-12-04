@@ -14,8 +14,10 @@ public class IntonationJudge extends ThreadedObserverObservable<EvaluableElement
   private MusicNote note = new MusicNote(new NoteValue(440f), NoteLength.QUARTER);
   private boolean isFirst = true;
 
-  public IntonationJudge() {
-    collector.start();
+  @Override
+  public void stop() {
+    super.stop();
+    collector.stop();
   }
 
   @Override
@@ -31,5 +33,7 @@ public class IntonationJudge extends ThreadedObserverObservable<EvaluableElement
       isFirst = false;
     }
     note = (MusicNote)element;
+    if (element == null)
+      stop();
   }
 }

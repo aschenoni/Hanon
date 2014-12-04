@@ -6,6 +6,7 @@ public class SynchronizedThread<T> extends Thread {
   private volatile boolean hasUpdate = false;
   private final Consumer<T> f;
   private T info;
+  private boolean running = true;
 
   public SynchronizedThread(Consumer<T> f) {
     this.f = f;
@@ -18,11 +19,19 @@ public class SynchronizedThread<T> extends Thread {
     notify();
   }
 
+  private synchronized boolean isRunning() {
+    return running;
+  }
+
+  public synchronized void stopRunning() {
+    running = false;
+  }
+
   @Override
   public synchronized void run() {
     super.run();
-    while (true) {
-      while (!hasUpdate) {
+    while (isRunning()) {
+      while (!hasUpdate && isRunning()) {
         try {
           wait();
         } catch (InterruptedException e) {

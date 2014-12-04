@@ -13,16 +13,10 @@ import hanon.app.model.analyst.tuner.IntonationJudge;
 import hanon.app.model.analyst.tuner.MusicNoteEvaluation;
 import hanon.app.model.music.*;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-
-
-
 
 
 import hanon.app.model.player.noteimage.NoteImage;
@@ -34,12 +28,8 @@ import hanon.app.model.util.FunctionalList;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -76,44 +66,43 @@ public class EvaluationController extends BaseController {
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     RhythmMachine counter = RhythmMachine.fromElements(quarters, 120);
 
-    Thread recThread = new Thread(RecordingGenerator.getInstance());
-    recThread.setDaemon(true);
-    recThread.start();
+    RecordingGenerator.getInstance().start();
 
-    Clicker clicker = new Clicker();
-    counter.register(clicker);
-    counter.register(this::startMachine);
-    counter.register(new CountInShower());
+    CountInShower cis = new CountInShower();
+
+    counter.register(new Clicker());
+    counter.register(e -> { if(e == null) machine.start(); });
+    counter.register(cis);
+
+    counter.setOnStop(cis::cancel);
 
     machine = RhythmMachine.fromElements(elements, 120);
-    
+    machine.register(new Clicker());
+
     IntonationJudge intonationJudge = new IntonationJudge();
-    intonationJudge.register(new NoteColorChanger(sheet));
+    DynamicsJudge dynamicsJudge = new DynamicsJudge();
+
+    NoteColorChanger noteColorChanger = new NoteColorChanger();
+    CrescendoColorChanger crescendoColorChanger = new CrescendoColorChanger(sheet);
+
+    intonationJudge.register(noteColorChanger);
+    dynamicsJudge.register(crescendoColorChanger);
+
     SongResultAggregator sra = new SongResultAggregator();
     sra.setEvalController(this);
     intonationJudge.register(sra);
-    
+
     machine.register(intonationJudge);
-    machine.register(clicker);
-    DynamicsJudge dynamicsJudge = new DynamicsJudge();
-    dynamicsJudge.register(new CrescendoColorChanger(sheet));
     machine.register(dynamicsJudge);
+    machine.setOnStop(() -> {
+      noteColorChanger.cancel();
+      crescendoColorChanger.cancel();
+    });
 
     ensureClickerReady();
 
-    Thread thread = new Thread(counter);
-    thread.setDaemon(true);
-    thread.start();
+    counter.start();
   }
-
-  private void startMachine(StaffElement e) {
-    if (e == null) {
-      Thread thread = new Thread(machine);
-      thread.setDaemon(true);
-      thread.start();
-    }
-  }
-
   private void ensureClickerReady() {
     try {
       Thread.sleep(2000);
@@ -143,7 +132,7 @@ public class EvaluationController extends BaseController {
   class NoteColorChanger extends Task implements Observer<MusicNoteEvaluation> {
     private FunctionalList<NoteImage> notes;
 
-    public NoteColorChanger(MusicSheet sheet) {
+    public NoteColorChanger() {
       notes = FunctionalList.fromIterable(sheet.getAllNoteImages());
     }
 
@@ -156,16 +145,16 @@ public class EvaluationController extends BaseController {
     public void inform(MusicNoteEvaluation info) {
       NoteImage n = notes.head();
       if(info != null) {
-          if (info.isPoor()) {
-            Platform.runLater(() ->
-              n.paint(sheet.getBrush().withColor(Color.RED)));
-          } else if (info.isGood()) {
-            Platform.runLater(() ->
-              n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
-          }
-          notes = notes.tail();
+        if (info.isPoor()) {
+          Platform.runLater(() ->
+            n.paint(sheet.getBrush().withColor(Color.RED)));
+        } else if (info.isGood()) {
+          Platform.runLater(() ->
+            n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
         }
+        notes = notes.tail();
       }
+    }
   }
 
   class CrescendoColorChanger extends Task implements Observer<SoundLevels> {

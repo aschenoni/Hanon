@@ -10,17 +10,15 @@ public class VolumeCollector extends Collector<Double> {
   private final RecordingGenerator generator = RecordingGenerator.getInstance();
 
   @Override
-  public void run() {
-    while (true) {
-      DataRecording rec = generator.getRecording();
-      if (rec != null) {
-        addToCollection(rec.getVolume());
-        informAll(getMostRecent());
-        try {
-          sleep(50);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
+  protected void runLoop() {
+    DataRecording rec = generator.getRecording();
+    if (rec != null) {
+      addToCollection(rec.getVolume());
+      informAll(getMostRecent());
+      try {
+        Thread.sleep(50);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
       }
     }
   }

@@ -8,18 +8,6 @@ import hanon.app.model.util.ThreadedObserverObservable;
  * Listens in on the incoming sound and determines when a note change occurs.
  */
 public class NoteChangeJudge extends ThreadedObserverObservable<MusicNote, Integer> {
-  public static void main(String[] args) {
-    NoteCollector collector = new NoteCollector();
-    NoteChangeJudge judge = new NoteChangeJudge();
-
-    collector.register(judge);
-    collector.register(n -> System.out.println(n.getFrequency()));
-    judge.register(n -> System.out.println("CHANGE!"));
-
-
-    collector.start();
-    while (true);
-  }
 
   private final Timer timer = new Timer();
   private MusicNote lastNote = null;
