@@ -30,6 +30,8 @@ public class Clicker extends ThreadedObserver<EvaluableElement> {
       clip.setFramePosition(0);
       clip.start();
     } else {
+      clip.setFramePosition(0);
+      clip.start();
       stop();
     }
   }

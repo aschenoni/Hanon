@@ -5,6 +5,8 @@ import hanon.app.model.analyst.Observer;
 import hanon.app.model.analyst.RecordingGenerator;
 import hanon.app.model.analyst.dynamics.DynamicsJudge;
 import hanon.app.model.analyst.dynamics.SoundLevels;
+import hanon.app.model.analyst.results.SongResult;
+import hanon.app.model.analyst.results.SongResultAggregator;
 import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.analyst.tuner.IntonationJudge;
@@ -12,6 +14,7 @@ import hanon.app.model.analyst.tuner.MusicNoteEvaluation;
 import hanon.app.model.music.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,7 +126,7 @@ public class EvaluationController extends BaseController {
   }
   
   public void publish(SongResult sr) throws IOException {
-	mainDriver.showResults();
+	  mainDriver.showResults();
   }
 
   class NoteColorChanger extends Task implements Observer<MusicNoteEvaluation> {
@@ -142,17 +145,15 @@ public class EvaluationController extends BaseController {
     public void inform(MusicNoteEvaluation info) {
       NoteImage n = notes.head();
       if(info != null) {
-          if (info.isPoor()) {
-            Platform.runLater(() ->
-              n.paint(sheet.getBrush().withColor(Color.RED)));
-          } else if (info.isGood()) {
-            Platform.runLater(() ->
-              n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
-          }
-          notes = notes.tail();
+        if (info.isPoor()) {
+          Platform.runLater(() ->
+            n.paint(sheet.getBrush().withColor(Color.RED)));
+        } else if (info.isGood()) {
+          Platform.runLater(() ->
+            n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
         }
+        notes = notes.tail();
       }
-      notes = notes.tail();
     }
   }
 
