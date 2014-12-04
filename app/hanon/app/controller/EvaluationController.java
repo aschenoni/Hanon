@@ -85,6 +85,10 @@ public class EvaluationController extends BaseController {
     intonationJudge.register(noteColorChanger);
     dynamicsJudge.register(crescendoColorChanger);
 
+    SongResultAggregator sra = new SongResultAggregator();
+    sra.setEvalController(this);
+    intonationJudge.register(sra);
+
     machine.register(intonationJudge);
     machine.register(dynamicsJudge);
     machine.setOnStop(() -> {
@@ -117,6 +121,10 @@ public class EvaluationController extends BaseController {
   public void setSheet(MusicSheet sheet) {
     this.sheet = sheet;
   }
+  
+  public void publish(SongResult sr) throws IOException {
+	mainDriver.showResults();
+  }
 
   class NoteColorChanger extends Task implements Observer<MusicNoteEvaluation> {
     private FunctionalList<NoteImage> notes;
@@ -133,12 +141,16 @@ public class EvaluationController extends BaseController {
     @Override
     public void inform(MusicNoteEvaluation info) {
       NoteImage n = notes.head();
-      if (info.isPoor()) {
-        Platform.runLater(() ->
-          n.paint(sheet.getBrush().withColor(Color.RED)));
-      } else if (info.isGood()) {
-        Platform.runLater(() ->
-          n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
+      if(info != null) {
+          if (info.isPoor()) {
+            Platform.runLater(() ->
+              n.paint(sheet.getBrush().withColor(Color.RED)));
+          } else if (info.isGood()) {
+            Platform.runLater(() ->
+              n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
+          }
+          notes = notes.tail();
+        }
       }
       notes = notes.tail();
     }

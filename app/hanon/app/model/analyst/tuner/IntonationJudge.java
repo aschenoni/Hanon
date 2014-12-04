@@ -24,6 +24,10 @@ public class IntonationJudge extends ThreadedObserverObservable<EvaluableElement
   public void consume(EvaluableElement element) {
     if (!isFirst) {
       MusicNote average = average(collector.takeCollection());
+      if(element == null) {
+    	  System.out.println("It is done");
+    	  informAll(null);
+      }
       informAll(new MusicNoteEvaluation(average, note));
     } else {
       isFirst = false;
