@@ -4,9 +4,11 @@ import hanon.app.controller.BaseController;
 import hanon.app.controller.LoginController;
 import hanon.app.controller.ResultController;
 import hanon.app.controller.RootLayoutController;
+import hanon.app.model.analyst.results.SongResult;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -111,12 +113,16 @@ public class MainDriver extends Application {
 		launch(args);
 	}
 
-	public void showResults() {
+	public void showResults(SongResult sr) {
 		FXMLLoader loader = BaseController.buildLoader("Result");
 		try {
 			AnchorPane resultPane = loader.load();
 			ResultController controller = loader.getController();
-			rootLayout.setCenter(resultPane);
+			controller.setMainDriver(this);
+			controller.setSongResult(sr);
+			hPane.setLeft(resultPane);
+			hPane.setPinnedSide(Side.LEFT);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

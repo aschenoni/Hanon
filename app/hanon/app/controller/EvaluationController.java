@@ -137,7 +137,7 @@ public class EvaluationController extends BaseController {
   }
   
   public void publish(SongResult sr) throws IOException {
-	mainDriver.showResults();
+	mainDriver.showResults(sr);
   }
 
   class NoteColorChanger extends Task implements Observer<MusicNoteEvaluation> {
