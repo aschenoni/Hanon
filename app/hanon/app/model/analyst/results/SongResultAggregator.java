@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
 import hanon.app.controller.EvaluationController;
 import hanon.app.model.analyst.Observer;
 import hanon.app.model.analyst.dynamics.SoundLevels;
@@ -57,7 +58,18 @@ public class SongResultAggregator implements Observer<MusicNoteEvaluation> {
 	}
 	
 	private void publish() throws IOException {
-		evalController.publish(new SongResult(list,goodBadNon) );
+		Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	        	try {
+					evalController.publish(new SongResult(list,goodBadNon) );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        }
+	   });
+		
 	}
 	
 

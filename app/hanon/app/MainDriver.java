@@ -112,17 +112,15 @@ public class MainDriver extends Application {
 	}
 
 	public void showResults() {
-		FXMLLoader loader = new FXMLLoader();
-		System.out.println(MainDriver.class.getResource("view/Result.fxml"));
-//		AnchorPane resultPane;
-//		try {
-//			resultPane = loader.load();
-//			ResultController controller = loader.getController();
-//			rootLayout.setCenter(resultPane);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		FXMLLoader loader = BaseController.buildLoader("Result");
+		try {
+			AnchorPane resultPane = loader.load();
+			ResultController controller = loader.getController();
+			rootLayout.setCenter(resultPane);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

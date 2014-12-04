@@ -10,10 +10,10 @@ import hanon.app.model.analyst.results.SongResult;
 
 public class ResultController extends BaseController {
 
-	private MainDriver mainDriver;
-	public ResultController(SongResult sr, MainDriver mainDriver) throws IOException {
-		this.mainDriver = mainDriver;
-
+	public ResultController() {
+		
 	}
+	
+	private MainDriver mainDriver;
 
 }
