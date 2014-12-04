@@ -5,6 +5,7 @@ import hanon.app.controller.LoginController;
 import hanon.app.controller.ResultController;
 import hanon.app.controller.RootLayoutController;
 import hanon.app.model.analyst.results.SongResult;
+import hanon.app.model.player.sheet.MusicSheet;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +62,12 @@ public class MainDriver extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void redraw(){
+		if(rootLayout.getCenter() instanceof MusicSheet) {
+			((MusicSheet) rootLayout.getCenter()).draw();
+		}
+	}
 	private void addLoginSideBar(HiddenSidesPane hPane2) throws IOException {
 		FXMLLoader loader = BaseController.buildLoader("Login");
 	  hPane.setContent(rootLayout);
@@ -112,7 +118,7 @@ public class MainDriver extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-
+	
 	public void showResults(SongResult sr) {
 		FXMLLoader loader = BaseController.buildLoader("Result");
 		try {

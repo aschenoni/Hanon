@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
@@ -40,5 +41,16 @@ public class ResultController extends BaseController {
 	public void setSongResult(SongResult result) {
 		this.result = result;
 	}
-
+	
+	@FXML
+	public void viewSong() {
+		mainDriver.getHPane().setPinnedSide(null);
+	}
+	
+	@FXML
+	public void playAgain() {
+		mainDriver.redraw();
+		mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
+		mainDriver.getHPane().setLeft(null);
+	}
 }
