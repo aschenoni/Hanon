@@ -16,8 +16,13 @@ import hanon.app.model.music.NoteLength;
 import hanon.app.model.music.NoteValue;
 import hanon.app.model.music.StaffElement;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+
+
+
 
 
 
@@ -31,8 +36,12 @@ import hanon.app.model.util.FunctionalList;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class EvaluationController extends BaseController {
@@ -126,8 +135,8 @@ public class EvaluationController extends BaseController {
     this.sheet = sheet;
   }
   
-  public void publish(SongResult sr) {
-	  
+  public void publish(SongResult sr) throws IOException {
+	mainDriver.showResults();
   }
 
   class NoteColorChanger extends Task implements Observer<MusicNoteEvaluation> {

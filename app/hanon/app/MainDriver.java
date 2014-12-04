@@ -2,6 +2,7 @@ package hanon.app;
 
 import hanon.app.controller.BaseController;
 import hanon.app.controller.LoginController;
+import hanon.app.controller.ResultController;
 import hanon.app.controller.RootLayoutController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -109,4 +110,19 @@ public class MainDriver extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+	public void showResults() {
+		FXMLLoader loader = new FXMLLoader();
+		System.out.println(MainDriver.class.getResource("view/Result.fxml"));
+//		AnchorPane resultPane;
+//		try {
+//			resultPane = loader.load();
+//			ResultController controller = loader.getController();
+//			rootLayout.setCenter(resultPane);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+	}
+
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="421.0" prefWidth="580.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="421.0" prefWidth="580.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="hanon.app.controller.ResultController">
    <children>
       <PieChart layoutX="269.0" layoutY="165.0" prefHeight="250.0" prefWidth="303.0" />
       <Label alignment="CENTER" layoutX="6.0" layoutY="9.0" prefHeight="57.0" prefWidth="428.0" text="Song Results">

@@ -1,5 +1,6 @@
 package hanon.app.model.analyst.results;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,12 @@ public class SongResultAggregator implements Observer<MusicNoteEvaluation> {
 		evaluations++;
 		
 		if(info == null) {
-			publish();
+			try {
+				publish();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			
 			if(info.isGood()) {
@@ -50,7 +56,7 @@ public class SongResultAggregator implements Observer<MusicNoteEvaluation> {
 		this.evalController = evalController;
 	}
 	
-	private void publish() {
+	private void publish() throws IOException {
 		evalController.publish(new SongResult(list,goodBadNon) );
 	}
 	
