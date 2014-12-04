@@ -12,8 +12,8 @@ import javax.imageio.ImageIO;
 public class Medal {
 	
 	private enum MedalRank {
-		GOLD(100,95,"images/Gold.png"), SILVER(95,75,"images/Silver.png"), 
-			BRONZE(75,60,"images/Bronze.png"), NOMEDAL(60,-1,"images/NoMedal.png");	
+		GOLD(100,95,"res/images/Gold.png"), SILVER(95,75,"res/images/Silver.png"),
+			BRONZE(75,60,"res/images/Bronze.png"), NOMEDAL(60,-1,"res/images/NoMedal.png");
 		int upperBound;
 		int lowerBound;
 		String url;
@@ -37,7 +37,8 @@ public class Medal {
 		}
 		
 		try {
-			medalImg = new ImageView(rank.url);
+      File file = new File(rank.url);
+			medalImg = new ImageView(file.toURI().toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
