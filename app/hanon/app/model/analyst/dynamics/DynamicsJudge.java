@@ -10,8 +10,10 @@ public class DynamicsJudge extends ThreadedObserverObservable<EvaluableElement, 
   private boolean inCrescendo = false;
   private boolean inDecrescendo = false;
 
-  public DynamicsJudge() {
-    collector.start();
+  @Override
+  public void stop() {
+    super.stop();
+    collector.stop();
   }
 
   @Override
@@ -49,6 +51,8 @@ public class DynamicsJudge extends ThreadedObserverObservable<EvaluableElement, 
         isRecording = true;
         inDecrescendo = true;
       }
+    } else {
+      stop();
     }
   }
 }

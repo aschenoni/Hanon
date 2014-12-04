@@ -63,40 +63,39 @@ public class EvaluationController extends BaseController {
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     RhythmMachine counter = RhythmMachine.fromElements(quarters, 120);
 
-    Thread recThread = new Thread(RecordingGenerator.getInstance());
-    recThread.setDaemon(true);
-    recThread.start();
+    RecordingGenerator.getInstance().start();
 
-    Clicker clicker = new Clicker();
-    counter.register(clicker);
-    counter.register(this::startMachine);
-    counter.register(new CountInShower());
+    CountInShower cis = new CountInShower();
+
+    counter.register(new Clicker());
+    counter.register(e -> { if(e == null) machine.start(); });
+    counter.register(cis);
+
+    counter.setOnStop(cis::cancel);
 
     machine = RhythmMachine.fromElements(elements, 120);
-    machine.register(clicker);
-    IntonationJudge intonationJudge = new IntonationJudge();
-    intonationJudge.register(new NoteColorChanger(sheet));
-    machine.register(intonationJudge);
+    machine.register(new Clicker());
 
+    IntonationJudge intonationJudge = new IntonationJudge();
     DynamicsJudge dynamicsJudge = new DynamicsJudge();
-    dynamicsJudge.register(new CrescendoColorChanger(sheet));
+
+    NoteColorChanger noteColorChanger = new NoteColorChanger();
+    CrescendoColorChanger crescendoColorChanger = new CrescendoColorChanger(sheet);
+
+    intonationJudge.register(noteColorChanger);
+    dynamicsJudge.register(crescendoColorChanger);
+
+    machine.register(intonationJudge);
     machine.register(dynamicsJudge);
+    machine.setOnStop(() -> {
+      noteColorChanger.cancel();
+      crescendoColorChanger.cancel();
+    });
 
     ensureClickerReady();
 
-    Thread thread = new Thread(counter);
-    thread.setDaemon(true);
-    thread.start();
+    counter.start();
   }
-
-  private void startMachine(StaffElement e) {
-    if (e == null) {
-      Thread thread = new Thread(machine);
-      thread.setDaemon(true);
-      thread.start();
-    }
-  }
-
   private void ensureClickerReady() {
     try {
       Thread.sleep(2000);
@@ -122,7 +121,7 @@ public class EvaluationController extends BaseController {
   class NoteColorChanger extends Task implements Observer<MusicNoteEvaluation> {
     private FunctionalList<NoteImage> notes;
 
-    public NoteColorChanger(MusicSheet sheet) {
+    public NoteColorChanger() {
       notes = FunctionalList.fromIterable(sheet.getAllNoteImages());
     }
 

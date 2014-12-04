@@ -18,4 +18,8 @@ public abstract class ThreadedObserver<T> implements Observer<T> {
   }
 
   public abstract void consume(T t);
+
+  public void stop() {
+    thread.stopRunning();
+  }
 }

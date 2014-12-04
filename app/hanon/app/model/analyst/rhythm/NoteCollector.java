@@ -12,21 +12,16 @@ import java.util.List;
 public class NoteCollector extends Collector<MusicNote> {
   private final RecordingGenerator generator = RecordingGenerator.getInstance();
 
-  public NoteCollector() {
-  }
-
   @Override
-  public void run() {
-    while (true) {
-      DataRecording rec = generator.getRecording();
-      if (rec != null) {
-        addToCollection(MusicNote.fromSoundArr(rec.getFloatArray()));
-        informAll(getMostRecent());
-        try {
-          sleep(50);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
+  protected void runLoop() {
+    DataRecording rec = generator.getRecording();
+    if (rec != null) {
+      addToCollection(MusicNote.fromSoundArr(rec.getFloatArray()));
+      informAll(getMostRecent());
+      try {
+        Thread.sleep(50);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
       }
     }
   }
