@@ -5,6 +5,8 @@ import hanon.app.model.analyst.Observer;
 import hanon.app.model.analyst.RecordingGenerator;
 import hanon.app.model.analyst.dynamics.DynamicsJudge;
 import hanon.app.model.analyst.dynamics.SoundLevels;
+import hanon.app.model.analyst.results.SongResult;
+import hanon.app.model.analyst.results.SongResultAggregator;
 import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.analyst.tuner.IntonationJudge;
@@ -16,6 +18,8 @@ import hanon.app.model.music.StaffElement;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 
 import hanon.app.model.player.noteimage.NoteImage;
@@ -72,11 +76,15 @@ public class EvaluationController extends BaseController {
     counter.register(this::startMachine);
 
     machine = RhythmMachine.fromElements(elements, 120);
-    machine.register(clicker);
+    
     IntonationJudge intonationJudge = new IntonationJudge();
     intonationJudge.register(new NoteColorChanger(sheet));
+    SongResultAggregator sra = new SongResultAggregator();
+    sra.setEvalController(this);
+    intonationJudge.register(sra);
+    
     machine.register(intonationJudge);
-
+    machine.register(clicker);
     DynamicsJudge dynamicsJudge = new DynamicsJudge();
     dynamicsJudge.register(new CrescendoColorChanger(sheet));
     machine.register(dynamicsJudge);
@@ -117,6 +125,10 @@ public class EvaluationController extends BaseController {
   public void setSheet(MusicSheet sheet) {
     this.sheet = sheet;
   }
+  
+  public void publish(SongResult sr) {
+	  
+  }
 
   class NoteColorChanger extends Task implements Observer<MusicNoteEvaluation> {
     private FunctionalList<NoteImage> notes;
@@ -133,15 +145,17 @@ public class EvaluationController extends BaseController {
     @Override
     public void inform(MusicNoteEvaluation info) {
       NoteImage n = notes.head();
-      if (info.isPoor()) {
-        Platform.runLater(() ->
-          n.paint(sheet.getBrush().withColor(Color.RED)));
-      } else if (info.isGood()) {
-        Platform.runLater(() ->
-          n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
+      if(info != null) {
+          if (info.isPoor()) {
+            Platform.runLater(() ->
+              n.paint(sheet.getBrush().withColor(Color.RED)));
+          } else if (info.isGood()) {
+            Platform.runLater(() ->
+              n.paint(sheet.getBrush().withColor(Color.SEAGREEN)));
+          }
+          notes = notes.tail();
+        }
       }
-      notes = notes.tail();
-    }
   }
 
   class CrescendoColorChanger extends Task implements Observer<SoundLevels> {
