@@ -28,7 +28,9 @@ public class IntonationJudge extends ThreadedObserverObservable<EvaluableElement
     	  System.out.println("It is done");
     	  informAll(null);
       }
-      informAll(new MusicNoteEvaluation(average, note));
+      MusicNoteEvaluation evaluation = new MusicNoteEvaluation(average, note);
+      informAll(evaluation);
+      note.setEvaluation(evaluation);
     } else {
       isFirst = false;
     }
