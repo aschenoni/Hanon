@@ -23,7 +23,8 @@ public class RootLayoutController extends BaseController {
 	//Allows for communication with other parts of the application
 	private MainDriver mainDriver;
   private MusicSheet sheet;
-
+  private EvaluationController evalController;
+  
 	public void setMainDriver(MainDriver mainDriver){
 		this.mainDriver = mainDriver;
 	}
@@ -46,6 +47,25 @@ public class RootLayoutController extends BaseController {
       sheet.setup(500, 500);
       sheet.draw();
 			mainDriver.getRootLayout().setCenter(sheet);
+		}
+		
+		Node currentSheet = mainDriver.getRootLayout().getCenter();
+		if(currentSheet instanceof MusicSheet){
+			FXMLLoader loader = buildLoader("Rhythm");
+			AnchorPane rhythmPane;
+			try {
+				rhythmPane = loader.load();
+				EvaluationController evaluationController = loader.getController();
+				mainDriver.getHPane().setBottom(rhythmPane);
+				mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
+				evaluationController.setMainDriver(mainDriver);
+				evaluationController.setSheet(sheet);
+				this.evalController = evaluationController;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	}
 
@@ -85,20 +105,13 @@ public class RootLayoutController extends BaseController {
   }
 	
 	@FXML private void handleClicker() throws IOException {
-		Node currentSheet = mainDriver.getRootLayout().getCenter();
-		if(currentSheet instanceof MusicSheet){
-			FXMLLoader loader = buildLoader("Rhythm");
-			AnchorPane rhythmPane = loader.load();
-			EvaluationController evaluationController = loader.getController();
-			mainDriver.getHPane().setBottom(rhythmPane);
-			mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
-			evaluationController.setMainDriver(mainDriver);
-      evaluationController.setSheet(sheet);
-			ObservableList<StaffElementSet> sets = ((MusicSheet) currentSheet).getSets();
+		if(mainDriver.getRootLayout().getCenter() instanceof MusicSheet) {
+		
+			ObservableList<StaffElementSet> sets = ((MusicSheet)mainDriver.getRootLayout().getCenter()).getSets();
 			StaffElementSet set = sets.get(0);
-			evaluationController.handleRhythm(set.getElements());
-    }
-	}
+			evalController.handleRhythm(set.getElements());
+			}
+		}
 
   @FXML
 	private void handleAbout(){

@@ -23,7 +23,7 @@
                   </ImageView>
                </children>
             </HBox>
-             <Label fx:id="rhythmStatus" alignment="CENTER" prefHeight="38.0" prefWidth="184.0" text="Playing Rhythm...">
+             <Label fx:id="rhythmStatus" alignment="CENTER" prefHeight="40.0" prefWidth="210.0" text="Click to Play Rhythm...">
                  <font>
                    <Font size="20.0" />
                  </font>
@@ -31,7 +31,7 @@
                   <Insets bottom="10.0" />
                </padding>
              </Label>
-            <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="345.0">
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="345.0">
                <children>
                   <ToggleButton mnemonicParsing="false" onAction="#handlePlay">
                      <graphic>
@@ -57,7 +57,7 @@
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>
-                  <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <Label prefHeight="55.0" prefWidth="87.0" text="Tempo:">
                            <font>
@@ -70,10 +70,13 @@
                         <TextField fx:id="tempoField" alignment="BOTTOM_RIGHT" prefHeight="25.0" prefWidth="63.0" />
                      </children>
                      <HBox.margin>
-                        <Insets left="50.0" right="25.0" />
+                        <Insets left="50.0" />
                      </HBox.margin>
                   </VBox>
                </children>
+               <VBox.margin>
+                  <Insets left="150.0" />
+               </VBox.margin>
             </HBox>
          </children>
       </VBox>
