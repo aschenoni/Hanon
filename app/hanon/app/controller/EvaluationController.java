@@ -24,6 +24,7 @@ import java.util.List;
 
 
 
+
 import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.MusicSheet;
@@ -39,6 +40,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -53,6 +55,8 @@ public class EvaluationController extends BaseController {
   @FXML public ToggleButton stopButton;
   private MusicSheet sheet;
 
+  @FXML TextField tempofield;
+  
   public EvaluationController() {
   }
   
@@ -69,11 +73,13 @@ public class EvaluationController extends BaseController {
   }
   
   @FXML public void handlePlay() {
-	  System.out.println("button was pressed");
-	  handleRhythm( sheet.getSets().get(0).getElements() );
+	  handleRhythm( sheet.getSets().get(0).getElements());
   }
   
   public void handleRhythm(List<StaffElement> elements) {
+	
+	Integer tempo;
+	System.out.println(tempofield.getText());
     List<StaffElement> quarters = new ArrayList<>();
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
