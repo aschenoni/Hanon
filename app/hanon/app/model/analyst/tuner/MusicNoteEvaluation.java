@@ -50,10 +50,10 @@ public class MusicNoteEvaluation {
 
   public void showStatistics(int x, int y) throws IOException {
     FXMLLoader loader = BaseController.buildLoader("NoteEvalView");
+    pane = loader.load();
     MusicEvalController controller = loader.getController();
     controller.setEvaluation(this);
 
-    pane = loader.load();
     ((MusicSheet)(MainDriver
             .getInstance()
             .getRootLayout()
