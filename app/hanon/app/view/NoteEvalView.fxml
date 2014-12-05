@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="102.0" prefWidth="178.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="hanon.app.controller.MusicEvalController">
+<AnchorPane prefHeight="102.0" prefWidth="178.0" style="-fx-background-color: RGB(0,200,175,1);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.MusicEvalController">
    <children>
       <Label layoutX="23.0" layoutY="42.0" text="Note:" />
       <Label layoutX="23.0" layoutY="67.0" text="Freq.:" />
