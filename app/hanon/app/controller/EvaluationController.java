@@ -174,6 +174,14 @@ public class EvaluationController extends BaseController {
       Color color;
       StaffPlaceable c = crescendos.head();
 
+      if (c instanceof CrescendoImage) {
+        ((CrescendoImage)c).setOnMousePressed(e -> graphLevels(levels));
+        ((CrescendoImage)c).setOnMouseReleased(e -> hideLevels());
+      } else {
+        ((DecrescendoImage)c).setOnMousePressed(e -> graphLevels(levels));
+        ((DecrescendoImage)c).setOnMouseReleased(e -> hideLevels());
+      }
+
       if (levels.isCrescendo() && c instanceof CrescendoImage) {
         color = Color.SEAGREEN;
       } else if (levels.isDecrescendo() && c instanceof DecrescendoImage) {
@@ -183,6 +191,13 @@ public class EvaluationController extends BaseController {
       }
       Platform.runLater(() -> c.paint(sheet.getBrush().withColor(color)));
       crescendos = crescendos.tail();
+    }
+
+    private void graphLevels(SoundLevels levels) {
+
+    }
+
+    private void hideLevels() {
     }
 
     @Override
