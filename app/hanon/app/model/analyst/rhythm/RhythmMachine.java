@@ -31,6 +31,8 @@ public class RhythmMachine extends StoppableTool<EvaluableElement> {
     for (StaffElement e : elements) {
       if (isStopped()) break;
       else if (e.getType() == StaffElementType.NOTE) {
+        MusicNote note = (MusicNote)e;
+        note.setEvaluation(null);
         EvaluableElement n = (EvaluableElement)e;
 
         if (crescendoNoteCount > 0) {
