@@ -56,7 +56,7 @@ public class RhythmMachine extends StoppableTool<EvaluableElement> {
   }
 
   private void waitForLength(NoteLength n) {
-    float bps = bpm / 60;
+    float bps = bpm / 60f;
     float spb = 1 / bps;
     float mspb = spb * 1000;
     float time = (mspb * n.lengthRelativeTo256th()) / lengthWithBeat.lengthRelativeTo256th();
