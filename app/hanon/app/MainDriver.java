@@ -34,6 +34,7 @@ public class MainDriver extends Application {
 	private BorderPane rootLayout; //Main application node from which everything will be a child
 	private HiddenSidesPane hPane;
 	private Integer previousSongPercent;
+	private RootLayoutController rootLayoutController;
 	
   	/**
 	 * JavaFX application main method
@@ -97,6 +98,7 @@ public class MainDriver extends Application {
   private void buildController(FXMLLoader loader) {
     RootLayoutController controller = loader.getController();
     controller.setMainDriver(this);
+    this.rootLayoutController = controller;
   }
 
   /**
@@ -150,5 +152,9 @@ public class MainDriver extends Application {
 	public void setPrevious(Integer integer) {
 		this.previousSongPercent = integer;
 		
+	}
+	
+	public RootLayoutController getRootLayoutController() {
+		return rootLayoutController;
 	}
 }

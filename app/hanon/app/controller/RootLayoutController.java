@@ -122,4 +122,9 @@ public class RootLayoutController extends BaseController {
 	private void handleExit(){
 		//TODO
 	}
+	
+	public EvaluationController getEvaluationController() {
+		return evalController;
+		
+	}
 }
