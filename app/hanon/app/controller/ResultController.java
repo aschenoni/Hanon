@@ -100,11 +100,7 @@ public class ResultController extends BaseController {
 		mainDriver.redraw();
 		mainDriver.getHPane().setLeft(null);
 		mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
-		AnchorPane bottom = (AnchorPane) mainDriver.getHPane().getBottom();
-		for (Node node : bottom.getChildren() ) {
-			
-			//TODO: VERY UGLY
-			((ToggleButton)((HBox)((VBox) node).getChildren().get(2)).getChildren().get(0)).fire();
-		}
+		
+		mainDriver.getRootLayoutController().getEvaluationController().handlePlay();
 	}
 }
