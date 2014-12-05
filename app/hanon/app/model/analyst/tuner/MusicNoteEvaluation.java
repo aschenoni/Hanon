@@ -15,6 +15,7 @@ import java.io.IOException;
 public class MusicNoteEvaluation {
   private final MusicNote played;
   private final MusicNote expected;
+  private AnchorPane pane;
 
   public MusicNoteEvaluation(MusicNote played, MusicNote expected) {
     this.played = played;
@@ -48,13 +49,27 @@ public class MusicNoteEvaluation {
   }
 
   public void showStatistics(int x, int y) throws IOException {
-    System.out.println("Showing statistics");
     FXMLLoader loader = BaseController.buildLoader("NoteEvalView");
-    MusicEvalController controller = new MusicEvalController();
-    AnchorPane pane = loader.load();
-    ((MusicSheet)(MainDriver.getInstance().getRootLayout().getCenter())).getChildren().add(pane);
-    Insets ins = new Insets(y, 0, 0, x);
+    MusicEvalController controller = loader.getController();
+    controller.setEvaluation(this);
+
+    pane = loader.load();
+    ((MusicSheet)(MainDriver
+            .getInstance()
+            .getRootLayout()
+            .getCenter()))
+            .getChildren()
+            .add(pane);
     pane.setLayoutX(x);
     pane.setLayoutY(y);
+  }
+
+  public void hideStatistics() {
+    ((MusicSheet)(MainDriver
+            .getInstance()
+            .getRootLayout()
+            .getCenter()))
+            .getChildren()
+            .remove(pane);
   }
 }

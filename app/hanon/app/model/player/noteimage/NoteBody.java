@@ -18,13 +18,14 @@ public class NoteBody implements NoteComponent {
 
   public NoteBody(int x, int y, int angle) {
     ellipse = RotatedEllipse.buildEllipse(x, y, WIDTH, HEIGHT, angle);
-    ellipse.setOnMouseEntered(e -> {
+    ellipse.setOnMousePressed(e -> {
       try {
         note.getEvaluation().showStatistics(x, y);
       } catch (IOException e1) {
         e1.printStackTrace();
       }
     });
+    ellipse.setOnMouseReleased(e -> note.getEvaluation().hideStatistics());
   }
 
   public void setMusicNote(MusicNote note) {
