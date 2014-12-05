@@ -209,18 +209,30 @@ public class EvaluationController extends BaseController {
     }
 
     private void graphLevels(int x, int y, SoundLevels levels) {
-    	final NumberAxis xAxis = new NumberAxis();
-    	final NumberAxis yAxis = new NumberAxis();
-    	levelGraph = new LineChart<Number,Number>(xAxis,yAxis);
+
     	XYChart.Series series = new XYChart.Series();
     	int i = 1;
+    	Double max = levels.averagedLevels().minimum(levels.averagedLevels());
+    	Double min = levels.averagedLevels().maximum(levels.averagedLevels());
+    	
+    	
+    	
+    	
     	for(Double level  : levels.averagedLevels().toArrayList()) {
-    		series.getData().add(new XYChart.Data(i,level));
-    		i++;			
-		  }
+    			
+    			series.getData().add(new XYChart.Data(i,level));
+    			System.out.println(i + " level: " + level);
+    			i++;
+		  } 
+    	System.out.println(max + " " + min);
+    	final NumberAxis newX = new NumberAxis();
+    	final NumberAxis newY = new NumberAxis(min, max, max-min / 100);
+    	newY.setForceZeroInRange(false);
+    	newX.setForceZeroInRange(false);
+    	levelGraph = new LineChart<Number,Number>(newX,newY);
     	levelGraph.getData().add(series);
-      levelGraph.setLayoutX(x);
-      levelGraph.setLayoutY(y);
+    	levelGraph.setLayoutX(x);
+    	levelGraph.setLayoutY(y);
     	((MusicSheet)mainDriver.getRootLayout().getCenter()).getChildren().add(levelGraph);
     }
 

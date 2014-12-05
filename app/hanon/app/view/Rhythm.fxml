@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="177.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.EvaluationController">
+<AnchorPane prefHeight="200.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.EvaluationController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="440.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -21,8 +21,13 @@
                   <Insets bottom="10.0" />
                </padding>
              </Label>
-            <HBox alignment="TOP_CENTER" prefHeight="25.0" prefWidth="345.0">
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="345.0">
                <children>
+                  <ImageView fitHeight="94.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </ImageView>
                   <ToggleButton mnemonicParsing="false" onAction="#handlePlay">
                      <graphic>
                         <ImageView>
@@ -47,6 +52,11 @@
                            </image>
                         </ImageView>
                      </graphic></ToggleButton>
+                  <TextField prefHeight="25.0" prefWidth="95.0">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </TextField>
                </children>
             </HBox>
          </children>
