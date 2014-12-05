@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -165,6 +166,13 @@ public class FunctionalList<A> implements Monad<A> {
   public <B> FunctionalList<B> map(Function<A, B> f) {
     if (isEmpty()) return FunctionalList.<B>empty();
     else return tail().map(f).prepend(f.apply(head()));
+  }
+
+  public void foreach(Consumer<A> f) {
+    if (!isEmpty()) {
+      f.accept(head);
+      tail.foreach(f);
+    }
   }
 
   /**
