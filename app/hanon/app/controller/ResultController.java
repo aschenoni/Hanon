@@ -92,7 +92,7 @@ public class ResultController extends BaseController {
 
 	@FXML
 	public void viewSong() {
-		mainDriver.getHPane().setPinnedSide(null);
+		mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
 	}
 	
 	@FXML

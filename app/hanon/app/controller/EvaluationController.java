@@ -55,7 +55,7 @@ public class EvaluationController extends BaseController {
   @FXML public ToggleButton stopButton;
   private MusicSheet sheet;
 
-  @FXML TextField tempofield;
+  @FXML TextField tempoField;
   
   public EvaluationController() {
   }
@@ -66,26 +66,24 @@ public class EvaluationController extends BaseController {
       stopButton.setText("Close");
       rhythmStatus.setText("Rhythm Stopped");
     }
-    
-    else {
-      mainDriver.getHPane().setBottom(null);
-    }
   }
   
   @FXML public void handlePlay() {
+	  sheet.draw();
 	  handleRhythm( sheet.getSets().get(0).getElements());
+	  rhythmStatus.setText("Playing Rhythm...");
   }
   
   public void handleRhythm(List<StaffElement> elements) {
 	
-	Integer tempo;
-	System.out.println(tempofield.getText());
+	Integer tempo = new Integer(tempoField.getText());
+
     List<StaffElement> quarters = new ArrayList<>();
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
     quarters.add(new MusicNote(new NoteValue(440f), NoteLength.QUARTER));
-    RhythmMachine counter = RhythmMachine.fromElements(quarters, 120);
+    RhythmMachine counter = RhythmMachine.fromElements(quarters, tempo);
 
     RecordingGenerator.getInstance().start();
 
@@ -97,7 +95,7 @@ public class EvaluationController extends BaseController {
 
     counter.setOnStop(cis::cancel);
 
-    machine = RhythmMachine.fromElements(elements, 120);
+    machine = RhythmMachine.fromElements(elements, tempo);
     machine.register(new Clicker());
 
     IntonationJudge intonationJudge = new IntonationJudge();

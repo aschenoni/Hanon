@@ -59,7 +59,7 @@
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="tempoField" alignment="BOTTOM_RIGHT" prefHeight="25.0" prefWidth="63.0" />
+                        <TextField fx:id="tempoField" alignment="CENTER" prefHeight="25.0" prefWidth="63.0" text="120" />
                      </children>
                      <HBox.margin>
                         <Insets left="50.0" />
