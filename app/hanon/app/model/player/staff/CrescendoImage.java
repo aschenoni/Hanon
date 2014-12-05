@@ -13,20 +13,22 @@ public class CrescendoImage implements StaffPlaceable {
   private final Line lineUp;
   private final Line lineDown;
   private final Rectangle boundingRectangle;
+  private int x;
+  private int y;
 
   public CrescendoImage(FunctionalList<NoteImage> lastNNotes, int y) {
-    int startX = lastNNotes.head().x();
+    x = lastNNotes.head().x();
     int endX = lastNNotes.last().x() + 10;
     int startY = y + 60;
-    int endTopY = y + 55;
+    this.y = y + 55;
     int endBottomY = y + 65;
 
-    int width = endX - startX;
-    int height = endBottomY - endTopY;
+    int width = endX - x;
+    int height = endBottomY - this.y;
 
-    lineUp = new Line(startX, startY, endX, endTopY);
-    lineDown = new Line(startX, startY, endX, endBottomY);
-    boundingRectangle = new Rectangle(startX, endTopY, width, height);
+    lineUp = new Line(x, startY, endX, this.y);
+    lineDown = new Line(x, startY, endX, endBottomY);
+    boundingRectangle = new Rectangle(x, this.y, width, height);
   }
 
   @Override
@@ -42,5 +44,13 @@ public class CrescendoImage implements StaffPlaceable {
 
   public void setOnMouseReleased(EventHandler e) {
     boundingRectangle.setOnMouseReleased(e);
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
   }
 }

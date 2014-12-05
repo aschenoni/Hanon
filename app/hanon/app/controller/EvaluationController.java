@@ -173,6 +173,7 @@ public class EvaluationController extends BaseController {
 
   class CrescendoColorChanger extends Task implements Observer<SoundLevels> {
     private FunctionalList<StaffPlaceable> crescendos;
+    private LineChart<Number, Number> levelGraph;
 
     public CrescendoColorChanger(MusicSheet sheet) {
       crescendos = FunctionalList.fromIterable(sheet.getAllCrescendos());
@@ -186,11 +187,13 @@ public class EvaluationController extends BaseController {
       if (c == null) return;
 
       if (c instanceof CrescendoImage) {
-        ((CrescendoImage)c).setOnMousePressed(e -> graphLevels(levels));
-        ((CrescendoImage)c).setOnMouseReleased(e -> hideLevels());
+        CrescendoImage cr = (CrescendoImage)c;
+        cr.setOnMousePressed(e -> graphLevels(cr.getX(), cr.getY(), levels));
+        cr.setOnMouseReleased(e -> hideLevels());
       } else {
-        ((DecrescendoImage)c).setOnMousePressed(e -> graphLevels(levels));
-        ((DecrescendoImage)c).setOnMouseReleased(e -> hideLevels());
+        DecrescendoImage dr = (DecrescendoImage)c;
+        dr.setOnMousePressed(e -> graphLevels(dr.getX(), dr.getY(), levels));
+        dr.setOnMouseReleased(e -> hideLevels());
       }
 
       if (levels.isCrescendo() && c instanceof CrescendoImage) {
@@ -205,21 +208,24 @@ public class EvaluationController extends BaseController {
       crescendos = crescendos.tail();
     }
 
-    private void graphLevels(SoundLevels levels) {
+    private void graphLevels(int x, int y, SoundLevels levels) {
     	final NumberAxis xAxis = new NumberAxis();
     	final NumberAxis yAxis = new NumberAxis();
-    	LineChart<Number, Number> levelGraph = new LineChart<Number,Number>(xAxis,yAxis);
+    	levelGraph = new LineChart<Number,Number>(xAxis,yAxis);
     	XYChart.Series series = new XYChart.Series();
     	int i = 1;
     	for(Double level  : levels.averagedLevels().toArrayList()) {
     		series.getData().add(new XYChart.Data(i,level));
     		i++;			
-		}
+		  }
     	levelGraph.getData().add(series);
+      levelGraph.setLayoutX(x);
+      levelGraph.setLayoutY(y);
     	((MusicSheet)mainDriver.getRootLayout().getCenter()).getChildren().add(levelGraph);
     }
 
     private void hideLevels() {
+      ((MusicSheet)mainDriver.getRootLayout().getCenter()).getChildren().remove(levelGraph);
     }
 
     @Override
