@@ -53,14 +53,6 @@
       </Label>
       <ImageView fx:id="medal" fitHeight="143.0" fitWidth="153.0" layoutX="418.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="143.0" fitWidth="153.0" layoutX="193.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
-      <BarChart horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="52.0" layoutY="361.0" legendVisible="false" prefHeight="189.0" prefWidth="363.0" verticalGridLinesVisible="false">
-        <xAxis>
-          <CategoryAxis disable="true" opacity="0.0" side="BOTTOM" tickLabelsVisible="false" tickMarkVisible="false" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis minorTickVisible="false" opacity="0.0" side="LEFT" tickLabelsVisible="false" tickMarkVisible="false" />
-        </yAxis>
-      </BarChart>
       <Button layoutX="418.0" layoutY="500.0" mnemonicParsing="false" onAction="#viewSong" text="View Song" />
       <Button layoutX="503.0" layoutY="500.0" mnemonicParsing="false" onAction="#playAgain" text="Play Again" />
       <Label fx:id="totalPercent" alignment="CENTER" layoutX="418.0" layoutY="144.0" prefHeight="143.0" prefWidth="153.0" text="Label">

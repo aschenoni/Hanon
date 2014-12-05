@@ -222,12 +222,12 @@ public class EvaluationController extends BaseController {
     	
     	for(Double level  : levels.averagedLevels().toArrayList()) {
     			
-    			series.getData().add(new XYChart.Data(i,level));
+    			series.getData().add(new XYChart.Data(i,level*-1));
     			i++;
 		  } 
     	System.out.println(max + " " + min);
     	final NumberAxis newX = new NumberAxis();
-    	final NumberAxis newY = new NumberAxis(min + Math.abs((min/100)), max - Math.abs((max/100)), Math.abs(max-min / 100));
+    	final NumberAxis newY = new NumberAxis(-1*(min + Math.abs((min/100))), -1*(max - Math.abs((max/100))), Math.abs(max-min / 100));
     	newY.setForceZeroInRange(false);
     	newX.setForceZeroInRange(false);
     	newY.setTickLabelsVisible(false);
