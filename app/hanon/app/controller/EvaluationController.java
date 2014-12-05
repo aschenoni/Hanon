@@ -38,7 +38,6 @@ public class EvaluationController extends BaseController {
   private RhythmMachine machine;
   private MainDriver mainDriver;
 
-
   @FXML public Label rhythmStatus;
   
   @FXML public ToggleButton stopButton;

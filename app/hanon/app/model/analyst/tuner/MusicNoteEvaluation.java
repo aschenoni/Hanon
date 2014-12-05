@@ -1,7 +1,16 @@
 package hanon.app.model.analyst.tuner;
 
+import hanon.app.MainDriver;
+import hanon.app.controller.BaseController;
+import hanon.app.controller.MusicEvalController;
 import hanon.app.model.music.MusicNote;
 import hanon.app.model.music.NoteValue;
+import hanon.app.model.player.sheet.MusicSheet;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class MusicNoteEvaluation {
   private final MusicNote played;
@@ -36,5 +45,16 @@ public class MusicNoteEvaluation {
   @Override
   public String toString() {
     return "Played: {" + played + "}, Expected:{" + expected + "}";
+  }
+
+  public void showStatistics(int x, int y) throws IOException {
+    System.out.println("Showing statistics");
+    FXMLLoader loader = BaseController.buildLoader("NoteEvalView");
+    MusicEvalController controller = new MusicEvalController();
+    AnchorPane pane = loader.load();
+    ((MusicSheet)(MainDriver.getInstance().getRootLayout().getCenter())).getChildren().add(pane);
+    Insets ins = new Insets(y, 0, 0, x);
+    pane.setLayoutX(x);
+    pane.setLayoutY(y);
   }
 }

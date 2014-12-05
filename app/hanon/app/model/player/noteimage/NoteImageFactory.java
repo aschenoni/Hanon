@@ -42,6 +42,8 @@ public class NoteImageFactory {
     int y = (note.getStaffPosition(clef)-1)*5 + staffY + 1;
     NoteBody normalBody = new NoteBody(x, y, -20);
     NoteBody wholeBody  = new NoteBody(x, y, 0);
+    normalBody.setMusicNote(note);
+    wholeBody.setMusicNote(note);
     NoteStem noteStem   = buildStem(x, y, d);
     NoteFlag flag       = NoteFlag.fromPosition(x, y, staffY);
     BodyHole normalHole = new BodyHole(x, y, -20);

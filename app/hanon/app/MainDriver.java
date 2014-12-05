@@ -24,6 +24,12 @@ import org.controlsfx.control.HiddenSidesPane;
 
 public class MainDriver extends Application {
 
+  private static MainDriver instance;
+
+  public static MainDriver getInstance() {
+    return instance;
+  }
+
 	private Stage primaryStage;
 	private BorderPane rootLayout; //Main application node from which everything will be a child
 	private HiddenSidesPane hPane;
@@ -35,6 +41,7 @@ public class MainDriver extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Hanon");
+    instance = this;
 		
 		initPrimaryScene();
   }
@@ -134,5 +141,4 @@ public class MainDriver extends Application {
 			e.printStackTrace();
 		}
 	}
-
 }

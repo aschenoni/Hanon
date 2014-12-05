@@ -1,5 +1,6 @@
 package hanon.app.model.music;
 
+import hanon.app.model.analyst.tuner.MusicNoteEvaluation;
 import javafx.scene.paint.Color;
 import be.tarsos.dsp.pitch.PitchDetectionResult;
 import be.tarsos.dsp.pitch.Yin;
@@ -30,6 +31,8 @@ public class MusicNote extends EvaluableElement {
 
   private boolean inCrescendo = false;
   private boolean inDecrescendo = false;
+  private MusicNoteEvaluation evaluation;
+
 
   public MusicNote(NoteValue value, NoteLength length) {
     this.value = value;
@@ -159,4 +162,12 @@ public class MusicNote extends EvaluableElement {
     return new MusicNote(new NoteValue(frequency), NoteLength.QUARTER); //TODO how do we determine the length
 		
 	}
+
+  public MusicNoteEvaluation getEvaluation() {
+    return evaluation;
+  }
+
+  public void setEvaluation(MusicNoteEvaluation evaluation) {
+    this.evaluation = evaluation;
+  }
 }
