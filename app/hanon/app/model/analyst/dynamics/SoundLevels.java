@@ -12,18 +12,32 @@ public class SoundLevels {
   }
 
   public boolean isCrescendo() {
-    FunctionalList<FunctionalList<Double>> grouped = levels.groupN(granularity);
-    FunctionalList<Double> averages = grouped.map(SoundLevels::average);
-    return isOrdered(averages);
+    return isOrdered(averagedLevels());
   }
 
   public boolean isDecrescendo() {
-    FunctionalList<FunctionalList<Double>> grouped = levels.groupN(granularity);
-    FunctionalList<Double> averages = grouped.map(SoundLevels::average);
-    return isOrdered(averages.reverse());
+    return isOrdered(averagedLevels().reverse());
   }
 
-  private static double average(FunctionalList<Double> list) {
+  private FunctionalList<Double> averagedLevels() {
+    FunctionalList<Double> withoutOutliers = dropOutliers(levels);
+    FunctionalList<FunctionalList<Double>> grouped = withoutOutliers.groupN(granularity);
+    return grouped.map(SoundLevels::average);
+  }
+
+  private FunctionalList<Double> dropOutliers(FunctionalList<Double> levels) {
+    Double mean = average(levels);
+    Double sd = stdDev(levels);
+    return levels.filter(n -> Math.abs(n - mean) < sd);
+  }
+
+  private Double stdDev(FunctionalList<Double> nums) {
+    Double mean = average(nums);
+    Double summedDiffs = nums.foldl((sum, n) -> sum + ((n - mean) * (n - mean)), 0.0);
+    return Math.sqrt(summedDiffs/nums.size());
+  }
+
+  private static Double average(FunctionalList<Double> list) {
     Double sum = list.foldl((a, b) -> a + b, 0.0);
     return sum / list.size();
   }
