@@ -104,7 +104,7 @@ public class ResultController extends BaseController {
 		for (Node node : bottom.getChildren() ) {
 			
 			//TODO: VERY UGLY
-			((ToggleButton)((HBox)((VBox) node).getChildren().get(1)).getChildren().get(0)).fire();
+			((ToggleButton)((HBox)((VBox) node).getChildren().get(2)).getChildren().get(0)).fire();
 		}
 	}
 }
