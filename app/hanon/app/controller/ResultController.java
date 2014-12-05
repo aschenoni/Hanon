@@ -10,8 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import hanon.app.MainDriver;
 import hanon.app.model.analyst.results.SongResult;
 
@@ -55,7 +58,9 @@ public class ResultController extends BaseController {
 		mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
 		AnchorPane bottom = (AnchorPane) mainDriver.getHPane().getBottom();
 		for (Node node : bottom.getChildren() ) {
-			System.out.println(node);
+			
+			//TODO: VERY UGLY
+			((ToggleButton)((HBox)((VBox) node).getChildren().get(1)).getChildren().get(0)).fire();
 		}
 	}
 }

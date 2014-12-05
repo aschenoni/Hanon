@@ -16,7 +16,7 @@ public class MusicEvalController {
   public void setEvaluation(MusicNoteEvaluation evaluation) {
     actualNote.setText(evaluation.getPlayed().getName().toString());
     expectedNote.setText(evaluation.getExpected().getName().toString());
-    actualFreq.setText("" + evaluation.getPlayed().getFrequency());
-    expectedFreq.setText("" + evaluation.getExpected().getFrequency());
+    actualFreq.setText("" + Math.round(evaluation.getPlayed().getFrequency()));
+    expectedFreq.setText("" + Math.round(evaluation.getExpected().getFrequency()));
   }
 }
