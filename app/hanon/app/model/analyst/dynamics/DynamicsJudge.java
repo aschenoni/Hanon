@@ -20,23 +20,17 @@ public class DynamicsJudge extends ThreadedObserverObservable<EvaluableElement, 
   public void consume(EvaluableElement element) {
     if (element != null) {
       if (isRecording && inCrescendo && element.isInDecrescendo()) {
-        FunctionalList<Double> items = collector.takeCollection();
-        SoundLevels levels = new SoundLevels(items, 10);
-        informAll(levels);
+        send();
         inCrescendo = false;
         inDecrescendo = true;
       }
       else if (isRecording && inDecrescendo && element.isInCrescendo()) {
-        FunctionalList<Double> items = collector.takeCollection();
-        SoundLevels levels = new SoundLevels(items, 10);
-        informAll(levels);
+        send();
         inCrescendo = true;
         inDecrescendo = false;
       }
       else if (isRecording && !element.isInCrescendo() && !element.isInDecrescendo()) {
-        FunctionalList<Double> items = collector.takeCollection();
-        SoundLevels levels = new SoundLevels(items, 10);
-        informAll(levels);
+        send();
         isRecording = false;
         inCrescendo = false;
         inDecrescendo = false;
@@ -52,7 +46,14 @@ public class DynamicsJudge extends ThreadedObserverObservable<EvaluableElement, 
         inDecrescendo = true;
       }
     } else {
+      send();
       stop();
     }
+  }
+
+  private void send() {
+    FunctionalList<Double> items = collector.takeCollection();
+    SoundLevels levels = new SoundLevels(items, 10);
+    informAll(levels);
   }
 }
