@@ -3,6 +3,8 @@ package hanon.app.controller;
 import java.io.IOException;
 import java.util.Arrays;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
@@ -60,20 +62,31 @@ public class ResultController extends BaseController {
 			comparedTo.setText("This is your first playthrough this session");
 		} else {
 			Integer previous = mainDriver.getPrevious();
-			float difference = gp - previous;
+			float difference = (gp/totalNotes * 100) - previous;
 			String bOrW;
 			if(difference < 0) {
 				bOrW = "Worse";
 			} else {
 				bOrW = "Better";
 			}
-			comparedTo.setText("You did " + Math.round(Math.abs((difference)/totalNotes)*100) + "% " + bOrW + " than last time");
+			comparedTo.setText("You did " + Math.round(Math.abs((difference))) + "% " + bOrW + " than last time");
 		}
-		mainDriver.setPrevious((int) gp );
+		mainDriver.setPrevious(((int) gp / totalNotes) * 100 );
 		medal.setImage(result.medalEarned().getMedalImage().getImage());
 		totalPercent.setText(Math.round(((float) gp / totalNotes * 100)) + "%");
+		
+		createPieChart(gbn);
 	}
 	
+	private void createPieChart(int[] gbn) {
+		ObservableList<PieChart.Data> pChartData = 
+				FXCollections.observableArrayList(
+				new PieChart.Data("", gbn[0]),
+				new PieChart.Data("", gbn[1]),
+				new PieChart.Data("", gbn[2]));
+		pchart = new PieChart(pChartData);
+	}
+
 	@FXML
 	public void viewSong() {
 		mainDriver.getHPane().setPinnedSide(null);
