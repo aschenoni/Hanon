@@ -64,9 +64,8 @@ public class SongResultMusicAggregator implements Observer<MusicNoteEvaluation> 
 	        @Override
 	        public void run() {
 	        	try {
-	        		Thread.sleep(2000);
 					evalController.publish(new SongResult(list,goodBadNon, srsa.getLevels()) );
-				} catch (IOException | InterruptedException e) {
+				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

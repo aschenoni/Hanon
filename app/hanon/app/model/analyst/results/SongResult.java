@@ -19,8 +19,6 @@ public class SongResult {
 		this.goodBadNon = goodBadNon;
 		this.levels = levels;
 
-		System.out.println(levels.get(0));
-		
 		medal = medalEarned();
 	}
 	

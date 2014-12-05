@@ -61,21 +61,17 @@ public class EvaluationController extends BaseController {
   }
   
   @FXML public void handleStop() {
-    if(rhythmStatus.getText().equals("Playing Rhythm...")) {
       stop();
-      stopButton.setText("Close");
       rhythmStatus.setText("Rhythm Stopped");
-    }
   }
   
   @FXML public void handlePlay() {
 	  sheet.draw();
 	  handleRhythm( sheet.getSets().get(0).getElements());
-	  rhythmStatus.setText("Playing Rhythm...");
   }
   
   public void handleRhythm(List<StaffElement> elements) {
-	
+	rhythmStatus.setText("Playing Rhythm...");
 	Integer tempo = new Integer(tempoField.getText());
 
     List<StaffElement> quarters = new ArrayList<>();
