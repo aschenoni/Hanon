@@ -11,12 +11,12 @@ public class MusicEvalController {
   @FXML Label expectedNote;
   @FXML Label expectedFreq;
 
-  private MusicNoteEvaluation evaluation;
-
   public MusicEvalController() {}
 
   public void setEvaluation(MusicNoteEvaluation evaluation) {
-    this.evaluation = evaluation;
-    actualNote.setText(evaluation.getPlayed().toString());
+    actualNote.setText(evaluation.getPlayed().getName().toString());
+    expectedNote.setText(evaluation.getExpected().getName().toString());
+    actualFreq.setText("" + evaluation.getPlayed().getFrequency());
+    expectedFreq.setText("" + evaluation.getExpected().getFrequency());
   }
 }
