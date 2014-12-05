@@ -16,20 +16,26 @@ public class NoteBody implements NoteComponent {
   private final Ellipse ellipse;
   private MusicNote note;
 
+  private boolean evaluationShowing = false;
+
   public NoteBody(int x, int y, int angle) {
     ellipse = RotatedEllipse.buildEllipse(x, y, WIDTH, HEIGHT, angle);
     ellipse.setOnMousePressed(e -> {
-      try {
-        if (note.getEvaluation() != null) {
-          note.getEvaluation().showStatistics(x, y);
+      if (!evaluationShowing) {
+        try {
+          if (note.getEvaluation() != null) {
+            note.getEvaluation().showStatistics(x, y);
+          }
+        } catch (IOException e1) {
+          e1.printStackTrace();
         }
-      } catch (IOException e1) {
-        e1.printStackTrace();
       }
+      evaluationShowing = true;
     });
     ellipse.setOnMouseReleased(e -> {
       if (note.getEvaluation() != null) {
         note.getEvaluation().hideStatistics();
+        evaluationShowing = false;
       }
     });
   }
