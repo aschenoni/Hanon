@@ -62,7 +62,7 @@ public class ResultController extends BaseController {
 			comparedTo.setText("This is your first playthrough this session");
 		} else {
 			Integer previous = mainDriver.getPrevious();
-			float difference = (gp/totalNotes * 100) - previous;
+			float difference = ((float) gp/totalNotes * 100) - previous;
 			String bOrW;
 			if(difference < 0) {
 				bOrW = "Worse";
@@ -71,7 +71,8 @@ public class ResultController extends BaseController {
 			}
 			comparedTo.setText("You did " + Math.round(Math.abs((difference))) + "% " + bOrW + " than last time");
 		}
-		mainDriver.setPrevious(((int) gp / totalNotes) * 100 );
+		mainDriver.setPrevious( (int)((((float)gp) / totalNotes)*100));
+		
 		medal.setImage(result.medalEarned().getMedalImage().getImage());
 		totalPercent.setText(Math.round(((float) gp / totalNotes * 100)) + "%");
 		
