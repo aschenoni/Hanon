@@ -2,6 +2,7 @@ package hanon.app.controller;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import hanon.app.MainDriver;
+import hanon.app.model.analyst.dynamics.SoundLevels;
 import hanon.app.model.analyst.results.SongResult;
 
 public class ResultController extends BaseController {
@@ -78,7 +80,7 @@ public class ResultController extends BaseController {
 		
 		createPieChart(gbn);
 	}
-	
+
 	private void createPieChart(int[] gbn) {
 		ObservableList<PieChart.Data> pChartData = 
 				FXCollections.observableArrayList(

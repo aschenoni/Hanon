@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
+
+
 import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.MusicSheet;
@@ -29,6 +33,10 @@ import hanon.app.model.util.FunctionalList;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -198,7 +206,17 @@ public class EvaluationController extends BaseController {
     }
 
     private void graphLevels(SoundLevels levels) {
-
+    	final NumberAxis xAxis = new NumberAxis();
+    	final NumberAxis yAxis = new NumberAxis();
+    	LineChart<Number, Number> levelGraph = new LineChart<Number,Number>(xAxis,yAxis);
+    	XYChart.Series series = new XYChart.Series();
+    	int i = 1;
+    	for(Double level  : levels.averagedLevels().toArrayList()) {
+    		series.getData().add(new XYChart.Data(i,level));
+    		i++;			
+		}
+    	levelGraph.getData().add(series);
+    	((MusicSheet)mainDriver.getRootLayout().getCenter()).getChildren().add(levelGraph);
     }
 
     private void hideLevels() {

@@ -19,7 +19,7 @@ public class SoundLevels {
     return isOrdered(averagedLevels().reverse());
   }
 
-  private FunctionalList<Double> averagedLevels() {
+  public FunctionalList<Double> averagedLevels() {
     FunctionalList<Double> withoutOutliers = dropOutliers(levels);
     FunctionalList<FunctionalList<Double>> grouped = withoutOutliers.groupN(granularity);
     return grouped.map(SoundLevels::average);
@@ -50,4 +50,6 @@ public class SoundLevels {
       else return false;
     }
   }
+  
+  
 }

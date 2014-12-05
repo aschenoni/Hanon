@@ -18,7 +18,9 @@ public class SongResult {
 		this.list = list;
 		this.goodBadNon = goodBadNon;
 		this.levels = levels;
-		System.out.println(levels);
+
+		System.out.println(levels.get(0));
+		
 		medal = medalEarned();
 	}
 	
@@ -31,5 +33,10 @@ public class SongResult {
 	
 	public int[] getGBN() {
 		return goodBadNon;				
+	}
+
+	public List<SoundLevels> getLevels() {
+		
+		return levels;
 	}
 }
