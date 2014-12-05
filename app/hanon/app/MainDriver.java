@@ -33,6 +33,7 @@ public class MainDriver extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout; //Main application node from which everything will be a child
 	private HiddenSidesPane hPane;
+	private Integer previousSongPercent;
 	
   	/**
 	 * JavaFX application main method
@@ -140,5 +141,14 @@ public class MainDriver extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public Integer getPrevious() {
+		return previousSongPercent;
+	}
+
+	public void setPrevious(Integer integer) {
+		this.previousSongPercent = integer;
+		
 	}
 }

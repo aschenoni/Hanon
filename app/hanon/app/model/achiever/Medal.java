@@ -38,8 +38,9 @@ public class Medal {
 		
 		try {
       File file = new File(rank.url);
+      		System.out.println("Made it to image check");
 			medalImg = new ImageView(file.toURI().toString());
-			
+			System.out.println("Made the image");
 		} catch (Exception e) {
 			e.printStackTrace();
 		};

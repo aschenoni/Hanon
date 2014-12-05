@@ -16,17 +16,17 @@
             <Font size="40.0" />
          </font>
       </Label>
-      <Label layoutX="277.0" layoutY="165.0" prefHeight="29.0" prefWidth="72.0" text="\%">
+      <Label fx:id="goodPercent" layoutX="277.0" layoutY="165.0" prefHeight="29.0" prefWidth="72.0" text="\%">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label layoutX="277.0" layoutY="215.0" prefHeight="29.0" prefWidth="72.0" text="\%">
+      <Label fx:id="badPercent" layoutX="277.0" layoutY="215.0" prefHeight="29.0" prefWidth="72.0" text="\%">
          <font>
             <Font size="28.0" />
          </font>
       </Label>
-      <Label layoutX="277.0" layoutY="270.0" prefHeight="29.0" prefWidth="72.0" text="\%">
+      <Label fx:id="unplayedPercent" layoutX="277.0" layoutY="270.0" prefHeight="29.0" prefWidth="72.0" text="\%">
          <font>
             <Font size="28.0" />
          </font>
@@ -46,12 +46,12 @@
             <Font size="28.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="88.0" prefHeight="29.0" prefWidth="992.0" text="You did %better than last time">
+      <Label fx:id="comparedTo" alignment="CENTER" layoutX="14.0" layoutY="88.0" prefHeight="29.0" prefWidth="992.0" text="You did %better than last time">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="143.0" fitWidth="153.0" layoutX="418.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="medal" fitHeight="143.0" fitWidth="153.0" layoutX="418.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="143.0" fitWidth="153.0" layoutX="193.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
       <BarChart horizontalGridLinesVisible="false" horizontalZeroLineVisible="false" layoutX="52.0" layoutY="361.0" legendVisible="false" prefHeight="189.0" prefWidth="363.0" verticalGridLinesVisible="false">
         <xAxis>
@@ -63,5 +63,10 @@
       </BarChart>
       <Button layoutX="418.0" layoutY="500.0" mnemonicParsing="false" onAction="#viewSong" text="View Song" />
       <Button layoutX="503.0" layoutY="500.0" mnemonicParsing="false" onAction="#playAgain" text="Play Again" />
+      <Label fx:id="totalPercent" alignment="CENTER" layoutX="418.0" layoutY="144.0" prefHeight="143.0" prefWidth="153.0" text="Label">
+         <font>
+            <Font size="53.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

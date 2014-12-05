@@ -6,7 +6,7 @@ import hanon.app.model.analyst.RecordingGenerator;
 import hanon.app.model.analyst.dynamics.DynamicsJudge;
 import hanon.app.model.analyst.dynamics.SoundLevels;
 import hanon.app.model.analyst.results.SongResult;
-import hanon.app.model.analyst.results.SongResultAggregator;
+import hanon.app.model.analyst.results.SongResultMusicAggregator;
 import hanon.app.model.analyst.rhythm.Clicker;
 import hanon.app.model.analyst.rhythm.RhythmMachine;
 import hanon.app.model.analyst.tuner.IntonationJudge;
@@ -93,10 +93,10 @@ public class EvaluationController extends BaseController {
     intonationJudge.register(noteColorChanger);
     dynamicsJudge.register(crescendoColorChanger);
 
-    SongResultAggregator sra = new SongResultAggregator();
+    SongResultMusicAggregator sra = new SongResultMusicAggregator();
     sra.setEvalController(this);
     intonationJudge.register(sra);
-
+    dynamicsJudge.register(sra.getSoundAggregator());
     machine.register(intonationJudge);
     machine.register(dynamicsJudge);
     machine.setOnStop(() -> {

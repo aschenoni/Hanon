@@ -10,18 +10,20 @@ import hanon.app.model.analyst.Observer;
 import hanon.app.model.analyst.dynamics.SoundLevels;
 import hanon.app.model.analyst.tuner.MusicNoteEvaluation;
 
-public class SongResultAggregator implements Observer<MusicNoteEvaluation> {
+public class SongResultMusicAggregator implements Observer<MusicNoteEvaluation> {
 
 	public int evaluations;
 	int[] goodBadNon; //good notes, bad notes, unplayed notes
-	private List<MusicNoteEvaluation> list;
 	
+	private List<MusicNoteEvaluation> list;
+	private SoundAggregator srsa;
 	private EvaluationController evalController;
 	
-	public SongResultAggregator() {
+	public SongResultMusicAggregator() {
 		evaluations = 0;
 		list = new ArrayList();
 		goodBadNon = new int[3];
+		srsa = new SoundAggregator();
 	}
 	
 	public void inform(MusicNoteEvaluation info) {
@@ -63,7 +65,7 @@ public class SongResultAggregator implements Observer<MusicNoteEvaluation> {
 	        public void run() {
 	        	try {
 	        		Thread.sleep(2000);
-					evalController.publish(new SongResult(list,goodBadNon) );
+					evalController.publish(new SongResult(list,goodBadNon, srsa.getLevels()) );
 				} catch (IOException | InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -71,6 +73,10 @@ public class SongResultAggregator implements Observer<MusicNoteEvaluation> {
 	        }
 	   });
 		
+	}
+	
+	public SoundAggregator getSoundAggregator() {
+		return srsa;
 	}
 	
 

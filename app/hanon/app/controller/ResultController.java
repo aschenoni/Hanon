@@ -1,6 +1,7 @@
 package hanon.app.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,7 @@ public class ResultController extends BaseController {
 	@FXML Label goodPercent;
 	@FXML Label badPercent;
 	@FXML Label unplayedPercent;
+	@FXML Label totalPercent;
 	@FXML PieChart pchart;
 	@FXML ImageView profile;
 	@FXML ImageView medal;
@@ -43,7 +45,33 @@ public class ResultController extends BaseController {
 	}
 	
 	public void setSongResult(SongResult result) {
+
 		this.result = result;
+		int[] gbn = this.result.getGBN();
+		
+		int totalNotes = Arrays.stream(gbn).sum();
+		float gp = ((float) gbn[0]);
+		goodPercent.setText("" + (int)gp);
+		float bp = ((float) gbn[1]);
+		badPercent.setText("" + (int)bp);
+		float up = ((float) gbn[2]);
+		unplayedPercent.setText("" + (int)up);
+		if(mainDriver.getPrevious() == null) {
+			comparedTo.setText("This is your first playthrough this session");
+		} else {
+			Integer previous = mainDriver.getPrevious();
+			float difference = gp - previous;
+			String bOrW;
+			if(difference < 0) {
+				bOrW = "Worse";
+			} else {
+				bOrW = "Better";
+			}
+			comparedTo.setText("You did " + Math.round(Math.abs((difference)/totalNotes)*100) + "% " + bOrW + " than last time");
+		}
+		mainDriver.setPrevious((int) gp );
+		medal.setImage(result.medalEarned().getMedalImage().getImage());
+		totalPercent.setText(Math.round(((float) gp / totalNotes * 100)) + "%");
 	}
 	
 	@FXML

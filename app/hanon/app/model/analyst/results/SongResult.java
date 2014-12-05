@@ -1,6 +1,7 @@
 package hanon.app.model.analyst.results;
 
 import hanon.app.model.achiever.Medal;
+import hanon.app.model.analyst.dynamics.SoundLevels;
 import hanon.app.model.analyst.tuner.MusicNoteEvaluation;
 
 import java.util.Arrays;
@@ -10,11 +11,14 @@ public class SongResult {
 	
 	private List<MusicNoteEvaluation> list;
 	private int[] goodBadNon;
+	private List<SoundLevels> levels;
 	private Medal medal;
 	
-	public SongResult(List<MusicNoteEvaluation> list, int[] goodBadNon) {
+	public SongResult(List<MusicNoteEvaluation> list, int[] goodBadNon, List<SoundLevels> levels) {
 		this.list = list;
 		this.goodBadNon = goodBadNon;
+		this.levels = levels;
+		System.out.println(levels);
 		medal = medalEarned();
 	}
 	
@@ -24,5 +28,8 @@ public class SongResult {
 		percentGood = Math.round(percentGood);
 		return new Medal(percentGood);
 	}
-
+	
+	public int[] getGBN() {
+		return goodBadNon;				
+	}
 }
