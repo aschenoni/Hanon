@@ -222,7 +222,6 @@ public class EvaluationController extends BaseController {
     	for(Double level  : levels.averagedLevels().toArrayList()) {
     			
     			series.getData().add(new XYChart.Data(i,level));
-    			System.out.println(i + " level: " + level);
     			i++;
 		  } 
     	System.out.println(max + " " + min);
