@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -8,13 +9,29 @@
 
 <AnchorPane prefHeight="102.0" prefWidth="178.0" style="-fx-background-color: RGB(0,200,175,1);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hanon.app.controller.MusicEvalController">
    <children>
-      <Label layoutX="23.0" layoutY="42.0" text="Note:" />
-      <Label layoutX="23.0" layoutY="67.0" text="Freq.:" />
-      <Label fx:id="actualNote" layoutX="65.0" layoutY="42.0" text="Label" />
-      <Label fx:id="actualFreq" layoutX="65.0" layoutY="67.0" text="Label" />
-      <Label fx:id="expectedFreq" layoutX="114.0" layoutY="67.0" text="Label" />
-      <Label fx:id="expectedNote" layoutX="114.0" layoutY="42.0" text="Label" />
-      <Label layoutX="62.0" layoutY="14.0" text="Actual" />
-      <Label layoutX="111.0" layoutY="14.0" text="Expected" />
+      <Label layoutX="4.0" layoutY="42.0" prefHeight="17.0" prefWidth="39.0" text="Note:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="4.0" layoutY="67.0" prefHeight="17.0" prefWidth="39.0" text="Freq.:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="actualNote" alignment="CENTER" layoutX="48.0" layoutY="42.0" prefHeight="17.0" prefWidth="48.0" text="Label" />
+      <Label fx:id="actualFreq" alignment="CENTER" layoutX="48.0" layoutY="67.0" prefHeight="17.0" prefWidth="48.0" text="Label" />
+      <Label fx:id="expectedFreq" alignment="CENTER" layoutX="104.0" layoutY="67.0" prefHeight="17.0" prefWidth="55.0" text="Label" />
+      <Label fx:id="expectedNote" alignment="CENTER" layoutX="104.0" layoutY="43.0" prefHeight="17.0" prefWidth="55.0" text="Label" />
+      <Label alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="17.0" prefWidth="48.0" text="Actual">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="104.0" layoutY="14.0" prefHeight="17.0" prefWidth="55.0" text="Expected">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
