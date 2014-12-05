@@ -82,10 +82,10 @@ public class ResultController extends BaseController {
 	private void createPieChart(int[] gbn) {
 		ObservableList<PieChart.Data> pChartData = 
 				FXCollections.observableArrayList(
-				new PieChart.Data("", gbn[0]),
-				new PieChart.Data("", gbn[1]),
-				new PieChart.Data("", gbn[2]));
-		pchart = new PieChart(pChartData);
+				new PieChart.Data("Good", gbn[0]),
+				new PieChart.Data("Bad", gbn[1]),
+				new PieChart.Data("Unplayed", gbn[2]));
+		pchart.setData(pChartData);
 	}
 
 	@FXML
