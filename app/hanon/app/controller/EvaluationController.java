@@ -216,9 +216,6 @@ public class EvaluationController extends BaseController {
     	Double max = levels.averagedLevels().minimum(levels.averagedLevels());
     	Double min = levels.averagedLevels().maximum(levels.averagedLevels());
     	
-    	
-    	
-    	
     	for(Double level  : levels.averagedLevels().toArrayList()) {
     			
     			series.getData().add(new XYChart.Data(i,level));
