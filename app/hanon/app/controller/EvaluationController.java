@@ -53,9 +53,15 @@ public class EvaluationController extends BaseController {
       stopButton.setText("Close");
       rhythmStatus.setText("Rhythm Stopped");
     }
+    
     else {
       mainDriver.getHPane().setBottom(null);
     }
+  }
+  
+  @FXML public void handlePlay() {
+	  System.out.println("button was pressed");
+	  handleRhythm( sheet.getSets().get(0).getElements() );
   }
   
   public void handleRhythm(List<StaffElement> elements) {

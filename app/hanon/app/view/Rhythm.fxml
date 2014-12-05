@@ -23,7 +23,7 @@
              </Label>
             <HBox alignment="TOP_CENTER" prefHeight="25.0" prefWidth="345.0">
                <children>
-                  <ToggleButton mnemonicParsing="false">
+                  <ToggleButton mnemonicParsing="false" onAction="#handlePlay">
                      <graphic>
                         <ImageView>
                            <image>

@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
@@ -50,7 +51,11 @@ public class ResultController extends BaseController {
 	@FXML
 	public void playAgain() {
 		mainDriver.redraw();
-		mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
 		mainDriver.getHPane().setLeft(null);
+		mainDriver.getHPane().setPinnedSide(Side.BOTTOM);
+		AnchorPane bottom = (AnchorPane) mainDriver.getHPane().getBottom();
+		for (Node node : bottom.getChildren() ) {
+			System.out.println(node);
+		}
 	}
 }
