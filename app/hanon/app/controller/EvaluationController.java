@@ -23,6 +23,7 @@ import java.util.List;
 
 
 
+
 import hanon.app.model.player.noteimage.NoteImage;
 import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.MusicSheet;
@@ -226,13 +227,20 @@ public class EvaluationController extends BaseController {
 		  } 
     	System.out.println(max + " " + min);
     	final NumberAxis newX = new NumberAxis();
-    	final NumberAxis newY = new NumberAxis(min, max, max-min / 100);
+    	final NumberAxis newY = new NumberAxis(min + Math.abs((min/100)), max - Math.abs((max/100)), Math.abs(max-min / 100));
     	newY.setForceZeroInRange(false);
     	newX.setForceZeroInRange(false);
+    	newY.setTickLabelsVisible(false);
+    	newX.setTickLabelsVisible(false);
+    	newY.setTickMarkVisible(false);
+    	newX.setTickMarkVisible(false);
+    	newX.setMinorTickVisible(false);
     	levelGraph = new LineChart<Number,Number>(newX,newY);
     	levelGraph.getData().add(series);
     	levelGraph.setLayoutX(x);
     	levelGraph.setLayoutY(y);
+    	levelGraph.setMaxSize(100, 100);
+    	
     	((MusicSheet)mainDriver.getRootLayout().getCenter()).getChildren().add(levelGraph);
     }
 
