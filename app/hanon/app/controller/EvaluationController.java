@@ -20,6 +20,7 @@ import java.util.List;
 
 
 import hanon.app.model.player.noteimage.NoteImage;
+import hanon.app.model.player.sheet.Brush;
 import hanon.app.model.player.sheet.MusicSheet;
 import hanon.app.model.player.sheet.StaffPlaceable;
 import hanon.app.model.player.staff.CrescendoImage;
@@ -174,6 +175,8 @@ public class EvaluationController extends BaseController {
       Color color;
       StaffPlaceable c = crescendos.head();
 
+      if (c == null) return;
+
       if (c instanceof CrescendoImage) {
         ((CrescendoImage)c).setOnMousePressed(e -> graphLevels(levels));
         ((CrescendoImage)c).setOnMouseReleased(e -> hideLevels());
@@ -189,7 +192,8 @@ public class EvaluationController extends BaseController {
       } else {
         color = Color.RED;
       }
-      Platform.runLater(() -> c.paint(sheet.getBrush().withColor(color)));
+      final Brush b = sheet.getBrush().withColor(color);
+      Platform.runLater(() -> c.paint(b));
       crescendos = crescendos.tail();
     }
 
